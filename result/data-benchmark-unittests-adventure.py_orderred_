@@ -1,0 +1,202 @@
+__init__
+['adventure.HasN']
+['None']
+__repr__
+['adventure.Move']
+['builtins.str']
+__init__
+['adventure.Room']
+['None']
+__repr__
+['adventure.Room']
+['builtins.str']
+is_forced
+['adventure.Room']
+['builtins.bool']
+is_aboveground
+['adventure.Room']
+['builtins.bool']
+is_before_hall_of_mists
+['adventure.Room']
+['builtins.bool']
+is_after_hall_of_mists
+['adventure.Room']
+['builtins.bool']
+is_dark
+['adventure.Room']
+['builtins.bool']
+__init__
+['adventure.Word']
+['None']
+__repr__
+['adventure.Word']
+['builtins.str']
+__eq__
+['adventure.Word']
+['builtins.str']
+['builtins.bool']
+add_synonym
+['adventure.Word']
+['Any']
+['None']
+__init__
+['adventure.Object']
+['None']
+__repr__
+['adventure.Object']
+['builtins.str']
+__hash__
+['adventure.Object']
+['builtins.int']
+__eq__
+['adventure.Object']
+['builtins.str']
+['builtins.bool']
+is_at
+['adventure.Object']
+['builtins.object']
+['builtins.bool']
+carry
+['adventure.Object']
+['None']
+drop
+['adventure.Object']
+['Any']
+['None']
+hide
+['adventure.Object']
+['None']
+destroy
+['adventure.Object']
+['None']
+__str__
+['adventure.Message']
+['builtins.str']
+__init__
+['adventure.Hint']
+['None']
+start_at
+['adventure.Dwarf']
+['Any']
+['None']
+can_move
+['adventure.Dwarf']
+['Any']
+['builtins.bool']
+__init__
+['adventure.Data']
+['None']
+referent
+['adventure.Data']
+['Any']
+['adventure.Object']
+make_object
+['builtins.dict[adventure.Data, builtins.str]', 'builtins.list[adventure.Data]', 'builtins.list[adventure.Dwarf]']
+['Any']
+['builtins.object', 'builtins.str', 'builtins.int']
+['builtins.object', 'builtins.str', 'builtins.int']
+expand_tabs
+['builtins.str', 'builtins.list[builtins.str]']
+['builtins.str']
+accumulate_message
+['builtins.dict[builtins.str, builtins.str]']
+['builtins.str']
+['builtins.str']
+['None']
+section10
+['adventure.Data']
+['builtins.int']
+['builtins.str']
+['None']
+__init__
+['adventure.Dwarf']
+['builtins.object']
+['None']
+make_object
+['builtins.dict[builtins.object, builtins.object]', 'builtins.list[adventure.Data]', 'builtins.list[adventure.Dwarf]']
+['Overload(def () -> adventure.Hint)', 'Overload(def () -> adventure.Message)', 'Overload(def () -> adventure.Object)']
+['builtins.int']
+['builtins.object', 'builtins.str', 'builtins.int']
+accumulate_message
+['builtins.dict[builtins.int, builtins.str]', 'builtins.dict[builtins.str, builtins.str]']
+['builtins.str', 'builtins.int']
+['builtins.str']
+['None']
+section12
+['adventure.Data']
+['builtins.str', 'builtins.int']
+['builtins.str']
+['None']
+make_object
+['builtins.dict[adventure.Hint, builtins.int]', 'builtins.list[adventure.Data]', 'builtins.list[adventure.Dwarf]']
+['Overload(def () -> adventure.Hint)', 'Overload(def () -> adventure.Message)', 'Overload(def () -> adventure.Object)']
+['builtins.int']
+['builtins.object', 'builtins.str', 'builtins.int']
+section1
+['adventure.Data']
+['builtins.int']
+['builtins.str', 'builtins.list[builtins.str]']
+['None']
+section3
+['adventure.Data']
+['builtins.int']
+['builtins.int', 'builtins.float']
+['builtins.list[builtins.int]']
+['None']
+section5
+['adventure.Data']
+['builtins.int']
+['builtins.str', 'builtins.list[builtins.str]']
+['None']
+section8
+['adventure.Data']
+['builtins.int']
+['builtins.int']
+['None']
+section9
+['adventure.Data']
+['builtins.int']
+['builtins.list[builtins.int]']
+['None']
+make_object
+['builtins.dict[adventure.Hint, builtins.int]', 'builtins.list[adventure.Data]', 'builtins.list[adventure.Dwarf]']
+['Overload(def () -> adventure.Hint)', 'Overload(def () -> adventure.Message)', 'Overload(def () -> adventure.Object)']
+['builtins.int']
+['builtins.object', 'builtins.str', 'builtins.int']
+section2
+['adventure.Data']
+['builtins.int']
+['builtins.str']
+['None']
+add_synonym
+['adventure.Word']
+['adventure.Word']
+['None']
+section4
+['adventure.Data']
+['builtins.int']
+['builtins.str']
+['None']
+section6
+['adventure.Data']
+['builtins.int']
+['builtins.str', 'builtins.list[builtins.str]']
+['None']
+drop
+['adventure.Object']
+['adventure.Room']
+['None']
+section7
+['adventure.Data']
+['builtins.int']
+['builtins.int']
+['builtins.list[builtins.int]']
+['None']
+section11
+['adventure.Data']
+['builtins.int']
+['builtins.int']
+['builtins.int']
+['builtins.int']
+['builtins.int']
+['None']

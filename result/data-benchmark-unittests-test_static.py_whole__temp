@@ -1,0 +1,4 @@
+f
+def () -> test_static.ISD_AS
+g
+def (self: test_static.ISD_AS) -> test_static.ISD_AS

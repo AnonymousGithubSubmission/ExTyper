@@ -1,0 +1,33 @@
+__init__
+['data.benchmark.pendulum.locales.locale.Locale']
+['builtins.str']
+['builtins.dict[builtins.str, data.benchmark.pendulum.tz.zoneinfo.transition_type.TransitionType]', 'builtins.dict[builtins.float, builtins.str]', 'builtins.dict[builtins.bool, builtins.str]']
+['None']
+normalize_locale
+['data.benchmark.pendulum.locales.locale.Locale']
+['builtins.str', 'builtins.bytes']
+['builtins.str', 'builtins.bytes']
+get
+['data.benchmark.pendulum.locales.locale.Locale']
+['builtins.str']
+['builtins.object']
+['builtins.str']
+translation
+['data.benchmark.pendulum.locales.locale.Locale']
+['builtins.object']
+['builtins.str']
+plural
+['data.benchmark.pendulum.locales.locale.Locale']
+['builtins.object']
+['builtins.str', 'builtins.bytes']
+ordinal
+['data.benchmark.pendulum.locales.locale.Locale']
+['builtins.object']
+['builtins.str', 'builtins.bytes']
+ordinalize
+['data.benchmark.pendulum.locales.locale.Locale']
+['Any']
+['Any']
+__repr__
+['data.benchmark.pendulum.locales.locale.Locale']
+['builtins.str']

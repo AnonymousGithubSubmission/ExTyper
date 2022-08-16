@@ -1,0 +1,141 @@
+__init__
+['rockpaperscissor.Outcome']
+['builtins.int']
+['builtins.str']
+['None']
+compete
+['rockpaperscissor.Paper']
+['rockpaperscissor.Item']
+['rockpaperscissor.Outcome']
+evalPaper
+['rockpaperscissor.Paper']
+['builtins.object']
+['rockpaperscissor.Outcome']
+evalScissors
+['rockpaperscissor.Paper']
+['builtins.object']
+['rockpaperscissor.Outcome']
+evalRock
+['rockpaperscissor.Paper']
+['builtins.object']
+['rockpaperscissor.Outcome']
+compete
+['rockpaperscissor.Scissors']
+['rockpaperscissor.Item']
+['rockpaperscissor.Outcome']
+evalPaper
+['rockpaperscissor.Scissors']
+['builtins.object']
+['rockpaperscissor.Outcome']
+evalScissors
+['rockpaperscissor.Scissors']
+['builtins.object']
+['rockpaperscissor.Outcome']
+evalRock
+['rockpaperscissor.Scissors']
+['builtins.object']
+['rockpaperscissor.Outcome']
+compete
+['rockpaperscissor.Rock']
+['rockpaperscissor.Item']
+['rockpaperscissor.Outcome']
+evalPaper
+['rockpaperscissor.Rock']
+['builtins.object']
+['rockpaperscissor.Outcome']
+evalScissors
+['rockpaperscissor.Rock']
+['builtins.object']
+['rockpaperscissor.Outcome']
+evalRock
+['rockpaperscissor.Rock']
+['builtins.object']
+['rockpaperscissor.Outcome']
+evalRock
+['rockpaperscissor.Rock']
+['builtins.object', 'builtins.str', 'builtins.int']
+['rockpaperscissor.Outcome']
+evalRock
+['rockpaperscissor.Paper']
+['builtins.object', 'builtins.str', 'builtins.int']
+['rockpaperscissor.Outcome']
+evalRock
+['rockpaperscissor.Scissors']
+['builtins.object', 'builtins.str', 'builtins.int']
+['rockpaperscissor.Outcome']
+evalPaper
+['rockpaperscissor.Rock']
+['builtins.object', 'builtins.str', 'builtins.int']
+['rockpaperscissor.Outcome']
+evalPaper
+['rockpaperscissor.Paper']
+['builtins.object', 'builtins.str', 'builtins.int']
+['rockpaperscissor.Outcome']
+evalPaper
+['rockpaperscissor.Scissors']
+['builtins.object', 'builtins.str', 'builtins.int']
+['rockpaperscissor.Outcome']
+evalScissors
+['rockpaperscissor.Rock']
+['builtins.object', 'builtins.str', 'builtins.int']
+['rockpaperscissor.Outcome']
+evalScissors
+['rockpaperscissor.Paper']
+['builtins.object', 'builtins.str', 'builtins.int']
+['rockpaperscissor.Outcome']
+evalScissors
+['rockpaperscissor.Scissors']
+['builtins.object', 'builtins.str', 'builtins.int']
+['rockpaperscissor.Outcome']
+evalRock
+['rockpaperscissor.Rock']
+['builtins.object', 'builtins.str', 'builtins.int']
+['rockpaperscissor.Outcome']
+compete
+['rockpaperscissor.Rock']
+['rockpaperscissor.Item', 'rockpaperscissor.Paper', 'rockpaperscissor.Rock']
+['rockpaperscissor.Outcome']
+evalRock
+['rockpaperscissor.Paper']
+['builtins.object', 'builtins.str', 'builtins.int']
+['rockpaperscissor.Outcome']
+evalRock
+['rockpaperscissor.Scissors']
+['builtins.object', 'builtins.str', 'builtins.int']
+['rockpaperscissor.Outcome']
+evalPaper
+['rockpaperscissor.Rock']
+['builtins.object', 'builtins.str', 'builtins.int']
+['rockpaperscissor.Outcome']
+compete
+['rockpaperscissor.Paper']
+['rockpaperscissor.Item', 'rockpaperscissor.Paper', 'rockpaperscissor.Rock']
+['rockpaperscissor.Outcome']
+evalPaper
+['rockpaperscissor.Paper']
+['builtins.object', 'builtins.str', 'builtins.int']
+['rockpaperscissor.Outcome']
+evalPaper
+['rockpaperscissor.Scissors']
+['builtins.object', 'builtins.str', 'builtins.int']
+['rockpaperscissor.Outcome']
+evalScissors
+['rockpaperscissor.Rock']
+['builtins.object', 'builtins.str', 'builtins.int']
+['rockpaperscissor.Outcome']
+compete
+['rockpaperscissor.Scissors']
+['rockpaperscissor.Item', 'rockpaperscissor.Paper', 'rockpaperscissor.Rock']
+['rockpaperscissor.Outcome']
+evalScissors
+['rockpaperscissor.Paper']
+['builtins.object', 'builtins.str', 'builtins.int']
+['rockpaperscissor.Outcome']
+evalScissors
+['rockpaperscissor.Scissors']
+['builtins.object', 'builtins.str', 'builtins.int']
+['rockpaperscissor.Outcome']
+match
+['rockpaperscissor.Item', 'rockpaperscissor.Paper', 'rockpaperscissor.Rock']
+['rockpaperscissor.Item', 'rockpaperscissor.Paper', 'rockpaperscissor.Rock']
+['rockpaperscissor.Outcome']

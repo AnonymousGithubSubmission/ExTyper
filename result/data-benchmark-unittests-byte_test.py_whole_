@@ -1,0 +1,3 @@
+sha256d
+def (s: builtins.bytes) -> builtins.str
+def (s: builtins.str) -> builtins.str

@@ -1,0 +1,9 @@
+factorize
+['builtins.int', 'builtins.bool']
+['builtins.dict[builtins.int, builtins.int]']
+get_all_divisors
+['builtins.int', 'builtins.bool']
+['builtins.list[builtins.int]']
+get_all_divisors
+['builtins.int', 'builtins.bool']
+['builtins.list[builtins.int]']

@@ -1,0 +1,6 @@
+who_am_i
+def (self: mro.A) -> mro.A
+who_am_i
+def (self: mro.C) -> mro.C
+f
+def () -> mro.C

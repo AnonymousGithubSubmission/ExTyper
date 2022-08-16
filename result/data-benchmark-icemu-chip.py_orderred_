@@ -1,0 +1,181 @@
+ishigh
+['chip.Pin']
+['builtins.bool']
+propagate_to
+['chip.Pin']
+['builtins.set[chip.Chip]', 'builtins.set[<nothing>]']
+isenabled
+['chip.Pin']
+['builtins.bool']
+pinrange
+['builtins.str']
+['builtins.int']
+['builtins.int']
+['builtins.list[builtins.str]']
+ispowered
+['chip.Chip']
+['builtins.bool']
+getpin
+['chip.Chip']
+['builtins.str']
+['chip.Pin']
+getpins
+['chip.Chip']
+['builtins.str', 'builtins.list[builtins.str]']
+['builtins.list[chip.Pin]']
+tick
+['chip.Chip']
+['builtins.object']
+['None']
+update
+['chip.Chip']
+['None']
+wirepins
+['chip.Chip']
+['chip.Chip']
+['builtins.str', 'builtins.list[builtins.str]']
+['builtins.str', 'builtins.list[builtins.str]']
+['None']
+is_enabled
+['chip.ActivableChip']
+['builtins.bool']
+maxvalue
+['chip.BinaryCounter']
+['builtins.int']
+is_resetting
+['chip.ShiftRegister']
+['builtins.bool']
+__init__
+['chip.LED']
+['chip.Pin']
+['chip.Pin']
+['builtins.int']
+['None']
+ishigh
+['chip.LED']
+['builtins.bool']
+combine_repr
+['builtins.str', 'builtins.list[builtins.int]', 'builtins.list[builtins.object]']
+['builtins.str']
+__init__
+['chip.Segment7']
+['builtins.tuple[builtins.object]']
+['builtins.dict[builtins.object, builtins.str]']
+['None']
+__str__
+['chip.Segment7']
+['builtins.str']
+_test
+['chip.NOR']
+['builtins.list[chip.LED]', 'builtins.list[chip.Pin]', 'builtins.set[chip.Pin]']
+['builtins.bool']
+_test
+['chip.NAND']
+['builtins.list[chip.LED]', 'builtins.list[chip.Pin]', 'builtins.set[chip.Pin]']
+['builtins.bool']
+_test
+['chip.OR']
+['builtins.list[chip.LED]', 'builtins.list[chip.Pin]', 'builtins.set[chip.LED]']
+['builtins.bool']
+_test
+['chip.AND']
+['builtins.list[chip.LED]', 'builtins.list[chip.Pin]', 'builtins.set[chip.LED]']
+['builtins.bool']
+__str__
+['chip.Pin']
+['builtins.str']
+set
+['chip.Pin']
+['builtins.bool']
+['None']
+sethigh
+['chip.Pin']
+['None']
+setlow
+['chip.Pin']
+['None']
+toggle
+['chip.Pin']
+['None']
+enable
+['chip.Pin']
+['None']
+disable
+['chip.Pin']
+['None']
+wire_to
+['chip.Pin']
+['chip.Pin']
+['None']
+__str__
+['chip.Chip']
+['builtins.str']
+getpin
+['chip.Chip']
+['builtins.str']
+['chip.Pin']
+asciiart
+['chip.Chip']
+['builtins.str']
+set_binary_value
+['builtins.int']
+['builtins.list[chip.Pin]', 'builtins.set[chip.Pin]']
+['None']
+get_binary_value
+['builtins.list[chip.LED]', 'builtins.list[chip.Pin]', 'builtins.set[chip.LED]']
+['builtins.int']
+update
+['chip.BinaryCounter']
+['None']
+update
+['chip.Decoder']
+['None']
+tick
+['chip.LED']
+['builtins.int']
+['None']
+tick
+['chip.Segment7']
+['builtins.int']
+['None']
+update
+['Any']
+['None']
+update
+['chip.Inverter']
+['None']
+getpins
+['chip.Chip']
+['builtins.str', 'builtins.list[builtins.str]', 'typing.Sequence']
+['builtins.list[chip.Pin]']
+__init__
+['chip.BinaryCounter']
+['builtins.tuple[builtins.object]']
+['builtins.dict[builtins.object, builtins.str]']
+['None']
+getpin
+['chip.Chip']
+['builtins.str']
+['chip.Pin']
+getpins
+['chip.Chip']
+['builtins.str', 'builtins.list[builtins.str]', 'builtins.set[builtins.str]']
+['builtins.list[chip.Pin]']
+setpins
+['chip.Chip']
+['builtins.str', 'builtins.list[builtins.str]', 'builtins.set[builtins.str]']
+['builtins.str', 'builtins.list[builtins.str]', 'builtins.set[builtins.str]']
+['None']
+setpins
+['chip.Chip']
+['builtins.str', 'builtins.list[builtins.str]', 'builtins.set[builtins.str]']
+['builtins.str', 'builtins.list[<nothing>]', 'builtins.list[builtins.str]']
+['None']
+update
+['chip.ShiftRegister']
+['None']
+__init__
+['chip.ShiftRegister']
+['builtins.tuple[builtins.object]']
+['builtins.dict[builtins.object, builtins.str]']
+['None']

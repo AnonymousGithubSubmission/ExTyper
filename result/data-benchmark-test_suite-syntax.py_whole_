@@ -1,0 +1,40 @@
+eval
+def (self: syntax.Aexp, env: builtins.object) -> builtins.int
+__init__
+def (self: syntax.IntAexp, i: builtins.bool)
+def (self: syntax.IntAexp, i: builtins.int)
+eval
+def (self: syntax.IntAexp, env: builtins.object) -> builtins.int
+__init__
+def (self: syntax.VarAexp, name: builtins.str)
+eval
+def (self: syntax.VarAexp, env: builtins.dict[builtins.object, builtins.object]) -> builtins.object
+__init__
+def (self: syntax.AssignStatement, name: builtins.str, aexp: syntax.Aexp)
+def (self: syntax.AssignStatement, name: builtins.str, aexp: syntax.IntAexp)
+def (self: syntax.AssignStatement, name: builtins.str, aexp: syntax.VarAexp)
+__init__
+def (self: syntax.IntAexp, i: builtins.bool)
+def (self: syntax.IntAexp, i: builtins.int)
+__init__
+def (self: syntax.AssignStatement, name: builtins.str, aexp: syntax.Aexp)
+def (self: syntax.AssignStatement, name: builtins.str, aexp: syntax.IntAexp)
+def (self: syntax.AssignStatement, name: builtins.str, aexp: syntax.VarAexp)
+__init__
+def (self: syntax.VarAexp, name: builtins.str)
+eval
+def (self: syntax.Aexp, env: builtins.bool) -> builtins.int
+def (self: syntax.Aexp, env: builtins.bytes) -> builtins.int
+def (self: syntax.Aexp, env: builtins.dict[builtins.object, builtins.object]) -> builtins.int
+def (self: syntax.Aexp, env: builtins.float) -> builtins.int
+def (self: syntax.Aexp, env: builtins.int) -> builtins.int
+def (self: syntax.Aexp, env: builtins.list[builtins.int]) -> builtins.int
+def (self: syntax.Aexp, env: builtins.list[builtins.object]) -> builtins.int
+def (self: syntax.Aexp, env: builtins.list[builtins.str]) -> builtins.int
+def (self: syntax.Aexp, env: builtins.object) -> builtins.int
+def (self: syntax.Aexp, env: builtins.set[builtins.object]) -> builtins.int
+def (self: syntax.Aexp, env: builtins.str) -> builtins.int
+def (self: syntax.Aexp, env: syntax.Aexp) -> builtins.int
+def (self: syntax.Aexp, env: syntax.Statement) -> builtins.int
+eval
+def (self: syntax.AssignStatement, env: builtins.dict[builtins.object, builtins.object])

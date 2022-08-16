@@ -1,0 +1,6 @@
+f
+def (klass: Any) -> Any
+f
+def (klass: def () -> inline_test.A) -> inline_test.A
+g
+def () -> inline_test.A

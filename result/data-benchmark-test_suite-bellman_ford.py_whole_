@@ -1,0 +1,113 @@
+__init__
+def (self: bellman_ford.Edge, a: builtins.bool, b: builtins.bool)
+def (self: bellman_ford.Edge, a: builtins.bool, b: builtins.int)
+def (self: bellman_ford.Edge, a: builtins.int, b: builtins.bool)
+def (self: bellman_ford.Edge, a: builtins.int, b: builtins.int)
+bellman_ford
+def (source: bellman_ford.Edge, adj_list: Any) -> builtins.list[builtins.int]
+def (source: builtins.bool, adj_list: Any) -> builtins.list[builtins.int]
+def (source: builtins.bytes, adj_list: Any) -> builtins.list[builtins.int]
+def (source: builtins.dict[bellman_ford.Edge, builtins.str], adj_list: Any) -> builtins.list[builtins.int]
+def (source: builtins.dict[builtins.bool, builtins.str], adj_list: Any) -> builtins.list[builtins.int]
+def (source: builtins.dict[builtins.bytes, builtins.str], adj_list: Any) -> builtins.list[builtins.int]
+def (source: builtins.dict[builtins.float, builtins.str], adj_list: Any) -> builtins.list[builtins.int]
+def (source: builtins.dict[builtins.int, builtins.str], adj_list: Any) -> builtins.list[builtins.int]
+def (source: builtins.dict[builtins.object, builtins.object], adj_list: Any) -> builtins.list[builtins.int]
+def (source: builtins.dict[builtins.object, builtins.str], adj_list: Any) -> builtins.list[builtins.int]
+def (source: builtins.dict[builtins.str, builtins.str], adj_list: Any) -> builtins.list[builtins.int]
+def (source: builtins.float, adj_list: Any) -> builtins.list[builtins.int]
+def (source: builtins.int, adj_list: Any) -> builtins.list[builtins.int]
+def (source: builtins.list[bellman_ford.Edge], adj_list: Any) -> builtins.list[builtins.int]
+def (source: builtins.list[builtins.bool], adj_list: Any) -> builtins.list[builtins.int]
+def (source: builtins.list[builtins.bytes], adj_list: Any) -> builtins.list[builtins.int]
+def (source: builtins.list[builtins.float], adj_list: Any) -> builtins.list[builtins.int]
+def (source: builtins.list[builtins.int], adj_list: Any) -> builtins.list[builtins.int]
+def (source: builtins.list[builtins.object], adj_list: Any) -> builtins.list[builtins.int]
+def (source: builtins.list[builtins.str], adj_list: Any) -> builtins.list[builtins.int]
+def (source: builtins.object, adj_list: Any) -> builtins.list[builtins.int]
+def (source: builtins.set[bellman_ford.Edge], adj_list: Any) -> builtins.list[builtins.int]
+def (source: builtins.set[builtins.bool], adj_list: Any) -> builtins.list[builtins.int]
+def (source: builtins.set[builtins.bytes], adj_list: Any) -> builtins.list[builtins.int]
+def (source: builtins.set[builtins.float], adj_list: Any) -> builtins.list[builtins.int]
+def (source: builtins.set[builtins.int], adj_list: Any) -> builtins.list[builtins.int]
+def (source: builtins.set[builtins.object], adj_list: Any) -> builtins.list[builtins.int]
+def (source: builtins.set[builtins.str], adj_list: Any) -> builtins.list[builtins.int]
+def (source: builtins.str, adj_list: Any) -> builtins.list[builtins.int]
+__init__
+def (self: bellman_ford.Edge, a: builtins.bool, b: builtins.bool)
+def (self: bellman_ford.Edge, a: builtins.bool, b: builtins.int)
+def (self: bellman_ford.Edge, a: builtins.int, b: builtins.bool)
+def (self: bellman_ford.Edge, a: builtins.int, b: builtins.int)
+bellman_ford
+def (source: bellman_ford.Edge, adj_list: Any) -> builtins.list[builtins.int]
+def (source: builtins.bool, adj_list: Any) -> builtins.list[builtins.int]
+def (source: builtins.bytes, adj_list: Any) -> builtins.list[builtins.int]
+def (source: builtins.dict[bellman_ford.Edge, builtins.str], adj_list: Any) -> builtins.list[builtins.int]
+def (source: builtins.dict[builtins.bool, builtins.str], adj_list: Any) -> builtins.list[builtins.int]
+def (source: builtins.dict[builtins.bytes, builtins.str], adj_list: Any) -> builtins.list[builtins.int]
+def (source: builtins.dict[builtins.float, builtins.str], adj_list: Any) -> builtins.list[builtins.int]
+def (source: builtins.dict[builtins.int, builtins.str], adj_list: Any) -> builtins.list[builtins.int]
+def (source: builtins.dict[builtins.object, builtins.object], adj_list: Any) -> builtins.list[builtins.int]
+def (source: builtins.dict[builtins.object, builtins.str], adj_list: Any) -> builtins.list[builtins.int]
+def (source: builtins.dict[builtins.str, builtins.str], adj_list: Any) -> builtins.list[builtins.int]
+def (source: builtins.float, adj_list: Any) -> builtins.list[builtins.int]
+def (source: builtins.int, adj_list: Any) -> builtins.list[builtins.int]
+def (source: builtins.list[bellman_ford.Edge], adj_list: Any) -> builtins.list[builtins.int]
+def (source: builtins.list[builtins.bool], adj_list: Any) -> builtins.list[builtins.int]
+def (source: builtins.list[builtins.bytes], adj_list: Any) -> builtins.list[builtins.int]
+def (source: builtins.list[builtins.float], adj_list: Any) -> builtins.list[builtins.int]
+def (source: builtins.list[builtins.int], adj_list: Any) -> builtins.list[builtins.int]
+def (source: builtins.list[builtins.object], adj_list: Any) -> builtins.list[builtins.int]
+def (source: builtins.list[builtins.str], adj_list: Any) -> builtins.list[builtins.int]
+def (source: builtins.object, adj_list: Any) -> builtins.list[builtins.int]
+def (source: builtins.set[bellman_ford.Edge], adj_list: Any) -> builtins.list[builtins.int]
+def (source: builtins.set[builtins.bool], adj_list: Any) -> builtins.list[builtins.int]
+def (source: builtins.set[builtins.bytes], adj_list: Any) -> builtins.list[builtins.int]
+def (source: builtins.set[builtins.float], adj_list: Any) -> builtins.list[builtins.int]
+def (source: builtins.set[builtins.int], adj_list: Any) -> builtins.list[builtins.int]
+def (source: builtins.set[builtins.object], adj_list: Any) -> builtins.list[builtins.int]
+def (source: builtins.set[builtins.str], adj_list: Any) -> builtins.list[builtins.int]
+def (source: builtins.str, adj_list: Any) -> builtins.list[builtins.int]
+bellman_ford
+def (source: bellman_ford.Edge, adj_list: Any) -> builtins.list[builtins.int]
+def (source: builtins.bool, adj_list: Any) -> builtins.list[builtins.int]
+def (source: builtins.bytes, adj_list: Any) -> builtins.list[builtins.int]
+def (source: builtins.dict[bellman_ford.Edge, builtins.str], adj_list: Any) -> builtins.list[builtins.int]
+def (source: builtins.dict[builtins.bool, builtins.str], adj_list: Any) -> builtins.list[builtins.int]
+def (source: builtins.dict[builtins.bytes, builtins.str], adj_list: Any) -> builtins.list[builtins.int]
+def (source: builtins.dict[builtins.float, builtins.str], adj_list: Any) -> builtins.list[builtins.int]
+def (source: builtins.dict[builtins.int, builtins.str], adj_list: Any) -> builtins.list[builtins.int]
+def (source: builtins.dict[builtins.object, builtins.object], adj_list: Any) -> builtins.list[builtins.int]
+def (source: builtins.dict[builtins.object, builtins.str], adj_list: Any) -> builtins.list[builtins.int]
+def (source: builtins.dict[builtins.str, builtins.str], adj_list: Any) -> builtins.list[builtins.int]
+def (source: builtins.float, adj_list: Any) -> builtins.list[builtins.int]
+def (source: builtins.int, adj_list: Any) -> builtins.list[builtins.int]
+def (source: builtins.list[bellman_ford.Edge], adj_list: Any) -> builtins.list[builtins.int]
+def (source: builtins.list[builtins.bool], adj_list: Any) -> builtins.list[builtins.int]
+def (source: builtins.list[builtins.bytes], adj_list: Any) -> builtins.list[builtins.int]
+def (source: builtins.list[builtins.float], adj_list: Any) -> builtins.list[builtins.int]
+def (source: builtins.list[builtins.int], adj_list: Any) -> builtins.list[builtins.int]
+def (source: builtins.list[builtins.object], adj_list: Any) -> builtins.list[builtins.int]
+def (source: builtins.list[builtins.str], adj_list: Any) -> builtins.list[builtins.int]
+def (source: builtins.object, adj_list: Any) -> builtins.list[builtins.int]
+def (source: builtins.set[bellman_ford.Edge], adj_list: Any) -> builtins.list[builtins.int]
+def (source: builtins.set[builtins.bool], adj_list: Any) -> builtins.list[builtins.int]
+def (source: builtins.set[builtins.bytes], adj_list: Any) -> builtins.list[builtins.int]
+def (source: builtins.set[builtins.float], adj_list: Any) -> builtins.list[builtins.int]
+def (source: builtins.set[builtins.int], adj_list: Any) -> builtins.list[builtins.int]
+def (source: builtins.set[builtins.object], adj_list: Any) -> builtins.list[builtins.int]
+def (source: builtins.set[builtins.str], adj_list: Any) -> builtins.list[builtins.int]
+def (source: builtins.str, adj_list: Any) -> builtins.list[builtins.int]
+has_negative_cycle
+def (source: bellman_ford.Edge, adj_list: Any) -> builtins.bool
+def (source: builtins.bool, adj_list: Any) -> builtins.bool
+def (source: builtins.bytes, adj_list: Any) -> builtins.bool
+def (source: builtins.dict[builtins.object, builtins.object], adj_list: Any) -> builtins.bool
+def (source: builtins.float, adj_list: Any) -> builtins.bool
+def (source: builtins.int, adj_list: Any) -> builtins.bool
+def (source: builtins.list[builtins.int], adj_list: Any) -> builtins.bool
+def (source: builtins.list[builtins.object], adj_list: Any) -> builtins.bool
+def (source: builtins.list[builtins.str], adj_list: Any) -> builtins.bool
+def (source: builtins.object, adj_list: Any) -> builtins.bool
+def (source: builtins.set[builtins.object], adj_list: Any) -> builtins.bool
+def (source: builtins.str, adj_list: Any) -> builtins.bool

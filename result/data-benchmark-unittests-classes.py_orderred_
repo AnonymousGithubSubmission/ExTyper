@@ -1,0 +1,19 @@
+__init__
+['classes.A']
+['builtins.int', 'builtins.float', 'builtins.object']
+[]
+f
+['classes.A']
+['builtins.int']
+f
+['classes.B']
+['builtins.str']
+fab
+[]
+['builtins.str']
+f
+['classes.D']
+['builtins.int']
+fab
+[]
+['builtins.str']

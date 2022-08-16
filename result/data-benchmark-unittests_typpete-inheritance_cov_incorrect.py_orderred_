@@ -1,0 +1,24 @@
+f
+['inheritance_cov_incorrect.A']
+['builtins.int', 'builtins.float']
+['builtins.int', 'builtins.float']
+['builtins.int', 'builtins.float']
+['builtins.int', 'builtins.float']
+g
+['inheritance_cov_incorrect.A']
+['builtins.int']
+f
+['inheritance_cov_incorrect.B']
+['builtins.str', 'builtins.int', 'builtins.float']
+['builtins.str', 'builtins.int', 'builtins.float']
+['builtins.str', 'builtins.int', 'builtins.float']
+g
+['inheritance_cov_incorrect.B']
+['builtins.object', 'builtins.int', 'builtins.float']
+['builtins.int']
+f
+['inheritance_cov_incorrect.A']
+['builtins.int']
+f
+['inheritance_cov_incorrect.A']
+['builtins.int']

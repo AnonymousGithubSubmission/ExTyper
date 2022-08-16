@@ -1,0 +1,544 @@
+outpoint
+def (self: tinychain_copy.UnspentTxOut) -> Tuple[builtins.int, builtins.str, fallback=tinychain_copy.OutPoint]
+is_coinbase
+def (self: tinychain_copy.Transaction) -> builtins.bool
+create_coinbase
+def (cls: Any, pay_to_addr: builtins.str, value: builtins.bool, height: builtins.object) -> Any
+def (cls: Any, pay_to_addr: builtins.str, value: builtins.int, height: builtins.object) -> Any
+validate_basics
+def (self: tinychain_copy.Transaction, as_coinbase: builtins.bool =)
+def (self: tinychain_copy.Transaction, as_coinbase: builtins.float =)
+def (self: tinychain_copy.Transaction, as_coinbase: builtins.int =)
+def (self: tinychain_copy.Transaction, as_coinbase: builtins.object =)
+header
+def (self: tinychain_copy.Block, nonce: builtins.int =) -> builtins.str
+get_current_height
+def () -> builtins.int
+txn_iterator
+def (chain: builtins.list[tinychain_copy.Block]) -> typing.Generator[None, None, Tuple[Tuple[builtins.bool, builtins.int, builtins.list[Tuple[Tuple[builtins.int, builtins.str, fallback=tinychain_copy.OutPoint], builtins.bytes, builtins.bytes, builtins.int, fallback=tinychain_copy.TxIn]], builtins.list[Tuple[builtins.int, builtins.str, fallback=tinychain_copy.TxOut]], builtins.str, fallback=tinychain_copy.Transaction], builtins.int, tinychain_copy.Block]]
+def (chain: builtins.set[tinychain_copy.Block]) -> typing.Generator[None, None, Tuple[Tuple[builtins.bool, builtins.int, builtins.list[Tuple[Tuple[builtins.int, builtins.str, fallback=tinychain_copy.OutPoint], builtins.bytes, builtins.bytes, builtins.int, fallback=tinychain_copy.TxIn]], builtins.list[Tuple[builtins.int, builtins.str, fallback=tinychain_copy.TxOut]], builtins.str, fallback=tinychain_copy.Transaction], builtins.int, tinychain_copy.Block]]
+locate_block
+def (block_hash: builtins.str, chain: builtins.list[tinychain_copy.Block] =) -> Tuple[Tuple[builtins.int, builtins.int, builtins.int, builtins.int, builtins.list[Tuple[builtins.bool, builtins.int, builtins.list[Tuple[Tuple[builtins.int, builtins.str, fallback=tinychain_copy.OutPoint], builtins.bytes, builtins.bytes, builtins.int, fallback=tinychain_copy.TxIn]], builtins.list[Tuple[builtins.int, builtins.str, fallback=tinychain_copy.TxOut]], builtins.str, fallback=tinychain_copy.Transaction]], builtins.str, builtins.str, builtins.str, fallback=tinychain_copy.Block], builtins.int, builtins.int]
+find_txout_for_txin
+def (txin: tinychain_copy.TxIn, chain: Any) -> Union[Tuple[Any, Any, Tuple[builtins.bool, builtins.int, builtins.list[Tuple[Tuple[builtins.int, builtins.str, fallback=tinychain_copy.OutPoint], builtins.bytes, builtins.bytes, builtins.int, fallback=tinychain_copy.TxIn]], builtins.list[Tuple[builtins.int, builtins.str, fallback=tinychain_copy.TxOut]], builtins.str, fallback=tinychain_copy.Transaction], Tuple[builtins.int, builtins.str, fallback=tinychain_copy.TxOut], builtins.int], Tuple[Any, Tuple[builtins.bool, builtins.int, builtins.list[Tuple[Tuple[builtins.int, builtins.str, fallback=tinychain_copy.OutPoint], builtins.bytes, builtins.bytes, builtins.int, fallback=tinychain_copy.TxIn]], builtins.list[Tuple[builtins.int, builtins.str, fallback=tinychain_copy.TxOut]], builtins.str, fallback=tinychain_copy.Transaction], Tuple[builtins.int, builtins.str, fallback=tinychain_copy.TxOut], builtins.int, builtins.int]]
+get_median_time_past
+def (num_last_blocks: builtins.bool) -> builtins.int
+def (num_last_blocks: builtins.int) -> builtins.int
+add_to_utxo
+def (txout: tinychain_copy.TxOut, tx: Any, idx: builtins.bool, is_coinbase: builtins.bool, height: builtins.bool)
+def (txout: tinychain_copy.TxOut, tx: Any, idx: builtins.bool, is_coinbase: builtins.bool, height: builtins.int)
+def (txout: tinychain_copy.TxOut, tx: Any, idx: builtins.int, is_coinbase: builtins.bool, height: builtins.bool)
+def (txout: tinychain_copy.TxOut, tx: Any, idx: builtins.int, is_coinbase: builtins.bool, height: builtins.int)
+def (txout: tinychain_copy.UnspentTxOut, tx: Any, idx: builtins.bool, is_coinbase: builtins.bool, height: builtins.bool)
+def (txout: tinychain_copy.UnspentTxOut, tx: Any, idx: builtins.bool, is_coinbase: builtins.bool, height: builtins.int)
+def (txout: tinychain_copy.UnspentTxOut, tx: Any, idx: builtins.int, is_coinbase: builtins.bool, height: builtins.bool)
+def (txout: tinychain_copy.UnspentTxOut, tx: Any, idx: builtins.int, is_coinbase: builtins.bool, height: builtins.int)
+rm_from_utxo
+def (txid: builtins.str, txout_idx: builtins.bool)
+def (txid: builtins.str, txout_idx: builtins.int)
+find_utxo_in_list
+def (txin: tinychain_copy.TxIn, txns: builtins.list[tinychain_copy.Transaction]) -> Tuple[builtins.bool, builtins.int, builtins.int, builtins.int, builtins.str, builtins.str, fallback=tinychain_copy.UnspentTxOut]
+def (txin: tinychain_copy.TxIn, txns: builtins.set[tinychain_copy.Transaction]) -> Tuple[builtins.bool, builtins.int, builtins.int, builtins.int, builtins.str, builtins.str, fallback=tinychain_copy.UnspentTxOut]
+get_next_work_required
+def (prev_block_hash: builtins.str) -> builtins.int
+get_block_subsidy
+def () -> builtins.int
+find_utxo_in_mempool
+def (txin: tinychain_copy.TxIn) -> Tuple[builtins.bool, builtins.int, builtins.int, builtins.int, builtins.str, builtins.str, fallback=tinychain_copy.UnspentTxOut]
+get_merkle_root_of_txns
+def (txns: builtins.list[tinychain_copy.Block]) -> Any
+def (txns: builtins.list[tinychain_copy.Transaction]) -> Any
+def (txns: builtins.set[tinychain_copy.Block]) -> Any
+def (txns: builtins.set[tinychain_copy.Transaction]) -> Any
+handle
+def (self: tinychain_copy.AddPeerMsg, sock: builtins.object, peer_hostname: builtins.object)
+read_all_from_socket
+def (req: socket.socket)
+int_to_8bytes
+def (a: builtins.object) -> builtins.bytes
+pubkey_to_address
+def (pubkey: builtins.bytes) -> builtins.bytes
+init_wallet
+def (path: builtins.str =) -> Tuple[Any, Any, builtins.bytes]
+sha256d
+def (s: builtins.bytes) -> builtins.str
+def (s: builtins.str) -> builtins.str
+_chunks
+def (l: builtins.bytes, n: builtins.bool) -> typing.Generator[None, None, builtins.bytes]
+def (l: builtins.bytes, n: builtins.int) -> typing.Generator[None, None, builtins.bytes]
+def (l: builtins.dict[builtins.object, builtins.object], n: builtins.bool) -> typing.Generator[None, None, builtins.object]
+def (l: builtins.dict[builtins.object, builtins.object], n: builtins.int) -> typing.Generator[None, None, builtins.object]
+def (l: builtins.list[builtins.bool], n: builtins.bool) -> typing.Generator[None, None, builtins.list[builtins.bool]]
+def (l: builtins.list[builtins.bool], n: builtins.int) -> typing.Generator[None, None, builtins.list[builtins.bool]]
+def (l: builtins.list[builtins.bytes], n: builtins.bool) -> typing.Generator[None, None, builtins.list[builtins.bytes]]
+def (l: builtins.list[builtins.bytes], n: builtins.int) -> typing.Generator[None, None, builtins.list[builtins.bytes]]
+def (l: builtins.list[builtins.float], n: builtins.bool) -> typing.Generator[None, None, builtins.list[builtins.float]]
+def (l: builtins.list[builtins.float], n: builtins.int) -> typing.Generator[None, None, builtins.list[builtins.float]]
+def (l: builtins.list[builtins.int], n: builtins.bool) -> typing.Generator[None, None, builtins.list[builtins.int]]
+def (l: builtins.list[builtins.int], n: builtins.int) -> typing.Generator[None, None, builtins.list[builtins.int]]
+def (l: builtins.list[builtins.object], n: builtins.bool) -> typing.Generator[None, None, builtins.list[builtins.object]]
+def (l: builtins.list[builtins.object], n: builtins.int) -> typing.Generator[None, None, builtins.list[builtins.object]]
+def (l: builtins.list[builtins.str], n: builtins.bool) -> typing.Generator[None, None, builtins.list[builtins.str]]
+def (l: builtins.list[builtins.str], n: builtins.int) -> typing.Generator[None, None, builtins.list[builtins.str]]
+def (l: builtins.list[email.generator.Generator], n: builtins.bool) -> typing.Generator[None, None, builtins.list[email.generator.Generator]]
+def (l: builtins.list[email.generator.Generator], n: builtins.int) -> typing.Generator[None, None, builtins.list[email.generator.Generator]]
+def (l: builtins.list[socket.socket], n: builtins.bool) -> typing.Generator[None, None, builtins.list[socket.socket]]
+def (l: builtins.list[socket.socket], n: builtins.int) -> typing.Generator[None, None, builtins.list[socket.socket]]
+def (l: builtins.list[tinychain_copy.AddPeerMsg], n: builtins.bool) -> typing.Generator[None, None, builtins.list[tinychain_copy.AddPeerMsg]]
+def (l: builtins.list[tinychain_copy.AddPeerMsg], n: builtins.int) -> typing.Generator[None, None, builtins.list[tinychain_copy.AddPeerMsg]]
+def (l: builtins.list[tinychain_copy.Block], n: builtins.bool) -> typing.Generator[None, None, builtins.list[tinychain_copy.Block]]
+def (l: builtins.list[tinychain_copy.Block], n: builtins.int) -> typing.Generator[None, None, builtins.list[tinychain_copy.Block]]
+def (l: builtins.list[tinychain_copy.GetActiveChainMsg], n: builtins.bool) -> typing.Generator[None, None, builtins.list[tinychain_copy.GetActiveChainMsg]]
+def (l: builtins.list[tinychain_copy.GetActiveChainMsg], n: builtins.int) -> typing.Generator[None, None, builtins.list[tinychain_copy.GetActiveChainMsg]]
+def (l: builtins.list[tinychain_copy.GetBlocksMsg], n: builtins.bool) -> typing.Generator[None, None, builtins.list[tinychain_copy.GetBlocksMsg]]
+def (l: builtins.list[tinychain_copy.GetBlocksMsg], n: builtins.int) -> typing.Generator[None, None, builtins.list[tinychain_copy.GetBlocksMsg]]
+def (l: builtins.list[tinychain_copy.GetMempoolMsg], n: builtins.bool) -> typing.Generator[None, None, builtins.list[tinychain_copy.GetMempoolMsg]]
+def (l: builtins.list[tinychain_copy.GetMempoolMsg], n: builtins.int) -> typing.Generator[None, None, builtins.list[tinychain_copy.GetMempoolMsg]]
+def (l: builtins.list[tinychain_copy.GetUTXOsMsg], n: builtins.bool) -> typing.Generator[None, None, builtins.list[tinychain_copy.GetUTXOsMsg]]
+def (l: builtins.list[tinychain_copy.GetUTXOsMsg], n: builtins.int) -> typing.Generator[None, None, builtins.list[tinychain_copy.GetUTXOsMsg]]
+def (l: builtins.list[tinychain_copy.InvMsg], n: builtins.bool) -> typing.Generator[None, None, builtins.list[tinychain_copy.InvMsg]]
+def (l: builtins.list[tinychain_copy.InvMsg], n: builtins.int) -> typing.Generator[None, None, builtins.list[tinychain_copy.InvMsg]]
+def (l: builtins.list[tinychain_copy.MerkleNode], n: builtins.bool) -> typing.Generator[None, None, builtins.list[tinychain_copy.MerkleNode]]
+def (l: builtins.list[tinychain_copy.MerkleNode], n: builtins.int) -> typing.Generator[None, None, builtins.list[tinychain_copy.MerkleNode]]
+def (l: builtins.list[tinychain_copy.OutPoint], n: builtins.bool) -> typing.Generator[None, None, builtins.list[tinychain_copy.OutPoint]]
+def (l: builtins.list[tinychain_copy.OutPoint], n: builtins.int) -> typing.Generator[None, None, builtins.list[tinychain_copy.OutPoint]]
+def (l: builtins.list[tinychain_copy.Params], n: builtins.bool) -> typing.Generator[None, None, builtins.list[tinychain_copy.Params]]
+def (l: builtins.list[tinychain_copy.Params], n: builtins.int) -> typing.Generator[None, None, builtins.list[tinychain_copy.Params]]
+def (l: builtins.list[tinychain_copy.Transaction], n: builtins.bool) -> typing.Generator[None, None, builtins.list[tinychain_copy.Transaction]]
+def (l: builtins.list[tinychain_copy.Transaction], n: builtins.int) -> typing.Generator[None, None, builtins.list[tinychain_copy.Transaction]]
+def (l: builtins.list[tinychain_copy.TxIn], n: builtins.bool) -> typing.Generator[None, None, builtins.list[tinychain_copy.TxIn]]
+def (l: builtins.list[tinychain_copy.TxIn], n: builtins.int) -> typing.Generator[None, None, builtins.list[tinychain_copy.TxIn]]
+def (l: builtins.list[tinychain_copy.TxOut], n: builtins.bool) -> typing.Generator[None, None, builtins.list[tinychain_copy.TxOut]]
+def (l: builtins.list[tinychain_copy.TxOut], n: builtins.int) -> typing.Generator[None, None, builtins.list[tinychain_copy.TxOut]]
+def (l: builtins.list[tinychain_copy.UnspentTxOut], n: builtins.bool) -> typing.Generator[None, None, builtins.list[tinychain_copy.UnspentTxOut]]
+def (l: builtins.list[tinychain_copy.UnspentTxOut], n: builtins.int) -> typing.Generator[None, None, builtins.list[tinychain_copy.UnspentTxOut]]
+def (l: builtins.str, n: builtins.bool) -> typing.Generator[None, None, builtins.str]
+def (l: builtins.str, n: builtins.int) -> typing.Generator[None, None, builtins.str]
+def (l: tinychain_copy.Block, n: builtins.bool) -> typing.Generator[None, None, builtins.tuple[builtins.object]]
+def (l: tinychain_copy.Block, n: builtins.int) -> typing.Generator[None, None, builtins.tuple[builtins.object]]
+def (l: tinychain_copy.OutPoint, n: builtins.bool) -> typing.Generator[None, None, builtins.tuple[builtins.object]]
+def (l: tinychain_copy.OutPoint, n: builtins.int) -> typing.Generator[None, None, builtins.tuple[builtins.object]]
+def (l: tinychain_copy.Transaction, n: builtins.bool) -> typing.Generator[None, None, builtins.tuple[builtins.object]]
+def (l: tinychain_copy.Transaction, n: builtins.int) -> typing.Generator[None, None, builtins.tuple[builtins.object]]
+def (l: tinychain_copy.TxIn, n: builtins.bool) -> typing.Generator[None, None, builtins.tuple[builtins.object]]
+def (l: tinychain_copy.TxIn, n: builtins.int) -> typing.Generator[None, None, builtins.tuple[builtins.object]]
+def (l: tinychain_copy.TxOut, n: builtins.bool) -> typing.Generator[None, None, builtins.tuple[builtins.object]]
+def (l: tinychain_copy.TxOut, n: builtins.int) -> typing.Generator[None, None, builtins.tuple[builtins.object]]
+def (l: tinychain_copy.UnspentTxOut, n: builtins.bool) -> typing.Generator[None, None, builtins.tuple[builtins.object]]
+def (l: tinychain_copy.UnspentTxOut, n: builtins.int) -> typing.Generator[None, None, builtins.tuple[builtins.object]]
+id
+def (self: tinychain_copy.Transaction) -> builtins.str
+locate_block
+def (block_hash: builtins.str, chain: builtins.list[Tuple[builtins.int, builtins.int, builtins.int, builtins.int, builtins.list[Tuple[builtins.bool, builtins.int, builtins.list[Tuple[Tuple[builtins.int, builtins.str, fallback=tinychain_copy.OutPoint], builtins.bytes, builtins.bytes, builtins.int, fallback=tinychain_copy.TxIn]], builtins.list[Tuple[builtins.int, builtins.str, fallback=tinychain_copy.TxOut]], builtins.str, fallback=tinychain_copy.Transaction]], builtins.str, builtins.str, builtins.str, fallback=tinychain_copy.Block]] =) -> Tuple[Tuple[builtins.int, builtins.int, builtins.int, builtins.int, builtins.list[Tuple[builtins.bool, builtins.int, builtins.list[Tuple[Tuple[builtins.int, builtins.str, fallback=tinychain_copy.OutPoint], builtins.bytes, builtins.bytes, builtins.int, fallback=tinychain_copy.TxIn]], builtins.list[Tuple[builtins.int, builtins.str, fallback=tinychain_copy.TxOut]], builtins.str, fallback=tinychain_copy.Transaction]], builtins.str, builtins.str, builtins.str, fallback=tinychain_copy.Block], builtins.int, builtins.int]
+def (block_hash: builtins.str, chain: builtins.list[tinychain_copy.Block] =) -> Tuple[Tuple[builtins.int, builtins.int, builtins.int, builtins.int, builtins.list[Tuple[builtins.bool, builtins.int, builtins.list[Tuple[Tuple[builtins.int, builtins.str, fallback=tinychain_copy.OutPoint], builtins.bytes, builtins.bytes, builtins.int, fallback=tinychain_copy.TxIn]], builtins.list[Tuple[builtins.int, builtins.str, fallback=tinychain_copy.TxOut]], builtins.str, fallback=tinychain_copy.Transaction]], builtins.str, builtins.str, builtins.str, fallback=tinychain_copy.Block], builtins.int, builtins.int]
+reorg_if_necessary
+def () -> builtins.bool
+mine
+def (block: tinychain_copy.Block) -> Union[None, tinychain_copy.Block]
+validate_signature_for_spend
+def (txin: tinychain_copy.TxIn, utxo: tinychain_copy.TxOut, txn: tinychain_copy.Transaction) -> builtins.bool
+def (txin: tinychain_copy.TxIn, utxo: tinychain_copy.UnspentTxOut, txn: tinychain_copy.Transaction) -> builtins.bool
+int_to_8bytes
+def (a: builtins.bool) -> builtins.bytes
+def (a: builtins.bytes) -> builtins.bytes
+def (a: builtins.dict[builtins.object, builtins.object]) -> builtins.bytes
+def (a: builtins.float) -> builtins.bytes
+def (a: builtins.int) -> builtins.bytes
+def (a: builtins.list[builtins.int]) -> builtins.bytes
+def (a: builtins.list[builtins.object]) -> builtins.bytes
+def (a: builtins.list[builtins.str]) -> builtins.bytes
+def (a: builtins.object) -> builtins.bytes
+def (a: builtins.set[builtins.object]) -> builtins.bytes
+def (a: builtins.str) -> builtins.bytes
+def (a: def (*Any, **Any) -> Any) -> builtins.bytes
+def (a: email.generator.Generator) -> builtins.bytes
+def (a: socket.socket) -> builtins.bytes
+def (a: tinychain_copy.AddPeerMsg) -> builtins.bytes
+def (a: tinychain_copy.Block) -> builtins.bytes
+def (a: tinychain_copy.GetActiveChainMsg) -> builtins.bytes
+def (a: tinychain_copy.GetBlocksMsg) -> builtins.bytes
+def (a: tinychain_copy.GetMempoolMsg) -> builtins.bytes
+def (a: tinychain_copy.GetUTXOsMsg) -> builtins.bytes
+def (a: tinychain_copy.InvMsg) -> builtins.bytes
+def (a: tinychain_copy.MerkleNode) -> builtins.bytes
+def (a: tinychain_copy.OutPoint) -> builtins.bytes
+def (a: tinychain_copy.Params) -> builtins.bytes
+def (a: tinychain_copy.Transaction) -> builtins.bytes
+def (a: tinychain_copy.TxIn) -> builtins.bytes
+def (a: tinychain_copy.TxOut) -> builtins.bytes
+def (a: tinychain_copy.UnspentTxOut) -> builtins.bytes
+encode_socket_data
+def (data: builtins.object) -> builtins.bytes
+get_merkle_root_of_txns
+def (txns: builtins.list[Tuple[builtins.bool, builtins.int, builtins.list[Tuple[Tuple[builtins.int, builtins.str, fallback=tinychain_copy.OutPoint], builtins.bytes, builtins.bytes, builtins.int, fallback=tinychain_copy.TxIn]], builtins.list[Tuple[builtins.int, builtins.str, fallback=tinychain_copy.TxOut]], builtins.str, fallback=tinychain_copy.Transaction]]) -> Any
+def (txns: builtins.list[tinychain_copy.Block]) -> Any
+def (txns: builtins.list[tinychain_copy.Transaction]) -> Any
+def (txns: builtins.set[tinychain_copy.Block]) -> Any
+def (txns: builtins.set[tinychain_copy.Transaction]) -> Any
+assemble_and_solve_block
+def (pay_coinbase_to_addr: builtins.object, txns: Any =) -> Union[None, tinychain_copy.Block]
+validate_txn
+def (txn: tinychain_copy.Transaction, as_coinbase: builtins.bool =, siblings_in_block: builtins.list[tinychain_copy.Transaction] =, allow_utxo_from_mempool: builtins.bool =) -> tinychain_copy.Transaction
+def (txn: tinychain_copy.Transaction, as_coinbase: builtins.bool =, siblings_in_block: builtins.list[tinychain_copy.Transaction] =, allow_utxo_from_mempool: builtins.float =) -> tinychain_copy.Transaction
+def (txn: tinychain_copy.Transaction, as_coinbase: builtins.bool =, siblings_in_block: builtins.list[tinychain_copy.Transaction] =, allow_utxo_from_mempool: builtins.int =) -> tinychain_copy.Transaction
+def (txn: tinychain_copy.Transaction, as_coinbase: builtins.bool =, siblings_in_block: builtins.list[tinychain_copy.Transaction] =, allow_utxo_from_mempool: builtins.object =) -> tinychain_copy.Transaction
+def (txn: tinychain_copy.Transaction, as_coinbase: builtins.bool =, siblings_in_block: builtins.set[tinychain_copy.Transaction] =, allow_utxo_from_mempool: builtins.bool =) -> tinychain_copy.Transaction
+def (txn: tinychain_copy.Transaction, as_coinbase: builtins.bool =, siblings_in_block: builtins.set[tinychain_copy.Transaction] =, allow_utxo_from_mempool: builtins.float =) -> tinychain_copy.Transaction
+def (txn: tinychain_copy.Transaction, as_coinbase: builtins.bool =, siblings_in_block: builtins.set[tinychain_copy.Transaction] =, allow_utxo_from_mempool: builtins.int =) -> tinychain_copy.Transaction
+def (txn: tinychain_copy.Transaction, as_coinbase: builtins.bool =, siblings_in_block: builtins.set[tinychain_copy.Transaction] =, allow_utxo_from_mempool: builtins.object =) -> tinychain_copy.Transaction
+def (txn: tinychain_copy.Transaction, as_coinbase: builtins.float =, siblings_in_block: builtins.list[tinychain_copy.Transaction] =, allow_utxo_from_mempool: builtins.bool =) -> tinychain_copy.Transaction
+def (txn: tinychain_copy.Transaction, as_coinbase: builtins.float =, siblings_in_block: builtins.list[tinychain_copy.Transaction] =, allow_utxo_from_mempool: builtins.float =) -> tinychain_copy.Transaction
+def (txn: tinychain_copy.Transaction, as_coinbase: builtins.float =, siblings_in_block: builtins.list[tinychain_copy.Transaction] =, allow_utxo_from_mempool: builtins.int =) -> tinychain_copy.Transaction
+def (txn: tinychain_copy.Transaction, as_coinbase: builtins.float =, siblings_in_block: builtins.list[tinychain_copy.Transaction] =, allow_utxo_from_mempool: builtins.object =) -> tinychain_copy.Transaction
+def (txn: tinychain_copy.Transaction, as_coinbase: builtins.float =, siblings_in_block: builtins.set[tinychain_copy.Transaction] =, allow_utxo_from_mempool: builtins.bool =) -> tinychain_copy.Transaction
+def (txn: tinychain_copy.Transaction, as_coinbase: builtins.float =, siblings_in_block: builtins.set[tinychain_copy.Transaction] =, allow_utxo_from_mempool: builtins.float =) -> tinychain_copy.Transaction
+def (txn: tinychain_copy.Transaction, as_coinbase: builtins.float =, siblings_in_block: builtins.set[tinychain_copy.Transaction] =, allow_utxo_from_mempool: builtins.int =) -> tinychain_copy.Transaction
+def (txn: tinychain_copy.Transaction, as_coinbase: builtins.float =, siblings_in_block: builtins.set[tinychain_copy.Transaction] =, allow_utxo_from_mempool: builtins.object =) -> tinychain_copy.Transaction
+def (txn: tinychain_copy.Transaction, as_coinbase: builtins.int =, siblings_in_block: builtins.list[tinychain_copy.Transaction] =, allow_utxo_from_mempool: builtins.bool =) -> tinychain_copy.Transaction
+def (txn: tinychain_copy.Transaction, as_coinbase: builtins.int =, siblings_in_block: builtins.list[tinychain_copy.Transaction] =, allow_utxo_from_mempool: builtins.float =) -> tinychain_copy.Transaction
+def (txn: tinychain_copy.Transaction, as_coinbase: builtins.int =, siblings_in_block: builtins.list[tinychain_copy.Transaction] =, allow_utxo_from_mempool: builtins.int =) -> tinychain_copy.Transaction
+def (txn: tinychain_copy.Transaction, as_coinbase: builtins.int =, siblings_in_block: builtins.list[tinychain_copy.Transaction] =, allow_utxo_from_mempool: builtins.object =) -> tinychain_copy.Transaction
+def (txn: tinychain_copy.Transaction, as_coinbase: builtins.int =, siblings_in_block: builtins.set[tinychain_copy.Transaction] =, allow_utxo_from_mempool: builtins.bool =) -> tinychain_copy.Transaction
+def (txn: tinychain_copy.Transaction, as_coinbase: builtins.int =, siblings_in_block: builtins.set[tinychain_copy.Transaction] =, allow_utxo_from_mempool: builtins.float =) -> tinychain_copy.Transaction
+def (txn: tinychain_copy.Transaction, as_coinbase: builtins.int =, siblings_in_block: builtins.set[tinychain_copy.Transaction] =, allow_utxo_from_mempool: builtins.int =) -> tinychain_copy.Transaction
+def (txn: tinychain_copy.Transaction, as_coinbase: builtins.int =, siblings_in_block: builtins.set[tinychain_copy.Transaction] =, allow_utxo_from_mempool: builtins.object =) -> tinychain_copy.Transaction
+def (txn: tinychain_copy.Transaction, as_coinbase: builtins.object =, siblings_in_block: builtins.list[tinychain_copy.Transaction] =, allow_utxo_from_mempool: builtins.bool =) -> tinychain_copy.Transaction
+def (txn: tinychain_copy.Transaction, as_coinbase: builtins.object =, siblings_in_block: builtins.list[tinychain_copy.Transaction] =, allow_utxo_from_mempool: builtins.float =) -> tinychain_copy.Transaction
+def (txn: tinychain_copy.Transaction, as_coinbase: builtins.object =, siblings_in_block: builtins.list[tinychain_copy.Transaction] =, allow_utxo_from_mempool: builtins.int =) -> tinychain_copy.Transaction
+def (txn: tinychain_copy.Transaction, as_coinbase: builtins.object =, siblings_in_block: builtins.list[tinychain_copy.Transaction] =, allow_utxo_from_mempool: builtins.object =) -> tinychain_copy.Transaction
+def (txn: tinychain_copy.Transaction, as_coinbase: builtins.object =, siblings_in_block: builtins.set[tinychain_copy.Transaction] =, allow_utxo_from_mempool: builtins.bool =) -> tinychain_copy.Transaction
+def (txn: tinychain_copy.Transaction, as_coinbase: builtins.object =, siblings_in_block: builtins.set[tinychain_copy.Transaction] =, allow_utxo_from_mempool: builtins.float =) -> tinychain_copy.Transaction
+def (txn: tinychain_copy.Transaction, as_coinbase: builtins.object =, siblings_in_block: builtins.set[tinychain_copy.Transaction] =, allow_utxo_from_mempool: builtins.int =) -> tinychain_copy.Transaction
+def (txn: tinychain_copy.Transaction, as_coinbase: builtins.object =, siblings_in_block: builtins.set[tinychain_copy.Transaction] =, allow_utxo_from_mempool: builtins.object =) -> tinychain_copy.Transaction
+send_to_peer
+def (data: builtins.object, peer: builtins.str =)
+txn_iterator
+def (chain: builtins.list[Tuple[builtins.int, builtins.int, builtins.int, builtins.int, builtins.list[Tuple[builtins.bool, builtins.int, builtins.list[Tuple[Tuple[builtins.int, builtins.str, fallback=tinychain_copy.OutPoint], builtins.bytes, builtins.bytes, builtins.int, fallback=tinychain_copy.TxIn]], builtins.list[Tuple[builtins.int, builtins.str, fallback=tinychain_copy.TxOut]], builtins.str, fallback=tinychain_copy.Transaction]], builtins.str, builtins.str, builtins.str, fallback=tinychain_copy.Block]]) -> typing.Generator[None, None, Tuple[Tuple[builtins.bool, builtins.int, builtins.list[Tuple[Tuple[builtins.int, builtins.str, fallback=tinychain_copy.OutPoint], builtins.bytes, builtins.bytes, builtins.int, fallback=tinychain_copy.TxIn]], builtins.list[Tuple[builtins.int, builtins.str, fallback=tinychain_copy.TxOut]], builtins.str, fallback=tinychain_copy.Transaction], Tuple[builtins.int, builtins.int, builtins.int, builtins.int, builtins.list[Tuple[builtins.bool, builtins.int, builtins.list[Tuple[Tuple[builtins.int, builtins.str, fallback=tinychain_copy.OutPoint], builtins.bytes, builtins.bytes, builtins.int, fallback=tinychain_copy.TxIn]], builtins.list[Tuple[builtins.int, builtins.str, fallback=tinychain_copy.TxOut]], builtins.str, fallback=tinychain_copy.Transaction]], builtins.str, builtins.str, builtins.str, fallback=tinychain_copy.Block], builtins.int]]
+def (chain: builtins.list[tinychain_copy.Block]) -> typing.Generator[None, None, Tuple[Tuple[builtins.bool, builtins.int, builtins.list[Tuple[Tuple[builtins.int, builtins.str, fallback=tinychain_copy.OutPoint], builtins.bytes, builtins.bytes, builtins.int, fallback=tinychain_copy.TxIn]], builtins.list[Tuple[builtins.int, builtins.str, fallback=tinychain_copy.TxOut]], builtins.str, fallback=tinychain_copy.Transaction], builtins.int, tinychain_copy.Block]]
+def (chain: builtins.set[tinychain_copy.Block]) -> typing.Generator[None, None, Tuple[Tuple[builtins.bool, builtins.int, builtins.list[Tuple[Tuple[builtins.int, builtins.str, fallback=tinychain_copy.OutPoint], builtins.bytes, builtins.bytes, builtins.int, fallback=tinychain_copy.TxIn]], builtins.list[Tuple[builtins.int, builtins.str, fallback=tinychain_copy.TxOut]], builtins.str, fallback=tinychain_copy.Transaction], builtins.int, tinychain_copy.Block]]
+find_txout_for_txin
+def (txin: tinychain_copy.TxIn, chain: Any) -> Union[Tuple[Any, Any, Tuple[builtins.bool, builtins.int, builtins.list[Tuple[Tuple[builtins.int, builtins.str, fallback=tinychain_copy.OutPoint], builtins.bytes, builtins.bytes, builtins.int, fallback=tinychain_copy.TxIn]], builtins.list[Tuple[builtins.int, builtins.str, fallback=tinychain_copy.TxOut]], builtins.str, fallback=tinychain_copy.Transaction], Tuple[builtins.int, builtins.str, fallback=tinychain_copy.TxOut], builtins.int], Tuple[Any, Tuple[builtins.bool, builtins.int, builtins.list[Tuple[Tuple[builtins.int, builtins.str, fallback=tinychain_copy.OutPoint], builtins.bytes, builtins.bytes, builtins.int, fallback=tinychain_copy.TxIn]], builtins.list[Tuple[builtins.int, builtins.str, fallback=tinychain_copy.TxOut]], builtins.str, fallback=tinychain_copy.Transaction], Tuple[builtins.int, builtins.str, fallback=tinychain_copy.TxOut], builtins.int, builtins.int]]
+disconnect_block
+def (block: Any, chain: builtins.list[tinychain_copy.Block] =) -> Tuple[builtins.int, builtins.int, builtins.int, builtins.int, builtins.list[Tuple[builtins.bool, builtins.int, builtins.list[Tuple[Tuple[builtins.int, builtins.str, fallback=tinychain_copy.OutPoint], builtins.bytes, builtins.bytes, builtins.int, fallback=tinychain_copy.TxIn]], builtins.list[Tuple[builtins.int, builtins.str, fallback=tinychain_copy.TxOut]], builtins.str, fallback=tinychain_copy.Transaction]], builtins.str, builtins.str, builtins.str, fallback=tinychain_copy.Block]
+encode_socket_data
+def (data: builtins.bool) -> builtins.bytes
+def (data: builtins.bytes) -> builtins.bytes
+def (data: builtins.dict[builtins.bool, builtins.str]) -> builtins.bytes
+def (data: builtins.dict[builtins.bytes, builtins.str]) -> builtins.bytes
+def (data: builtins.dict[builtins.float, builtins.str]) -> builtins.bytes
+def (data: builtins.dict[builtins.int, builtins.str]) -> builtins.bytes
+def (data: builtins.dict[builtins.object, builtins.object]) -> builtins.bytes
+def (data: builtins.dict[builtins.object, builtins.str]) -> builtins.bytes
+def (data: builtins.dict[builtins.str, builtins.str]) -> builtins.bytes
+def (data: builtins.dict[builtins.str, email.generator.Generator]) -> builtins.bytes
+def (data: builtins.dict[builtins.str, socket.socket]) -> builtins.bytes
+def (data: builtins.dict[builtins.str, tinychain_copy.AddPeerMsg]) -> builtins.bytes
+def (data: builtins.dict[builtins.str, tinychain_copy.Block]) -> builtins.bytes
+def (data: builtins.dict[builtins.str, tinychain_copy.GetActiveChainMsg]) -> builtins.bytes
+def (data: builtins.dict[builtins.str, tinychain_copy.GetBlocksMsg]) -> builtins.bytes
+def (data: builtins.dict[builtins.str, tinychain_copy.GetMempoolMsg]) -> builtins.bytes
+def (data: builtins.dict[builtins.str, tinychain_copy.GetUTXOsMsg]) -> builtins.bytes
+def (data: builtins.dict[builtins.str, tinychain_copy.InvMsg]) -> builtins.bytes
+def (data: builtins.dict[builtins.str, tinychain_copy.MerkleNode]) -> builtins.bytes
+def (data: builtins.dict[builtins.str, tinychain_copy.OutPoint]) -> builtins.bytes
+def (data: builtins.dict[builtins.str, tinychain_copy.Params]) -> builtins.bytes
+def (data: builtins.dict[builtins.str, tinychain_copy.Transaction]) -> builtins.bytes
+def (data: builtins.dict[builtins.str, tinychain_copy.TxIn]) -> builtins.bytes
+def (data: builtins.dict[builtins.str, tinychain_copy.TxOut]) -> builtins.bytes
+def (data: builtins.dict[builtins.str, tinychain_copy.UnspentTxOut]) -> builtins.bytes
+def (data: builtins.float) -> builtins.bytes
+def (data: builtins.int) -> builtins.bytes
+def (data: builtins.list[Tuple[Tuple[builtins.bool, builtins.int, builtins.int, builtins.int, builtins.str, builtins.str, fallback=tinychain_copy.UnspentTxOut], Tuple[builtins.int, builtins.str, fallback=tinychain_copy.OutPoint]]]) -> builtins.bytes
+def (data: builtins.list[Tuple[builtins.int, builtins.int, builtins.int, builtins.int, builtins.list[Tuple[builtins.bool, builtins.int, builtins.list[Tuple[Tuple[builtins.int, builtins.str, fallback=tinychain_copy.OutPoint], builtins.bytes, builtins.bytes, builtins.int, fallback=tinychain_copy.TxIn]], builtins.list[Tuple[builtins.int, builtins.str, fallback=tinychain_copy.TxOut]], builtins.str, fallback=tinychain_copy.Transaction]], builtins.str, builtins.str, builtins.str, fallback=tinychain_copy.Block]]) -> builtins.bytes
+def (data: builtins.list[builtins.bool]) -> builtins.bytes
+def (data: builtins.list[builtins.bytes]) -> builtins.bytes
+def (data: builtins.list[builtins.float]) -> builtins.bytes
+def (data: builtins.list[builtins.int]) -> builtins.bytes
+def (data: builtins.list[builtins.object]) -> builtins.bytes
+def (data: builtins.list[builtins.str]) -> builtins.bytes
+def (data: builtins.list[email.generator.Generator]) -> builtins.bytes
+def (data: builtins.list[socket.socket]) -> builtins.bytes
+def (data: builtins.list[tinychain_copy.AddPeerMsg]) -> builtins.bytes
+def (data: builtins.list[tinychain_copy.Block]) -> builtins.bytes
+def (data: builtins.list[tinychain_copy.GetActiveChainMsg]) -> builtins.bytes
+def (data: builtins.list[tinychain_copy.GetBlocksMsg]) -> builtins.bytes
+def (data: builtins.list[tinychain_copy.GetMempoolMsg]) -> builtins.bytes
+def (data: builtins.list[tinychain_copy.GetUTXOsMsg]) -> builtins.bytes
+def (data: builtins.list[tinychain_copy.InvMsg]) -> builtins.bytes
+def (data: builtins.list[tinychain_copy.MerkleNode]) -> builtins.bytes
+def (data: builtins.list[tinychain_copy.OutPoint]) -> builtins.bytes
+def (data: builtins.list[tinychain_copy.Params]) -> builtins.bytes
+def (data: builtins.list[tinychain_copy.Transaction]) -> builtins.bytes
+def (data: builtins.list[tinychain_copy.TxIn]) -> builtins.bytes
+def (data: builtins.list[tinychain_copy.TxOut]) -> builtins.bytes
+def (data: builtins.list[tinychain_copy.UnspentTxOut]) -> builtins.bytes
+def (data: builtins.object) -> builtins.bytes
+def (data: builtins.set[builtins.bool]) -> builtins.bytes
+def (data: builtins.set[builtins.bytes]) -> builtins.bytes
+def (data: builtins.set[builtins.float]) -> builtins.bytes
+def (data: builtins.set[builtins.int]) -> builtins.bytes
+def (data: builtins.set[builtins.object]) -> builtins.bytes
+def (data: builtins.set[builtins.str]) -> builtins.bytes
+def (data: builtins.set[email.generator.Generator]) -> builtins.bytes
+def (data: builtins.set[socket.socket]) -> builtins.bytes
+def (data: builtins.set[tinychain_copy.AddPeerMsg]) -> builtins.bytes
+def (data: builtins.set[tinychain_copy.Block]) -> builtins.bytes
+def (data: builtins.set[tinychain_copy.GetActiveChainMsg]) -> builtins.bytes
+def (data: builtins.set[tinychain_copy.GetBlocksMsg]) -> builtins.bytes
+def (data: builtins.set[tinychain_copy.GetMempoolMsg]) -> builtins.bytes
+def (data: builtins.set[tinychain_copy.GetUTXOsMsg]) -> builtins.bytes
+def (data: builtins.set[tinychain_copy.InvMsg]) -> builtins.bytes
+def (data: builtins.set[tinychain_copy.MerkleNode]) -> builtins.bytes
+def (data: builtins.set[tinychain_copy.OutPoint]) -> builtins.bytes
+def (data: builtins.set[tinychain_copy.Params]) -> builtins.bytes
+def (data: builtins.set[tinychain_copy.Transaction]) -> builtins.bytes
+def (data: builtins.set[tinychain_copy.TxIn]) -> builtins.bytes
+def (data: builtins.set[tinychain_copy.TxOut]) -> builtins.bytes
+def (data: builtins.set[tinychain_copy.UnspentTxOut]) -> builtins.bytes
+def (data: builtins.str) -> builtins.bytes
+def (data: def (*Any, **Any) -> Any) -> builtins.bytes
+def (data: email.generator.Generator) -> builtins.bytes
+def (data: socket.socket) -> builtins.bytes
+def (data: tinychain_copy.AddPeerMsg) -> builtins.bytes
+def (data: tinychain_copy.Block) -> builtins.bytes
+def (data: tinychain_copy.GetActiveChainMsg) -> builtins.bytes
+def (data: tinychain_copy.GetBlocksMsg) -> builtins.bytes
+def (data: tinychain_copy.GetMempoolMsg) -> builtins.bytes
+def (data: tinychain_copy.GetUTXOsMsg) -> builtins.bytes
+def (data: tinychain_copy.InvMsg) -> builtins.bytes
+def (data: tinychain_copy.MerkleNode) -> builtins.bytes
+def (data: tinychain_copy.OutPoint) -> builtins.bytes
+def (data: tinychain_copy.Params) -> builtins.bytes
+def (data: tinychain_copy.Transaction) -> builtins.bytes
+def (data: tinychain_copy.TxIn) -> builtins.bytes
+def (data: tinychain_copy.TxOut) -> builtins.bytes
+def (data: tinychain_copy.UnspentTxOut) -> builtins.bytes
+save_to_disk
+def ()
+handle
+def (self: tinychain_copy.GetUTXOsMsg, sock: socket.socket, peer_hostname: builtins.object)
+handle
+def (self: tinychain_copy.GetMempoolMsg, sock: socket.socket, peer_hostname: builtins.object)
+handle
+def (self: tinychain_copy.GetActiveChainMsg, sock: socket.socket, peer_hostname: builtins.object)
+find_utxo_in_list
+def (txin: tinychain_copy.TxIn, txns: builtins.list[Tuple[builtins.bool, builtins.int, builtins.list[Tuple[Tuple[builtins.int, builtins.str, fallback=tinychain_copy.OutPoint], builtins.bytes, builtins.bytes, builtins.int, fallback=tinychain_copy.TxIn]], builtins.list[Tuple[builtins.int, builtins.str, fallback=tinychain_copy.TxOut]], builtins.str, fallback=tinychain_copy.Transaction]]) -> Tuple[builtins.bool, builtins.int, builtins.int, builtins.int, builtins.str, builtins.str, fallback=tinychain_copy.UnspentTxOut]
+def (txin: tinychain_copy.TxIn, txns: builtins.list[tinychain_copy.Transaction]) -> Tuple[builtins.bool, builtins.int, builtins.int, builtins.int, builtins.str, builtins.str, fallback=tinychain_copy.UnspentTxOut]
+def (txin: tinychain_copy.TxIn, txns: builtins.set[tinychain_copy.Transaction]) -> Tuple[builtins.bool, builtins.int, builtins.int, builtins.int, builtins.str, builtins.str, fallback=tinychain_copy.UnspentTxOut]
+validate_txn
+def (txn: tinychain_copy.Transaction, as_coinbase: builtins.bool =, siblings_in_block: builtins.list[Tuple[builtins.bool, builtins.int, builtins.list[Tuple[Tuple[builtins.int, builtins.str, fallback=tinychain_copy.OutPoint], builtins.bytes, builtins.bytes, builtins.int, fallback=tinychain_copy.TxIn]], builtins.list[Tuple[builtins.int, builtins.str, fallback=tinychain_copy.TxOut]], builtins.str, fallback=tinychain_copy.Transaction]] =, allow_utxo_from_mempool: builtins.bool =) -> tinychain_copy.Transaction
+def (txn: tinychain_copy.Transaction, as_coinbase: builtins.bool =, siblings_in_block: builtins.list[Tuple[builtins.bool, builtins.int, builtins.list[Tuple[Tuple[builtins.int, builtins.str, fallback=tinychain_copy.OutPoint], builtins.bytes, builtins.bytes, builtins.int, fallback=tinychain_copy.TxIn]], builtins.list[Tuple[builtins.int, builtins.str, fallback=tinychain_copy.TxOut]], builtins.str, fallback=tinychain_copy.Transaction]] =, allow_utxo_from_mempool: builtins.float =) -> tinychain_copy.Transaction
+def (txn: tinychain_copy.Transaction, as_coinbase: builtins.bool =, siblings_in_block: builtins.list[Tuple[builtins.bool, builtins.int, builtins.list[Tuple[Tuple[builtins.int, builtins.str, fallback=tinychain_copy.OutPoint], builtins.bytes, builtins.bytes, builtins.int, fallback=tinychain_copy.TxIn]], builtins.list[Tuple[builtins.int, builtins.str, fallback=tinychain_copy.TxOut]], builtins.str, fallback=tinychain_copy.Transaction]] =, allow_utxo_from_mempool: builtins.int =) -> tinychain_copy.Transaction
+def (txn: tinychain_copy.Transaction, as_coinbase: builtins.bool =, siblings_in_block: builtins.list[Tuple[builtins.bool, builtins.int, builtins.list[Tuple[Tuple[builtins.int, builtins.str, fallback=tinychain_copy.OutPoint], builtins.bytes, builtins.bytes, builtins.int, fallback=tinychain_copy.TxIn]], builtins.list[Tuple[builtins.int, builtins.str, fallback=tinychain_copy.TxOut]], builtins.str, fallback=tinychain_copy.Transaction]] =, allow_utxo_from_mempool: builtins.object =) -> tinychain_copy.Transaction
+def (txn: tinychain_copy.Transaction, as_coinbase: builtins.bool =, siblings_in_block: builtins.list[tinychain_copy.Transaction] =, allow_utxo_from_mempool: builtins.bool =) -> tinychain_copy.Transaction
+def (txn: tinychain_copy.Transaction, as_coinbase: builtins.bool =, siblings_in_block: builtins.list[tinychain_copy.Transaction] =, allow_utxo_from_mempool: builtins.float =) -> tinychain_copy.Transaction
+def (txn: tinychain_copy.Transaction, as_coinbase: builtins.bool =, siblings_in_block: builtins.list[tinychain_copy.Transaction] =, allow_utxo_from_mempool: builtins.int =) -> tinychain_copy.Transaction
+def (txn: tinychain_copy.Transaction, as_coinbase: builtins.bool =, siblings_in_block: builtins.list[tinychain_copy.Transaction] =, allow_utxo_from_mempool: builtins.object =) -> tinychain_copy.Transaction
+def (txn: tinychain_copy.Transaction, as_coinbase: builtins.bool =, siblings_in_block: builtins.set[tinychain_copy.Transaction] =, allow_utxo_from_mempool: builtins.bool =) -> tinychain_copy.Transaction
+def (txn: tinychain_copy.Transaction, as_coinbase: builtins.bool =, siblings_in_block: builtins.set[tinychain_copy.Transaction] =, allow_utxo_from_mempool: builtins.float =) -> tinychain_copy.Transaction
+def (txn: tinychain_copy.Transaction, as_coinbase: builtins.bool =, siblings_in_block: builtins.set[tinychain_copy.Transaction] =, allow_utxo_from_mempool: builtins.int =) -> tinychain_copy.Transaction
+def (txn: tinychain_copy.Transaction, as_coinbase: builtins.bool =, siblings_in_block: builtins.set[tinychain_copy.Transaction] =, allow_utxo_from_mempool: builtins.object =) -> tinychain_copy.Transaction
+def (txn: tinychain_copy.Transaction, as_coinbase: builtins.float =, siblings_in_block: builtins.list[Tuple[builtins.bool, builtins.int, builtins.list[Tuple[Tuple[builtins.int, builtins.str, fallback=tinychain_copy.OutPoint], builtins.bytes, builtins.bytes, builtins.int, fallback=tinychain_copy.TxIn]], builtins.list[Tuple[builtins.int, builtins.str, fallback=tinychain_copy.TxOut]], builtins.str, fallback=tinychain_copy.Transaction]] =, allow_utxo_from_mempool: builtins.bool =) -> tinychain_copy.Transaction
+def (txn: tinychain_copy.Transaction, as_coinbase: builtins.float =, siblings_in_block: builtins.list[Tuple[builtins.bool, builtins.int, builtins.list[Tuple[Tuple[builtins.int, builtins.str, fallback=tinychain_copy.OutPoint], builtins.bytes, builtins.bytes, builtins.int, fallback=tinychain_copy.TxIn]], builtins.list[Tuple[builtins.int, builtins.str, fallback=tinychain_copy.TxOut]], builtins.str, fallback=tinychain_copy.Transaction]] =, allow_utxo_from_mempool: builtins.float =) -> tinychain_copy.Transaction
+def (txn: tinychain_copy.Transaction, as_coinbase: builtins.float =, siblings_in_block: builtins.list[Tuple[builtins.bool, builtins.int, builtins.list[Tuple[Tuple[builtins.int, builtins.str, fallback=tinychain_copy.OutPoint], builtins.bytes, builtins.bytes, builtins.int, fallback=tinychain_copy.TxIn]], builtins.list[Tuple[builtins.int, builtins.str, fallback=tinychain_copy.TxOut]], builtins.str, fallback=tinychain_copy.Transaction]] =, allow_utxo_from_mempool: builtins.int =) -> tinychain_copy.Transaction
+def (txn: tinychain_copy.Transaction, as_coinbase: builtins.float =, siblings_in_block: builtins.list[Tuple[builtins.bool, builtins.int, builtins.list[Tuple[Tuple[builtins.int, builtins.str, fallback=tinychain_copy.OutPoint], builtins.bytes, builtins.bytes, builtins.int, fallback=tinychain_copy.TxIn]], builtins.list[Tuple[builtins.int, builtins.str, fallback=tinychain_copy.TxOut]], builtins.str, fallback=tinychain_copy.Transaction]] =, allow_utxo_from_mempool: builtins.object =) -> tinychain_copy.Transaction
+def (txn: tinychain_copy.Transaction, as_coinbase: builtins.float =, siblings_in_block: builtins.list[tinychain_copy.Transaction] =, allow_utxo_from_mempool: builtins.bool =) -> tinychain_copy.Transaction
+def (txn: tinychain_copy.Transaction, as_coinbase: builtins.float =, siblings_in_block: builtins.list[tinychain_copy.Transaction] =, allow_utxo_from_mempool: builtins.float =) -> tinychain_copy.Transaction
+def (txn: tinychain_copy.Transaction, as_coinbase: builtins.float =, siblings_in_block: builtins.list[tinychain_copy.Transaction] =, allow_utxo_from_mempool: builtins.int =) -> tinychain_copy.Transaction
+def (txn: tinychain_copy.Transaction, as_coinbase: builtins.float =, siblings_in_block: builtins.list[tinychain_copy.Transaction] =, allow_utxo_from_mempool: builtins.object =) -> tinychain_copy.Transaction
+def (txn: tinychain_copy.Transaction, as_coinbase: builtins.float =, siblings_in_block: builtins.set[tinychain_copy.Transaction] =, allow_utxo_from_mempool: builtins.bool =) -> tinychain_copy.Transaction
+def (txn: tinychain_copy.Transaction, as_coinbase: builtins.float =, siblings_in_block: builtins.set[tinychain_copy.Transaction] =, allow_utxo_from_mempool: builtins.float =) -> tinychain_copy.Transaction
+def (txn: tinychain_copy.Transaction, as_coinbase: builtins.float =, siblings_in_block: builtins.set[tinychain_copy.Transaction] =, allow_utxo_from_mempool: builtins.int =) -> tinychain_copy.Transaction
+def (txn: tinychain_copy.Transaction, as_coinbase: builtins.float =, siblings_in_block: builtins.set[tinychain_copy.Transaction] =, allow_utxo_from_mempool: builtins.object =) -> tinychain_copy.Transaction
+def (txn: tinychain_copy.Transaction, as_coinbase: builtins.int =, siblings_in_block: builtins.list[Tuple[builtins.bool, builtins.int, builtins.list[Tuple[Tuple[builtins.int, builtins.str, fallback=tinychain_copy.OutPoint], builtins.bytes, builtins.bytes, builtins.int, fallback=tinychain_copy.TxIn]], builtins.list[Tuple[builtins.int, builtins.str, fallback=tinychain_copy.TxOut]], builtins.str, fallback=tinychain_copy.Transaction]] =, allow_utxo_from_mempool: builtins.bool =) -> tinychain_copy.Transaction
+def (txn: tinychain_copy.Transaction, as_coinbase: builtins.int =, siblings_in_block: builtins.list[Tuple[builtins.bool, builtins.int, builtins.list[Tuple[Tuple[builtins.int, builtins.str, fallback=tinychain_copy.OutPoint], builtins.bytes, builtins.bytes, builtins.int, fallback=tinychain_copy.TxIn]], builtins.list[Tuple[builtins.int, builtins.str, fallback=tinychain_copy.TxOut]], builtins.str, fallback=tinychain_copy.Transaction]] =, allow_utxo_from_mempool: builtins.float =) -> tinychain_copy.Transaction
+def (txn: tinychain_copy.Transaction, as_coinbase: builtins.int =, siblings_in_block: builtins.list[Tuple[builtins.bool, builtins.int, builtins.list[Tuple[Tuple[builtins.int, builtins.str, fallback=tinychain_copy.OutPoint], builtins.bytes, builtins.bytes, builtins.int, fallback=tinychain_copy.TxIn]], builtins.list[Tuple[builtins.int, builtins.str, fallback=tinychain_copy.TxOut]], builtins.str, fallback=tinychain_copy.Transaction]] =, allow_utxo_from_mempool: builtins.int =) -> tinychain_copy.Transaction
+def (txn: tinychain_copy.Transaction, as_coinbase: builtins.int =, siblings_in_block: builtins.list[Tuple[builtins.bool, builtins.int, builtins.list[Tuple[Tuple[builtins.int, builtins.str, fallback=tinychain_copy.OutPoint], builtins.bytes, builtins.bytes, builtins.int, fallback=tinychain_copy.TxIn]], builtins.list[Tuple[builtins.int, builtins.str, fallback=tinychain_copy.TxOut]], builtins.str, fallback=tinychain_copy.Transaction]] =, allow_utxo_from_mempool: builtins.object =) -> tinychain_copy.Transaction
+def (txn: tinychain_copy.Transaction, as_coinbase: builtins.int =, siblings_in_block: builtins.list[tinychain_copy.Transaction] =, allow_utxo_from_mempool: builtins.bool =) -> tinychain_copy.Transaction
+def (txn: tinychain_copy.Transaction, as_coinbase: builtins.int =, siblings_in_block: builtins.list[tinychain_copy.Transaction] =, allow_utxo_from_mempool: builtins.float =) -> tinychain_copy.Transaction
+def (txn: tinychain_copy.Transaction, as_coinbase: builtins.int =, siblings_in_block: builtins.list[tinychain_copy.Transaction] =, allow_utxo_from_mempool: builtins.int =) -> tinychain_copy.Transaction
+def (txn: tinychain_copy.Transaction, as_coinbase: builtins.int =, siblings_in_block: builtins.list[tinychain_copy.Transaction] =, allow_utxo_from_mempool: builtins.object =) -> tinychain_copy.Transaction
+def (txn: tinychain_copy.Transaction, as_coinbase: builtins.int =, siblings_in_block: builtins.set[tinychain_copy.Transaction] =, allow_utxo_from_mempool: builtins.bool =) -> tinychain_copy.Transaction
+def (txn: tinychain_copy.Transaction, as_coinbase: builtins.int =, siblings_in_block: builtins.set[tinychain_copy.Transaction] =, allow_utxo_from_mempool: builtins.float =) -> tinychain_copy.Transaction
+def (txn: tinychain_copy.Transaction, as_coinbase: builtins.int =, siblings_in_block: builtins.set[tinychain_copy.Transaction] =, allow_utxo_from_mempool: builtins.int =) -> tinychain_copy.Transaction
+def (txn: tinychain_copy.Transaction, as_coinbase: builtins.int =, siblings_in_block: builtins.set[tinychain_copy.Transaction] =, allow_utxo_from_mempool: builtins.object =) -> tinychain_copy.Transaction
+def (txn: tinychain_copy.Transaction, as_coinbase: builtins.object =, siblings_in_block: builtins.list[Tuple[builtins.bool, builtins.int, builtins.list[Tuple[Tuple[builtins.int, builtins.str, fallback=tinychain_copy.OutPoint], builtins.bytes, builtins.bytes, builtins.int, fallback=tinychain_copy.TxIn]], builtins.list[Tuple[builtins.int, builtins.str, fallback=tinychain_copy.TxOut]], builtins.str, fallback=tinychain_copy.Transaction]] =, allow_utxo_from_mempool: builtins.bool =) -> tinychain_copy.Transaction
+def (txn: tinychain_copy.Transaction, as_coinbase: builtins.object =, siblings_in_block: builtins.list[Tuple[builtins.bool, builtins.int, builtins.list[Tuple[Tuple[builtins.int, builtins.str, fallback=tinychain_copy.OutPoint], builtins.bytes, builtins.bytes, builtins.int, fallback=tinychain_copy.TxIn]], builtins.list[Tuple[builtins.int, builtins.str, fallback=tinychain_copy.TxOut]], builtins.str, fallback=tinychain_copy.Transaction]] =, allow_utxo_from_mempool: builtins.float =) -> tinychain_copy.Transaction
+def (txn: tinychain_copy.Transaction, as_coinbase: builtins.object =, siblings_in_block: builtins.list[Tuple[builtins.bool, builtins.int, builtins.list[Tuple[Tuple[builtins.int, builtins.str, fallback=tinychain_copy.OutPoint], builtins.bytes, builtins.bytes, builtins.int, fallback=tinychain_copy.TxIn]], builtins.list[Tuple[builtins.int, builtins.str, fallback=tinychain_copy.TxOut]], builtins.str, fallback=tinychain_copy.Transaction]] =, allow_utxo_from_mempool: builtins.int =) -> tinychain_copy.Transaction
+def (txn: tinychain_copy.Transaction, as_coinbase: builtins.object =, siblings_in_block: builtins.list[Tuple[builtins.bool, builtins.int, builtins.list[Tuple[Tuple[builtins.int, builtins.str, fallback=tinychain_copy.OutPoint], builtins.bytes, builtins.bytes, builtins.int, fallback=tinychain_copy.TxIn]], builtins.list[Tuple[builtins.int, builtins.str, fallback=tinychain_copy.TxOut]], builtins.str, fallback=tinychain_copy.Transaction]] =, allow_utxo_from_mempool: builtins.object =) -> tinychain_copy.Transaction
+def (txn: tinychain_copy.Transaction, as_coinbase: builtins.object =, siblings_in_block: builtins.list[tinychain_copy.Transaction] =, allow_utxo_from_mempool: builtins.bool =) -> tinychain_copy.Transaction
+def (txn: tinychain_copy.Transaction, as_coinbase: builtins.object =, siblings_in_block: builtins.list[tinychain_copy.Transaction] =, allow_utxo_from_mempool: builtins.float =) -> tinychain_copy.Transaction
+def (txn: tinychain_copy.Transaction, as_coinbase: builtins.object =, siblings_in_block: builtins.list[tinychain_copy.Transaction] =, allow_utxo_from_mempool: builtins.int =) -> tinychain_copy.Transaction
+def (txn: tinychain_copy.Transaction, as_coinbase: builtins.object =, siblings_in_block: builtins.list[tinychain_copy.Transaction] =, allow_utxo_from_mempool: builtins.object =) -> tinychain_copy.Transaction
+def (txn: tinychain_copy.Transaction, as_coinbase: builtins.object =, siblings_in_block: builtins.set[tinychain_copy.Transaction] =, allow_utxo_from_mempool: builtins.bool =) -> tinychain_copy.Transaction
+def (txn: tinychain_copy.Transaction, as_coinbase: builtins.object =, siblings_in_block: builtins.set[tinychain_copy.Transaction] =, allow_utxo_from_mempool: builtins.float =) -> tinychain_copy.Transaction
+def (txn: tinychain_copy.Transaction, as_coinbase: builtins.object =, siblings_in_block: builtins.set[tinychain_copy.Transaction] =, allow_utxo_from_mempool: builtins.int =) -> tinychain_copy.Transaction
+def (txn: tinychain_copy.Transaction, as_coinbase: builtins.object =, siblings_in_block: builtins.set[tinychain_copy.Transaction] =, allow_utxo_from_mempool: builtins.object =) -> tinychain_copy.Transaction
+validate_block
+def (block: Any) -> Tuple[builtins.int, builtins.object]
+send_to_peer
+def (data: builtins.bool, peer: builtins.str =)
+def (data: builtins.bytes, peer: builtins.str =)
+def (data: builtins.dict[builtins.object, builtins.object], peer: builtins.str =)
+def (data: builtins.float, peer: builtins.str =)
+def (data: builtins.int, peer: builtins.str =)
+def (data: builtins.list[builtins.int], peer: builtins.str =)
+def (data: builtins.list[builtins.object], peer: builtins.str =)
+def (data: builtins.list[builtins.str], peer: builtins.str =)
+def (data: builtins.object, peer: builtins.str =)
+def (data: builtins.set[builtins.object], peer: builtins.str =)
+def (data: builtins.str, peer: builtins.str =)
+def (data: def (*Any, **Any) -> Any, peer: builtins.str =)
+def (data: email.generator.Generator, peer: builtins.str =)
+def (data: socket.socket, peer: builtins.str =)
+def (data: tinychain_copy.AddPeerMsg, peer: builtins.str =)
+def (data: tinychain_copy.Block, peer: builtins.str =)
+def (data: tinychain_copy.GetActiveChainMsg, peer: builtins.str =)
+def (data: tinychain_copy.GetBlocksMsg, peer: builtins.str =)
+def (data: tinychain_copy.GetMempoolMsg, peer: builtins.str =)
+def (data: tinychain_copy.GetUTXOsMsg, peer: builtins.str =)
+def (data: tinychain_copy.InvMsg, peer: builtins.str =)
+def (data: tinychain_copy.MerkleNode, peer: builtins.str =)
+def (data: tinychain_copy.OutPoint, peer: builtins.str =)
+def (data: tinychain_copy.Params, peer: builtins.str =)
+def (data: tinychain_copy.Transaction, peer: builtins.str =)
+def (data: tinychain_copy.TxIn, peer: builtins.str =)
+def (data: tinychain_copy.TxOut, peer: builtins.str =)
+def (data: tinychain_copy.UnspentTxOut, peer: builtins.str =)
+handle
+def (self: tinychain_copy.GetBlocksMsg, sock: builtins.object, peer_hostname: builtins.str)
+connect_block
+def (block: Any, doing_reorg: builtins.bool =)
+def (block: Any, doing_reorg: builtins.float =)
+def (block: Any, doing_reorg: builtins.int =)
+def (block: Any, doing_reorg: builtins.object =)
+load_from_disk
+def ()
+mine_forever
+def ()
+send_to_peer
+def (data: builtins.bool, peer: builtins.str =)
+def (data: builtins.bytes, peer: builtins.str =)
+def (data: builtins.dict[builtins.object, builtins.object], peer: builtins.str =)
+def (data: builtins.float, peer: builtins.str =)
+def (data: builtins.int, peer: builtins.str =)
+def (data: builtins.list[builtins.int], peer: builtins.str =)
+def (data: builtins.list[builtins.object], peer: builtins.str =)
+def (data: builtins.list[builtins.str], peer: builtins.str =)
+def (data: builtins.object, peer: builtins.str =)
+def (data: builtins.set[builtins.object], peer: builtins.str =)
+def (data: builtins.str, peer: builtins.str =)
+def (data: def (*Any, **Any) -> Any, peer: builtins.str =)
+def (data: email.generator.Generator, peer: builtins.str =)
+def (data: socket.socket, peer: builtins.str =)
+def (data: tinychain_copy.AddPeerMsg, peer: builtins.str =)
+def (data: tinychain_copy.Block, peer: builtins.str =)
+def (data: tinychain_copy.GetActiveChainMsg, peer: builtins.str =)
+def (data: tinychain_copy.GetBlocksMsg, peer: builtins.str =)
+def (data: tinychain_copy.GetMempoolMsg, peer: builtins.str =)
+def (data: tinychain_copy.GetUTXOsMsg, peer: builtins.str =)
+def (data: tinychain_copy.InvMsg, peer: builtins.str =)
+def (data: tinychain_copy.MerkleNode, peer: builtins.str =)
+def (data: tinychain_copy.OutPoint, peer: builtins.str =)
+def (data: tinychain_copy.Params, peer: builtins.str =)
+def (data: tinychain_copy.Transaction, peer: builtins.str =)
+def (data: tinychain_copy.TxIn, peer: builtins.str =)
+def (data: tinychain_copy.TxOut, peer: builtins.str =)
+def (data: tinychain_copy.UnspentTxOut, peer: builtins.str =)
+handle
+def (self: Any, sock: builtins.object, peer_hostname: builtins.object)
+send_to_peer
+def (data: builtins.bool, peer: builtins.str =)
+def (data: builtins.bytes, peer: builtins.str =)
+def (data: builtins.dict[builtins.bool, builtins.str], peer: builtins.str =)
+def (data: builtins.dict[builtins.bytes, builtins.str], peer: builtins.str =)
+def (data: builtins.dict[builtins.float, builtins.str], peer: builtins.str =)
+def (data: builtins.dict[builtins.int, builtins.str], peer: builtins.str =)
+def (data: builtins.dict[builtins.object, builtins.object], peer: builtins.str =)
+def (data: builtins.dict[builtins.object, builtins.str], peer: builtins.str =)
+def (data: builtins.dict[builtins.str, builtins.str], peer: builtins.str =)
+def (data: builtins.dict[builtins.str, email.generator.Generator], peer: builtins.str =)
+def (data: builtins.dict[builtins.str, socket.socket], peer: builtins.str =)
+def (data: builtins.dict[builtins.str, tinychain_copy.AddPeerMsg], peer: builtins.str =)
+def (data: builtins.dict[builtins.str, tinychain_copy.Block], peer: builtins.str =)
+def (data: builtins.dict[builtins.str, tinychain_copy.GetActiveChainMsg], peer: builtins.str =)
+def (data: builtins.dict[builtins.str, tinychain_copy.GetBlocksMsg], peer: builtins.str =)
+def (data: builtins.dict[builtins.str, tinychain_copy.GetMempoolMsg], peer: builtins.str =)
+def (data: builtins.dict[builtins.str, tinychain_copy.GetUTXOsMsg], peer: builtins.str =)
+def (data: builtins.dict[builtins.str, tinychain_copy.InvMsg], peer: builtins.str =)
+def (data: builtins.dict[builtins.str, tinychain_copy.MerkleNode], peer: builtins.str =)
+def (data: builtins.dict[builtins.str, tinychain_copy.OutPoint], peer: builtins.str =)
+def (data: builtins.dict[builtins.str, tinychain_copy.Params], peer: builtins.str =)
+def (data: builtins.dict[builtins.str, tinychain_copy.Transaction], peer: builtins.str =)
+def (data: builtins.dict[builtins.str, tinychain_copy.TxIn], peer: builtins.str =)
+def (data: builtins.dict[builtins.str, tinychain_copy.TxOut], peer: builtins.str =)
+def (data: builtins.dict[builtins.str, tinychain_copy.UnspentTxOut], peer: builtins.str =)
+def (data: builtins.float, peer: builtins.str =)
+def (data: builtins.int, peer: builtins.str =)
+def (data: builtins.list[builtins.bool], peer: builtins.str =)
+def (data: builtins.list[builtins.bytes], peer: builtins.str =)
+def (data: builtins.list[builtins.float], peer: builtins.str =)
+def (data: builtins.list[builtins.int], peer: builtins.str =)
+def (data: builtins.list[builtins.object], peer: builtins.str =)
+def (data: builtins.list[builtins.str], peer: builtins.str =)
+def (data: builtins.list[email.generator.Generator], peer: builtins.str =)
+def (data: builtins.list[socket.socket], peer: builtins.str =)
+def (data: builtins.list[tinychain_copy.AddPeerMsg], peer: builtins.str =)
+def (data: builtins.list[tinychain_copy.Block], peer: builtins.str =)
+def (data: builtins.list[tinychain_copy.GetActiveChainMsg], peer: builtins.str =)
+def (data: builtins.list[tinychain_copy.GetBlocksMsg], peer: builtins.str =)
+def (data: builtins.list[tinychain_copy.GetMempoolMsg], peer: builtins.str =)
+def (data: builtins.list[tinychain_copy.GetUTXOsMsg], peer: builtins.str =)
+def (data: builtins.list[tinychain_copy.InvMsg], peer: builtins.str =)
+def (data: builtins.list[tinychain_copy.MerkleNode], peer: builtins.str =)
+def (data: builtins.list[tinychain_copy.OutPoint], peer: builtins.str =)
+def (data: builtins.list[tinychain_copy.Params], peer: builtins.str =)
+def (data: builtins.list[tinychain_copy.Transaction], peer: builtins.str =)
+def (data: builtins.list[tinychain_copy.TxIn], peer: builtins.str =)
+def (data: builtins.list[tinychain_copy.TxOut], peer: builtins.str =)
+def (data: builtins.list[tinychain_copy.UnspentTxOut], peer: builtins.str =)
+def (data: builtins.object, peer: builtins.str =)
+def (data: builtins.set[builtins.bool], peer: builtins.str =)
+def (data: builtins.set[builtins.bytes], peer: builtins.str =)
+def (data: builtins.set[builtins.float], peer: builtins.str =)
+def (data: builtins.set[builtins.int], peer: builtins.str =)
+def (data: builtins.set[builtins.object], peer: builtins.str =)
+def (data: builtins.set[builtins.str], peer: builtins.str =)
+def (data: builtins.set[email.generator.Generator], peer: builtins.str =)
+def (data: builtins.set[socket.socket], peer: builtins.str =)
+def (data: builtins.set[tinychain_copy.AddPeerMsg], peer: builtins.str =)
+def (data: builtins.set[tinychain_copy.Block], peer: builtins.str =)
+def (data: builtins.set[tinychain_copy.GetActiveChainMsg], peer: builtins.str =)
+def (data: builtins.set[tinychain_copy.GetBlocksMsg], peer: builtins.str =)
+def (data: builtins.set[tinychain_copy.GetMempoolMsg], peer: builtins.str =)
+def (data: builtins.set[tinychain_copy.GetUTXOsMsg], peer: builtins.str =)
+def (data: builtins.set[tinychain_copy.InvMsg], peer: builtins.str =)
+def (data: builtins.set[tinychain_copy.MerkleNode], peer: builtins.str =)
+def (data: builtins.set[tinychain_copy.OutPoint], peer: builtins.str =)
+def (data: builtins.set[tinychain_copy.Params], peer: builtins.str =)
+def (data: builtins.set[tinychain_copy.Transaction], peer: builtins.str =)
+def (data: builtins.set[tinychain_copy.TxIn], peer: builtins.str =)
+def (data: builtins.set[tinychain_copy.TxOut], peer: builtins.str =)
+def (data: builtins.set[tinychain_copy.UnspentTxOut], peer: builtins.str =)
+def (data: builtins.str, peer: builtins.str =)
+def (data: def (*Any, **Any) -> Any, peer: builtins.str =)
+def (data: email.generator.Generator, peer: builtins.str =)
+def (data: socket.socket, peer: builtins.str =)
+def (data: tinychain_copy.AddPeerMsg, peer: builtins.str =)
+def (data: tinychain_copy.Block, peer: builtins.str =)
+def (data: tinychain_copy.GetActiveChainMsg, peer: builtins.str =)
+def (data: tinychain_copy.GetBlocksMsg, peer: builtins.str =)
+def (data: tinychain_copy.GetMempoolMsg, peer: builtins.str =)
+def (data: tinychain_copy.GetUTXOsMsg, peer: builtins.str =)
+def (data: tinychain_copy.InvMsg, peer: builtins.str =)
+def (data: tinychain_copy.MerkleNode, peer: builtins.str =)
+def (data: tinychain_copy.OutPoint, peer: builtins.str =)
+def (data: tinychain_copy.Params, peer: builtins.str =)
+def (data: tinychain_copy.Transaction, peer: builtins.str =)
+def (data: tinychain_copy.TxIn, peer: builtins.str =)
+def (data: tinychain_copy.TxOut, peer: builtins.str =)
+def (data: tinychain_copy.UnspentTxOut, peer: builtins.str =)
+add_txn_to_mempool
+def (txn: tinychain_copy.Transaction)
+handle
+def (self: tinychain_copy.TCPHandler)

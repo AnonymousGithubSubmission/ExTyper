@@ -1,0 +1,11 @@
+__init__
+['data.benchmark.pendulum.formatting.difference_formatter.DifferenceFormatter']
+['builtins.object', 'builtins.str']
+['None']
+format
+['data.benchmark.pendulum.formatting.difference_formatter.DifferenceFormatter']
+['Any']
+['builtins.object', 'builtins.int', 'builtins.float']
+['builtins.object', 'builtins.int', 'builtins.float']
+['Any']
+['builtins.object', 'Any']

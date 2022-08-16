@@ -1,0 +1,8 @@
+decode
+['builtins.bytes']
+['builtins.list[builtins.str]']
+['builtins.str', 'builtins.bytes']
+encode
+['builtins.str']
+['builtins.list[builtins.str]']
+['builtins.str', 'builtins.bytes']

@@ -1,0 +1,12 @@
+f
+['isinstance.A']
+['builtins.int']
+g
+['isinstance.B']
+['builtins.int']
+f
+['builtins.str', 'builtins.int', 'builtins.float']
+['None']
+f
+['builtins.str', 'builtins.int', 'builtins.float']
+['None']

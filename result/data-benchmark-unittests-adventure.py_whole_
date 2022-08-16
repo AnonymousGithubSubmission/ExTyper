@@ -1,0 +1,621 @@
+__init__
+def (self: adventure.HasN)
+__repr__
+def (adventure.Move) -> builtins.str
+__init__
+def (self: adventure.Room)
+__repr__
+def (adventure.Room) -> builtins.str
+is_forced
+def (self: adventure.Room) -> builtins.bool
+is_aboveground
+def (self: adventure.Room) -> builtins.bool
+is_before_hall_of_mists
+def (self: adventure.Room) -> builtins.bool
+is_after_hall_of_mists
+def (self: adventure.Room) -> builtins.bool
+is_dark
+def (self: adventure.Room) -> builtins.bool
+__init__
+def (self: adventure.Word)
+__repr__
+def (adventure.Word) -> builtins.str
+__eq__
+def (adventure.Word, builtins.str) -> builtins.bool
+add_synonym
+def (self: adventure.Word, other: Any)
+__init__
+def (self: adventure.Object)
+__repr__
+def (adventure.Object) -> builtins.str
+__hash__
+def (self: adventure.Object) -> builtins.int
+__eq__
+def (adventure.Object, builtins.str) -> builtins.bool
+is_at
+def (self: adventure.Object, room: builtins.object) -> builtins.bool
+carry
+def (self: adventure.Object)
+drop
+def (self: adventure.Object, room: Any)
+hide
+def (self: adventure.Object)
+destroy
+def (self: adventure.Object)
+__str__
+def (adventure.Message) -> builtins.str
+__init__
+def (self: adventure.Hint)
+start_at
+def (self: adventure.Dwarf, room: Any)
+can_move
+def (self: adventure.Dwarf, move: Any) -> builtins.bool
+__init__
+def (self: adventure.Data)
+referent
+def (self: adventure.Data, word: Any) -> adventure.Object
+make_object
+def (dictionary: builtins.dict[adventure.Data, builtins.str], klass: Any, n: builtins.str) -> adventure.Data
+def (dictionary: builtins.dict[adventure.Dwarf, builtins.str], klass: Any, n: builtins.str) -> adventure.Dwarf
+def (dictionary: builtins.dict[adventure.HasN, builtins.str], klass: Any, n: builtins.str) -> adventure.HasN
+def (dictionary: builtins.dict[builtins.bool, builtins.str], klass: Any, n: builtins.str) -> builtins.bool
+def (dictionary: builtins.dict[builtins.bytes, builtins.str], klass: Any, n: builtins.str) -> builtins.bytes
+def (dictionary: builtins.dict[builtins.float, builtins.str], klass: Any, n: builtins.str) -> builtins.float
+def (dictionary: builtins.dict[builtins.int, builtins.str], klass: Any, n: builtins.str) -> builtins.int
+def (dictionary: builtins.dict[builtins.object, builtins.object], klass: Any, n: adventure.Data) -> builtins.object
+def (dictionary: builtins.dict[builtins.object, builtins.object], klass: Any, n: adventure.Dwarf) -> builtins.object
+def (dictionary: builtins.dict[builtins.object, builtins.object], klass: Any, n: adventure.HasN) -> builtins.object
+def (dictionary: builtins.dict[builtins.object, builtins.object], klass: Any, n: builtins.bool) -> builtins.object
+def (dictionary: builtins.dict[builtins.object, builtins.object], klass: Any, n: builtins.bytes) -> builtins.object
+def (dictionary: builtins.dict[builtins.object, builtins.object], klass: Any, n: builtins.dict[adventure.Data, builtins.str]) -> builtins.object
+def (dictionary: builtins.dict[builtins.object, builtins.object], klass: Any, n: builtins.dict[adventure.Dwarf, builtins.str]) -> builtins.object
+def (dictionary: builtins.dict[builtins.object, builtins.object], klass: Any, n: builtins.dict[adventure.HasN, builtins.str]) -> builtins.object
+def (dictionary: builtins.dict[builtins.object, builtins.object], klass: Any, n: builtins.dict[builtins.bool, builtins.str]) -> builtins.object
+def (dictionary: builtins.dict[builtins.object, builtins.object], klass: Any, n: builtins.dict[builtins.bytes, builtins.str]) -> builtins.object
+def (dictionary: builtins.dict[builtins.object, builtins.object], klass: Any, n: builtins.dict[builtins.float, builtins.str]) -> builtins.object
+def (dictionary: builtins.dict[builtins.object, builtins.object], klass: Any, n: builtins.dict[builtins.int, builtins.str]) -> builtins.object
+def (dictionary: builtins.dict[builtins.object, builtins.object], klass: Any, n: builtins.dict[builtins.object, builtins.object]) -> builtins.object
+def (dictionary: builtins.dict[builtins.object, builtins.object], klass: Any, n: builtins.dict[builtins.object, builtins.str]) -> builtins.object
+def (dictionary: builtins.dict[builtins.object, builtins.object], klass: Any, n: builtins.dict[builtins.str, builtins.str]) -> builtins.object
+def (dictionary: builtins.dict[builtins.object, builtins.object], klass: Any, n: builtins.float) -> builtins.object
+def (dictionary: builtins.dict[builtins.object, builtins.object], klass: Any, n: builtins.int) -> builtins.object
+def (dictionary: builtins.dict[builtins.object, builtins.object], klass: Any, n: builtins.list[adventure.Data]) -> builtins.object
+def (dictionary: builtins.dict[builtins.object, builtins.object], klass: Any, n: builtins.list[adventure.Dwarf]) -> builtins.object
+def (dictionary: builtins.dict[builtins.object, builtins.object], klass: Any, n: builtins.list[adventure.HasN]) -> builtins.object
+def (dictionary: builtins.dict[builtins.object, builtins.object], klass: Any, n: builtins.list[builtins.bool]) -> builtins.object
+def (dictionary: builtins.dict[builtins.object, builtins.object], klass: Any, n: builtins.list[builtins.bytes]) -> builtins.object
+def (dictionary: builtins.dict[builtins.object, builtins.object], klass: Any, n: builtins.list[builtins.float]) -> builtins.object
+def (dictionary: builtins.dict[builtins.object, builtins.object], klass: Any, n: builtins.list[builtins.int]) -> builtins.object
+def (dictionary: builtins.dict[builtins.object, builtins.object], klass: Any, n: builtins.list[builtins.object]) -> builtins.object
+def (dictionary: builtins.dict[builtins.object, builtins.object], klass: Any, n: builtins.list[builtins.str]) -> builtins.object
+def (dictionary: builtins.dict[builtins.object, builtins.object], klass: Any, n: builtins.object) -> builtins.object
+def (dictionary: builtins.dict[builtins.object, builtins.object], klass: Any, n: builtins.set[adventure.Data]) -> builtins.object
+def (dictionary: builtins.dict[builtins.object, builtins.object], klass: Any, n: builtins.set[adventure.Dwarf]) -> builtins.object
+def (dictionary: builtins.dict[builtins.object, builtins.object], klass: Any, n: builtins.set[adventure.HasN]) -> builtins.object
+def (dictionary: builtins.dict[builtins.object, builtins.object], klass: Any, n: builtins.set[builtins.bool]) -> builtins.object
+def (dictionary: builtins.dict[builtins.object, builtins.object], klass: Any, n: builtins.set[builtins.bytes]) -> builtins.object
+def (dictionary: builtins.dict[builtins.object, builtins.object], klass: Any, n: builtins.set[builtins.float]) -> builtins.object
+def (dictionary: builtins.dict[builtins.object, builtins.object], klass: Any, n: builtins.set[builtins.int]) -> builtins.object
+def (dictionary: builtins.dict[builtins.object, builtins.object], klass: Any, n: builtins.set[builtins.object]) -> builtins.object
+def (dictionary: builtins.dict[builtins.object, builtins.object], klass: Any, n: builtins.set[builtins.str]) -> builtins.object
+def (dictionary: builtins.dict[builtins.object, builtins.object], klass: Any, n: builtins.str) -> builtins.object
+def (dictionary: builtins.dict[builtins.object, builtins.str], klass: Any, n: builtins.str) -> builtins.object
+def (dictionary: builtins.dict[builtins.str, builtins.str], klass: Any, n: builtins.str) -> builtins.str
+def (dictionary: builtins.list[adventure.Data], klass: Any, n: builtins.bool) -> adventure.Data
+def (dictionary: builtins.list[adventure.Data], klass: Any, n: builtins.int) -> adventure.Data
+def (dictionary: builtins.list[adventure.Dwarf], klass: Any, n: builtins.bool) -> adventure.Dwarf
+def (dictionary: builtins.list[adventure.Dwarf], klass: Any, n: builtins.int) -> adventure.Dwarf
+def (dictionary: builtins.list[adventure.HasN], klass: Any, n: builtins.bool) -> adventure.HasN
+def (dictionary: builtins.list[adventure.HasN], klass: Any, n: builtins.int) -> adventure.HasN
+def (dictionary: builtins.list[builtins.bool], klass: Any, n: builtins.bool) -> builtins.bool
+def (dictionary: builtins.list[builtins.bool], klass: Any, n: builtins.int) -> builtins.bool
+def (dictionary: builtins.list[builtins.bytes], klass: Any, n: builtins.bool) -> builtins.bytes
+def (dictionary: builtins.list[builtins.bytes], klass: Any, n: builtins.int) -> builtins.bytes
+def (dictionary: builtins.list[builtins.float], klass: Any, n: builtins.bool) -> builtins.float
+def (dictionary: builtins.list[builtins.float], klass: Any, n: builtins.int) -> builtins.float
+def (dictionary: builtins.list[builtins.int], klass: Any, n: builtins.bool) -> builtins.int
+def (dictionary: builtins.list[builtins.int], klass: Any, n: builtins.int) -> builtins.int
+def (dictionary: builtins.list[builtins.object], klass: Any, n: builtins.bool) -> builtins.object
+def (dictionary: builtins.list[builtins.object], klass: Any, n: builtins.int) -> builtins.object
+def (dictionary: builtins.list[builtins.str], klass: Any, n: builtins.bool) -> builtins.str
+def (dictionary: builtins.list[builtins.str], klass: Any, n: builtins.int) -> builtins.str
+expand_tabs
+def (segments: builtins.list[builtins.str]) -> builtins.str
+def (segments: builtins.str) -> builtins.str
+accumulate_message
+def (dictionary: builtins.dict[builtins.str, builtins.str], n: builtins.str, line: builtins.str)
+section10
+def (data: adventure.Data, score: builtins.bool, line: builtins.str)
+def (data: adventure.Data, score: builtins.int, line: builtins.str)
+__init__
+def (self: adventure.Dwarf, room: builtins.object)
+make_object
+def (dictionary: builtins.dict[builtins.object, builtins.object], klass: Overload(def () -> adventure.Hint), n: builtins.bool) -> builtins.object
+def (dictionary: builtins.dict[builtins.object, builtins.object], klass: Overload(def () -> adventure.Hint), n: builtins.int) -> builtins.object
+def (dictionary: builtins.dict[builtins.object, builtins.object], klass: Overload(def () -> adventure.Message), n: builtins.bool) -> builtins.object
+def (dictionary: builtins.dict[builtins.object, builtins.object], klass: Overload(def () -> adventure.Message), n: builtins.int) -> builtins.object
+def (dictionary: builtins.dict[builtins.object, builtins.object], klass: Overload(def () -> adventure.Object), n: builtins.bool) -> builtins.object
+def (dictionary: builtins.dict[builtins.object, builtins.object], klass: Overload(def () -> adventure.Object), n: builtins.int) -> builtins.object
+def (dictionary: builtins.dict[builtins.object, builtins.object], klass: Overload(def () -> adventure.Room), n: builtins.bool) -> builtins.object
+def (dictionary: builtins.dict[builtins.object, builtins.object], klass: Overload(def () -> adventure.Room), n: builtins.int) -> builtins.object
+def (dictionary: builtins.dict[builtins.object, builtins.object], klass: Overload(def () -> adventure.Word), n: builtins.bool) -> builtins.object
+def (dictionary: builtins.dict[builtins.object, builtins.object], klass: Overload(def () -> adventure.Word), n: builtins.int) -> builtins.object
+def (dictionary: builtins.list[adventure.Data], klass: Overload(def () -> adventure.Hint), n: builtins.bool) -> adventure.Data
+def (dictionary: builtins.list[adventure.Data], klass: Overload(def () -> adventure.Hint), n: builtins.int) -> adventure.Data
+def (dictionary: builtins.list[adventure.Data], klass: Overload(def () -> adventure.Message), n: builtins.bool) -> adventure.Data
+def (dictionary: builtins.list[adventure.Data], klass: Overload(def () -> adventure.Message), n: builtins.int) -> adventure.Data
+def (dictionary: builtins.list[adventure.Data], klass: Overload(def () -> adventure.Object), n: builtins.bool) -> adventure.Data
+def (dictionary: builtins.list[adventure.Data], klass: Overload(def () -> adventure.Object), n: builtins.int) -> adventure.Data
+def (dictionary: builtins.list[adventure.Data], klass: Overload(def () -> adventure.Room), n: builtins.bool) -> adventure.Data
+def (dictionary: builtins.list[adventure.Data], klass: Overload(def () -> adventure.Room), n: builtins.int) -> adventure.Data
+def (dictionary: builtins.list[adventure.Data], klass: Overload(def () -> adventure.Word), n: builtins.bool) -> adventure.Data
+def (dictionary: builtins.list[adventure.Data], klass: Overload(def () -> adventure.Word), n: builtins.int) -> adventure.Data
+def (dictionary: builtins.list[adventure.Dwarf], klass: Overload(def () -> adventure.Hint), n: builtins.bool) -> adventure.Dwarf
+def (dictionary: builtins.list[adventure.Dwarf], klass: Overload(def () -> adventure.Hint), n: builtins.int) -> adventure.Dwarf
+def (dictionary: builtins.list[adventure.Dwarf], klass: Overload(def () -> adventure.Message), n: builtins.bool) -> adventure.Dwarf
+def (dictionary: builtins.list[adventure.Dwarf], klass: Overload(def () -> adventure.Message), n: builtins.int) -> adventure.Dwarf
+def (dictionary: builtins.list[adventure.Dwarf], klass: Overload(def () -> adventure.Object), n: builtins.bool) -> adventure.Dwarf
+def (dictionary: builtins.list[adventure.Dwarf], klass: Overload(def () -> adventure.Object), n: builtins.int) -> adventure.Dwarf
+def (dictionary: builtins.list[adventure.Dwarf], klass: Overload(def () -> adventure.Room), n: builtins.bool) -> adventure.Dwarf
+def (dictionary: builtins.list[adventure.Dwarf], klass: Overload(def () -> adventure.Room), n: builtins.int) -> adventure.Dwarf
+def (dictionary: builtins.list[adventure.Dwarf], klass: Overload(def () -> adventure.Word), n: builtins.bool) -> adventure.Dwarf
+def (dictionary: builtins.list[adventure.Dwarf], klass: Overload(def () -> adventure.Word), n: builtins.int) -> adventure.Dwarf
+def (dictionary: builtins.list[adventure.HasN], klass: Overload(def () -> adventure.Hint), n: builtins.bool) -> adventure.HasN
+def (dictionary: builtins.list[adventure.HasN], klass: Overload(def () -> adventure.Hint), n: builtins.int) -> adventure.HasN
+def (dictionary: builtins.list[adventure.HasN], klass: Overload(def () -> adventure.Message), n: builtins.bool) -> adventure.HasN
+def (dictionary: builtins.list[adventure.HasN], klass: Overload(def () -> adventure.Message), n: builtins.int) -> adventure.HasN
+def (dictionary: builtins.list[adventure.HasN], klass: Overload(def () -> adventure.Object), n: builtins.bool) -> adventure.HasN
+def (dictionary: builtins.list[adventure.HasN], klass: Overload(def () -> adventure.Object), n: builtins.int) -> adventure.HasN
+def (dictionary: builtins.list[adventure.HasN], klass: Overload(def () -> adventure.Room), n: builtins.bool) -> adventure.HasN
+def (dictionary: builtins.list[adventure.HasN], klass: Overload(def () -> adventure.Room), n: builtins.int) -> adventure.HasN
+def (dictionary: builtins.list[adventure.HasN], klass: Overload(def () -> adventure.Word), n: builtins.bool) -> adventure.HasN
+def (dictionary: builtins.list[adventure.HasN], klass: Overload(def () -> adventure.Word), n: builtins.int) -> adventure.HasN
+def (dictionary: builtins.list[builtins.bool], klass: Overload(def () -> adventure.Hint), n: builtins.bool) -> builtins.bool
+def (dictionary: builtins.list[builtins.bool], klass: Overload(def () -> adventure.Hint), n: builtins.int) -> builtins.bool
+def (dictionary: builtins.list[builtins.bool], klass: Overload(def () -> adventure.Message), n: builtins.bool) -> builtins.bool
+def (dictionary: builtins.list[builtins.bool], klass: Overload(def () -> adventure.Message), n: builtins.int) -> builtins.bool
+def (dictionary: builtins.list[builtins.bool], klass: Overload(def () -> adventure.Object), n: builtins.bool) -> builtins.bool
+def (dictionary: builtins.list[builtins.bool], klass: Overload(def () -> adventure.Object), n: builtins.int) -> builtins.bool
+def (dictionary: builtins.list[builtins.bool], klass: Overload(def () -> adventure.Room), n: builtins.bool) -> builtins.bool
+def (dictionary: builtins.list[builtins.bool], klass: Overload(def () -> adventure.Room), n: builtins.int) -> builtins.bool
+def (dictionary: builtins.list[builtins.bool], klass: Overload(def () -> adventure.Word), n: builtins.bool) -> builtins.bool
+def (dictionary: builtins.list[builtins.bool], klass: Overload(def () -> adventure.Word), n: builtins.int) -> builtins.bool
+def (dictionary: builtins.list[builtins.bytes], klass: Overload(def () -> adventure.Hint), n: builtins.bool) -> builtins.bytes
+def (dictionary: builtins.list[builtins.bytes], klass: Overload(def () -> adventure.Hint), n: builtins.int) -> builtins.bytes
+def (dictionary: builtins.list[builtins.bytes], klass: Overload(def () -> adventure.Message), n: builtins.bool) -> builtins.bytes
+def (dictionary: builtins.list[builtins.bytes], klass: Overload(def () -> adventure.Message), n: builtins.int) -> builtins.bytes
+def (dictionary: builtins.list[builtins.bytes], klass: Overload(def () -> adventure.Object), n: builtins.bool) -> builtins.bytes
+def (dictionary: builtins.list[builtins.bytes], klass: Overload(def () -> adventure.Object), n: builtins.int) -> builtins.bytes
+def (dictionary: builtins.list[builtins.bytes], klass: Overload(def () -> adventure.Room), n: builtins.bool) -> builtins.bytes
+def (dictionary: builtins.list[builtins.bytes], klass: Overload(def () -> adventure.Room), n: builtins.int) -> builtins.bytes
+def (dictionary: builtins.list[builtins.bytes], klass: Overload(def () -> adventure.Word), n: builtins.bool) -> builtins.bytes
+def (dictionary: builtins.list[builtins.bytes], klass: Overload(def () -> adventure.Word), n: builtins.int) -> builtins.bytes
+def (dictionary: builtins.list[builtins.float], klass: Overload(def () -> adventure.Hint), n: builtins.bool) -> builtins.float
+def (dictionary: builtins.list[builtins.float], klass: Overload(def () -> adventure.Hint), n: builtins.int) -> builtins.float
+def (dictionary: builtins.list[builtins.float], klass: Overload(def () -> adventure.Message), n: builtins.bool) -> builtins.float
+def (dictionary: builtins.list[builtins.float], klass: Overload(def () -> adventure.Message), n: builtins.int) -> builtins.float
+def (dictionary: builtins.list[builtins.float], klass: Overload(def () -> adventure.Object), n: builtins.bool) -> builtins.float
+def (dictionary: builtins.list[builtins.float], klass: Overload(def () -> adventure.Object), n: builtins.int) -> builtins.float
+def (dictionary: builtins.list[builtins.float], klass: Overload(def () -> adventure.Room), n: builtins.bool) -> builtins.float
+def (dictionary: builtins.list[builtins.float], klass: Overload(def () -> adventure.Room), n: builtins.int) -> builtins.float
+def (dictionary: builtins.list[builtins.float], klass: Overload(def () -> adventure.Word), n: builtins.bool) -> builtins.float
+def (dictionary: builtins.list[builtins.float], klass: Overload(def () -> adventure.Word), n: builtins.int) -> builtins.float
+def (dictionary: builtins.list[builtins.int], klass: Overload(def () -> adventure.Hint), n: builtins.bool) -> builtins.int
+def (dictionary: builtins.list[builtins.int], klass: Overload(def () -> adventure.Hint), n: builtins.int) -> builtins.int
+def (dictionary: builtins.list[builtins.int], klass: Overload(def () -> adventure.Message), n: builtins.bool) -> builtins.int
+def (dictionary: builtins.list[builtins.int], klass: Overload(def () -> adventure.Message), n: builtins.int) -> builtins.int
+def (dictionary: builtins.list[builtins.int], klass: Overload(def () -> adventure.Object), n: builtins.bool) -> builtins.int
+def (dictionary: builtins.list[builtins.int], klass: Overload(def () -> adventure.Object), n: builtins.int) -> builtins.int
+def (dictionary: builtins.list[builtins.int], klass: Overload(def () -> adventure.Room), n: builtins.bool) -> builtins.int
+def (dictionary: builtins.list[builtins.int], klass: Overload(def () -> adventure.Room), n: builtins.int) -> builtins.int
+def (dictionary: builtins.list[builtins.int], klass: Overload(def () -> adventure.Word), n: builtins.bool) -> builtins.int
+def (dictionary: builtins.list[builtins.int], klass: Overload(def () -> adventure.Word), n: builtins.int) -> builtins.int
+def (dictionary: builtins.list[builtins.object], klass: Overload(def () -> adventure.Hint), n: builtins.bool) -> builtins.object
+def (dictionary: builtins.list[builtins.object], klass: Overload(def () -> adventure.Hint), n: builtins.int) -> builtins.object
+def (dictionary: builtins.list[builtins.object], klass: Overload(def () -> adventure.Message), n: builtins.bool) -> builtins.object
+def (dictionary: builtins.list[builtins.object], klass: Overload(def () -> adventure.Message), n: builtins.int) -> builtins.object
+def (dictionary: builtins.list[builtins.object], klass: Overload(def () -> adventure.Object), n: builtins.bool) -> builtins.object
+def (dictionary: builtins.list[builtins.object], klass: Overload(def () -> adventure.Object), n: builtins.int) -> builtins.object
+def (dictionary: builtins.list[builtins.object], klass: Overload(def () -> adventure.Room), n: builtins.bool) -> builtins.object
+def (dictionary: builtins.list[builtins.object], klass: Overload(def () -> adventure.Room), n: builtins.int) -> builtins.object
+def (dictionary: builtins.list[builtins.object], klass: Overload(def () -> adventure.Word), n: builtins.bool) -> builtins.object
+def (dictionary: builtins.list[builtins.object], klass: Overload(def () -> adventure.Word), n: builtins.int) -> builtins.object
+def (dictionary: builtins.list[builtins.str], klass: Overload(def () -> adventure.Hint), n: builtins.bool) -> builtins.str
+def (dictionary: builtins.list[builtins.str], klass: Overload(def () -> adventure.Hint), n: builtins.int) -> builtins.str
+def (dictionary: builtins.list[builtins.str], klass: Overload(def () -> adventure.Message), n: builtins.bool) -> builtins.str
+def (dictionary: builtins.list[builtins.str], klass: Overload(def () -> adventure.Message), n: builtins.int) -> builtins.str
+def (dictionary: builtins.list[builtins.str], klass: Overload(def () -> adventure.Object), n: builtins.bool) -> builtins.str
+def (dictionary: builtins.list[builtins.str], klass: Overload(def () -> adventure.Object), n: builtins.int) -> builtins.str
+def (dictionary: builtins.list[builtins.str], klass: Overload(def () -> adventure.Room), n: builtins.bool) -> builtins.str
+def (dictionary: builtins.list[builtins.str], klass: Overload(def () -> adventure.Room), n: builtins.int) -> builtins.str
+def (dictionary: builtins.list[builtins.str], klass: Overload(def () -> adventure.Word), n: builtins.bool) -> builtins.str
+def (dictionary: builtins.list[builtins.str], klass: Overload(def () -> adventure.Word), n: builtins.int) -> builtins.str
+accumulate_message
+def (dictionary: builtins.dict[builtins.int, builtins.str], n: builtins.bool, line: builtins.str)
+def (dictionary: builtins.dict[builtins.int, builtins.str], n: builtins.int, line: builtins.str)
+def (dictionary: builtins.dict[builtins.str, builtins.str], n: builtins.str, line: builtins.str)
+section12
+def (data: adventure.Data, n: builtins.bool, line: builtins.str)
+def (data: adventure.Data, n: builtins.int, line: builtins.str)
+def (data: adventure.Data, n: builtins.str, line: builtins.str)
+make_object
+def (dictionary: builtins.dict[adventure.Hint, builtins.int], klass: Overload(def () -> adventure.Hint), n: builtins.bool) -> adventure.Hint
+def (dictionary: builtins.dict[adventure.Hint, builtins.int], klass: Overload(def () -> adventure.Hint), n: builtins.int) -> adventure.Hint
+def (dictionary: builtins.dict[adventure.Hint, builtins.int], klass: Overload(def () -> adventure.Message), n: builtins.bool) -> adventure.Hint
+def (dictionary: builtins.dict[adventure.Hint, builtins.int], klass: Overload(def () -> adventure.Message), n: builtins.int) -> adventure.Hint
+def (dictionary: builtins.dict[adventure.Hint, builtins.int], klass: Overload(def () -> adventure.Object), n: builtins.bool) -> adventure.Hint
+def (dictionary: builtins.dict[adventure.Hint, builtins.int], klass: Overload(def () -> adventure.Object), n: builtins.int) -> adventure.Hint
+def (dictionary: builtins.dict[adventure.Hint, builtins.int], klass: Overload(def () -> adventure.Room), n: builtins.bool) -> adventure.Hint
+def (dictionary: builtins.dict[adventure.Hint, builtins.int], klass: Overload(def () -> adventure.Room), n: builtins.int) -> adventure.Hint
+def (dictionary: builtins.dict[adventure.Hint, builtins.int], klass: Overload(def () -> adventure.Word), n: builtins.bool) -> adventure.Hint
+def (dictionary: builtins.dict[adventure.Hint, builtins.int], klass: Overload(def () -> adventure.Word), n: builtins.int) -> adventure.Hint
+def (dictionary: builtins.dict[adventure.Message, builtins.int], klass: Overload(def () -> adventure.Hint), n: builtins.bool) -> adventure.Message
+def (dictionary: builtins.dict[adventure.Message, builtins.int], klass: Overload(def () -> adventure.Hint), n: builtins.int) -> adventure.Message
+def (dictionary: builtins.dict[adventure.Message, builtins.int], klass: Overload(def () -> adventure.Message), n: builtins.bool) -> adventure.Message
+def (dictionary: builtins.dict[adventure.Message, builtins.int], klass: Overload(def () -> adventure.Message), n: builtins.int) -> adventure.Message
+def (dictionary: builtins.dict[adventure.Message, builtins.int], klass: Overload(def () -> adventure.Object), n: builtins.bool) -> adventure.Message
+def (dictionary: builtins.dict[adventure.Message, builtins.int], klass: Overload(def () -> adventure.Object), n: builtins.int) -> adventure.Message
+def (dictionary: builtins.dict[adventure.Message, builtins.int], klass: Overload(def () -> adventure.Room), n: builtins.bool) -> adventure.Message
+def (dictionary: builtins.dict[adventure.Message, builtins.int], klass: Overload(def () -> adventure.Room), n: builtins.int) -> adventure.Message
+def (dictionary: builtins.dict[adventure.Message, builtins.int], klass: Overload(def () -> adventure.Word), n: builtins.bool) -> adventure.Message
+def (dictionary: builtins.dict[adventure.Message, builtins.int], klass: Overload(def () -> adventure.Word), n: builtins.int) -> adventure.Message
+def (dictionary: builtins.dict[adventure.Object, builtins.int], klass: Overload(def () -> adventure.Hint), n: builtins.bool) -> adventure.Object
+def (dictionary: builtins.dict[adventure.Object, builtins.int], klass: Overload(def () -> adventure.Hint), n: builtins.int) -> adventure.Object
+def (dictionary: builtins.dict[adventure.Object, builtins.int], klass: Overload(def () -> adventure.Message), n: builtins.bool) -> adventure.Object
+def (dictionary: builtins.dict[adventure.Object, builtins.int], klass: Overload(def () -> adventure.Message), n: builtins.int) -> adventure.Object
+def (dictionary: builtins.dict[adventure.Object, builtins.int], klass: Overload(def () -> adventure.Object), n: builtins.bool) -> adventure.Object
+def (dictionary: builtins.dict[adventure.Object, builtins.int], klass: Overload(def () -> adventure.Object), n: builtins.int) -> adventure.Object
+def (dictionary: builtins.dict[adventure.Object, builtins.int], klass: Overload(def () -> adventure.Room), n: builtins.bool) -> adventure.Object
+def (dictionary: builtins.dict[adventure.Object, builtins.int], klass: Overload(def () -> adventure.Room), n: builtins.int) -> adventure.Object
+def (dictionary: builtins.dict[adventure.Object, builtins.int], klass: Overload(def () -> adventure.Word), n: builtins.bool) -> adventure.Object
+def (dictionary: builtins.dict[adventure.Object, builtins.int], klass: Overload(def () -> adventure.Word), n: builtins.int) -> adventure.Object
+def (dictionary: builtins.dict[adventure.Room, builtins.int], klass: Overload(def () -> adventure.Hint), n: builtins.bool) -> adventure.Room
+def (dictionary: builtins.dict[adventure.Room, builtins.int], klass: Overload(def () -> adventure.Hint), n: builtins.int) -> adventure.Room
+def (dictionary: builtins.dict[adventure.Room, builtins.int], klass: Overload(def () -> adventure.Message), n: builtins.bool) -> adventure.Room
+def (dictionary: builtins.dict[adventure.Room, builtins.int], klass: Overload(def () -> adventure.Message), n: builtins.int) -> adventure.Room
+def (dictionary: builtins.dict[adventure.Room, builtins.int], klass: Overload(def () -> adventure.Object), n: builtins.bool) -> adventure.Room
+def (dictionary: builtins.dict[adventure.Room, builtins.int], klass: Overload(def () -> adventure.Object), n: builtins.int) -> adventure.Room
+def (dictionary: builtins.dict[adventure.Room, builtins.int], klass: Overload(def () -> adventure.Room), n: builtins.bool) -> adventure.Room
+def (dictionary: builtins.dict[adventure.Room, builtins.int], klass: Overload(def () -> adventure.Room), n: builtins.int) -> adventure.Room
+def (dictionary: builtins.dict[adventure.Room, builtins.int], klass: Overload(def () -> adventure.Word), n: builtins.bool) -> adventure.Room
+def (dictionary: builtins.dict[adventure.Room, builtins.int], klass: Overload(def () -> adventure.Word), n: builtins.int) -> adventure.Room
+def (dictionary: builtins.dict[adventure.Word, builtins.int], klass: Overload(def () -> adventure.Hint), n: builtins.bool) -> adventure.Word
+def (dictionary: builtins.dict[adventure.Word, builtins.int], klass: Overload(def () -> adventure.Hint), n: builtins.int) -> adventure.Word
+def (dictionary: builtins.dict[adventure.Word, builtins.int], klass: Overload(def () -> adventure.Message), n: builtins.bool) -> adventure.Word
+def (dictionary: builtins.dict[adventure.Word, builtins.int], klass: Overload(def () -> adventure.Message), n: builtins.int) -> adventure.Word
+def (dictionary: builtins.dict[adventure.Word, builtins.int], klass: Overload(def () -> adventure.Object), n: builtins.bool) -> adventure.Word
+def (dictionary: builtins.dict[adventure.Word, builtins.int], klass: Overload(def () -> adventure.Object), n: builtins.int) -> adventure.Word
+def (dictionary: builtins.dict[adventure.Word, builtins.int], klass: Overload(def () -> adventure.Room), n: builtins.bool) -> adventure.Word
+def (dictionary: builtins.dict[adventure.Word, builtins.int], klass: Overload(def () -> adventure.Room), n: builtins.int) -> adventure.Word
+def (dictionary: builtins.dict[adventure.Word, builtins.int], klass: Overload(def () -> adventure.Word), n: builtins.bool) -> adventure.Word
+def (dictionary: builtins.dict[adventure.Word, builtins.int], klass: Overload(def () -> adventure.Word), n: builtins.int) -> adventure.Word
+def (dictionary: builtins.dict[builtins.object, builtins.object], klass: Overload(def () -> adventure.Hint), n: builtins.bool) -> builtins.object
+def (dictionary: builtins.dict[builtins.object, builtins.object], klass: Overload(def () -> adventure.Hint), n: builtins.int) -> builtins.object
+def (dictionary: builtins.dict[builtins.object, builtins.object], klass: Overload(def () -> adventure.Message), n: builtins.bool) -> builtins.object
+def (dictionary: builtins.dict[builtins.object, builtins.object], klass: Overload(def () -> adventure.Message), n: builtins.int) -> builtins.object
+def (dictionary: builtins.dict[builtins.object, builtins.object], klass: Overload(def () -> adventure.Object), n: builtins.bool) -> builtins.object
+def (dictionary: builtins.dict[builtins.object, builtins.object], klass: Overload(def () -> adventure.Object), n: builtins.int) -> builtins.object
+def (dictionary: builtins.dict[builtins.object, builtins.object], klass: Overload(def () -> adventure.Room), n: builtins.bool) -> builtins.object
+def (dictionary: builtins.dict[builtins.object, builtins.object], klass: Overload(def () -> adventure.Room), n: builtins.int) -> builtins.object
+def (dictionary: builtins.dict[builtins.object, builtins.object], klass: Overload(def () -> adventure.Word), n: builtins.bool) -> builtins.object
+def (dictionary: builtins.dict[builtins.object, builtins.object], klass: Overload(def () -> adventure.Word), n: builtins.int) -> builtins.object
+def (dictionary: builtins.list[adventure.Data], klass: Overload(def () -> adventure.Hint), n: builtins.bool) -> adventure.Data
+def (dictionary: builtins.list[adventure.Data], klass: Overload(def () -> adventure.Hint), n: builtins.int) -> adventure.Data
+def (dictionary: builtins.list[adventure.Data], klass: Overload(def () -> adventure.Message), n: builtins.bool) -> adventure.Data
+def (dictionary: builtins.list[adventure.Data], klass: Overload(def () -> adventure.Message), n: builtins.int) -> adventure.Data
+def (dictionary: builtins.list[adventure.Data], klass: Overload(def () -> adventure.Object), n: builtins.bool) -> adventure.Data
+def (dictionary: builtins.list[adventure.Data], klass: Overload(def () -> adventure.Object), n: builtins.int) -> adventure.Data
+def (dictionary: builtins.list[adventure.Data], klass: Overload(def () -> adventure.Room), n: builtins.bool) -> adventure.Data
+def (dictionary: builtins.list[adventure.Data], klass: Overload(def () -> adventure.Room), n: builtins.int) -> adventure.Data
+def (dictionary: builtins.list[adventure.Data], klass: Overload(def () -> adventure.Word), n: builtins.bool) -> adventure.Data
+def (dictionary: builtins.list[adventure.Data], klass: Overload(def () -> adventure.Word), n: builtins.int) -> adventure.Data
+def (dictionary: builtins.list[adventure.Dwarf], klass: Overload(def () -> adventure.Hint), n: builtins.bool) -> adventure.Dwarf
+def (dictionary: builtins.list[adventure.Dwarf], klass: Overload(def () -> adventure.Hint), n: builtins.int) -> adventure.Dwarf
+def (dictionary: builtins.list[adventure.Dwarf], klass: Overload(def () -> adventure.Message), n: builtins.bool) -> adventure.Dwarf
+def (dictionary: builtins.list[adventure.Dwarf], klass: Overload(def () -> adventure.Message), n: builtins.int) -> adventure.Dwarf
+def (dictionary: builtins.list[adventure.Dwarf], klass: Overload(def () -> adventure.Object), n: builtins.bool) -> adventure.Dwarf
+def (dictionary: builtins.list[adventure.Dwarf], klass: Overload(def () -> adventure.Object), n: builtins.int) -> adventure.Dwarf
+def (dictionary: builtins.list[adventure.Dwarf], klass: Overload(def () -> adventure.Room), n: builtins.bool) -> adventure.Dwarf
+def (dictionary: builtins.list[adventure.Dwarf], klass: Overload(def () -> adventure.Room), n: builtins.int) -> adventure.Dwarf
+def (dictionary: builtins.list[adventure.Dwarf], klass: Overload(def () -> adventure.Word), n: builtins.bool) -> adventure.Dwarf
+def (dictionary: builtins.list[adventure.Dwarf], klass: Overload(def () -> adventure.Word), n: builtins.int) -> adventure.Dwarf
+def (dictionary: builtins.list[adventure.HasN], klass: Overload(def () -> adventure.Hint), n: builtins.bool) -> adventure.HasN
+def (dictionary: builtins.list[adventure.HasN], klass: Overload(def () -> adventure.Hint), n: builtins.int) -> adventure.HasN
+def (dictionary: builtins.list[adventure.HasN], klass: Overload(def () -> adventure.Message), n: builtins.bool) -> adventure.HasN
+def (dictionary: builtins.list[adventure.HasN], klass: Overload(def () -> adventure.Message), n: builtins.int) -> adventure.HasN
+def (dictionary: builtins.list[adventure.HasN], klass: Overload(def () -> adventure.Object), n: builtins.bool) -> adventure.HasN
+def (dictionary: builtins.list[adventure.HasN], klass: Overload(def () -> adventure.Object), n: builtins.int) -> adventure.HasN
+def (dictionary: builtins.list[adventure.HasN], klass: Overload(def () -> adventure.Room), n: builtins.bool) -> adventure.HasN
+def (dictionary: builtins.list[adventure.HasN], klass: Overload(def () -> adventure.Room), n: builtins.int) -> adventure.HasN
+def (dictionary: builtins.list[adventure.HasN], klass: Overload(def () -> adventure.Word), n: builtins.bool) -> adventure.HasN
+def (dictionary: builtins.list[adventure.HasN], klass: Overload(def () -> adventure.Word), n: builtins.int) -> adventure.HasN
+def (dictionary: builtins.list[builtins.bool], klass: Overload(def () -> adventure.Hint), n: builtins.bool) -> builtins.bool
+def (dictionary: builtins.list[builtins.bool], klass: Overload(def () -> adventure.Hint), n: builtins.int) -> builtins.bool
+def (dictionary: builtins.list[builtins.bool], klass: Overload(def () -> adventure.Message), n: builtins.bool) -> builtins.bool
+def (dictionary: builtins.list[builtins.bool], klass: Overload(def () -> adventure.Message), n: builtins.int) -> builtins.bool
+def (dictionary: builtins.list[builtins.bool], klass: Overload(def () -> adventure.Object), n: builtins.bool) -> builtins.bool
+def (dictionary: builtins.list[builtins.bool], klass: Overload(def () -> adventure.Object), n: builtins.int) -> builtins.bool
+def (dictionary: builtins.list[builtins.bool], klass: Overload(def () -> adventure.Room), n: builtins.bool) -> builtins.bool
+def (dictionary: builtins.list[builtins.bool], klass: Overload(def () -> adventure.Room), n: builtins.int) -> builtins.bool
+def (dictionary: builtins.list[builtins.bool], klass: Overload(def () -> adventure.Word), n: builtins.bool) -> builtins.bool
+def (dictionary: builtins.list[builtins.bool], klass: Overload(def () -> adventure.Word), n: builtins.int) -> builtins.bool
+def (dictionary: builtins.list[builtins.bytes], klass: Overload(def () -> adventure.Hint), n: builtins.bool) -> builtins.bytes
+def (dictionary: builtins.list[builtins.bytes], klass: Overload(def () -> adventure.Hint), n: builtins.int) -> builtins.bytes
+def (dictionary: builtins.list[builtins.bytes], klass: Overload(def () -> adventure.Message), n: builtins.bool) -> builtins.bytes
+def (dictionary: builtins.list[builtins.bytes], klass: Overload(def () -> adventure.Message), n: builtins.int) -> builtins.bytes
+def (dictionary: builtins.list[builtins.bytes], klass: Overload(def () -> adventure.Object), n: builtins.bool) -> builtins.bytes
+def (dictionary: builtins.list[builtins.bytes], klass: Overload(def () -> adventure.Object), n: builtins.int) -> builtins.bytes
+def (dictionary: builtins.list[builtins.bytes], klass: Overload(def () -> adventure.Room), n: builtins.bool) -> builtins.bytes
+def (dictionary: builtins.list[builtins.bytes], klass: Overload(def () -> adventure.Room), n: builtins.int) -> builtins.bytes
+def (dictionary: builtins.list[builtins.bytes], klass: Overload(def () -> adventure.Word), n: builtins.bool) -> builtins.bytes
+def (dictionary: builtins.list[builtins.bytes], klass: Overload(def () -> adventure.Word), n: builtins.int) -> builtins.bytes
+def (dictionary: builtins.list[builtins.float], klass: Overload(def () -> adventure.Hint), n: builtins.bool) -> builtins.float
+def (dictionary: builtins.list[builtins.float], klass: Overload(def () -> adventure.Hint), n: builtins.int) -> builtins.float
+def (dictionary: builtins.list[builtins.float], klass: Overload(def () -> adventure.Message), n: builtins.bool) -> builtins.float
+def (dictionary: builtins.list[builtins.float], klass: Overload(def () -> adventure.Message), n: builtins.int) -> builtins.float
+def (dictionary: builtins.list[builtins.float], klass: Overload(def () -> adventure.Object), n: builtins.bool) -> builtins.float
+def (dictionary: builtins.list[builtins.float], klass: Overload(def () -> adventure.Object), n: builtins.int) -> builtins.float
+def (dictionary: builtins.list[builtins.float], klass: Overload(def () -> adventure.Room), n: builtins.bool) -> builtins.float
+def (dictionary: builtins.list[builtins.float], klass: Overload(def () -> adventure.Room), n: builtins.int) -> builtins.float
+def (dictionary: builtins.list[builtins.float], klass: Overload(def () -> adventure.Word), n: builtins.bool) -> builtins.float
+def (dictionary: builtins.list[builtins.float], klass: Overload(def () -> adventure.Word), n: builtins.int) -> builtins.float
+def (dictionary: builtins.list[builtins.int], klass: Overload(def () -> adventure.Hint), n: builtins.bool) -> builtins.int
+def (dictionary: builtins.list[builtins.int], klass: Overload(def () -> adventure.Hint), n: builtins.int) -> builtins.int
+def (dictionary: builtins.list[builtins.int], klass: Overload(def () -> adventure.Message), n: builtins.bool) -> builtins.int
+def (dictionary: builtins.list[builtins.int], klass: Overload(def () -> adventure.Message), n: builtins.int) -> builtins.int
+def (dictionary: builtins.list[builtins.int], klass: Overload(def () -> adventure.Object), n: builtins.bool) -> builtins.int
+def (dictionary: builtins.list[builtins.int], klass: Overload(def () -> adventure.Object), n: builtins.int) -> builtins.int
+def (dictionary: builtins.list[builtins.int], klass: Overload(def () -> adventure.Room), n: builtins.bool) -> builtins.int
+def (dictionary: builtins.list[builtins.int], klass: Overload(def () -> adventure.Room), n: builtins.int) -> builtins.int
+def (dictionary: builtins.list[builtins.int], klass: Overload(def () -> adventure.Word), n: builtins.bool) -> builtins.int
+def (dictionary: builtins.list[builtins.int], klass: Overload(def () -> adventure.Word), n: builtins.int) -> builtins.int
+def (dictionary: builtins.list[builtins.object], klass: Overload(def () -> adventure.Hint), n: builtins.bool) -> builtins.object
+def (dictionary: builtins.list[builtins.object], klass: Overload(def () -> adventure.Hint), n: builtins.int) -> builtins.object
+def (dictionary: builtins.list[builtins.object], klass: Overload(def () -> adventure.Message), n: builtins.bool) -> builtins.object
+def (dictionary: builtins.list[builtins.object], klass: Overload(def () -> adventure.Message), n: builtins.int) -> builtins.object
+def (dictionary: builtins.list[builtins.object], klass: Overload(def () -> adventure.Object), n: builtins.bool) -> builtins.object
+def (dictionary: builtins.list[builtins.object], klass: Overload(def () -> adventure.Object), n: builtins.int) -> builtins.object
+def (dictionary: builtins.list[builtins.object], klass: Overload(def () -> adventure.Room), n: builtins.bool) -> builtins.object
+def (dictionary: builtins.list[builtins.object], klass: Overload(def () -> adventure.Room), n: builtins.int) -> builtins.object
+def (dictionary: builtins.list[builtins.object], klass: Overload(def () -> adventure.Word), n: builtins.bool) -> builtins.object
+def (dictionary: builtins.list[builtins.object], klass: Overload(def () -> adventure.Word), n: builtins.int) -> builtins.object
+def (dictionary: builtins.list[builtins.str], klass: Overload(def () -> adventure.Hint), n: builtins.bool) -> builtins.str
+def (dictionary: builtins.list[builtins.str], klass: Overload(def () -> adventure.Hint), n: builtins.int) -> builtins.str
+def (dictionary: builtins.list[builtins.str], klass: Overload(def () -> adventure.Message), n: builtins.bool) -> builtins.str
+def (dictionary: builtins.list[builtins.str], klass: Overload(def () -> adventure.Message), n: builtins.int) -> builtins.str
+def (dictionary: builtins.list[builtins.str], klass: Overload(def () -> adventure.Object), n: builtins.bool) -> builtins.str
+def (dictionary: builtins.list[builtins.str], klass: Overload(def () -> adventure.Object), n: builtins.int) -> builtins.str
+def (dictionary: builtins.list[builtins.str], klass: Overload(def () -> adventure.Room), n: builtins.bool) -> builtins.str
+def (dictionary: builtins.list[builtins.str], klass: Overload(def () -> adventure.Room), n: builtins.int) -> builtins.str
+def (dictionary: builtins.list[builtins.str], klass: Overload(def () -> adventure.Word), n: builtins.bool) -> builtins.str
+def (dictionary: builtins.list[builtins.str], klass: Overload(def () -> adventure.Word), n: builtins.int) -> builtins.str
+section1
+def (data: adventure.Data, n: builtins.bool, etc: builtins.list[builtins.str])
+def (data: adventure.Data, n: builtins.bool, etc: builtins.str)
+def (data: adventure.Data, n: builtins.int, etc: builtins.list[builtins.str])
+def (data: adventure.Data, n: builtins.int, etc: builtins.str)
+section3
+def (data: adventure.Data, x: builtins.bool, y: builtins.bool, verbs: builtins.list[builtins.int])
+def (data: adventure.Data, x: builtins.bool, y: builtins.float, verbs: builtins.list[builtins.int])
+def (data: adventure.Data, x: builtins.bool, y: builtins.int, verbs: builtins.list[builtins.int])
+def (data: adventure.Data, x: builtins.int, y: builtins.bool, verbs: builtins.list[builtins.int])
+def (data: adventure.Data, x: builtins.int, y: builtins.float, verbs: builtins.list[builtins.int])
+def (data: adventure.Data, x: builtins.int, y: builtins.int, verbs: builtins.list[builtins.int])
+section5
+def (data: adventure.Data, n: builtins.int, etc: builtins.list[builtins.str])
+def (data: adventure.Data, n: builtins.int, etc: builtins.str)
+section8
+def (data: adventure.Data, word_n: builtins.bool, message_n: builtins.bool)
+def (data: adventure.Data, word_n: builtins.bool, message_n: builtins.int)
+def (data: adventure.Data, word_n: builtins.int, message_n: builtins.bool)
+def (data: adventure.Data, word_n: builtins.int, message_n: builtins.int)
+section9
+def (data: adventure.Data, bit: builtins.int, nlist: builtins.bytes)
+def (data: adventure.Data, bit: builtins.int, nlist: builtins.list[builtins.int])
+make_object
+def (dictionary: builtins.dict[adventure.Hint, builtins.int], klass: Overload(def () -> adventure.Hint), n: builtins.bool) -> adventure.Hint
+def (dictionary: builtins.dict[adventure.Hint, builtins.int], klass: Overload(def () -> adventure.Hint), n: builtins.int) -> adventure.Hint
+def (dictionary: builtins.dict[adventure.Hint, builtins.int], klass: Overload(def () -> adventure.Message), n: builtins.bool) -> adventure.Hint
+def (dictionary: builtins.dict[adventure.Hint, builtins.int], klass: Overload(def () -> adventure.Message), n: builtins.int) -> adventure.Hint
+def (dictionary: builtins.dict[adventure.Hint, builtins.int], klass: Overload(def () -> adventure.Object), n: builtins.bool) -> adventure.Hint
+def (dictionary: builtins.dict[adventure.Hint, builtins.int], klass: Overload(def () -> adventure.Object), n: builtins.int) -> adventure.Hint
+def (dictionary: builtins.dict[adventure.Hint, builtins.int], klass: Overload(def () -> adventure.Room), n: builtins.bool) -> adventure.Hint
+def (dictionary: builtins.dict[adventure.Hint, builtins.int], klass: Overload(def () -> adventure.Room), n: builtins.int) -> adventure.Hint
+def (dictionary: builtins.dict[adventure.Hint, builtins.int], klass: Overload(def () -> adventure.Word), n: builtins.bool) -> adventure.Hint
+def (dictionary: builtins.dict[adventure.Hint, builtins.int], klass: Overload(def () -> adventure.Word), n: builtins.int) -> adventure.Hint
+def (dictionary: builtins.dict[adventure.Message, builtins.int], klass: Overload(def () -> adventure.Hint), n: builtins.bool) -> adventure.Message
+def (dictionary: builtins.dict[adventure.Message, builtins.int], klass: Overload(def () -> adventure.Hint), n: builtins.int) -> adventure.Message
+def (dictionary: builtins.dict[adventure.Message, builtins.int], klass: Overload(def () -> adventure.Message), n: builtins.bool) -> adventure.Message
+def (dictionary: builtins.dict[adventure.Message, builtins.int], klass: Overload(def () -> adventure.Message), n: builtins.int) -> adventure.Message
+def (dictionary: builtins.dict[adventure.Message, builtins.int], klass: Overload(def () -> adventure.Object), n: builtins.bool) -> adventure.Message
+def (dictionary: builtins.dict[adventure.Message, builtins.int], klass: Overload(def () -> adventure.Object), n: builtins.int) -> adventure.Message
+def (dictionary: builtins.dict[adventure.Message, builtins.int], klass: Overload(def () -> adventure.Room), n: builtins.bool) -> adventure.Message
+def (dictionary: builtins.dict[adventure.Message, builtins.int], klass: Overload(def () -> adventure.Room), n: builtins.int) -> adventure.Message
+def (dictionary: builtins.dict[adventure.Message, builtins.int], klass: Overload(def () -> adventure.Word), n: builtins.bool) -> adventure.Message
+def (dictionary: builtins.dict[adventure.Message, builtins.int], klass: Overload(def () -> adventure.Word), n: builtins.int) -> adventure.Message
+def (dictionary: builtins.dict[adventure.Object, builtins.int], klass: Overload(def () -> adventure.Hint), n: builtins.bool) -> adventure.Object
+def (dictionary: builtins.dict[adventure.Object, builtins.int], klass: Overload(def () -> adventure.Hint), n: builtins.int) -> adventure.Object
+def (dictionary: builtins.dict[adventure.Object, builtins.int], klass: Overload(def () -> adventure.Message), n: builtins.bool) -> adventure.Object
+def (dictionary: builtins.dict[adventure.Object, builtins.int], klass: Overload(def () -> adventure.Message), n: builtins.int) -> adventure.Object
+def (dictionary: builtins.dict[adventure.Object, builtins.int], klass: Overload(def () -> adventure.Object), n: builtins.bool) -> adventure.Object
+def (dictionary: builtins.dict[adventure.Object, builtins.int], klass: Overload(def () -> adventure.Object), n: builtins.int) -> adventure.Object
+def (dictionary: builtins.dict[adventure.Object, builtins.int], klass: Overload(def () -> adventure.Room), n: builtins.bool) -> adventure.Object
+def (dictionary: builtins.dict[adventure.Object, builtins.int], klass: Overload(def () -> adventure.Room), n: builtins.int) -> adventure.Object
+def (dictionary: builtins.dict[adventure.Object, builtins.int], klass: Overload(def () -> adventure.Word), n: builtins.bool) -> adventure.Object
+def (dictionary: builtins.dict[adventure.Object, builtins.int], klass: Overload(def () -> adventure.Word), n: builtins.int) -> adventure.Object
+def (dictionary: builtins.dict[adventure.Room, builtins.int], klass: Overload(def () -> adventure.Hint), n: builtins.bool) -> adventure.Room
+def (dictionary: builtins.dict[adventure.Room, builtins.int], klass: Overload(def () -> adventure.Hint), n: builtins.int) -> adventure.Room
+def (dictionary: builtins.dict[adventure.Room, builtins.int], klass: Overload(def () -> adventure.Message), n: builtins.bool) -> adventure.Room
+def (dictionary: builtins.dict[adventure.Room, builtins.int], klass: Overload(def () -> adventure.Message), n: builtins.int) -> adventure.Room
+def (dictionary: builtins.dict[adventure.Room, builtins.int], klass: Overload(def () -> adventure.Object), n: builtins.bool) -> adventure.Room
+def (dictionary: builtins.dict[adventure.Room, builtins.int], klass: Overload(def () -> adventure.Object), n: builtins.int) -> adventure.Room
+def (dictionary: builtins.dict[adventure.Room, builtins.int], klass: Overload(def () -> adventure.Room), n: builtins.bool) -> adventure.Room
+def (dictionary: builtins.dict[adventure.Room, builtins.int], klass: Overload(def () -> adventure.Room), n: builtins.int) -> adventure.Room
+def (dictionary: builtins.dict[adventure.Room, builtins.int], klass: Overload(def () -> adventure.Word), n: builtins.bool) -> adventure.Room
+def (dictionary: builtins.dict[adventure.Room, builtins.int], klass: Overload(def () -> adventure.Word), n: builtins.int) -> adventure.Room
+def (dictionary: builtins.dict[adventure.Word, builtins.int], klass: Overload(def () -> adventure.Hint), n: builtins.bool) -> adventure.Word
+def (dictionary: builtins.dict[adventure.Word, builtins.int], klass: Overload(def () -> adventure.Hint), n: builtins.int) -> adventure.Word
+def (dictionary: builtins.dict[adventure.Word, builtins.int], klass: Overload(def () -> adventure.Message), n: builtins.bool) -> adventure.Word
+def (dictionary: builtins.dict[adventure.Word, builtins.int], klass: Overload(def () -> adventure.Message), n: builtins.int) -> adventure.Word
+def (dictionary: builtins.dict[adventure.Word, builtins.int], klass: Overload(def () -> adventure.Object), n: builtins.bool) -> adventure.Word
+def (dictionary: builtins.dict[adventure.Word, builtins.int], klass: Overload(def () -> adventure.Object), n: builtins.int) -> adventure.Word
+def (dictionary: builtins.dict[adventure.Word, builtins.int], klass: Overload(def () -> adventure.Room), n: builtins.bool) -> adventure.Word
+def (dictionary: builtins.dict[adventure.Word, builtins.int], klass: Overload(def () -> adventure.Room), n: builtins.int) -> adventure.Word
+def (dictionary: builtins.dict[adventure.Word, builtins.int], klass: Overload(def () -> adventure.Word), n: builtins.bool) -> adventure.Word
+def (dictionary: builtins.dict[adventure.Word, builtins.int], klass: Overload(def () -> adventure.Word), n: builtins.int) -> adventure.Word
+def (dictionary: builtins.dict[builtins.object, builtins.object], klass: Overload(def () -> adventure.Hint), n: builtins.bool) -> builtins.object
+def (dictionary: builtins.dict[builtins.object, builtins.object], klass: Overload(def () -> adventure.Hint), n: builtins.int) -> builtins.object
+def (dictionary: builtins.dict[builtins.object, builtins.object], klass: Overload(def () -> adventure.Message), n: builtins.bool) -> builtins.object
+def (dictionary: builtins.dict[builtins.object, builtins.object], klass: Overload(def () -> adventure.Message), n: builtins.int) -> builtins.object
+def (dictionary: builtins.dict[builtins.object, builtins.object], klass: Overload(def () -> adventure.Object), n: builtins.bool) -> builtins.object
+def (dictionary: builtins.dict[builtins.object, builtins.object], klass: Overload(def () -> adventure.Object), n: builtins.int) -> builtins.object
+def (dictionary: builtins.dict[builtins.object, builtins.object], klass: Overload(def () -> adventure.Room), n: builtins.bool) -> builtins.object
+def (dictionary: builtins.dict[builtins.object, builtins.object], klass: Overload(def () -> adventure.Room), n: builtins.int) -> builtins.object
+def (dictionary: builtins.dict[builtins.object, builtins.object], klass: Overload(def () -> adventure.Word), n: builtins.bool) -> builtins.object
+def (dictionary: builtins.dict[builtins.object, builtins.object], klass: Overload(def () -> adventure.Word), n: builtins.int) -> builtins.object
+def (dictionary: builtins.list[adventure.Data], klass: Overload(def () -> adventure.Hint), n: builtins.bool) -> adventure.Data
+def (dictionary: builtins.list[adventure.Data], klass: Overload(def () -> adventure.Hint), n: builtins.int) -> adventure.Data
+def (dictionary: builtins.list[adventure.Data], klass: Overload(def () -> adventure.Message), n: builtins.bool) -> adventure.Data
+def (dictionary: builtins.list[adventure.Data], klass: Overload(def () -> adventure.Message), n: builtins.int) -> adventure.Data
+def (dictionary: builtins.list[adventure.Data], klass: Overload(def () -> adventure.Object), n: builtins.bool) -> adventure.Data
+def (dictionary: builtins.list[adventure.Data], klass: Overload(def () -> adventure.Object), n: builtins.int) -> adventure.Data
+def (dictionary: builtins.list[adventure.Data], klass: Overload(def () -> adventure.Room), n: builtins.bool) -> adventure.Data
+def (dictionary: builtins.list[adventure.Data], klass: Overload(def () -> adventure.Room), n: builtins.int) -> adventure.Data
+def (dictionary: builtins.list[adventure.Data], klass: Overload(def () -> adventure.Word), n: builtins.bool) -> adventure.Data
+def (dictionary: builtins.list[adventure.Data], klass: Overload(def () -> adventure.Word), n: builtins.int) -> adventure.Data
+def (dictionary: builtins.list[adventure.Dwarf], klass: Overload(def () -> adventure.Hint), n: builtins.bool) -> adventure.Dwarf
+def (dictionary: builtins.list[adventure.Dwarf], klass: Overload(def () -> adventure.Hint), n: builtins.int) -> adventure.Dwarf
+def (dictionary: builtins.list[adventure.Dwarf], klass: Overload(def () -> adventure.Message), n: builtins.bool) -> adventure.Dwarf
+def (dictionary: builtins.list[adventure.Dwarf], klass: Overload(def () -> adventure.Message), n: builtins.int) -> adventure.Dwarf
+def (dictionary: builtins.list[adventure.Dwarf], klass: Overload(def () -> adventure.Object), n: builtins.bool) -> adventure.Dwarf
+def (dictionary: builtins.list[adventure.Dwarf], klass: Overload(def () -> adventure.Object), n: builtins.int) -> adventure.Dwarf
+def (dictionary: builtins.list[adventure.Dwarf], klass: Overload(def () -> adventure.Room), n: builtins.bool) -> adventure.Dwarf
+def (dictionary: builtins.list[adventure.Dwarf], klass: Overload(def () -> adventure.Room), n: builtins.int) -> adventure.Dwarf
+def (dictionary: builtins.list[adventure.Dwarf], klass: Overload(def () -> adventure.Word), n: builtins.bool) -> adventure.Dwarf
+def (dictionary: builtins.list[adventure.Dwarf], klass: Overload(def () -> adventure.Word), n: builtins.int) -> adventure.Dwarf
+def (dictionary: builtins.list[adventure.HasN], klass: Overload(def () -> adventure.Hint), n: builtins.bool) -> adventure.HasN
+def (dictionary: builtins.list[adventure.HasN], klass: Overload(def () -> adventure.Hint), n: builtins.int) -> adventure.HasN
+def (dictionary: builtins.list[adventure.HasN], klass: Overload(def () -> adventure.Message), n: builtins.bool) -> adventure.HasN
+def (dictionary: builtins.list[adventure.HasN], klass: Overload(def () -> adventure.Message), n: builtins.int) -> adventure.HasN
+def (dictionary: builtins.list[adventure.HasN], klass: Overload(def () -> adventure.Object), n: builtins.bool) -> adventure.HasN
+def (dictionary: builtins.list[adventure.HasN], klass: Overload(def () -> adventure.Object), n: builtins.int) -> adventure.HasN
+def (dictionary: builtins.list[adventure.HasN], klass: Overload(def () -> adventure.Room), n: builtins.bool) -> adventure.HasN
+def (dictionary: builtins.list[adventure.HasN], klass: Overload(def () -> adventure.Room), n: builtins.int) -> adventure.HasN
+def (dictionary: builtins.list[adventure.HasN], klass: Overload(def () -> adventure.Word), n: builtins.bool) -> adventure.HasN
+def (dictionary: builtins.list[adventure.HasN], klass: Overload(def () -> adventure.Word), n: builtins.int) -> adventure.HasN
+def (dictionary: builtins.list[builtins.bool], klass: Overload(def () -> adventure.Hint), n: builtins.bool) -> builtins.bool
+def (dictionary: builtins.list[builtins.bool], klass: Overload(def () -> adventure.Hint), n: builtins.int) -> builtins.bool
+def (dictionary: builtins.list[builtins.bool], klass: Overload(def () -> adventure.Message), n: builtins.bool) -> builtins.bool
+def (dictionary: builtins.list[builtins.bool], klass: Overload(def () -> adventure.Message), n: builtins.int) -> builtins.bool
+def (dictionary: builtins.list[builtins.bool], klass: Overload(def () -> adventure.Object), n: builtins.bool) -> builtins.bool
+def (dictionary: builtins.list[builtins.bool], klass: Overload(def () -> adventure.Object), n: builtins.int) -> builtins.bool
+def (dictionary: builtins.list[builtins.bool], klass: Overload(def () -> adventure.Room), n: builtins.bool) -> builtins.bool
+def (dictionary: builtins.list[builtins.bool], klass: Overload(def () -> adventure.Room), n: builtins.int) -> builtins.bool
+def (dictionary: builtins.list[builtins.bool], klass: Overload(def () -> adventure.Word), n: builtins.bool) -> builtins.bool
+def (dictionary: builtins.list[builtins.bool], klass: Overload(def () -> adventure.Word), n: builtins.int) -> builtins.bool
+def (dictionary: builtins.list[builtins.bytes], klass: Overload(def () -> adventure.Hint), n: builtins.bool) -> builtins.bytes
+def (dictionary: builtins.list[builtins.bytes], klass: Overload(def () -> adventure.Hint), n: builtins.int) -> builtins.bytes
+def (dictionary: builtins.list[builtins.bytes], klass: Overload(def () -> adventure.Message), n: builtins.bool) -> builtins.bytes
+def (dictionary: builtins.list[builtins.bytes], klass: Overload(def () -> adventure.Message), n: builtins.int) -> builtins.bytes
+def (dictionary: builtins.list[builtins.bytes], klass: Overload(def () -> adventure.Object), n: builtins.bool) -> builtins.bytes
+def (dictionary: builtins.list[builtins.bytes], klass: Overload(def () -> adventure.Object), n: builtins.int) -> builtins.bytes
+def (dictionary: builtins.list[builtins.bytes], klass: Overload(def () -> adventure.Room), n: builtins.bool) -> builtins.bytes
+def (dictionary: builtins.list[builtins.bytes], klass: Overload(def () -> adventure.Room), n: builtins.int) -> builtins.bytes
+def (dictionary: builtins.list[builtins.bytes], klass: Overload(def () -> adventure.Word), n: builtins.bool) -> builtins.bytes
+def (dictionary: builtins.list[builtins.bytes], klass: Overload(def () -> adventure.Word), n: builtins.int) -> builtins.bytes
+def (dictionary: builtins.list[builtins.float], klass: Overload(def () -> adventure.Hint), n: builtins.bool) -> builtins.float
+def (dictionary: builtins.list[builtins.float], klass: Overload(def () -> adventure.Hint), n: builtins.int) -> builtins.float
+def (dictionary: builtins.list[builtins.float], klass: Overload(def () -> adventure.Message), n: builtins.bool) -> builtins.float
+def (dictionary: builtins.list[builtins.float], klass: Overload(def () -> adventure.Message), n: builtins.int) -> builtins.float
+def (dictionary: builtins.list[builtins.float], klass: Overload(def () -> adventure.Object), n: builtins.bool) -> builtins.float
+def (dictionary: builtins.list[builtins.float], klass: Overload(def () -> adventure.Object), n: builtins.int) -> builtins.float
+def (dictionary: builtins.list[builtins.float], klass: Overload(def () -> adventure.Room), n: builtins.bool) -> builtins.float
+def (dictionary: builtins.list[builtins.float], klass: Overload(def () -> adventure.Room), n: builtins.int) -> builtins.float
+def (dictionary: builtins.list[builtins.float], klass: Overload(def () -> adventure.Word), n: builtins.bool) -> builtins.float
+def (dictionary: builtins.list[builtins.float], klass: Overload(def () -> adventure.Word), n: builtins.int) -> builtins.float
+def (dictionary: builtins.list[builtins.int], klass: Overload(def () -> adventure.Hint), n: builtins.bool) -> builtins.int
+def (dictionary: builtins.list[builtins.int], klass: Overload(def () -> adventure.Hint), n: builtins.int) -> builtins.int
+def (dictionary: builtins.list[builtins.int], klass: Overload(def () -> adventure.Message), n: builtins.bool) -> builtins.int
+def (dictionary: builtins.list[builtins.int], klass: Overload(def () -> adventure.Message), n: builtins.int) -> builtins.int
+def (dictionary: builtins.list[builtins.int], klass: Overload(def () -> adventure.Object), n: builtins.bool) -> builtins.int
+def (dictionary: builtins.list[builtins.int], klass: Overload(def () -> adventure.Object), n: builtins.int) -> builtins.int
+def (dictionary: builtins.list[builtins.int], klass: Overload(def () -> adventure.Room), n: builtins.bool) -> builtins.int
+def (dictionary: builtins.list[builtins.int], klass: Overload(def () -> adventure.Room), n: builtins.int) -> builtins.int
+def (dictionary: builtins.list[builtins.int], klass: Overload(def () -> adventure.Word), n: builtins.bool) -> builtins.int
+def (dictionary: builtins.list[builtins.int], klass: Overload(def () -> adventure.Word), n: builtins.int) -> builtins.int
+def (dictionary: builtins.list[builtins.object], klass: Overload(def () -> adventure.Hint), n: builtins.bool) -> builtins.object
+def (dictionary: builtins.list[builtins.object], klass: Overload(def () -> adventure.Hint), n: builtins.int) -> builtins.object
+def (dictionary: builtins.list[builtins.object], klass: Overload(def () -> adventure.Message), n: builtins.bool) -> builtins.object
+def (dictionary: builtins.list[builtins.object], klass: Overload(def () -> adventure.Message), n: builtins.int) -> builtins.object
+def (dictionary: builtins.list[builtins.object], klass: Overload(def () -> adventure.Object), n: builtins.bool) -> builtins.object
+def (dictionary: builtins.list[builtins.object], klass: Overload(def () -> adventure.Object), n: builtins.int) -> builtins.object
+def (dictionary: builtins.list[builtins.object], klass: Overload(def () -> adventure.Room), n: builtins.bool) -> builtins.object
+def (dictionary: builtins.list[builtins.object], klass: Overload(def () -> adventure.Room), n: builtins.int) -> builtins.object
+def (dictionary: builtins.list[builtins.object], klass: Overload(def () -> adventure.Word), n: builtins.bool) -> builtins.object
+def (dictionary: builtins.list[builtins.object], klass: Overload(def () -> adventure.Word), n: builtins.int) -> builtins.object
+def (dictionary: builtins.list[builtins.str], klass: Overload(def () -> adventure.Hint), n: builtins.bool) -> builtins.str
+def (dictionary: builtins.list[builtins.str], klass: Overload(def () -> adventure.Hint), n: builtins.int) -> builtins.str
+def (dictionary: builtins.list[builtins.str], klass: Overload(def () -> adventure.Message), n: builtins.bool) -> builtins.str
+def (dictionary: builtins.list[builtins.str], klass: Overload(def () -> adventure.Message), n: builtins.int) -> builtins.str
+def (dictionary: builtins.list[builtins.str], klass: Overload(def () -> adventure.Object), n: builtins.bool) -> builtins.str
+def (dictionary: builtins.list[builtins.str], klass: Overload(def () -> adventure.Object), n: builtins.int) -> builtins.str
+def (dictionary: builtins.list[builtins.str], klass: Overload(def () -> adventure.Room), n: builtins.bool) -> builtins.str
+def (dictionary: builtins.list[builtins.str], klass: Overload(def () -> adventure.Room), n: builtins.int) -> builtins.str
+def (dictionary: builtins.list[builtins.str], klass: Overload(def () -> adventure.Word), n: builtins.bool) -> builtins.str
+def (dictionary: builtins.list[builtins.str], klass: Overload(def () -> adventure.Word), n: builtins.int) -> builtins.str
+section2
+def (data: adventure.Data, n: builtins.bool, line: builtins.str)
+def (data: adventure.Data, n: builtins.int, line: builtins.str)
+add_synonym
+def (self: adventure.Word, other: adventure.Word)
+section4
+def (data: adventure.Data, n: builtins.int, text: builtins.str)
+section6
+def (data: adventure.Data, n: builtins.bool, etc: builtins.list[builtins.str])
+def (data: adventure.Data, n: builtins.bool, etc: builtins.str)
+def (data: adventure.Data, n: builtins.int, etc: builtins.list[builtins.str])
+def (data: adventure.Data, n: builtins.int, etc: builtins.str)
+drop
+def (self: adventure.Object, room: adventure.Room)
+section7
+def (data: adventure.Data, n: builtins.bool, room_n: builtins.bool, etc: builtins.bytes)
+def (data: adventure.Data, n: builtins.bool, room_n: builtins.bool, etc: builtins.list[builtins.int])
+def (data: adventure.Data, n: builtins.bool, room_n: builtins.int, etc: builtins.bytes)
+def (data: adventure.Data, n: builtins.bool, room_n: builtins.int, etc: builtins.list[builtins.int])
+def (data: adventure.Data, n: builtins.int, room_n: builtins.bool, etc: builtins.bytes)
+def (data: adventure.Data, n: builtins.int, room_n: builtins.bool, etc: builtins.list[builtins.int])
+def (data: adventure.Data, n: builtins.int, room_n: builtins.int, etc: builtins.bytes)
+def (data: adventure.Data, n: builtins.int, room_n: builtins.int, etc: builtins.list[builtins.int])
+section11
+def (data: adventure.Data, n: builtins.bool, turns_needed: builtins.bool, penalty: builtins.bool, question_n: builtins.bool, message_n: builtins.bool)
+def (data: adventure.Data, n: builtins.bool, turns_needed: builtins.bool, penalty: builtins.bool, question_n: builtins.bool, message_n: builtins.int)
+def (data: adventure.Data, n: builtins.bool, turns_needed: builtins.bool, penalty: builtins.bool, question_n: builtins.int, message_n: builtins.bool)
+def (data: adventure.Data, n: builtins.bool, turns_needed: builtins.bool, penalty: builtins.bool, question_n: builtins.int, message_n: builtins.int)
+def (data: adventure.Data, n: builtins.bool, turns_needed: builtins.bool, penalty: builtins.int, question_n: builtins.bool, message_n: builtins.bool)
+def (data: adventure.Data, n: builtins.bool, turns_needed: builtins.bool, penalty: builtins.int, question_n: builtins.bool, message_n: builtins.int)
+def (data: adventure.Data, n: builtins.bool, turns_needed: builtins.bool, penalty: builtins.int, question_n: builtins.int, message_n: builtins.bool)
+def (data: adventure.Data, n: builtins.bool, turns_needed: builtins.bool, penalty: builtins.int, question_n: builtins.int, message_n: builtins.int)
+def (data: adventure.Data, n: builtins.bool, turns_needed: builtins.int, penalty: builtins.bool, question_n: builtins.bool, message_n: builtins.bool)
+def (data: adventure.Data, n: builtins.bool, turns_needed: builtins.int, penalty: builtins.bool, question_n: builtins.bool, message_n: builtins.int)
+def (data: adventure.Data, n: builtins.bool, turns_needed: builtins.int, penalty: builtins.bool, question_n: builtins.int, message_n: builtins.bool)
+def (data: adventure.Data, n: builtins.bool, turns_needed: builtins.int, penalty: builtins.bool, question_n: builtins.int, message_n: builtins.int)
+def (data: adventure.Data, n: builtins.bool, turns_needed: builtins.int, penalty: builtins.int, question_n: builtins.bool, message_n: builtins.bool)
+def (data: adventure.Data, n: builtins.bool, turns_needed: builtins.int, penalty: builtins.int, question_n: builtins.bool, message_n: builtins.int)
+def (data: adventure.Data, n: builtins.bool, turns_needed: builtins.int, penalty: builtins.int, question_n: builtins.int, message_n: builtins.bool)
+def (data: adventure.Data, n: builtins.bool, turns_needed: builtins.int, penalty: builtins.int, question_n: builtins.int, message_n: builtins.int)
+def (data: adventure.Data, n: builtins.int, turns_needed: builtins.bool, penalty: builtins.bool, question_n: builtins.bool, message_n: builtins.bool)
+def (data: adventure.Data, n: builtins.int, turns_needed: builtins.bool, penalty: builtins.bool, question_n: builtins.bool, message_n: builtins.int)
+def (data: adventure.Data, n: builtins.int, turns_needed: builtins.bool, penalty: builtins.bool, question_n: builtins.int, message_n: builtins.bool)
+def (data: adventure.Data, n: builtins.int, turns_needed: builtins.bool, penalty: builtins.bool, question_n: builtins.int, message_n: builtins.int)
+def (data: adventure.Data, n: builtins.int, turns_needed: builtins.bool, penalty: builtins.int, question_n: builtins.bool, message_n: builtins.bool)
+def (data: adventure.Data, n: builtins.int, turns_needed: builtins.bool, penalty: builtins.int, question_n: builtins.bool, message_n: builtins.int)
+def (data: adventure.Data, n: builtins.int, turns_needed: builtins.bool, penalty: builtins.int, question_n: builtins.int, message_n: builtins.bool)
+def (data: adventure.Data, n: builtins.int, turns_needed: builtins.bool, penalty: builtins.int, question_n: builtins.int, message_n: builtins.int)
+def (data: adventure.Data, n: builtins.int, turns_needed: builtins.int, penalty: builtins.bool, question_n: builtins.bool, message_n: builtins.bool)
+def (data: adventure.Data, n: builtins.int, turns_needed: builtins.int, penalty: builtins.bool, question_n: builtins.bool, message_n: builtins.int)
+def (data: adventure.Data, n: builtins.int, turns_needed: builtins.int, penalty: builtins.bool, question_n: builtins.int, message_n: builtins.bool)
+def (data: adventure.Data, n: builtins.int, turns_needed: builtins.int, penalty: builtins.bool, question_n: builtins.int, message_n: builtins.int)
+def (data: adventure.Data, n: builtins.int, turns_needed: builtins.int, penalty: builtins.int, question_n: builtins.bool, message_n: builtins.bool)
+def (data: adventure.Data, n: builtins.int, turns_needed: builtins.int, penalty: builtins.int, question_n: builtins.bool, message_n: builtins.int)
+def (data: adventure.Data, n: builtins.int, turns_needed: builtins.int, penalty: builtins.int, question_n: builtins.int, message_n: builtins.bool)
+def (data: adventure.Data, n: builtins.int, turns_needed: builtins.int, penalty: builtins.int, question_n: builtins.int, message_n: builtins.int)

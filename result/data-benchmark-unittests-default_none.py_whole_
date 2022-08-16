@@ -1,0 +1,4 @@
+f
+def (x: builtins.bool =) -> builtins.int
+def (x: builtins.float =) -> builtins.float
+def (x: builtins.int =) -> builtins.int

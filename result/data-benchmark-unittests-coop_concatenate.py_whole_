@@ -1,0 +1,26 @@
+__init__
+def (self: coop_concatenate.Concatenator, a: builtins.object)
+concatenate
+def (self: coop_concatenate.Concatenator, separator: builtins.object, from_: builtins.bytes, to: builtins.list[builtins.object])
+def (self: coop_concatenate.Concatenator, separator: builtins.object, from_: builtins.dict[builtins.object, builtins.object], to: builtins.list[builtins.object])
+def (self: coop_concatenate.Concatenator, separator: builtins.object, from_: builtins.list[builtins.int], to: builtins.list[builtins.object])
+def (self: coop_concatenate.Concatenator, separator: builtins.object, from_: builtins.list[builtins.object], to: builtins.list[builtins.object])
+def (self: coop_concatenate.Concatenator, separator: builtins.object, from_: builtins.list[builtins.str], to: builtins.list[builtins.object])
+def (self: coop_concatenate.Concatenator, separator: builtins.object, from_: builtins.set[builtins.object], to: builtins.list[builtins.object])
+def (self: coop_concatenate.Concatenator, separator: builtins.object, from_: builtins.str, to: builtins.list[builtins.object])
+foo
+def (self: coop_concatenate.Z)
+bar
+def (self: coop_concatenate.Y)
+baz
+def (self: coop_concatenate.X)
+omg
+def (self: coop_concatenate.W)
+foo
+def (self: coop_concatenate.ZP)
+bar
+def (self: coop_concatenate.YP)
+baz
+def (self: coop_concatenate.XP)
+omg
+def (self: coop_concatenate.WP)

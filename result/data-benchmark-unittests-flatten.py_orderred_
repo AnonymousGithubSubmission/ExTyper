@@ -1,0 +1,14 @@
+flatten
+['builtins.list[builtins.bytes]', 'builtins.str', 'builtins.list[builtins.str]']
+['builtins.list[builtins.str]', 'builtins.list[builtins.int]']
+flatten_dict
+[]
+['builtins.bytes', 'builtins.list[builtins.bool]', 'builtins.list[builtins.int]']
+['builtins.dict[builtins.int, builtins.list[<nothing>]]', 'builtins.dict[builtins.bool, builtins.list[<nothing>]]']
+flatten
+['builtins.list[builtins.bytes]', 'builtins.str', 'builtins.list[builtins.str]']
+['builtins.list[builtins.str]', 'builtins.list[builtins.int]']
+flatten_dict
+[]
+['builtins.bytes', 'builtins.list[builtins.bool]', 'builtins.list[builtins.int]']
+['builtins.dict[builtins.int, builtins.list[<nothing>]]', 'builtins.dict[builtins.bool, builtins.list[<nothing>]]']

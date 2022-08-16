@@ -1,0 +1,2 @@
+parse_plaintext_layout
+def (plaintext_str: builtins.str) -> builtins.int

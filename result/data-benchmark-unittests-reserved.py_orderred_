@@ -1,0 +1,81 @@
+__call__
+['reserved.Parser']
+['builtins.object']
+['builtins.object']
+[]
+__init__
+['reserved.Process']
+['reserved.Parser', 'reserved.Reserved', 'reserved.Concat']
+['builtins.object']
+[]
+__init__
+['reserved.Exp']
+['reserved.Parser', 'reserved.Reserved', 'reserved.Concat']
+['reserved.Reserved', 'reserved.Concat', 'reserved.Process']
+[]
+__init__
+['reserved.Concat']
+['reserved.Reserved', 'reserved.Concat', 'reserved.Process']
+['reserved.Reserved', 'reserved.Concat', 'reserved.Process']
+[]
+__init__
+['reserved.Alternate']
+['reserved.Reserved', 'reserved.Concat', 'reserved.Process']
+['reserved.Reserved', 'reserved.Concat', 'reserved.Process']
+[]
+__init__
+['reserved.Reserved']
+['builtins.str']
+['builtins.str']
+[]
+keyword
+['builtins.str']
+['reserved.Reserved']
+any_operator_in_list
+['builtins.str', 'builtins.dict[builtins.list[builtins.object], builtins.str]', 'builtins.list[builtins.str]']
+['reserved.Reserved']
+__init__
+['reserved.Concat']
+['reserved.Reserved', 'reserved.Concat', 'reserved.Process']
+['reserved.Reserved', 'reserved.Concat', 'reserved.Process']
+[]
+__add__
+['reserved.Parser']
+['reserved.Reserved', 'reserved.Concat', 'reserved.Process']
+['reserved.Concat']
+__init__
+['reserved.Exp']
+['reserved.Parser', 'reserved.Reserved', 'reserved.Concat']
+['reserved.Reserved', 'reserved.Concat', 'reserved.Process']
+[]
+__mul__
+['reserved.Parser']
+['reserved.Reserved', 'reserved.Concat', 'reserved.Process']
+['reserved.Exp']
+__init__
+['reserved.Alternate']
+['reserved.Reserved', 'reserved.Concat', 'reserved.Process']
+['reserved.Reserved', 'reserved.Concat', 'reserved.Process']
+[]
+__or__
+['reserved.Parser']
+['reserved.Reserved', 'reserved.Concat', 'reserved.Process']
+['reserved.Alternate']
+__init__
+['reserved.Process']
+['reserved.Parser', 'reserved.Reserved', 'reserved.Concat']
+['builtins.object']
+[]
+__xor__
+['reserved.Parser']
+['builtins.object']
+['reserved.Process']
+op_parser
+['builtins.str']
+['builtins.object']
+['reserved.Process']
+precedence
+['reserved.Parser', 'reserved.Reserved', 'reserved.Concat']
+['builtins.str']
+['builtins.object']
+['reserved.Exp']

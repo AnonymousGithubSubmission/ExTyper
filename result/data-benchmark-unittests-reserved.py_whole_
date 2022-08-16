@@ -1,0 +1,294 @@
+__call__
+def (self: reserved.Parser, tokens: builtins.object, pos: builtins.object)
+__init__
+def (self: reserved.Process, parser: reserved.Alternate, function: builtins.object)
+def (self: reserved.Process, parser: reserved.Concat, function: builtins.object)
+def (self: reserved.Process, parser: reserved.Exp, function: builtins.object)
+def (self: reserved.Process, parser: reserved.Parser, function: builtins.object)
+def (self: reserved.Process, parser: reserved.Process, function: builtins.object)
+def (self: reserved.Process, parser: reserved.Reserved, function: builtins.object)
+__init__
+def (self: reserved.Exp, parser: reserved.Alternate, separator: reserved.Alternate)
+def (self: reserved.Exp, parser: reserved.Alternate, separator: reserved.Concat)
+def (self: reserved.Exp, parser: reserved.Alternate, separator: reserved.Exp)
+def (self: reserved.Exp, parser: reserved.Alternate, separator: reserved.Parser)
+def (self: reserved.Exp, parser: reserved.Alternate, separator: reserved.Process)
+def (self: reserved.Exp, parser: reserved.Alternate, separator: reserved.Reserved)
+def (self: reserved.Exp, parser: reserved.Concat, separator: reserved.Alternate)
+def (self: reserved.Exp, parser: reserved.Concat, separator: reserved.Concat)
+def (self: reserved.Exp, parser: reserved.Concat, separator: reserved.Exp)
+def (self: reserved.Exp, parser: reserved.Concat, separator: reserved.Parser)
+def (self: reserved.Exp, parser: reserved.Concat, separator: reserved.Process)
+def (self: reserved.Exp, parser: reserved.Concat, separator: reserved.Reserved)
+def (self: reserved.Exp, parser: reserved.Exp, separator: reserved.Alternate)
+def (self: reserved.Exp, parser: reserved.Exp, separator: reserved.Concat)
+def (self: reserved.Exp, parser: reserved.Exp, separator: reserved.Exp)
+def (self: reserved.Exp, parser: reserved.Exp, separator: reserved.Parser)
+def (self: reserved.Exp, parser: reserved.Exp, separator: reserved.Process)
+def (self: reserved.Exp, parser: reserved.Exp, separator: reserved.Reserved)
+def (self: reserved.Exp, parser: reserved.Parser, separator: reserved.Alternate)
+def (self: reserved.Exp, parser: reserved.Parser, separator: reserved.Concat)
+def (self: reserved.Exp, parser: reserved.Parser, separator: reserved.Exp)
+def (self: reserved.Exp, parser: reserved.Parser, separator: reserved.Parser)
+def (self: reserved.Exp, parser: reserved.Parser, separator: reserved.Process)
+def (self: reserved.Exp, parser: reserved.Parser, separator: reserved.Reserved)
+def (self: reserved.Exp, parser: reserved.Process, separator: reserved.Alternate)
+def (self: reserved.Exp, parser: reserved.Process, separator: reserved.Concat)
+def (self: reserved.Exp, parser: reserved.Process, separator: reserved.Exp)
+def (self: reserved.Exp, parser: reserved.Process, separator: reserved.Parser)
+def (self: reserved.Exp, parser: reserved.Process, separator: reserved.Process)
+def (self: reserved.Exp, parser: reserved.Process, separator: reserved.Reserved)
+def (self: reserved.Exp, parser: reserved.Reserved, separator: reserved.Alternate)
+def (self: reserved.Exp, parser: reserved.Reserved, separator: reserved.Concat)
+def (self: reserved.Exp, parser: reserved.Reserved, separator: reserved.Exp)
+def (self: reserved.Exp, parser: reserved.Reserved, separator: reserved.Parser)
+def (self: reserved.Exp, parser: reserved.Reserved, separator: reserved.Process)
+def (self: reserved.Exp, parser: reserved.Reserved, separator: reserved.Reserved)
+__init__
+def (self: reserved.Concat, left: reserved.Alternate, right: reserved.Alternate)
+def (self: reserved.Concat, left: reserved.Alternate, right: reserved.Concat)
+def (self: reserved.Concat, left: reserved.Alternate, right: reserved.Exp)
+def (self: reserved.Concat, left: reserved.Alternate, right: reserved.Parser)
+def (self: reserved.Concat, left: reserved.Alternate, right: reserved.Process)
+def (self: reserved.Concat, left: reserved.Alternate, right: reserved.Reserved)
+def (self: reserved.Concat, left: reserved.Concat, right: reserved.Alternate)
+def (self: reserved.Concat, left: reserved.Concat, right: reserved.Concat)
+def (self: reserved.Concat, left: reserved.Concat, right: reserved.Exp)
+def (self: reserved.Concat, left: reserved.Concat, right: reserved.Parser)
+def (self: reserved.Concat, left: reserved.Concat, right: reserved.Process)
+def (self: reserved.Concat, left: reserved.Concat, right: reserved.Reserved)
+def (self: reserved.Concat, left: reserved.Exp, right: reserved.Alternate)
+def (self: reserved.Concat, left: reserved.Exp, right: reserved.Concat)
+def (self: reserved.Concat, left: reserved.Exp, right: reserved.Exp)
+def (self: reserved.Concat, left: reserved.Exp, right: reserved.Parser)
+def (self: reserved.Concat, left: reserved.Exp, right: reserved.Process)
+def (self: reserved.Concat, left: reserved.Exp, right: reserved.Reserved)
+def (self: reserved.Concat, left: reserved.Parser, right: reserved.Alternate)
+def (self: reserved.Concat, left: reserved.Parser, right: reserved.Concat)
+def (self: reserved.Concat, left: reserved.Parser, right: reserved.Exp)
+def (self: reserved.Concat, left: reserved.Parser, right: reserved.Parser)
+def (self: reserved.Concat, left: reserved.Parser, right: reserved.Process)
+def (self: reserved.Concat, left: reserved.Parser, right: reserved.Reserved)
+def (self: reserved.Concat, left: reserved.Process, right: reserved.Alternate)
+def (self: reserved.Concat, left: reserved.Process, right: reserved.Concat)
+def (self: reserved.Concat, left: reserved.Process, right: reserved.Exp)
+def (self: reserved.Concat, left: reserved.Process, right: reserved.Parser)
+def (self: reserved.Concat, left: reserved.Process, right: reserved.Process)
+def (self: reserved.Concat, left: reserved.Process, right: reserved.Reserved)
+def (self: reserved.Concat, left: reserved.Reserved, right: reserved.Alternate)
+def (self: reserved.Concat, left: reserved.Reserved, right: reserved.Concat)
+def (self: reserved.Concat, left: reserved.Reserved, right: reserved.Exp)
+def (self: reserved.Concat, left: reserved.Reserved, right: reserved.Parser)
+def (self: reserved.Concat, left: reserved.Reserved, right: reserved.Process)
+def (self: reserved.Concat, left: reserved.Reserved, right: reserved.Reserved)
+__init__
+def (self: reserved.Alternate, left: reserved.Alternate, right: reserved.Alternate)
+def (self: reserved.Alternate, left: reserved.Alternate, right: reserved.Concat)
+def (self: reserved.Alternate, left: reserved.Alternate, right: reserved.Exp)
+def (self: reserved.Alternate, left: reserved.Alternate, right: reserved.Parser)
+def (self: reserved.Alternate, left: reserved.Alternate, right: reserved.Process)
+def (self: reserved.Alternate, left: reserved.Alternate, right: reserved.Reserved)
+def (self: reserved.Alternate, left: reserved.Concat, right: reserved.Alternate)
+def (self: reserved.Alternate, left: reserved.Concat, right: reserved.Concat)
+def (self: reserved.Alternate, left: reserved.Concat, right: reserved.Exp)
+def (self: reserved.Alternate, left: reserved.Concat, right: reserved.Parser)
+def (self: reserved.Alternate, left: reserved.Concat, right: reserved.Process)
+def (self: reserved.Alternate, left: reserved.Concat, right: reserved.Reserved)
+def (self: reserved.Alternate, left: reserved.Exp, right: reserved.Alternate)
+def (self: reserved.Alternate, left: reserved.Exp, right: reserved.Concat)
+def (self: reserved.Alternate, left: reserved.Exp, right: reserved.Exp)
+def (self: reserved.Alternate, left: reserved.Exp, right: reserved.Parser)
+def (self: reserved.Alternate, left: reserved.Exp, right: reserved.Process)
+def (self: reserved.Alternate, left: reserved.Exp, right: reserved.Reserved)
+def (self: reserved.Alternate, left: reserved.Parser, right: reserved.Alternate)
+def (self: reserved.Alternate, left: reserved.Parser, right: reserved.Concat)
+def (self: reserved.Alternate, left: reserved.Parser, right: reserved.Exp)
+def (self: reserved.Alternate, left: reserved.Parser, right: reserved.Parser)
+def (self: reserved.Alternate, left: reserved.Parser, right: reserved.Process)
+def (self: reserved.Alternate, left: reserved.Parser, right: reserved.Reserved)
+def (self: reserved.Alternate, left: reserved.Process, right: reserved.Alternate)
+def (self: reserved.Alternate, left: reserved.Process, right: reserved.Concat)
+def (self: reserved.Alternate, left: reserved.Process, right: reserved.Exp)
+def (self: reserved.Alternate, left: reserved.Process, right: reserved.Parser)
+def (self: reserved.Alternate, left: reserved.Process, right: reserved.Process)
+def (self: reserved.Alternate, left: reserved.Process, right: reserved.Reserved)
+def (self: reserved.Alternate, left: reserved.Reserved, right: reserved.Alternate)
+def (self: reserved.Alternate, left: reserved.Reserved, right: reserved.Concat)
+def (self: reserved.Alternate, left: reserved.Reserved, right: reserved.Exp)
+def (self: reserved.Alternate, left: reserved.Reserved, right: reserved.Parser)
+def (self: reserved.Alternate, left: reserved.Reserved, right: reserved.Process)
+def (self: reserved.Alternate, left: reserved.Reserved, right: reserved.Reserved)
+__init__
+def (self: reserved.Reserved, value: builtins.str, tag: builtins.str)
+keyword
+def (kw: builtins.str) -> reserved.Reserved
+any_operator_in_list
+def (ops: builtins.dict[abc.ABCMeta, builtins.str]) -> reserved.Reserved
+def (ops: builtins.dict[builtins.bool, builtins.str]) -> reserved.Reserved
+def (ops: builtins.dict[builtins.bytes, builtins.str]) -> reserved.Reserved
+def (ops: builtins.dict[builtins.dict[builtins.object, builtins.object], builtins.str]) -> reserved.Reserved
+def (ops: builtins.dict[builtins.float, builtins.str]) -> reserved.Reserved
+def (ops: builtins.dict[builtins.int, builtins.str]) -> reserved.Reserved
+def (ops: builtins.dict[builtins.list[builtins.object], builtins.str]) -> reserved.Reserved
+def (ops: builtins.dict[builtins.object, builtins.str]) -> reserved.Reserved
+def (ops: builtins.dict[builtins.set[builtins.object], builtins.str]) -> reserved.Reserved
+def (ops: builtins.dict[builtins.str, builtins.str]) -> reserved.Reserved
+def (ops: builtins.dict[builtins.str, reserved.Alternate]) -> reserved.Reserved
+def (ops: builtins.dict[builtins.str, reserved.Concat]) -> reserved.Reserved
+def (ops: builtins.dict[builtins.str, reserved.Exp]) -> reserved.Reserved
+def (ops: builtins.dict[builtins.str, reserved.Parser]) -> reserved.Reserved
+def (ops: builtins.dict[builtins.str, reserved.Process]) -> reserved.Reserved
+def (ops: builtins.dict[builtins.str, reserved.Reserved]) -> reserved.Reserved
+def (ops: builtins.list[builtins.str]) -> reserved.Reserved
+def (ops: builtins.set[builtins.str]) -> reserved.Reserved
+def (ops: builtins.str) -> reserved.Reserved
+__init__
+def (self: reserved.Concat, left: reserved.Alternate, right: reserved.Alternate)
+def (self: reserved.Concat, left: reserved.Alternate, right: reserved.Concat)
+def (self: reserved.Concat, left: reserved.Alternate, right: reserved.Exp)
+def (self: reserved.Concat, left: reserved.Alternate, right: reserved.Parser)
+def (self: reserved.Concat, left: reserved.Alternate, right: reserved.Process)
+def (self: reserved.Concat, left: reserved.Alternate, right: reserved.Reserved)
+def (self: reserved.Concat, left: reserved.Concat, right: reserved.Alternate)
+def (self: reserved.Concat, left: reserved.Concat, right: reserved.Concat)
+def (self: reserved.Concat, left: reserved.Concat, right: reserved.Exp)
+def (self: reserved.Concat, left: reserved.Concat, right: reserved.Parser)
+def (self: reserved.Concat, left: reserved.Concat, right: reserved.Process)
+def (self: reserved.Concat, left: reserved.Concat, right: reserved.Reserved)
+def (self: reserved.Concat, left: reserved.Exp, right: reserved.Alternate)
+def (self: reserved.Concat, left: reserved.Exp, right: reserved.Concat)
+def (self: reserved.Concat, left: reserved.Exp, right: reserved.Exp)
+def (self: reserved.Concat, left: reserved.Exp, right: reserved.Parser)
+def (self: reserved.Concat, left: reserved.Exp, right: reserved.Process)
+def (self: reserved.Concat, left: reserved.Exp, right: reserved.Reserved)
+def (self: reserved.Concat, left: reserved.Parser, right: reserved.Alternate)
+def (self: reserved.Concat, left: reserved.Parser, right: reserved.Concat)
+def (self: reserved.Concat, left: reserved.Parser, right: reserved.Exp)
+def (self: reserved.Concat, left: reserved.Parser, right: reserved.Parser)
+def (self: reserved.Concat, left: reserved.Parser, right: reserved.Process)
+def (self: reserved.Concat, left: reserved.Parser, right: reserved.Reserved)
+def (self: reserved.Concat, left: reserved.Process, right: reserved.Alternate)
+def (self: reserved.Concat, left: reserved.Process, right: reserved.Concat)
+def (self: reserved.Concat, left: reserved.Process, right: reserved.Exp)
+def (self: reserved.Concat, left: reserved.Process, right: reserved.Parser)
+def (self: reserved.Concat, left: reserved.Process, right: reserved.Process)
+def (self: reserved.Concat, left: reserved.Process, right: reserved.Reserved)
+def (self: reserved.Concat, left: reserved.Reserved, right: reserved.Alternate)
+def (self: reserved.Concat, left: reserved.Reserved, right: reserved.Concat)
+def (self: reserved.Concat, left: reserved.Reserved, right: reserved.Exp)
+def (self: reserved.Concat, left: reserved.Reserved, right: reserved.Parser)
+def (self: reserved.Concat, left: reserved.Reserved, right: reserved.Process)
+def (self: reserved.Concat, left: reserved.Reserved, right: reserved.Reserved)
+__add__
+def (reserved.Parser, reserved.Alternate) -> reserved.Concat
+def (reserved.Parser, reserved.Concat) -> reserved.Concat
+def (reserved.Parser, reserved.Exp) -> reserved.Concat
+def (reserved.Parser, reserved.Parser) -> reserved.Concat
+def (reserved.Parser, reserved.Process) -> reserved.Concat
+def (reserved.Parser, reserved.Reserved) -> reserved.Concat
+__init__
+def (self: reserved.Exp, parser: reserved.Alternate, separator: reserved.Alternate)
+def (self: reserved.Exp, parser: reserved.Alternate, separator: reserved.Concat)
+def (self: reserved.Exp, parser: reserved.Alternate, separator: reserved.Exp)
+def (self: reserved.Exp, parser: reserved.Alternate, separator: reserved.Parser)
+def (self: reserved.Exp, parser: reserved.Alternate, separator: reserved.Process)
+def (self: reserved.Exp, parser: reserved.Alternate, separator: reserved.Reserved)
+def (self: reserved.Exp, parser: reserved.Concat, separator: reserved.Alternate)
+def (self: reserved.Exp, parser: reserved.Concat, separator: reserved.Concat)
+def (self: reserved.Exp, parser: reserved.Concat, separator: reserved.Exp)
+def (self: reserved.Exp, parser: reserved.Concat, separator: reserved.Parser)
+def (self: reserved.Exp, parser: reserved.Concat, separator: reserved.Process)
+def (self: reserved.Exp, parser: reserved.Concat, separator: reserved.Reserved)
+def (self: reserved.Exp, parser: reserved.Exp, separator: reserved.Alternate)
+def (self: reserved.Exp, parser: reserved.Exp, separator: reserved.Concat)
+def (self: reserved.Exp, parser: reserved.Exp, separator: reserved.Exp)
+def (self: reserved.Exp, parser: reserved.Exp, separator: reserved.Parser)
+def (self: reserved.Exp, parser: reserved.Exp, separator: reserved.Process)
+def (self: reserved.Exp, parser: reserved.Exp, separator: reserved.Reserved)
+def (self: reserved.Exp, parser: reserved.Parser, separator: reserved.Alternate)
+def (self: reserved.Exp, parser: reserved.Parser, separator: reserved.Concat)
+def (self: reserved.Exp, parser: reserved.Parser, separator: reserved.Exp)
+def (self: reserved.Exp, parser: reserved.Parser, separator: reserved.Parser)
+def (self: reserved.Exp, parser: reserved.Parser, separator: reserved.Process)
+def (self: reserved.Exp, parser: reserved.Parser, separator: reserved.Reserved)
+def (self: reserved.Exp, parser: reserved.Process, separator: reserved.Alternate)
+def (self: reserved.Exp, parser: reserved.Process, separator: reserved.Concat)
+def (self: reserved.Exp, parser: reserved.Process, separator: reserved.Exp)
+def (self: reserved.Exp, parser: reserved.Process, separator: reserved.Parser)
+def (self: reserved.Exp, parser: reserved.Process, separator: reserved.Process)
+def (self: reserved.Exp, parser: reserved.Process, separator: reserved.Reserved)
+def (self: reserved.Exp, parser: reserved.Reserved, separator: reserved.Alternate)
+def (self: reserved.Exp, parser: reserved.Reserved, separator: reserved.Concat)
+def (self: reserved.Exp, parser: reserved.Reserved, separator: reserved.Exp)
+def (self: reserved.Exp, parser: reserved.Reserved, separator: reserved.Parser)
+def (self: reserved.Exp, parser: reserved.Reserved, separator: reserved.Process)
+def (self: reserved.Exp, parser: reserved.Reserved, separator: reserved.Reserved)
+__mul__
+def (reserved.Parser, reserved.Alternate) -> reserved.Exp
+def (reserved.Parser, reserved.Concat) -> reserved.Exp
+def (reserved.Parser, reserved.Exp) -> reserved.Exp
+def (reserved.Parser, reserved.Parser) -> reserved.Exp
+def (reserved.Parser, reserved.Process) -> reserved.Exp
+def (reserved.Parser, reserved.Reserved) -> reserved.Exp
+__init__
+def (self: reserved.Alternate, left: reserved.Alternate, right: reserved.Alternate)
+def (self: reserved.Alternate, left: reserved.Alternate, right: reserved.Concat)
+def (self: reserved.Alternate, left: reserved.Alternate, right: reserved.Exp)
+def (self: reserved.Alternate, left: reserved.Alternate, right: reserved.Parser)
+def (self: reserved.Alternate, left: reserved.Alternate, right: reserved.Process)
+def (self: reserved.Alternate, left: reserved.Alternate, right: reserved.Reserved)
+def (self: reserved.Alternate, left: reserved.Concat, right: reserved.Alternate)
+def (self: reserved.Alternate, left: reserved.Concat, right: reserved.Concat)
+def (self: reserved.Alternate, left: reserved.Concat, right: reserved.Exp)
+def (self: reserved.Alternate, left: reserved.Concat, right: reserved.Parser)
+def (self: reserved.Alternate, left: reserved.Concat, right: reserved.Process)
+def (self: reserved.Alternate, left: reserved.Concat, right: reserved.Reserved)
+def (self: reserved.Alternate, left: reserved.Exp, right: reserved.Alternate)
+def (self: reserved.Alternate, left: reserved.Exp, right: reserved.Concat)
+def (self: reserved.Alternate, left: reserved.Exp, right: reserved.Exp)
+def (self: reserved.Alternate, left: reserved.Exp, right: reserved.Parser)
+def (self: reserved.Alternate, left: reserved.Exp, right: reserved.Process)
+def (self: reserved.Alternate, left: reserved.Exp, right: reserved.Reserved)
+def (self: reserved.Alternate, left: reserved.Parser, right: reserved.Alternate)
+def (self: reserved.Alternate, left: reserved.Parser, right: reserved.Concat)
+def (self: reserved.Alternate, left: reserved.Parser, right: reserved.Exp)
+def (self: reserved.Alternate, left: reserved.Parser, right: reserved.Parser)
+def (self: reserved.Alternate, left: reserved.Parser, right: reserved.Process)
+def (self: reserved.Alternate, left: reserved.Parser, right: reserved.Reserved)
+def (self: reserved.Alternate, left: reserved.Process, right: reserved.Alternate)
+def (self: reserved.Alternate, left: reserved.Process, right: reserved.Concat)
+def (self: reserved.Alternate, left: reserved.Process, right: reserved.Exp)
+def (self: reserved.Alternate, left: reserved.Process, right: reserved.Parser)
+def (self: reserved.Alternate, left: reserved.Process, right: reserved.Process)
+def (self: reserved.Alternate, left: reserved.Process, right: reserved.Reserved)
+def (self: reserved.Alternate, left: reserved.Reserved, right: reserved.Alternate)
+def (self: reserved.Alternate, left: reserved.Reserved, right: reserved.Concat)
+def (self: reserved.Alternate, left: reserved.Reserved, right: reserved.Exp)
+def (self: reserved.Alternate, left: reserved.Reserved, right: reserved.Parser)
+def (self: reserved.Alternate, left: reserved.Reserved, right: reserved.Process)
+def (self: reserved.Alternate, left: reserved.Reserved, right: reserved.Reserved)
+__or__
+def (reserved.Parser, reserved.Alternate) -> reserved.Alternate
+def (reserved.Parser, reserved.Concat) -> reserved.Alternate
+def (reserved.Parser, reserved.Exp) -> reserved.Alternate
+def (reserved.Parser, reserved.Parser) -> reserved.Alternate
+def (reserved.Parser, reserved.Process) -> reserved.Alternate
+def (reserved.Parser, reserved.Reserved) -> reserved.Alternate
+__init__
+def (self: reserved.Process, parser: reserved.Alternate, function: builtins.object)
+def (self: reserved.Process, parser: reserved.Concat, function: builtins.object)
+def (self: reserved.Process, parser: reserved.Exp, function: builtins.object)
+def (self: reserved.Process, parser: reserved.Parser, function: builtins.object)
+def (self: reserved.Process, parser: reserved.Process, function: builtins.object)
+def (self: reserved.Process, parser: reserved.Reserved, function: builtins.object)
+__xor__
+def (reserved.Parser, builtins.object) -> reserved.Process
+op_parser
+def (precedence_level: builtins.str, combine: builtins.object) -> reserved.Process
+precedence
+def (value_parser: reserved.Alternate, precedence_levels: builtins.str, combine: builtins.object) -> reserved.Exp
+def (value_parser: reserved.Concat, precedence_levels: builtins.str, combine: builtins.object) -> reserved.Exp
+def (value_parser: reserved.Exp, precedence_levels: builtins.str, combine: builtins.object) -> reserved.Exp
+def (value_parser: reserved.Parser, precedence_levels: builtins.str, combine: builtins.object) -> reserved.Exp
+def (value_parser: reserved.Process, precedence_levels: builtins.str, combine: builtins.object) -> reserved.Exp
+def (value_parser: reserved.Reserved, precedence_levels: builtins.str, combine: builtins.object) -> reserved.Exp

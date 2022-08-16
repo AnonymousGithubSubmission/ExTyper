@@ -1,0 +1,156 @@
+cell_coverage
+['numpy.ndarray']
+['numpy.ndarray[Any, numpy.dtype[numpy.floating[numpy.typing._64Bit]]]']
+_count_neighbors
+['numpy.ndarray']
+['numpy.ndarray']
+_parse_rulestring
+['builtins.str']
+['Tuple[builtins.list[builtins.int], builtins.list[builtins.int]]']
+life_rule
+['numpy.ndarray']
+['builtins.str']
+['numpy.ndarray']
+shannon_entropy
+['Any']
+['numpy.ndarray[Any, numpy.dtype[Any]]']
+parse_plaintext_layout
+['builtins.str']
+['numpy.ndarray']
+add
+['seagull.Board']
+['Any']
+['numpy.ndarray', 'builtins.list[builtins.int]', 'builtins.set[builtins.bool]']
+['None']
+clear
+['seagull.Board']
+['None']
+view
+['seagull.Board']
+['Tuple[Literal[5]?, Literal[5]?]']
+['Tuple[matplotlib.image.AxesImage, matplotlib.pyplot.Figure]']
+compute_statistics
+['seagull.Simulator']
+['numpy.ndarray']
+['builtins.dict[builtins.str, numpy.ndarray[Any, Any]]']
+get_history
+['seagull.Simulator']
+['builtins.object', 'builtins.int', 'builtins.float']
+['numpy.ndarray']
+animate
+['seagull.Simulator']
+['Any']
+['builtins.object', 'builtins.int', 'builtins.float']
+['Any']
+size
+['seagull.Lifeform']
+['builtins.tuple[builtins.int]']
+view
+['seagull.Lifeform']
+['Tuple[Literal[5]?, Literal[5]?]']
+['matplotlib.pyplot.Figure']
+validate_input_values
+['seagull.Custom']
+['Any']
+['None']
+validate_input_shapes
+['seagull.Custom']
+['numpy.ndarray']
+['None']
+layout
+['seagull.Custom']
+['numpy.ndarray']
+layout
+['seagull.Glider']
+['numpy.ndarray']
+layout
+['seagull.LightweightSpaceship']
+['numpy.ndarray']
+layout
+['seagull.MiddleweightSpaceship']
+['numpy.ndarray']
+layout
+['seagull.Unbounded']
+['numpy.ndarray']
+layout
+['seagull.Century']
+['numpy.ndarray']
+layout
+['seagull.Thunderbird']
+['numpy.ndarray']
+layout
+['seagull.Blinker']
+['numpy.ndarray']
+layout
+['seagull.Toad']
+['numpy.ndarray']
+layout
+['seagull.Pulsar']
+['numpy.ndarray']
+layout
+['seagull.FigureEight']
+['numpy.ndarray']
+layout
+['seagull.Beacon']
+['numpy.ndarray']
+layout
+['seagull.Pentadecathlon']
+['numpy.ndarray']
+layout
+['seagull.ChaCha']
+['numpy.ndarray']
+layout
+['seagull.RandomBox']
+['Any']
+layout
+['seagull.Box']
+['numpy.ndarray']
+layout
+['seagull.Seed']
+['numpy.ndarray']
+layout
+['seagull.Moon']
+['numpy.ndarray']
+layout
+['seagull.Kite']
+['numpy.ndarray']
+layout
+['seagull.Eater1']
+['numpy.ndarray']
+layout
+['seagull.SwitchEngine']
+['numpy.ndarray']
+_load_file_of_url
+['builtins.str']
+['Any']
+cells2rle
+['builtins.str', 'numpy.ndarray', 'builtins.list[builtins.str]']
+['builtins.str']
+rle2cells
+['builtins.str']
+['builtins.str']
+run
+['seagull.Simulator']
+['Any']
+['builtins.int', 'numpy.ndarray']
+['builtins.dict[builtins.object, builtins.str]']
+['builtins.dict[builtins.str, numpy.ndarray[Any, Any]]']
+parse_plaintext_layout
+['builtins.str', 'builtins.list[Any]']
+['numpy.ndarray']
+parse_cells
+['builtins.str']
+['seagull.Custom']
+parse_rle
+['builtins.str']
+['seagull.Custom']
+_parse_rulestring
+['builtins.str']
+['Tuple[builtins.list[builtins.int], builtins.list[builtins.int]]']
+life_rule
+['numpy.ndarray']
+['builtins.str']
+['numpy.ndarray']
+conway_classic
+['numpy.ndarray']
+['numpy.ndarray']

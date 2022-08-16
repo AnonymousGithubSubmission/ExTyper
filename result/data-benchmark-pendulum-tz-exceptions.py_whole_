@@ -1,0 +1,4 @@
+__init__
+def (self: data.benchmark.pendulum.tz.exceptions.NonExistingTime, dt: builtins.object)
+__init__
+def (self: data.benchmark.pendulum.tz.exceptions.AmbiguousTime, dt: builtins.object)

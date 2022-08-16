@@ -1,0 +1,30 @@
+f
+def (self: isinstance.A) -> builtins.int
+g
+def (self: isinstance.B) -> builtins.int
+f
+def (x: builtins.bool) -> <partial None>
+def (x: builtins.bytes) -> <partial None>
+def (x: builtins.dict[builtins.object, builtins.object]) -> <partial None>
+def (x: builtins.float) -> <partial None>
+def (x: builtins.int) -> <partial None>
+def (x: builtins.list[builtins.int]) -> <partial None>
+def (x: builtins.list[builtins.object]) -> <partial None>
+def (x: builtins.list[builtins.str]) -> <partial None>
+def (x: builtins.set[builtins.object]) -> <partial None>
+def (x: builtins.str) -> <partial None>
+def (x: isinstance.A) -> <partial None>
+def (x: isinstance.B) -> <partial None>
+f
+def (x: builtins.bool) -> <partial None>
+def (x: builtins.bytes) -> <partial None>
+def (x: builtins.dict[builtins.object, builtins.object]) -> <partial None>
+def (x: builtins.float) -> <partial None>
+def (x: builtins.int) -> <partial None>
+def (x: builtins.list[builtins.int]) -> <partial None>
+def (x: builtins.list[builtins.object]) -> <partial None>
+def (x: builtins.list[builtins.str]) -> <partial None>
+def (x: builtins.set[builtins.object]) -> <partial None>
+def (x: builtins.str) -> <partial None>
+def (x: isinstance.A) -> <partial None>
+def (x: isinstance.B) -> <partial None>

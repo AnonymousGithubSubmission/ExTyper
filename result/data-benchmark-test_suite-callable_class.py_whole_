@@ -1,0 +1,4 @@
+__init__
+def (self: callable_class.A)
+__call__
+def (self: callable_class.A, z: builtins.list[builtins.object]) -> builtins.list[builtins.object]

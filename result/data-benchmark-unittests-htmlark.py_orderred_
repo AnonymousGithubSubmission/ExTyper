@@ -1,0 +1,31 @@
+get_available_parsers
+['builtins.list[builtins.str]']
+_get_resource
+['builtins.str']
+['Tuple[Any, Union[None, builtins.str]]']
+make_data_uri
+['builtins.str']
+['builtins.bytes']
+['builtins.str']
+convert_page
+['builtins.str']
+['builtins.str']
+['Any']
+['builtins.object']
+['builtins.object']
+['builtins.object']
+['builtins.object']
+['builtins.str']
+_get_options
+['argparse.Namespace']
+convert_page
+['builtins.str']
+['builtins.str']
+['def (severity: Any, message_type: Any, message_data: Any) -> Any']
+['builtins.object']
+['builtins.object']
+['builtins.object']
+['builtins.object']
+['builtins.str']
+_main
+['None']

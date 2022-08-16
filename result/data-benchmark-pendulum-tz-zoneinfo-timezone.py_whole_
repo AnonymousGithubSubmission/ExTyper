@@ -1,0 +1,52 @@
+transitions
+def (self: data.benchmark.pendulum.tz.zoneinfo.timezone.Timezone) -> builtins.list[data.benchmark.pendulum.tz.zoneinfo.transition.Transition]
+posix_rule
+def (self: data.benchmark.pendulum.tz.zoneinfo.timezone.Timezone) -> data.benchmark.pendulum.tz.zoneinfo.posix_timezone.PosixTimezone
+_check_ttype
+def (self: data.benchmark.pendulum.tz.zoneinfo.timezone.Timezone, ttype: data.benchmark.pendulum.tz.zoneinfo.transition_type.TransitionType, offset: builtins.bool, is_dst: builtins.bool, abbr: builtins.str) -> builtins.bool
+def (self: data.benchmark.pendulum.tz.zoneinfo.timezone.Timezone, ttype: data.benchmark.pendulum.tz.zoneinfo.transition_type.TransitionType, offset: builtins.int, is_dst: builtins.bool, abbr: builtins.str) -> builtins.bool
+trans_offset
+def (self: data.benchmark.pendulum.tz.zoneinfo.posix_timezone.PosixTransition, is_leap: builtins.object, jan1_weekday: builtins.bool)
+def (self: data.benchmark.pendulum.tz.zoneinfo.posix_timezone.PosixTransition, is_leap: builtins.object, jan1_weekday: builtins.bytes)
+def (self: data.benchmark.pendulum.tz.zoneinfo.posix_timezone.PosixTransition, is_leap: builtins.object, jan1_weekday: builtins.dict[builtins.object, builtins.object])
+def (self: data.benchmark.pendulum.tz.zoneinfo.posix_timezone.PosixTransition, is_leap: builtins.object, jan1_weekday: builtins.float)
+def (self: data.benchmark.pendulum.tz.zoneinfo.posix_timezone.PosixTransition, is_leap: builtins.object, jan1_weekday: builtins.int)
+def (self: data.benchmark.pendulum.tz.zoneinfo.posix_timezone.PosixTransition, is_leap: builtins.object, jan1_weekday: builtins.list[builtins.int])
+def (self: data.benchmark.pendulum.tz.zoneinfo.posix_timezone.PosixTransition, is_leap: builtins.object, jan1_weekday: builtins.list[builtins.object])
+def (self: data.benchmark.pendulum.tz.zoneinfo.posix_timezone.PosixTransition, is_leap: builtins.object, jan1_weekday: builtins.list[builtins.str])
+def (self: data.benchmark.pendulum.tz.zoneinfo.posix_timezone.PosixTransition, is_leap: builtins.object, jan1_weekday: builtins.object)
+def (self: data.benchmark.pendulum.tz.zoneinfo.posix_timezone.PosixTransition, is_leap: builtins.object, jan1_weekday: builtins.set[builtins.object])
+def (self: data.benchmark.pendulum.tz.zoneinfo.posix_timezone.PosixTransition, is_leap: builtins.object, jan1_weekday: builtins.str)
+def (self: data.benchmark.pendulum.tz.zoneinfo.posix_timezone.PosixTransition, is_leap: builtins.object, jan1_weekday: data.benchmark.pendulum._extensions.helpers.PreciseDiff)
+def (self: data.benchmark.pendulum.tz.zoneinfo.posix_timezone.PosixTransition, is_leap: builtins.object, jan1_weekday: data.benchmark.pendulum.date.Date)
+def (self: data.benchmark.pendulum.tz.zoneinfo.posix_timezone.PosixTransition, is_leap: builtins.object, jan1_weekday: data.benchmark.pendulum.datetime.DateTime)
+def (self: data.benchmark.pendulum.tz.zoneinfo.posix_timezone.PosixTransition, is_leap: builtins.object, jan1_weekday: data.benchmark.pendulum.formatting.difference_formatter.DifferenceFormatter)
+def (self: data.benchmark.pendulum.tz.zoneinfo.posix_timezone.PosixTransition, is_leap: builtins.object, jan1_weekday: data.benchmark.pendulum.formatting.formatter.Formatter)
+def (self: data.benchmark.pendulum.tz.zoneinfo.posix_timezone.PosixTransition, is_leap: builtins.object, jan1_weekday: data.benchmark.pendulum.locales.locale.Locale)
+def (self: data.benchmark.pendulum.tz.zoneinfo.posix_timezone.PosixTransition, is_leap: builtins.object, jan1_weekday: data.benchmark.pendulum.mixins.default.FormattableMixin)
+def (self: data.benchmark.pendulum.tz.zoneinfo.posix_timezone.PosixTransition, is_leap: builtins.object, jan1_weekday: data.benchmark.pendulum.parsing._Interval)
+def (self: data.benchmark.pendulum.tz.zoneinfo.posix_timezone.PosixTransition, is_leap: builtins.object, jan1_weekday: data.benchmark.pendulum.time.Time)
+def (self: data.benchmark.pendulum.tz.zoneinfo.posix_timezone.PosixTransition, is_leap: builtins.object, jan1_weekday: data.benchmark.pendulum.tz.zoneinfo.posix_timezone.PosixTimezone)
+def (self: data.benchmark.pendulum.tz.zoneinfo.posix_timezone.PosixTransition, is_leap: builtins.object, jan1_weekday: data.benchmark.pendulum.tz.zoneinfo.posix_timezone.PosixTransition)
+def (self: data.benchmark.pendulum.tz.zoneinfo.posix_timezone.PosixTransition, is_leap: builtins.object, jan1_weekday: data.benchmark.pendulum.tz.zoneinfo.reader.Reader)
+def (self: data.benchmark.pendulum.tz.zoneinfo.posix_timezone.PosixTransition, is_leap: builtins.object, jan1_weekday: data.benchmark.pendulum.tz.zoneinfo.reader._offset)
+def (self: data.benchmark.pendulum.tz.zoneinfo.posix_timezone.PosixTransition, is_leap: builtins.object, jan1_weekday: data.benchmark.pendulum.tz.zoneinfo.reader.header)
+def (self: data.benchmark.pendulum.tz.zoneinfo.posix_timezone.PosixTransition, is_leap: builtins.object, jan1_weekday: data.benchmark.pendulum.tz.zoneinfo.timezone.Timezone)
+def (self: data.benchmark.pendulum.tz.zoneinfo.posix_timezone.PosixTransition, is_leap: builtins.object, jan1_weekday: data.benchmark.pendulum.tz.zoneinfo.transition.Transition)
+def (self: data.benchmark.pendulum.tz.zoneinfo.posix_timezone.PosixTransition, is_leap: builtins.object, jan1_weekday: data.benchmark.pendulum.tz.zoneinfo.transition_type.TransitionType)
+def (self: data.benchmark.pendulum.tz.zoneinfo.posix_timezone.PosixTransition, is_leap: builtins.object, jan1_weekday: datetime.date)
+def (self: data.benchmark.pendulum.tz.zoneinfo.posix_timezone.PosixTransition, is_leap: builtins.object, jan1_weekday: datetime.datetime)
+def (self: data.benchmark.pendulum.tz.zoneinfo.posix_timezone.PosixTransition, is_leap: builtins.object, jan1_weekday: datetime.time)
+def (self: data.benchmark.pendulum.tz.zoneinfo.posix_timezone.PosixTransition, is_leap: builtins.object, jan1_weekday: datetime.timedelta)
+def (self: data.benchmark.pendulum.tz.zoneinfo.posix_timezone.PosixTransition, is_leap: builtins.object, jan1_weekday: datetime.timezone)
+def (self: data.benchmark.pendulum.tz.zoneinfo.posix_timezone.PosixTransition, is_leap: builtins.object, jan1_weekday: datetime.tzinfo)
+def (self: data.benchmark.pendulum.tz.zoneinfo.posix_timezone.PosixTransition, is_leap: builtins.object, jan1_weekday: typing.Match[Any])
+def (self: data.benchmark.pendulum.tz.zoneinfo.posix_timezone.PosixTransition, is_leap: builtins.object, jan1_weekday: typing.Pattern[Any])
+def (self: data.benchmark.pendulum.tz.zoneinfo.posix_timezone.PosixTransition, is_leap: builtins.object, jan1_weekday: typing.TypeVar)
+_extends
+def (self: data.benchmark.pendulum.tz.zoneinfo.timezone.Timezone)
+__init__
+def (self: data.benchmark.pendulum.tz.zoneinfo.timezone.Timezone, transitions: builtins.list[data.benchmark.pendulum.tz.zoneinfo.transition.Transition], posix_rule: data.benchmark.pendulum.tz.zoneinfo.posix_timezone.PosixTimezone =, extended: builtins.bool =)
+def (self: data.benchmark.pendulum.tz.zoneinfo.timezone.Timezone, transitions: builtins.list[data.benchmark.pendulum.tz.zoneinfo.transition.Transition], posix_rule: data.benchmark.pendulum.tz.zoneinfo.posix_timezone.PosixTimezone =, extended: builtins.float =)
+def (self: data.benchmark.pendulum.tz.zoneinfo.timezone.Timezone, transitions: builtins.list[data.benchmark.pendulum.tz.zoneinfo.transition.Transition], posix_rule: data.benchmark.pendulum.tz.zoneinfo.posix_timezone.PosixTimezone =, extended: builtins.int =)
+def (self: data.benchmark.pendulum.tz.zoneinfo.timezone.Timezone, transitions: builtins.list[data.benchmark.pendulum.tz.zoneinfo.transition.Transition], posix_rule: data.benchmark.pendulum.tz.zoneinfo.posix_timezone.PosixTimezone =, extended: builtins.object =)

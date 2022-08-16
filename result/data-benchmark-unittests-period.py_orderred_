@@ -1,0 +1,36 @@
+__init__
+['period.Period']
+['period.Period', 'datetime.datetime', 'datetime.date']
+['period.Period', 'datetime.datetime', 'datetime.date']
+['builtins.bool']
+['None']
+years
+['period.Period']
+['Any']
+months
+['period.Period']
+['Any']
+weeks
+['period.Period']
+['None']
+days
+['period.Period']
+['Any']
+remaining_days
+['period.Period']
+['None']
+hours
+['period.Period']
+['Any']
+minutes
+['period.Period']
+['Any']
+start
+['period.Period']
+['datetime.date']
+end
+['period.Period']
+['datetime.date']
+__neg__
+['period.Period']
+['period.Period']

@@ -1,0 +1,638 @@
+name
+def (self: data.benchmark.pendulum.tz.timezone.Timezone) -> builtins.str
+_lookup_transition
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, stamp: Any, is_utc: builtins.bool =) -> data.benchmark.pendulum.tz.zoneinfo.transition.Transition
+utcoffset
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: data.benchmark.pendulum.datetime.DateTime) -> datetime.timedelta
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: datetime.datetime) -> datetime.timedelta
+dst
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: Any) -> datetime.timedelta
+tzname
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: data.benchmark.pendulum.datetime.DateTime) -> builtins.str
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: datetime.datetime) -> builtins.str
+fromutc
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: data.benchmark.pendulum.datetime.DateTime) -> data.benchmark.pendulum.datetime.DateTime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: data.benchmark.pendulum.time.Time) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: datetime.datetime) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: datetime.time) -> datetime.datetime
+__repr__
+def (data.benchmark.pendulum.tz.timezone.Timezone) -> builtins.str
+__getinitargs__
+def (self: data.benchmark.pendulum.tz.timezone.Timezone) -> Tuple[builtins.str]
+__init__
+def (self: data.benchmark.pendulum.tz.timezone.FixedTimezone, offset: builtins.bool, name: builtins.str =)
+def (self: data.benchmark.pendulum.tz.timezone.FixedTimezone, offset: builtins.int, name: builtins.str =)
+offset
+def (self: data.benchmark.pendulum.tz.timezone.FixedTimezone) -> builtins.int
+_normalize
+def (self: data.benchmark.pendulum.tz.timezone.FixedTimezone, dt: data.benchmark.pendulum.datetime.DateTime, dst_rule: builtins.object =) -> data.benchmark.pendulum.datetime.DateTime
+def (self: data.benchmark.pendulum.tz.timezone.FixedTimezone, dt: datetime.datetime, dst_rule: builtins.object =) -> datetime.datetime
+utcoffset
+def (self: data.benchmark.pendulum.tz.timezone.FixedTimezone, dt: builtins.object) -> datetime.timedelta
+dst
+def (self: data.benchmark.pendulum.tz.timezone.FixedTimezone, dt: builtins.object) -> datetime.timedelta
+fromutc
+def (self: data.benchmark.pendulum.tz.timezone.FixedTimezone, dt: builtins.object) -> Any
+tzname
+def (self: data.benchmark.pendulum.tz.timezone.FixedTimezone, dt: builtins.object) -> builtins.str
+__getinitargs__
+def (self: data.benchmark.pendulum.tz.timezone.FixedTimezone) -> Tuple[builtins.int, builtins.str]
+_normalize
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: data.benchmark.pendulum.datetime.DateTime, dst_rule: builtins.object =) -> data.benchmark.pendulum.datetime.DateTime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: data.benchmark.pendulum.time.Time, dst_rule: builtins.object =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: datetime.datetime, dst_rule: builtins.object =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: datetime.time, dst_rule: builtins.object =) -> datetime.datetime
+astimezone
+def (self: data.benchmark.pendulum.datetime.DateTime, tz: builtins.bool =) -> data.benchmark.pendulum.datetime.DateTime
+def (self: data.benchmark.pendulum.datetime.DateTime, tz: builtins.bytes =) -> data.benchmark.pendulum.datetime.DateTime
+def (self: data.benchmark.pendulum.datetime.DateTime, tz: builtins.dict[builtins.object, builtins.object] =) -> data.benchmark.pendulum.datetime.DateTime
+def (self: data.benchmark.pendulum.datetime.DateTime, tz: builtins.float =) -> data.benchmark.pendulum.datetime.DateTime
+def (self: data.benchmark.pendulum.datetime.DateTime, tz: builtins.int =) -> data.benchmark.pendulum.datetime.DateTime
+def (self: data.benchmark.pendulum.datetime.DateTime, tz: builtins.list[builtins.int] =) -> data.benchmark.pendulum.datetime.DateTime
+def (self: data.benchmark.pendulum.datetime.DateTime, tz: builtins.list[builtins.object] =) -> data.benchmark.pendulum.datetime.DateTime
+def (self: data.benchmark.pendulum.datetime.DateTime, tz: builtins.list[builtins.str] =) -> data.benchmark.pendulum.datetime.DateTime
+def (self: data.benchmark.pendulum.datetime.DateTime, tz: builtins.object =) -> data.benchmark.pendulum.datetime.DateTime
+def (self: data.benchmark.pendulum.datetime.DateTime, tz: builtins.set[builtins.object] =) -> data.benchmark.pendulum.datetime.DateTime
+def (self: data.benchmark.pendulum.datetime.DateTime, tz: builtins.str =) -> data.benchmark.pendulum.datetime.DateTime
+def (self: data.benchmark.pendulum.datetime.DateTime, tz: data.benchmark.pendulum._extensions.helpers.PreciseDiff =) -> data.benchmark.pendulum.datetime.DateTime
+def (self: data.benchmark.pendulum.datetime.DateTime, tz: data.benchmark.pendulum.date.Date =) -> data.benchmark.pendulum.datetime.DateTime
+def (self: data.benchmark.pendulum.datetime.DateTime, tz: data.benchmark.pendulum.datetime.DateTime =) -> data.benchmark.pendulum.datetime.DateTime
+def (self: data.benchmark.pendulum.datetime.DateTime, tz: data.benchmark.pendulum.formatting.difference_formatter.DifferenceFormatter =) -> data.benchmark.pendulum.datetime.DateTime
+def (self: data.benchmark.pendulum.datetime.DateTime, tz: data.benchmark.pendulum.formatting.formatter.Formatter =) -> data.benchmark.pendulum.datetime.DateTime
+def (self: data.benchmark.pendulum.datetime.DateTime, tz: data.benchmark.pendulum.locales.locale.Locale =) -> data.benchmark.pendulum.datetime.DateTime
+def (self: data.benchmark.pendulum.datetime.DateTime, tz: data.benchmark.pendulum.mixins.default.FormattableMixin =) -> data.benchmark.pendulum.datetime.DateTime
+def (self: data.benchmark.pendulum.datetime.DateTime, tz: data.benchmark.pendulum.parsing._Interval =) -> data.benchmark.pendulum.datetime.DateTime
+def (self: data.benchmark.pendulum.datetime.DateTime, tz: data.benchmark.pendulum.time.Time =) -> data.benchmark.pendulum.datetime.DateTime
+def (self: data.benchmark.pendulum.datetime.DateTime, tz: data.benchmark.pendulum.tz.timezone.FixedTimezone =) -> data.benchmark.pendulum.datetime.DateTime
+def (self: data.benchmark.pendulum.datetime.DateTime, tz: data.benchmark.pendulum.tz.zoneinfo.posix_timezone.PosixTimezone =) -> data.benchmark.pendulum.datetime.DateTime
+def (self: data.benchmark.pendulum.datetime.DateTime, tz: data.benchmark.pendulum.tz.zoneinfo.posix_timezone.PosixTransition =) -> data.benchmark.pendulum.datetime.DateTime
+def (self: data.benchmark.pendulum.datetime.DateTime, tz: data.benchmark.pendulum.tz.zoneinfo.reader.Reader =) -> data.benchmark.pendulum.datetime.DateTime
+def (self: data.benchmark.pendulum.datetime.DateTime, tz: data.benchmark.pendulum.tz.zoneinfo.reader._offset =) -> data.benchmark.pendulum.datetime.DateTime
+def (self: data.benchmark.pendulum.datetime.DateTime, tz: data.benchmark.pendulum.tz.zoneinfo.reader.header =) -> data.benchmark.pendulum.datetime.DateTime
+def (self: data.benchmark.pendulum.datetime.DateTime, tz: data.benchmark.pendulum.tz.zoneinfo.timezone.Timezone =) -> data.benchmark.pendulum.datetime.DateTime
+def (self: data.benchmark.pendulum.datetime.DateTime, tz: data.benchmark.pendulum.tz.zoneinfo.transition.Transition =) -> data.benchmark.pendulum.datetime.DateTime
+def (self: data.benchmark.pendulum.datetime.DateTime, tz: data.benchmark.pendulum.tz.zoneinfo.transition_type.TransitionType =) -> data.benchmark.pendulum.datetime.DateTime
+def (self: data.benchmark.pendulum.datetime.DateTime, tz: datetime.date =) -> data.benchmark.pendulum.datetime.DateTime
+def (self: data.benchmark.pendulum.datetime.DateTime, tz: datetime.datetime =) -> data.benchmark.pendulum.datetime.DateTime
+def (self: data.benchmark.pendulum.datetime.DateTime, tz: datetime.time =) -> data.benchmark.pendulum.datetime.DateTime
+def (self: data.benchmark.pendulum.datetime.DateTime, tz: datetime.timedelta =) -> data.benchmark.pendulum.datetime.DateTime
+def (self: data.benchmark.pendulum.datetime.DateTime, tz: datetime.timezone =) -> data.benchmark.pendulum.datetime.DateTime
+def (self: data.benchmark.pendulum.datetime.DateTime, tz: datetime.tzinfo =) -> data.benchmark.pendulum.datetime.DateTime
+def (self: data.benchmark.pendulum.datetime.DateTime, tz: typing.Match[Any] =) -> data.benchmark.pendulum.datetime.DateTime
+def (self: data.benchmark.pendulum.datetime.DateTime, tz: typing.Pattern[Any] =) -> data.benchmark.pendulum.datetime.DateTime
+def (self: data.benchmark.pendulum.datetime.DateTime, tz: typing.TypeVar =) -> data.benchmark.pendulum.datetime.DateTime
+_convert
+def (self: data.benchmark.pendulum.tz.timezone.FixedTimezone, dt: data.benchmark.pendulum.datetime.DateTime) -> data.benchmark.pendulum.datetime.DateTime
+def (self: data.benchmark.pendulum.tz.timezone.FixedTimezone, dt: datetime.datetime) -> datetime.datetime
+_normalize
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: data.benchmark.pendulum.datetime.DateTime, dst_rule: builtins.object =) -> data.benchmark.pendulum.datetime.DateTime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: data.benchmark.pendulum.datetime.DateTime, dst_rule: builtins.str =) -> data.benchmark.pendulum.datetime.DateTime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: data.benchmark.pendulum.time.Time, dst_rule: builtins.object =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: data.benchmark.pendulum.time.Time, dst_rule: builtins.str =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: datetime.datetime, dst_rule: builtins.object =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: datetime.datetime, dst_rule: builtins.str =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: datetime.time, dst_rule: builtins.object =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: datetime.time, dst_rule: builtins.str =) -> datetime.datetime
+astimezone
+def (self: data.benchmark.pendulum.datetime.DateTime, tz: builtins.bool =) -> data.benchmark.pendulum.datetime.DateTime
+def (self: data.benchmark.pendulum.datetime.DateTime, tz: builtins.bytes =) -> data.benchmark.pendulum.datetime.DateTime
+def (self: data.benchmark.pendulum.datetime.DateTime, tz: builtins.dict[builtins.object, builtins.object] =) -> data.benchmark.pendulum.datetime.DateTime
+def (self: data.benchmark.pendulum.datetime.DateTime, tz: builtins.float =) -> data.benchmark.pendulum.datetime.DateTime
+def (self: data.benchmark.pendulum.datetime.DateTime, tz: builtins.int =) -> data.benchmark.pendulum.datetime.DateTime
+def (self: data.benchmark.pendulum.datetime.DateTime, tz: builtins.list[builtins.int] =) -> data.benchmark.pendulum.datetime.DateTime
+def (self: data.benchmark.pendulum.datetime.DateTime, tz: builtins.list[builtins.object] =) -> data.benchmark.pendulum.datetime.DateTime
+def (self: data.benchmark.pendulum.datetime.DateTime, tz: builtins.list[builtins.str] =) -> data.benchmark.pendulum.datetime.DateTime
+def (self: data.benchmark.pendulum.datetime.DateTime, tz: builtins.object =) -> data.benchmark.pendulum.datetime.DateTime
+def (self: data.benchmark.pendulum.datetime.DateTime, tz: builtins.set[builtins.object] =) -> data.benchmark.pendulum.datetime.DateTime
+def (self: data.benchmark.pendulum.datetime.DateTime, tz: builtins.str =) -> data.benchmark.pendulum.datetime.DateTime
+def (self: data.benchmark.pendulum.datetime.DateTime, tz: data.benchmark.pendulum._extensions.helpers.PreciseDiff =) -> data.benchmark.pendulum.datetime.DateTime
+def (self: data.benchmark.pendulum.datetime.DateTime, tz: data.benchmark.pendulum.date.Date =) -> data.benchmark.pendulum.datetime.DateTime
+def (self: data.benchmark.pendulum.datetime.DateTime, tz: data.benchmark.pendulum.datetime.DateTime =) -> data.benchmark.pendulum.datetime.DateTime
+def (self: data.benchmark.pendulum.datetime.DateTime, tz: data.benchmark.pendulum.formatting.difference_formatter.DifferenceFormatter =) -> data.benchmark.pendulum.datetime.DateTime
+def (self: data.benchmark.pendulum.datetime.DateTime, tz: data.benchmark.pendulum.formatting.formatter.Formatter =) -> data.benchmark.pendulum.datetime.DateTime
+def (self: data.benchmark.pendulum.datetime.DateTime, tz: data.benchmark.pendulum.locales.locale.Locale =) -> data.benchmark.pendulum.datetime.DateTime
+def (self: data.benchmark.pendulum.datetime.DateTime, tz: data.benchmark.pendulum.mixins.default.FormattableMixin =) -> data.benchmark.pendulum.datetime.DateTime
+def (self: data.benchmark.pendulum.datetime.DateTime, tz: data.benchmark.pendulum.parsing._Interval =) -> data.benchmark.pendulum.datetime.DateTime
+def (self: data.benchmark.pendulum.datetime.DateTime, tz: data.benchmark.pendulum.time.Time =) -> data.benchmark.pendulum.datetime.DateTime
+def (self: data.benchmark.pendulum.datetime.DateTime, tz: data.benchmark.pendulum.tz.timezone.FixedTimezone =) -> data.benchmark.pendulum.datetime.DateTime
+def (self: data.benchmark.pendulum.datetime.DateTime, tz: data.benchmark.pendulum.tz.timezone.Timezone =) -> data.benchmark.pendulum.datetime.DateTime
+def (self: data.benchmark.pendulum.datetime.DateTime, tz: data.benchmark.pendulum.tz.zoneinfo.posix_timezone.PosixTimezone =) -> data.benchmark.pendulum.datetime.DateTime
+def (self: data.benchmark.pendulum.datetime.DateTime, tz: data.benchmark.pendulum.tz.zoneinfo.posix_timezone.PosixTransition =) -> data.benchmark.pendulum.datetime.DateTime
+def (self: data.benchmark.pendulum.datetime.DateTime, tz: data.benchmark.pendulum.tz.zoneinfo.reader.Reader =) -> data.benchmark.pendulum.datetime.DateTime
+def (self: data.benchmark.pendulum.datetime.DateTime, tz: data.benchmark.pendulum.tz.zoneinfo.reader._offset =) -> data.benchmark.pendulum.datetime.DateTime
+def (self: data.benchmark.pendulum.datetime.DateTime, tz: data.benchmark.pendulum.tz.zoneinfo.reader.header =) -> data.benchmark.pendulum.datetime.DateTime
+def (self: data.benchmark.pendulum.datetime.DateTime, tz: data.benchmark.pendulum.tz.zoneinfo.timezone.Timezone =) -> data.benchmark.pendulum.datetime.DateTime
+def (self: data.benchmark.pendulum.datetime.DateTime, tz: data.benchmark.pendulum.tz.zoneinfo.transition.Transition =) -> data.benchmark.pendulum.datetime.DateTime
+def (self: data.benchmark.pendulum.datetime.DateTime, tz: data.benchmark.pendulum.tz.zoneinfo.transition_type.TransitionType =) -> data.benchmark.pendulum.datetime.DateTime
+def (self: data.benchmark.pendulum.datetime.DateTime, tz: datetime.date =) -> data.benchmark.pendulum.datetime.DateTime
+def (self: data.benchmark.pendulum.datetime.DateTime, tz: datetime.datetime =) -> data.benchmark.pendulum.datetime.DateTime
+def (self: data.benchmark.pendulum.datetime.DateTime, tz: datetime.time =) -> data.benchmark.pendulum.datetime.DateTime
+def (self: data.benchmark.pendulum.datetime.DateTime, tz: datetime.timedelta =) -> data.benchmark.pendulum.datetime.DateTime
+def (self: data.benchmark.pendulum.datetime.DateTime, tz: datetime.timezone =) -> data.benchmark.pendulum.datetime.DateTime
+def (self: data.benchmark.pendulum.datetime.DateTime, tz: datetime.tzinfo =) -> data.benchmark.pendulum.datetime.DateTime
+def (self: data.benchmark.pendulum.datetime.DateTime, tz: typing.Match[Any] =) -> data.benchmark.pendulum.datetime.DateTime
+def (self: data.benchmark.pendulum.datetime.DateTime, tz: typing.Pattern[Any] =) -> data.benchmark.pendulum.datetime.DateTime
+def (self: data.benchmark.pendulum.datetime.DateTime, tz: typing.TypeVar =) -> data.benchmark.pendulum.datetime.DateTime
+_normalize
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: data.benchmark.pendulum.datetime.DateTime, dst_rule: builtins.object =) -> data.benchmark.pendulum.datetime.DateTime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: data.benchmark.pendulum.datetime.DateTime, dst_rule: builtins.str =) -> data.benchmark.pendulum.datetime.DateTime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: data.benchmark.pendulum.time.Time, dst_rule: builtins.object =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: data.benchmark.pendulum.time.Time, dst_rule: builtins.str =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: datetime.datetime, dst_rule: builtins.object =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: datetime.datetime, dst_rule: builtins.str =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: datetime.time, dst_rule: builtins.object =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: datetime.time, dst_rule: builtins.str =) -> datetime.datetime
+_convert
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: Any) -> datetime.datetime
+convert
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: data.benchmark.pendulum.datetime.DateTime, dst_rule: builtins.object =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: data.benchmark.pendulum.time.Time, dst_rule: builtins.object =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: datetime.datetime, dst_rule: builtins.object =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: datetime.time, dst_rule: builtins.object =) -> datetime.datetime
+convert
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: data.benchmark.pendulum.datetime.DateTime, dst_rule: builtins.bool =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: data.benchmark.pendulum.datetime.DateTime, dst_rule: builtins.bytes =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: data.benchmark.pendulum.datetime.DateTime, dst_rule: builtins.dict[builtins.object, builtins.object] =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: data.benchmark.pendulum.datetime.DateTime, dst_rule: builtins.float =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: data.benchmark.pendulum.datetime.DateTime, dst_rule: builtins.int =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: data.benchmark.pendulum.datetime.DateTime, dst_rule: builtins.list[builtins.int] =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: data.benchmark.pendulum.datetime.DateTime, dst_rule: builtins.list[builtins.object] =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: data.benchmark.pendulum.datetime.DateTime, dst_rule: builtins.list[builtins.str] =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: data.benchmark.pendulum.datetime.DateTime, dst_rule: builtins.object =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: data.benchmark.pendulum.datetime.DateTime, dst_rule: builtins.set[builtins.object] =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: data.benchmark.pendulum.datetime.DateTime, dst_rule: builtins.str =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: data.benchmark.pendulum.datetime.DateTime, dst_rule: data.benchmark.pendulum._extensions.helpers.PreciseDiff =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: data.benchmark.pendulum.datetime.DateTime, dst_rule: data.benchmark.pendulum.date.Date =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: data.benchmark.pendulum.datetime.DateTime, dst_rule: data.benchmark.pendulum.datetime.DateTime =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: data.benchmark.pendulum.datetime.DateTime, dst_rule: data.benchmark.pendulum.formatting.difference_formatter.DifferenceFormatter =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: data.benchmark.pendulum.datetime.DateTime, dst_rule: data.benchmark.pendulum.formatting.formatter.Formatter =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: data.benchmark.pendulum.datetime.DateTime, dst_rule: data.benchmark.pendulum.locales.locale.Locale =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: data.benchmark.pendulum.datetime.DateTime, dst_rule: data.benchmark.pendulum.mixins.default.FormattableMixin =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: data.benchmark.pendulum.datetime.DateTime, dst_rule: data.benchmark.pendulum.parsing._Interval =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: data.benchmark.pendulum.datetime.DateTime, dst_rule: data.benchmark.pendulum.time.Time =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: data.benchmark.pendulum.datetime.DateTime, dst_rule: data.benchmark.pendulum.tz.zoneinfo.posix_timezone.PosixTimezone =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: data.benchmark.pendulum.datetime.DateTime, dst_rule: data.benchmark.pendulum.tz.zoneinfo.posix_timezone.PosixTransition =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: data.benchmark.pendulum.datetime.DateTime, dst_rule: data.benchmark.pendulum.tz.zoneinfo.reader.Reader =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: data.benchmark.pendulum.datetime.DateTime, dst_rule: data.benchmark.pendulum.tz.zoneinfo.reader._offset =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: data.benchmark.pendulum.datetime.DateTime, dst_rule: data.benchmark.pendulum.tz.zoneinfo.reader.header =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: data.benchmark.pendulum.datetime.DateTime, dst_rule: data.benchmark.pendulum.tz.zoneinfo.timezone.Timezone =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: data.benchmark.pendulum.datetime.DateTime, dst_rule: data.benchmark.pendulum.tz.zoneinfo.transition.Transition =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: data.benchmark.pendulum.datetime.DateTime, dst_rule: data.benchmark.pendulum.tz.zoneinfo.transition_type.TransitionType =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: data.benchmark.pendulum.datetime.DateTime, dst_rule: datetime.date =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: data.benchmark.pendulum.datetime.DateTime, dst_rule: datetime.datetime =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: data.benchmark.pendulum.datetime.DateTime, dst_rule: datetime.time =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: data.benchmark.pendulum.datetime.DateTime, dst_rule: datetime.timedelta =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: data.benchmark.pendulum.datetime.DateTime, dst_rule: datetime.timezone =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: data.benchmark.pendulum.datetime.DateTime, dst_rule: datetime.tzinfo =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: data.benchmark.pendulum.datetime.DateTime, dst_rule: typing.Match[Any] =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: data.benchmark.pendulum.datetime.DateTime, dst_rule: typing.Pattern[Any] =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: data.benchmark.pendulum.datetime.DateTime, dst_rule: typing.TypeVar =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: data.benchmark.pendulum.time.Time, dst_rule: builtins.bool =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: data.benchmark.pendulum.time.Time, dst_rule: builtins.bytes =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: data.benchmark.pendulum.time.Time, dst_rule: builtins.dict[builtins.object, builtins.object] =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: data.benchmark.pendulum.time.Time, dst_rule: builtins.float =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: data.benchmark.pendulum.time.Time, dst_rule: builtins.int =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: data.benchmark.pendulum.time.Time, dst_rule: builtins.list[builtins.int] =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: data.benchmark.pendulum.time.Time, dst_rule: builtins.list[builtins.object] =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: data.benchmark.pendulum.time.Time, dst_rule: builtins.list[builtins.str] =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: data.benchmark.pendulum.time.Time, dst_rule: builtins.object =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: data.benchmark.pendulum.time.Time, dst_rule: builtins.set[builtins.object] =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: data.benchmark.pendulum.time.Time, dst_rule: builtins.str =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: data.benchmark.pendulum.time.Time, dst_rule: data.benchmark.pendulum._extensions.helpers.PreciseDiff =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: data.benchmark.pendulum.time.Time, dst_rule: data.benchmark.pendulum.date.Date =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: data.benchmark.pendulum.time.Time, dst_rule: data.benchmark.pendulum.datetime.DateTime =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: data.benchmark.pendulum.time.Time, dst_rule: data.benchmark.pendulum.formatting.difference_formatter.DifferenceFormatter =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: data.benchmark.pendulum.time.Time, dst_rule: data.benchmark.pendulum.formatting.formatter.Formatter =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: data.benchmark.pendulum.time.Time, dst_rule: data.benchmark.pendulum.locales.locale.Locale =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: data.benchmark.pendulum.time.Time, dst_rule: data.benchmark.pendulum.mixins.default.FormattableMixin =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: data.benchmark.pendulum.time.Time, dst_rule: data.benchmark.pendulum.parsing._Interval =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: data.benchmark.pendulum.time.Time, dst_rule: data.benchmark.pendulum.time.Time =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: data.benchmark.pendulum.time.Time, dst_rule: data.benchmark.pendulum.tz.zoneinfo.posix_timezone.PosixTimezone =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: data.benchmark.pendulum.time.Time, dst_rule: data.benchmark.pendulum.tz.zoneinfo.posix_timezone.PosixTransition =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: data.benchmark.pendulum.time.Time, dst_rule: data.benchmark.pendulum.tz.zoneinfo.reader.Reader =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: data.benchmark.pendulum.time.Time, dst_rule: data.benchmark.pendulum.tz.zoneinfo.reader._offset =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: data.benchmark.pendulum.time.Time, dst_rule: data.benchmark.pendulum.tz.zoneinfo.reader.header =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: data.benchmark.pendulum.time.Time, dst_rule: data.benchmark.pendulum.tz.zoneinfo.timezone.Timezone =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: data.benchmark.pendulum.time.Time, dst_rule: data.benchmark.pendulum.tz.zoneinfo.transition.Transition =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: data.benchmark.pendulum.time.Time, dst_rule: data.benchmark.pendulum.tz.zoneinfo.transition_type.TransitionType =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: data.benchmark.pendulum.time.Time, dst_rule: datetime.date =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: data.benchmark.pendulum.time.Time, dst_rule: datetime.datetime =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: data.benchmark.pendulum.time.Time, dst_rule: datetime.time =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: data.benchmark.pendulum.time.Time, dst_rule: datetime.timedelta =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: data.benchmark.pendulum.time.Time, dst_rule: datetime.timezone =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: data.benchmark.pendulum.time.Time, dst_rule: datetime.tzinfo =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: data.benchmark.pendulum.time.Time, dst_rule: typing.Match[Any] =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: data.benchmark.pendulum.time.Time, dst_rule: typing.Pattern[Any] =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: data.benchmark.pendulum.time.Time, dst_rule: typing.TypeVar =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: datetime.datetime, dst_rule: builtins.bool =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: datetime.datetime, dst_rule: builtins.bytes =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: datetime.datetime, dst_rule: builtins.dict[builtins.object, builtins.object] =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: datetime.datetime, dst_rule: builtins.float =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: datetime.datetime, dst_rule: builtins.int =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: datetime.datetime, dst_rule: builtins.list[builtins.int] =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: datetime.datetime, dst_rule: builtins.list[builtins.object] =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: datetime.datetime, dst_rule: builtins.list[builtins.str] =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: datetime.datetime, dst_rule: builtins.object =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: datetime.datetime, dst_rule: builtins.set[builtins.object] =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: datetime.datetime, dst_rule: builtins.str =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: datetime.datetime, dst_rule: data.benchmark.pendulum._extensions.helpers.PreciseDiff =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: datetime.datetime, dst_rule: data.benchmark.pendulum.date.Date =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: datetime.datetime, dst_rule: data.benchmark.pendulum.datetime.DateTime =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: datetime.datetime, dst_rule: data.benchmark.pendulum.formatting.difference_formatter.DifferenceFormatter =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: datetime.datetime, dst_rule: data.benchmark.pendulum.formatting.formatter.Formatter =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: datetime.datetime, dst_rule: data.benchmark.pendulum.locales.locale.Locale =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: datetime.datetime, dst_rule: data.benchmark.pendulum.mixins.default.FormattableMixin =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: datetime.datetime, dst_rule: data.benchmark.pendulum.parsing._Interval =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: datetime.datetime, dst_rule: data.benchmark.pendulum.time.Time =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: datetime.datetime, dst_rule: data.benchmark.pendulum.tz.zoneinfo.posix_timezone.PosixTimezone =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: datetime.datetime, dst_rule: data.benchmark.pendulum.tz.zoneinfo.posix_timezone.PosixTransition =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: datetime.datetime, dst_rule: data.benchmark.pendulum.tz.zoneinfo.reader.Reader =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: datetime.datetime, dst_rule: data.benchmark.pendulum.tz.zoneinfo.reader._offset =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: datetime.datetime, dst_rule: data.benchmark.pendulum.tz.zoneinfo.reader.header =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: datetime.datetime, dst_rule: data.benchmark.pendulum.tz.zoneinfo.timezone.Timezone =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: datetime.datetime, dst_rule: data.benchmark.pendulum.tz.zoneinfo.transition.Transition =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: datetime.datetime, dst_rule: data.benchmark.pendulum.tz.zoneinfo.transition_type.TransitionType =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: datetime.datetime, dst_rule: datetime.date =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: datetime.datetime, dst_rule: datetime.datetime =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: datetime.datetime, dst_rule: datetime.time =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: datetime.datetime, dst_rule: datetime.timedelta =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: datetime.datetime, dst_rule: datetime.timezone =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: datetime.datetime, dst_rule: datetime.tzinfo =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: datetime.datetime, dst_rule: typing.Match[Any] =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: datetime.datetime, dst_rule: typing.Pattern[Any] =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: datetime.datetime, dst_rule: typing.TypeVar =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: datetime.time, dst_rule: builtins.bool =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: datetime.time, dst_rule: builtins.bytes =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: datetime.time, dst_rule: builtins.dict[builtins.object, builtins.object] =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: datetime.time, dst_rule: builtins.float =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: datetime.time, dst_rule: builtins.int =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: datetime.time, dst_rule: builtins.list[builtins.int] =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: datetime.time, dst_rule: builtins.list[builtins.object] =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: datetime.time, dst_rule: builtins.list[builtins.str] =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: datetime.time, dst_rule: builtins.object =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: datetime.time, dst_rule: builtins.set[builtins.object] =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: datetime.time, dst_rule: builtins.str =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: datetime.time, dst_rule: data.benchmark.pendulum._extensions.helpers.PreciseDiff =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: datetime.time, dst_rule: data.benchmark.pendulum.date.Date =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: datetime.time, dst_rule: data.benchmark.pendulum.datetime.DateTime =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: datetime.time, dst_rule: data.benchmark.pendulum.formatting.difference_formatter.DifferenceFormatter =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: datetime.time, dst_rule: data.benchmark.pendulum.formatting.formatter.Formatter =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: datetime.time, dst_rule: data.benchmark.pendulum.locales.locale.Locale =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: datetime.time, dst_rule: data.benchmark.pendulum.mixins.default.FormattableMixin =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: datetime.time, dst_rule: data.benchmark.pendulum.parsing._Interval =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: datetime.time, dst_rule: data.benchmark.pendulum.time.Time =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: datetime.time, dst_rule: data.benchmark.pendulum.tz.zoneinfo.posix_timezone.PosixTimezone =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: datetime.time, dst_rule: data.benchmark.pendulum.tz.zoneinfo.posix_timezone.PosixTransition =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: datetime.time, dst_rule: data.benchmark.pendulum.tz.zoneinfo.reader.Reader =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: datetime.time, dst_rule: data.benchmark.pendulum.tz.zoneinfo.reader._offset =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: datetime.time, dst_rule: data.benchmark.pendulum.tz.zoneinfo.reader.header =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: datetime.time, dst_rule: data.benchmark.pendulum.tz.zoneinfo.timezone.Timezone =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: datetime.time, dst_rule: data.benchmark.pendulum.tz.zoneinfo.transition.Transition =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: datetime.time, dst_rule: data.benchmark.pendulum.tz.zoneinfo.transition_type.TransitionType =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: datetime.time, dst_rule: datetime.date =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: datetime.time, dst_rule: datetime.datetime =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: datetime.time, dst_rule: datetime.time =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: datetime.time, dst_rule: datetime.timedelta =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: datetime.time, dst_rule: datetime.timezone =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: datetime.time, dst_rule: datetime.tzinfo =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: datetime.time, dst_rule: typing.Match[Any] =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: datetime.time, dst_rule: typing.Pattern[Any] =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, dt: datetime.time, dst_rule: typing.TypeVar =) -> datetime.datetime
+datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, year: builtins.bool, month: builtins.bool, day: builtins.bool, hour: builtins.int =, minute: builtins.int =, second: builtins.int =, microsecond: builtins.int =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, year: builtins.bool, month: builtins.bool, day: builtins.int, hour: builtins.int =, minute: builtins.int =, second: builtins.int =, microsecond: builtins.int =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, year: builtins.bool, month: builtins.int, day: builtins.bool, hour: builtins.int =, minute: builtins.int =, second: builtins.int =, microsecond: builtins.int =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, year: builtins.bool, month: builtins.int, day: builtins.int, hour: builtins.int =, minute: builtins.int =, second: builtins.int =, microsecond: builtins.int =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, year: builtins.int, month: builtins.bool, day: builtins.bool, hour: builtins.int =, minute: builtins.int =, second: builtins.int =, microsecond: builtins.int =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, year: builtins.int, month: builtins.bool, day: builtins.int, hour: builtins.int =, minute: builtins.int =, second: builtins.int =, microsecond: builtins.int =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, year: builtins.int, month: builtins.int, day: builtins.bool, hour: builtins.int =, minute: builtins.int =, second: builtins.int =, microsecond: builtins.int =) -> datetime.datetime
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, year: builtins.int, month: builtins.int, day: builtins.int, hour: builtins.int =, minute: builtins.int =, second: builtins.int =, microsecond: builtins.int =) -> datetime.datetime
+__init__
+def (self: data.benchmark.pendulum.tz.timezone.TimezoneFile, path: builtins.bytes)
+def (self: data.benchmark.pendulum.tz.timezone.TimezoneFile, path: builtins.str)
+read_for
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: builtins.bool) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: builtins.bytes) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: builtins.dict[builtins.object, builtins.object]) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: builtins.float) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: builtins.int) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: builtins.list[builtins.int]) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: builtins.list[builtins.object]) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: builtins.list[builtins.str]) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: builtins.object) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: builtins.set[builtins.object]) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: builtins.str) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: data.benchmark.pendulum._extensions.helpers.PreciseDiff) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: data.benchmark.pendulum.date.Date) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: data.benchmark.pendulum.datetime.DateTime) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: data.benchmark.pendulum.formatting.difference_formatter.DifferenceFormatter) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: data.benchmark.pendulum.formatting.formatter.Formatter) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: data.benchmark.pendulum.locales.locale.Locale) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: data.benchmark.pendulum.mixins.default.FormattableMixin) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: data.benchmark.pendulum.parsing._Interval) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: data.benchmark.pendulum.time.Time) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: data.benchmark.pendulum.tz.zoneinfo.posix_timezone.PosixTimezone) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: data.benchmark.pendulum.tz.zoneinfo.posix_timezone.PosixTransition) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: data.benchmark.pendulum.tz.zoneinfo.reader.Reader) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: data.benchmark.pendulum.tz.zoneinfo.reader._offset) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: data.benchmark.pendulum.tz.zoneinfo.reader.header) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: data.benchmark.pendulum.tz.zoneinfo.timezone.Timezone) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: data.benchmark.pendulum.tz.zoneinfo.transition.Transition) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: data.benchmark.pendulum.tz.zoneinfo.transition_type.TransitionType) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: datetime.date) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: datetime.datetime) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: datetime.time) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: datetime.timedelta) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: datetime.timezone) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: datetime.tzinfo) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: typing.Match[Any]) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: typing.Pattern[Any]) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: typing.TypeVar) -> Any
+read
+def (name: builtins.bool, extend: builtins.bool =) -> Any
+def (name: builtins.bytes, extend: builtins.bool =) -> Any
+def (name: builtins.dict[builtins.object, builtins.object], extend: builtins.bool =) -> Any
+def (name: builtins.float, extend: builtins.bool =) -> Any
+def (name: builtins.int, extend: builtins.bool =) -> Any
+def (name: builtins.list[builtins.int], extend: builtins.bool =) -> Any
+def (name: builtins.list[builtins.object], extend: builtins.bool =) -> Any
+def (name: builtins.list[builtins.str], extend: builtins.bool =) -> Any
+def (name: builtins.object, extend: builtins.bool =) -> Any
+def (name: builtins.set[builtins.object], extend: builtins.bool =) -> Any
+def (name: builtins.str, extend: builtins.bool =) -> Any
+def (name: data.benchmark.pendulum._extensions.helpers.PreciseDiff, extend: builtins.bool =) -> Any
+def (name: data.benchmark.pendulum.date.Date, extend: builtins.bool =) -> Any
+def (name: data.benchmark.pendulum.datetime.DateTime, extend: builtins.bool =) -> Any
+def (name: data.benchmark.pendulum.formatting.difference_formatter.DifferenceFormatter, extend: builtins.bool =) -> Any
+def (name: data.benchmark.pendulum.formatting.formatter.Formatter, extend: builtins.bool =) -> Any
+def (name: data.benchmark.pendulum.locales.locale.Locale, extend: builtins.bool =) -> Any
+def (name: data.benchmark.pendulum.mixins.default.FormattableMixin, extend: builtins.bool =) -> Any
+def (name: data.benchmark.pendulum.parsing._Interval, extend: builtins.bool =) -> Any
+def (name: data.benchmark.pendulum.time.Time, extend: builtins.bool =) -> Any
+def (name: data.benchmark.pendulum.tz.zoneinfo.posix_timezone.PosixTimezone, extend: builtins.bool =) -> Any
+def (name: data.benchmark.pendulum.tz.zoneinfo.posix_timezone.PosixTransition, extend: builtins.bool =) -> Any
+def (name: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, extend: builtins.bool =) -> Any
+def (name: data.benchmark.pendulum.tz.zoneinfo.reader._offset, extend: builtins.bool =) -> Any
+def (name: data.benchmark.pendulum.tz.zoneinfo.reader.header, extend: builtins.bool =) -> Any
+def (name: data.benchmark.pendulum.tz.zoneinfo.timezone.Timezone, extend: builtins.bool =) -> Any
+def (name: data.benchmark.pendulum.tz.zoneinfo.transition.Transition, extend: builtins.bool =) -> Any
+def (name: data.benchmark.pendulum.tz.zoneinfo.transition_type.TransitionType, extend: builtins.bool =) -> Any
+def (name: datetime.date, extend: builtins.bool =) -> Any
+def (name: datetime.datetime, extend: builtins.bool =) -> Any
+def (name: datetime.time, extend: builtins.bool =) -> Any
+def (name: datetime.timedelta, extend: builtins.bool =) -> Any
+def (name: datetime.timezone, extend: builtins.bool =) -> Any
+def (name: datetime.tzinfo, extend: builtins.bool =) -> Any
+def (name: typing.Match[Any], extend: builtins.bool =) -> Any
+def (name: typing.Pattern[Any], extend: builtins.bool =) -> Any
+def (name: typing.TypeVar, extend: builtins.bool =) -> Any
+read_for
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: builtins.bool) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: builtins.bytes) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: builtins.dict[builtins.bool, builtins.str]) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: builtins.dict[builtins.bytes, builtins.str]) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: builtins.dict[builtins.float, builtins.str]) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: builtins.dict[builtins.int, builtins.str]) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: builtins.dict[builtins.object, builtins.object]) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: builtins.dict[builtins.object, builtins.str]) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: builtins.dict[builtins.str, builtins.str]) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: builtins.dict[builtins.str, data.benchmark.pendulum._extensions.helpers.PreciseDiff]) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: builtins.dict[builtins.str, data.benchmark.pendulum.date.Date]) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: builtins.dict[builtins.str, data.benchmark.pendulum.datetime.DateTime]) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: builtins.dict[builtins.str, data.benchmark.pendulum.formatting.difference_formatter.DifferenceFormatter]) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: builtins.dict[builtins.str, data.benchmark.pendulum.formatting.formatter.Formatter]) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: builtins.dict[builtins.str, data.benchmark.pendulum.locales.locale.Locale]) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: builtins.dict[builtins.str, data.benchmark.pendulum.mixins.default.FormattableMixin]) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: builtins.dict[builtins.str, data.benchmark.pendulum.parsing._Interval]) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: builtins.dict[builtins.str, data.benchmark.pendulum.time.Time]) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: builtins.dict[builtins.str, data.benchmark.pendulum.tz.zoneinfo.posix_timezone.PosixTimezone]) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: builtins.dict[builtins.str, data.benchmark.pendulum.tz.zoneinfo.posix_timezone.PosixTransition]) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: builtins.dict[builtins.str, data.benchmark.pendulum.tz.zoneinfo.reader.Reader]) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: builtins.dict[builtins.str, data.benchmark.pendulum.tz.zoneinfo.reader._offset]) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: builtins.dict[builtins.str, data.benchmark.pendulum.tz.zoneinfo.reader.header]) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: builtins.dict[builtins.str, data.benchmark.pendulum.tz.zoneinfo.timezone.Timezone]) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: builtins.dict[builtins.str, data.benchmark.pendulum.tz.zoneinfo.transition.Transition]) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: builtins.dict[builtins.str, data.benchmark.pendulum.tz.zoneinfo.transition_type.TransitionType]) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: builtins.dict[builtins.str, datetime.date]) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: builtins.dict[builtins.str, datetime.datetime]) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: builtins.dict[builtins.str, datetime.time]) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: builtins.dict[builtins.str, datetime.timedelta]) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: builtins.dict[builtins.str, datetime.timezone]) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: builtins.dict[builtins.str, datetime.tzinfo]) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: builtins.dict[builtins.str, typing.TypeVar]) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: builtins.float) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: builtins.int) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: builtins.list[builtins.bool]) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: builtins.list[builtins.bytes]) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: builtins.list[builtins.float]) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: builtins.list[builtins.int]) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: builtins.list[builtins.object]) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: builtins.list[builtins.str]) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: builtins.list[data.benchmark.pendulum._extensions.helpers.PreciseDiff]) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: builtins.list[data.benchmark.pendulum.date.Date]) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: builtins.list[data.benchmark.pendulum.datetime.DateTime]) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: builtins.list[data.benchmark.pendulum.formatting.difference_formatter.DifferenceFormatter]) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: builtins.list[data.benchmark.pendulum.formatting.formatter.Formatter]) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: builtins.list[data.benchmark.pendulum.locales.locale.Locale]) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: builtins.list[data.benchmark.pendulum.mixins.default.FormattableMixin]) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: builtins.list[data.benchmark.pendulum.parsing._Interval]) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: builtins.list[data.benchmark.pendulum.time.Time]) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: builtins.list[data.benchmark.pendulum.tz.zoneinfo.posix_timezone.PosixTimezone]) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: builtins.list[data.benchmark.pendulum.tz.zoneinfo.posix_timezone.PosixTransition]) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: builtins.list[data.benchmark.pendulum.tz.zoneinfo.reader.Reader]) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: builtins.list[data.benchmark.pendulum.tz.zoneinfo.reader._offset]) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: builtins.list[data.benchmark.pendulum.tz.zoneinfo.reader.header]) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: builtins.list[data.benchmark.pendulum.tz.zoneinfo.timezone.Timezone]) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: builtins.list[data.benchmark.pendulum.tz.zoneinfo.transition.Transition]) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: builtins.list[data.benchmark.pendulum.tz.zoneinfo.transition_type.TransitionType]) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: builtins.list[datetime.date]) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: builtins.list[datetime.datetime]) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: builtins.list[datetime.time]) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: builtins.list[datetime.timedelta]) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: builtins.list[datetime.timezone]) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: builtins.list[datetime.tzinfo]) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: builtins.list[typing.TypeVar]) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: builtins.object) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: builtins.set[builtins.bool]) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: builtins.set[builtins.bytes]) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: builtins.set[builtins.float]) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: builtins.set[builtins.int]) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: builtins.set[builtins.object]) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: builtins.set[builtins.str]) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: builtins.set[data.benchmark.pendulum._extensions.helpers.PreciseDiff]) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: builtins.set[data.benchmark.pendulum.date.Date]) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: builtins.set[data.benchmark.pendulum.datetime.DateTime]) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: builtins.set[data.benchmark.pendulum.formatting.difference_formatter.DifferenceFormatter]) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: builtins.set[data.benchmark.pendulum.formatting.formatter.Formatter]) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: builtins.set[data.benchmark.pendulum.locales.locale.Locale]) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: builtins.set[data.benchmark.pendulum.mixins.default.FormattableMixin]) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: builtins.set[data.benchmark.pendulum.parsing._Interval]) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: builtins.set[data.benchmark.pendulum.time.Time]) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: builtins.set[data.benchmark.pendulum.tz.zoneinfo.posix_timezone.PosixTimezone]) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: builtins.set[data.benchmark.pendulum.tz.zoneinfo.posix_timezone.PosixTransition]) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: builtins.set[data.benchmark.pendulum.tz.zoneinfo.reader.Reader]) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: builtins.set[data.benchmark.pendulum.tz.zoneinfo.reader._offset]) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: builtins.set[data.benchmark.pendulum.tz.zoneinfo.reader.header]) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: builtins.set[data.benchmark.pendulum.tz.zoneinfo.timezone.Timezone]) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: builtins.set[data.benchmark.pendulum.tz.zoneinfo.transition.Transition]) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: builtins.set[data.benchmark.pendulum.tz.zoneinfo.transition_type.TransitionType]) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: builtins.set[datetime.date]) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: builtins.set[datetime.datetime]) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: builtins.set[datetime.time]) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: builtins.set[datetime.timedelta]) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: builtins.set[datetime.timezone]) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: builtins.set[datetime.tzinfo]) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: builtins.set[typing.TypeVar]) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: builtins.str) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: data.benchmark.pendulum._extensions.helpers.PreciseDiff) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: data.benchmark.pendulum.date.Date) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: data.benchmark.pendulum.datetime.DateTime) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: data.benchmark.pendulum.formatting.difference_formatter.DifferenceFormatter) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: data.benchmark.pendulum.formatting.formatter.Formatter) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: data.benchmark.pendulum.locales.locale.Locale) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: data.benchmark.pendulum.mixins.default.FormattableMixin) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: data.benchmark.pendulum.parsing._Interval) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: data.benchmark.pendulum.time.Time) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: data.benchmark.pendulum.tz.zoneinfo.posix_timezone.PosixTimezone) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: data.benchmark.pendulum.tz.zoneinfo.posix_timezone.PosixTransition) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: data.benchmark.pendulum.tz.zoneinfo.reader.Reader) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: data.benchmark.pendulum.tz.zoneinfo.reader._offset) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: data.benchmark.pendulum.tz.zoneinfo.reader.header) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: data.benchmark.pendulum.tz.zoneinfo.timezone.Timezone) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: data.benchmark.pendulum.tz.zoneinfo.transition.Transition) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: data.benchmark.pendulum.tz.zoneinfo.transition_type.TransitionType) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: datetime.date) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: datetime.datetime) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: datetime.time) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: datetime.timedelta) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: datetime.timezone) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: datetime.tzinfo) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: typing.Match[Any]) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: typing.Pattern[Any]) -> Any
+def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, timezone: typing.TypeVar) -> Any
+read
+def (name: builtins.bool, extend: builtins.bool =) -> Any
+def (name: builtins.bytes, extend: builtins.bool =) -> Any
+def (name: builtins.dict[builtins.bool, builtins.str], extend: builtins.bool =) -> Any
+def (name: builtins.dict[builtins.bytes, builtins.str], extend: builtins.bool =) -> Any
+def (name: builtins.dict[builtins.float, builtins.str], extend: builtins.bool =) -> Any
+def (name: builtins.dict[builtins.int, builtins.str], extend: builtins.bool =) -> Any
+def (name: builtins.dict[builtins.object, builtins.object], extend: builtins.bool =) -> Any
+def (name: builtins.dict[builtins.object, builtins.str], extend: builtins.bool =) -> Any
+def (name: builtins.dict[builtins.str, builtins.str], extend: builtins.bool =) -> Any
+def (name: builtins.dict[builtins.str, data.benchmark.pendulum._extensions.helpers.PreciseDiff], extend: builtins.bool =) -> Any
+def (name: builtins.dict[builtins.str, data.benchmark.pendulum.date.Date], extend: builtins.bool =) -> Any
+def (name: builtins.dict[builtins.str, data.benchmark.pendulum.datetime.DateTime], extend: builtins.bool =) -> Any
+def (name: builtins.dict[builtins.str, data.benchmark.pendulum.formatting.difference_formatter.DifferenceFormatter], extend: builtins.bool =) -> Any
+def (name: builtins.dict[builtins.str, data.benchmark.pendulum.formatting.formatter.Formatter], extend: builtins.bool =) -> Any
+def (name: builtins.dict[builtins.str, data.benchmark.pendulum.locales.locale.Locale], extend: builtins.bool =) -> Any
+def (name: builtins.dict[builtins.str, data.benchmark.pendulum.mixins.default.FormattableMixin], extend: builtins.bool =) -> Any
+def (name: builtins.dict[builtins.str, data.benchmark.pendulum.parsing._Interval], extend: builtins.bool =) -> Any
+def (name: builtins.dict[builtins.str, data.benchmark.pendulum.time.Time], extend: builtins.bool =) -> Any
+def (name: builtins.dict[builtins.str, data.benchmark.pendulum.tz.zoneinfo.posix_timezone.PosixTimezone], extend: builtins.bool =) -> Any
+def (name: builtins.dict[builtins.str, data.benchmark.pendulum.tz.zoneinfo.posix_timezone.PosixTransition], extend: builtins.bool =) -> Any
+def (name: builtins.dict[builtins.str, data.benchmark.pendulum.tz.zoneinfo.reader.Reader], extend: builtins.bool =) -> Any
+def (name: builtins.dict[builtins.str, data.benchmark.pendulum.tz.zoneinfo.reader._offset], extend: builtins.bool =) -> Any
+def (name: builtins.dict[builtins.str, data.benchmark.pendulum.tz.zoneinfo.reader.header], extend: builtins.bool =) -> Any
+def (name: builtins.dict[builtins.str, data.benchmark.pendulum.tz.zoneinfo.timezone.Timezone], extend: builtins.bool =) -> Any
+def (name: builtins.dict[builtins.str, data.benchmark.pendulum.tz.zoneinfo.transition.Transition], extend: builtins.bool =) -> Any
+def (name: builtins.dict[builtins.str, data.benchmark.pendulum.tz.zoneinfo.transition_type.TransitionType], extend: builtins.bool =) -> Any
+def (name: builtins.dict[builtins.str, datetime.date], extend: builtins.bool =) -> Any
+def (name: builtins.dict[builtins.str, datetime.datetime], extend: builtins.bool =) -> Any
+def (name: builtins.dict[builtins.str, datetime.time], extend: builtins.bool =) -> Any
+def (name: builtins.dict[builtins.str, datetime.timedelta], extend: builtins.bool =) -> Any
+def (name: builtins.dict[builtins.str, datetime.timezone], extend: builtins.bool =) -> Any
+def (name: builtins.dict[builtins.str, datetime.tzinfo], extend: builtins.bool =) -> Any
+def (name: builtins.dict[builtins.str, typing.TypeVar], extend: builtins.bool =) -> Any
+def (name: builtins.float, extend: builtins.bool =) -> Any
+def (name: builtins.int, extend: builtins.bool =) -> Any
+def (name: builtins.list[builtins.bool], extend: builtins.bool =) -> Any
+def (name: builtins.list[builtins.bytes], extend: builtins.bool =) -> Any
+def (name: builtins.list[builtins.float], extend: builtins.bool =) -> Any
+def (name: builtins.list[builtins.int], extend: builtins.bool =) -> Any
+def (name: builtins.list[builtins.object], extend: builtins.bool =) -> Any
+def (name: builtins.list[builtins.str], extend: builtins.bool =) -> Any
+def (name: builtins.list[data.benchmark.pendulum._extensions.helpers.PreciseDiff], extend: builtins.bool =) -> Any
+def (name: builtins.list[data.benchmark.pendulum.date.Date], extend: builtins.bool =) -> Any
+def (name: builtins.list[data.benchmark.pendulum.datetime.DateTime], extend: builtins.bool =) -> Any
+def (name: builtins.list[data.benchmark.pendulum.formatting.difference_formatter.DifferenceFormatter], extend: builtins.bool =) -> Any
+def (name: builtins.list[data.benchmark.pendulum.formatting.formatter.Formatter], extend: builtins.bool =) -> Any
+def (name: builtins.list[data.benchmark.pendulum.locales.locale.Locale], extend: builtins.bool =) -> Any
+def (name: builtins.list[data.benchmark.pendulum.mixins.default.FormattableMixin], extend: builtins.bool =) -> Any
+def (name: builtins.list[data.benchmark.pendulum.parsing._Interval], extend: builtins.bool =) -> Any
+def (name: builtins.list[data.benchmark.pendulum.time.Time], extend: builtins.bool =) -> Any
+def (name: builtins.list[data.benchmark.pendulum.tz.zoneinfo.posix_timezone.PosixTimezone], extend: builtins.bool =) -> Any
+def (name: builtins.list[data.benchmark.pendulum.tz.zoneinfo.posix_timezone.PosixTransition], extend: builtins.bool =) -> Any
+def (name: builtins.list[data.benchmark.pendulum.tz.zoneinfo.reader.Reader], extend: builtins.bool =) -> Any
+def (name: builtins.list[data.benchmark.pendulum.tz.zoneinfo.reader._offset], extend: builtins.bool =) -> Any
+def (name: builtins.list[data.benchmark.pendulum.tz.zoneinfo.reader.header], extend: builtins.bool =) -> Any
+def (name: builtins.list[data.benchmark.pendulum.tz.zoneinfo.timezone.Timezone], extend: builtins.bool =) -> Any
+def (name: builtins.list[data.benchmark.pendulum.tz.zoneinfo.transition.Transition], extend: builtins.bool =) -> Any
+def (name: builtins.list[data.benchmark.pendulum.tz.zoneinfo.transition_type.TransitionType], extend: builtins.bool =) -> Any
+def (name: builtins.list[datetime.date], extend: builtins.bool =) -> Any
+def (name: builtins.list[datetime.datetime], extend: builtins.bool =) -> Any
+def (name: builtins.list[datetime.time], extend: builtins.bool =) -> Any
+def (name: builtins.list[datetime.timedelta], extend: builtins.bool =) -> Any
+def (name: builtins.list[datetime.timezone], extend: builtins.bool =) -> Any
+def (name: builtins.list[datetime.tzinfo], extend: builtins.bool =) -> Any
+def (name: builtins.list[typing.TypeVar], extend: builtins.bool =) -> Any
+def (name: builtins.object, extend: builtins.bool =) -> Any
+def (name: builtins.set[builtins.bool], extend: builtins.bool =) -> Any
+def (name: builtins.set[builtins.bytes], extend: builtins.bool =) -> Any
+def (name: builtins.set[builtins.float], extend: builtins.bool =) -> Any
+def (name: builtins.set[builtins.int], extend: builtins.bool =) -> Any
+def (name: builtins.set[builtins.object], extend: builtins.bool =) -> Any
+def (name: builtins.set[builtins.str], extend: builtins.bool =) -> Any
+def (name: builtins.set[data.benchmark.pendulum._extensions.helpers.PreciseDiff], extend: builtins.bool =) -> Any
+def (name: builtins.set[data.benchmark.pendulum.date.Date], extend: builtins.bool =) -> Any
+def (name: builtins.set[data.benchmark.pendulum.datetime.DateTime], extend: builtins.bool =) -> Any
+def (name: builtins.set[data.benchmark.pendulum.formatting.difference_formatter.DifferenceFormatter], extend: builtins.bool =) -> Any
+def (name: builtins.set[data.benchmark.pendulum.formatting.formatter.Formatter], extend: builtins.bool =) -> Any
+def (name: builtins.set[data.benchmark.pendulum.locales.locale.Locale], extend: builtins.bool =) -> Any
+def (name: builtins.set[data.benchmark.pendulum.mixins.default.FormattableMixin], extend: builtins.bool =) -> Any
+def (name: builtins.set[data.benchmark.pendulum.parsing._Interval], extend: builtins.bool =) -> Any
+def (name: builtins.set[data.benchmark.pendulum.time.Time], extend: builtins.bool =) -> Any
+def (name: builtins.set[data.benchmark.pendulum.tz.zoneinfo.posix_timezone.PosixTimezone], extend: builtins.bool =) -> Any
+def (name: builtins.set[data.benchmark.pendulum.tz.zoneinfo.posix_timezone.PosixTransition], extend: builtins.bool =) -> Any
+def (name: builtins.set[data.benchmark.pendulum.tz.zoneinfo.reader.Reader], extend: builtins.bool =) -> Any
+def (name: builtins.set[data.benchmark.pendulum.tz.zoneinfo.reader._offset], extend: builtins.bool =) -> Any
+def (name: builtins.set[data.benchmark.pendulum.tz.zoneinfo.reader.header], extend: builtins.bool =) -> Any
+def (name: builtins.set[data.benchmark.pendulum.tz.zoneinfo.timezone.Timezone], extend: builtins.bool =) -> Any
+def (name: builtins.set[data.benchmark.pendulum.tz.zoneinfo.transition.Transition], extend: builtins.bool =) -> Any
+def (name: builtins.set[data.benchmark.pendulum.tz.zoneinfo.transition_type.TransitionType], extend: builtins.bool =) -> Any
+def (name: builtins.set[datetime.date], extend: builtins.bool =) -> Any
+def (name: builtins.set[datetime.datetime], extend: builtins.bool =) -> Any
+def (name: builtins.set[datetime.time], extend: builtins.bool =) -> Any
+def (name: builtins.set[datetime.timedelta], extend: builtins.bool =) -> Any
+def (name: builtins.set[datetime.timezone], extend: builtins.bool =) -> Any
+def (name: builtins.set[datetime.tzinfo], extend: builtins.bool =) -> Any
+def (name: builtins.set[typing.TypeVar], extend: builtins.bool =) -> Any
+def (name: builtins.str, extend: builtins.bool =) -> Any
+def (name: data.benchmark.pendulum._extensions.helpers.PreciseDiff, extend: builtins.bool =) -> Any
+def (name: data.benchmark.pendulum.date.Date, extend: builtins.bool =) -> Any
+def (name: data.benchmark.pendulum.datetime.DateTime, extend: builtins.bool =) -> Any
+def (name: data.benchmark.pendulum.formatting.difference_formatter.DifferenceFormatter, extend: builtins.bool =) -> Any
+def (name: data.benchmark.pendulum.formatting.formatter.Formatter, extend: builtins.bool =) -> Any
+def (name: data.benchmark.pendulum.locales.locale.Locale, extend: builtins.bool =) -> Any
+def (name: data.benchmark.pendulum.mixins.default.FormattableMixin, extend: builtins.bool =) -> Any
+def (name: data.benchmark.pendulum.parsing._Interval, extend: builtins.bool =) -> Any
+def (name: data.benchmark.pendulum.time.Time, extend: builtins.bool =) -> Any
+def (name: data.benchmark.pendulum.tz.zoneinfo.posix_timezone.PosixTimezone, extend: builtins.bool =) -> Any
+def (name: data.benchmark.pendulum.tz.zoneinfo.posix_timezone.PosixTransition, extend: builtins.bool =) -> Any
+def (name: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, extend: builtins.bool =) -> Any
+def (name: data.benchmark.pendulum.tz.zoneinfo.reader._offset, extend: builtins.bool =) -> Any
+def (name: data.benchmark.pendulum.tz.zoneinfo.reader.header, extend: builtins.bool =) -> Any
+def (name: data.benchmark.pendulum.tz.zoneinfo.timezone.Timezone, extend: builtins.bool =) -> Any
+def (name: data.benchmark.pendulum.tz.zoneinfo.transition.Transition, extend: builtins.bool =) -> Any
+def (name: data.benchmark.pendulum.tz.zoneinfo.transition_type.TransitionType, extend: builtins.bool =) -> Any
+def (name: datetime.date, extend: builtins.bool =) -> Any
+def (name: datetime.datetime, extend: builtins.bool =) -> Any
+def (name: datetime.time, extend: builtins.bool =) -> Any
+def (name: datetime.timedelta, extend: builtins.bool =) -> Any
+def (name: datetime.timezone, extend: builtins.bool =) -> Any
+def (name: datetime.tzinfo, extend: builtins.bool =) -> Any
+def (name: typing.Match[Any], extend: builtins.bool =) -> Any
+def (name: typing.Pattern[Any], extend: builtins.bool =) -> Any
+def (name: typing.TypeVar, extend: builtins.bool =) -> Any
+__init__
+def (self: data.benchmark.pendulum.tz.timezone.Timezone, name: builtins.str, extended: builtins.bool =)

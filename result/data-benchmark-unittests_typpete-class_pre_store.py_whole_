@@ -1,0 +1,6 @@
+f
+def (self: class_pre_store.A) -> class_pre_store.B
+g
+def (self: class_pre_store.B) -> builtins.str
+g
+def (self: class_pre_store.A) -> builtins.str

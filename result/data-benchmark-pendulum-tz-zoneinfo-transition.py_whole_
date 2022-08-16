@@ -1,0 +1,34 @@
+at
+def (self: data.benchmark.pendulum.tz.zoneinfo.transition.Transition) -> builtins.int
+local
+def (self: data.benchmark.pendulum.tz.zoneinfo.transition.Transition) -> builtins.int
+to
+def (self: data.benchmark.pendulum.tz.zoneinfo.transition.Transition) -> builtins.int
+to_utc
+def (self: data.benchmark.pendulum.tz.zoneinfo.transition.Transition) -> builtins.int
+ttype
+def (self: data.benchmark.pendulum.tz.zoneinfo.transition.Transition) -> data.benchmark.pendulum.tz.zoneinfo.transition_type.TransitionType
+previous
+def (self: data.benchmark.pendulum.tz.zoneinfo.transition.Transition) -> data.benchmark.pendulum.tz.zoneinfo.transition.Transition
+fix
+def (self: data.benchmark.pendulum.tz.zoneinfo.transition.Transition) -> builtins.int
+is_ambiguous
+def (self: data.benchmark.pendulum.tz.zoneinfo.transition.Transition, stamp: builtins.bool) -> builtins.bool
+def (self: data.benchmark.pendulum.tz.zoneinfo.transition.Transition, stamp: builtins.int) -> builtins.bool
+is_missing
+def (self: data.benchmark.pendulum.tz.zoneinfo.transition.Transition, stamp: builtins.bool) -> builtins.bool
+def (self: data.benchmark.pendulum.tz.zoneinfo.transition.Transition, stamp: builtins.int) -> builtins.bool
+utcoffset
+def (self: data.benchmark.pendulum.tz.zoneinfo.transition.Transition) -> datetime.timedelta
+__contains__
+def (data.benchmark.pendulum.tz.zoneinfo.transition.Transition, builtins.bool) -> builtins.bool
+def (data.benchmark.pendulum.tz.zoneinfo.transition.Transition, builtins.int) -> builtins.bool
+__repr__
+def (data.benchmark.pendulum.tz.zoneinfo.transition.Transition) -> builtins.str
+__init__
+def (self: data.benchmark.pendulum.tz.zoneinfo.transition.Transition, at: builtins.bool, ttype: data.benchmark.pendulum.datetime.DateTime, previous: data.benchmark.pendulum.tz.zoneinfo.transition.Transition)
+def (self: data.benchmark.pendulum.tz.zoneinfo.transition.Transition, at: builtins.bool, ttype: data.benchmark.pendulum.tz.zoneinfo.posix_timezone.PosixTransition, previous: data.benchmark.pendulum.tz.zoneinfo.transition.Transition)
+def (self: data.benchmark.pendulum.tz.zoneinfo.transition.Transition, at: builtins.bool, ttype: data.benchmark.pendulum.tz.zoneinfo.transition_type.TransitionType, previous: data.benchmark.pendulum.tz.zoneinfo.transition.Transition)
+def (self: data.benchmark.pendulum.tz.zoneinfo.transition.Transition, at: builtins.int, ttype: data.benchmark.pendulum.datetime.DateTime, previous: data.benchmark.pendulum.tz.zoneinfo.transition.Transition)
+def (self: data.benchmark.pendulum.tz.zoneinfo.transition.Transition, at: builtins.int, ttype: data.benchmark.pendulum.tz.zoneinfo.posix_timezone.PosixTransition, previous: data.benchmark.pendulum.tz.zoneinfo.transition.Transition)
+def (self: data.benchmark.pendulum.tz.zoneinfo.transition.Transition, at: builtins.int, ttype: data.benchmark.pendulum.tz.zoneinfo.transition_type.TransitionType, previous: data.benchmark.pendulum.tz.zoneinfo.transition.Transition)

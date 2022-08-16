@@ -1,0 +1,30 @@
+__init__
+def (self: period.Period, start: datetime.date, end: datetime.date, absolute: builtins.bool =)
+def (self: period.Period, start: datetime.date, end: datetime.datetime, absolute: builtins.bool =)
+def (self: period.Period, start: datetime.date, end: period.Period, absolute: builtins.bool =)
+def (self: period.Period, start: datetime.datetime, end: datetime.date, absolute: builtins.bool =)
+def (self: period.Period, start: datetime.datetime, end: datetime.datetime, absolute: builtins.bool =)
+def (self: period.Period, start: datetime.datetime, end: period.Period, absolute: builtins.bool =)
+def (self: period.Period, start: period.Period, end: datetime.date, absolute: builtins.bool =)
+def (self: period.Period, start: period.Period, end: datetime.datetime, absolute: builtins.bool =)
+def (self: period.Period, start: period.Period, end: period.Period, absolute: builtins.bool =)
+years
+def (self: period.Period) -> Any
+months
+def (self: period.Period) -> Any
+weeks
+def (self: period.Period)
+days
+def (self: period.Period) -> Any
+remaining_days
+def (self: period.Period)
+hours
+def (self: period.Period) -> Any
+minutes
+def (self: period.Period) -> Any
+start
+def (self: period.Period) -> datetime.date
+end
+def (self: period.Period) -> datetime.date
+__neg__
+def (period.Period) -> period.Period

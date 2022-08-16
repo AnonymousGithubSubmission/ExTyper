@@ -1,0 +1,5 @@
+f
+def (self: member_assign.A, y: builtins.bool)
+def (self: member_assign.A, y: builtins.bytes)
+def (self: member_assign.A, y: builtins.int)
+def (self: member_assign.A, y: builtins.list[builtins.int])

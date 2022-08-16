@@ -1,0 +1,2 @@
+f
+def (number: builtins.object) -> builtins.str

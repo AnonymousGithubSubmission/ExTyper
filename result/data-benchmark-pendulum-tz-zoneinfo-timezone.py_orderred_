@@ -1,0 +1,27 @@
+transitions
+['data.benchmark.pendulum.tz.zoneinfo.timezone.Timezone']
+['builtins.list[data.benchmark.pendulum.tz.zoneinfo.transition.Transition]']
+posix_rule
+['data.benchmark.pendulum.tz.zoneinfo.timezone.Timezone']
+['data.benchmark.pendulum.tz.zoneinfo.posix_timezone.PosixTimezone']
+_check_ttype
+['data.benchmark.pendulum.tz.zoneinfo.timezone.Timezone']
+['data.benchmark.pendulum.tz.zoneinfo.transition_type.TransitionType']
+['builtins.int']
+['builtins.bool']
+['builtins.str']
+['builtins.bool']
+trans_offset
+['data.benchmark.pendulum.tz.zoneinfo.posix_timezone.PosixTransition']
+['builtins.object']
+['builtins.object', 'builtins.str', 'builtins.int']
+['None']
+_extends
+['data.benchmark.pendulum.tz.zoneinfo.timezone.Timezone']
+['None']
+__init__
+['data.benchmark.pendulum.tz.zoneinfo.timezone.Timezone']
+['builtins.list[data.benchmark.pendulum.tz.zoneinfo.transition.Transition]']
+['data.benchmark.pendulum.tz.zoneinfo.posix_timezone.PosixTimezone']
+['builtins.object', 'builtins.int', 'builtins.float']
+['None']

@@ -1,0 +1,4 @@
+f
+def () -> builtins.int
+g
+def (self: staticmethod.A) -> builtins.int

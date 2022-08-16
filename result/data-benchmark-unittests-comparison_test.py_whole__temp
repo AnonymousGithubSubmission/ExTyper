@@ -1,0 +1,10 @@
+__init__
+def (self: comparison_test.A, x: builtins.object)
+__gt__
+def (comparison_test.A, comparison_test.A) -> builtins.bool
+__lt__
+def (comparison_test.A, comparison_test.A) -> builtins.bool
+__ge__
+def (comparison_test.A, comparison_test.A) -> builtins.bool
+__le__
+def (comparison_test.A, comparison_test.A) -> builtins.bool

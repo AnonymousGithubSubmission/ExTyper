@@ -1,0 +1,46 @@
+eval
+['syntax.Aexp']
+['builtins.object']
+['builtins.int']
+__init__
+['syntax.IntAexp']
+['builtins.int']
+['None']
+eval
+['syntax.IntAexp']
+['builtins.object']
+['builtins.int']
+__init__
+['syntax.VarAexp']
+['builtins.str']
+['None']
+eval
+['syntax.VarAexp']
+['builtins.dict[builtins.object, builtins.object]']
+['builtins.object']
+__init__
+['syntax.AssignStatement']
+['builtins.str']
+['syntax.Aexp', 'syntax.IntAexp', 'syntax.VarAexp']
+['None']
+__init__
+['syntax.IntAexp']
+['builtins.int']
+['None']
+__init__
+['syntax.AssignStatement']
+['builtins.str']
+['syntax.Aexp', 'syntax.IntAexp', 'syntax.VarAexp']
+['None']
+__init__
+['syntax.VarAexp']
+['builtins.str']
+['None']
+eval
+['syntax.Aexp']
+['builtins.object', 'builtins.str', 'builtins.int']
+['builtins.int']
+eval
+['syntax.AssignStatement']
+['builtins.dict[builtins.object, builtins.object]']
+['None']

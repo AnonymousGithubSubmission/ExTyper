@@ -1,0 +1,22 @@
+__init__
+['generic_class_test.Cell']
+['builtins.int', 'builtins.bool', 'generic_class_test.A']
+[]
+cget
+['generic_class_test.Cell']
+['builtins.int', 'generic_class_test.A']
+cset
+['generic_class_test.Cell']
+['builtins.int', 'builtins.bool', 'generic_class_test.A']
+[]
+foo
+['generic_class_test.A']
+['builtins.int']
+__init__
+['generic_class_test.Cell']
+['builtins.int', 'builtins.bool', 'generic_class_test.A']
+[]
+cset
+['generic_class_test.Cell']
+['builtins.int', 'builtins.bool', 'generic_class_test.A']
+[]

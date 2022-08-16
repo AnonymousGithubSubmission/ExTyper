@@ -1,0 +1,34 @@
+__init__
+def (self: comparison_test.A, x: builtins.bool)
+def (self: comparison_test.A, x: builtins.bytes)
+def (self: comparison_test.A, x: builtins.dict[builtins.object, builtins.object])
+def (self: comparison_test.A, x: builtins.float)
+def (self: comparison_test.A, x: builtins.int)
+def (self: comparison_test.A, x: builtins.list[builtins.int])
+def (self: comparison_test.A, x: builtins.list[builtins.object])
+def (self: comparison_test.A, x: builtins.list[builtins.str])
+def (self: comparison_test.A, x: builtins.object)
+def (self: comparison_test.A, x: builtins.set[builtins.object])
+def (self: comparison_test.A, x: builtins.str)
+def (self: comparison_test.A, x: comparison_test.A)
+__gt__
+def (comparison_test.A, comparison_test.A) -> builtins.bool
+__lt__
+def (comparison_test.A, comparison_test.A) -> builtins.bool
+__ge__
+def (comparison_test.A, comparison_test.A) -> builtins.bool
+__le__
+def (comparison_test.A, comparison_test.A) -> builtins.bool
+__init__
+def (self: comparison_test.A, x: builtins.bool)
+def (self: comparison_test.A, x: builtins.bytes)
+def (self: comparison_test.A, x: builtins.dict[builtins.object, builtins.object])
+def (self: comparison_test.A, x: builtins.float)
+def (self: comparison_test.A, x: builtins.int)
+def (self: comparison_test.A, x: builtins.list[builtins.int])
+def (self: comparison_test.A, x: builtins.list[builtins.object])
+def (self: comparison_test.A, x: builtins.list[builtins.str])
+def (self: comparison_test.A, x: builtins.object)
+def (self: comparison_test.A, x: builtins.set[builtins.object])
+def (self: comparison_test.A, x: builtins.str)
+def (self: comparison_test.A, x: comparison_test.A)

@@ -1,0 +1,29 @@
+lex
+def (characters: builtins.str, token_exprs: builtins.dict[builtins.bool, builtins.str]) -> <partial list[?]>
+def (characters: builtins.str, token_exprs: builtins.dict[builtins.bytes, builtins.str]) -> <partial list[?]>
+def (characters: builtins.str, token_exprs: builtins.dict[builtins.dict[builtins.object, builtins.object], builtins.str]) -> <partial list[?]>
+def (characters: builtins.str, token_exprs: builtins.dict[builtins.float, builtins.str]) -> <partial list[?]>
+def (characters: builtins.str, token_exprs: builtins.dict[builtins.int, builtins.str]) -> <partial list[?]>
+def (characters: builtins.str, token_exprs: builtins.dict[builtins.list[builtins.object], builtins.str]) -> <partial list[?]>
+def (characters: builtins.str, token_exprs: builtins.dict[builtins.object, builtins.str]) -> <partial list[?]>
+def (characters: builtins.str, token_exprs: builtins.dict[builtins.set[builtins.object], builtins.str]) -> <partial list[?]>
+def (characters: builtins.str, token_exprs: builtins.dict[builtins.str, builtins.str]) -> <partial list[?]>
+def (characters: builtins.str, token_exprs: builtins.list[builtins.str]) -> <partial list[?]>
+def (characters: builtins.str, token_exprs: builtins.set[builtins.str]) -> <partial list[?]>
+def (characters: builtins.str, token_exprs: builtins.str) -> <partial list[?]>
+lex
+def (characters: builtins.str, token_exprs: builtins.dict[builtins.bool, builtins.str]) -> <partial list[?]>
+def (characters: builtins.str, token_exprs: builtins.dict[builtins.bytes, builtins.str]) -> <partial list[?]>
+def (characters: builtins.str, token_exprs: builtins.dict[builtins.dict[builtins.object, builtins.object], builtins.str]) -> <partial list[?]>
+def (characters: builtins.str, token_exprs: builtins.dict[builtins.float, builtins.str]) -> <partial list[?]>
+def (characters: builtins.str, token_exprs: builtins.dict[builtins.int, builtins.str]) -> <partial list[?]>
+def (characters: builtins.str, token_exprs: builtins.dict[builtins.list[builtins.object], builtins.str]) -> <partial list[?]>
+def (characters: builtins.str, token_exprs: builtins.dict[builtins.object, builtins.str]) -> <partial list[?]>
+def (characters: builtins.str, token_exprs: builtins.dict[builtins.set[builtins.object], builtins.str]) -> <partial list[?]>
+def (characters: builtins.str, token_exprs: builtins.dict[builtins.str, builtins.str]) -> <partial list[?]>
+def (characters: builtins.str, token_exprs: builtins.list[Tuple[builtins.str, builtins.str]]) -> <partial list[?]>
+def (characters: builtins.str, token_exprs: builtins.list[builtins.str]) -> <partial list[?]>
+def (characters: builtins.str, token_exprs: builtins.set[builtins.str]) -> <partial list[?]>
+def (characters: builtins.str, token_exprs: builtins.str) -> <partial list[?]>
+imp_lex
+def (characters: builtins.str) -> <partial list[?]>

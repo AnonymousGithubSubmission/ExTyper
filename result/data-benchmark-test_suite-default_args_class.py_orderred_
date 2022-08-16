@@ -1,0 +1,14 @@
+__init__
+['default_args_class.A']
+['builtins.object', 'builtins.int', 'builtins.float']
+['None']
+f
+['def (x: Any =) -> default_args_class.A']
+['None']
+f
+['Overload(def (x: builtins.float =) -> default_args_class.A, def (x: builtins.int =) -> default_args_class.A, def (x: builtins.object =) -> default_args_class.A)', 'def (x: Any =) -> default_args_class.A']
+['None']
+__init__
+['default_args_class.A']
+['builtins.object', 'builtins.int', 'builtins.float']
+['None']

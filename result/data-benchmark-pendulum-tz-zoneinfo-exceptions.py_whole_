@@ -1,0 +1,4 @@
+__init__
+def (self: data.benchmark.pendulum.tz.zoneinfo.exceptions.InvalidTimezone, name: builtins.object)
+__init__
+def (self: data.benchmark.pendulum.tz.zoneinfo.exceptions.InvalidPosixSpec, spec: builtins.object)

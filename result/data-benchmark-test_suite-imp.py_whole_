@@ -1,0 +1,200 @@
+__init__
+def (self: imp.IntAexp, i: builtins.bool)
+def (self: imp.IntAexp, i: builtins.int)
+__repr__
+def (imp.IntAexp) -> builtins.str
+eval
+def (self: imp.IntAexp, env: builtins.object) -> builtins.int
+__init__
+def (self: imp.VarAexp, name: builtins.str)
+__repr__
+def (imp.VarAexp) -> builtins.str
+eval
+def (self: imp.VarAexp, env: builtins.dict[builtins.object, builtins.object]) -> builtins.object
+__init__
+def (self: imp.BinopAexp, op: builtins.str, left: imp.Aexp, right: imp.Aexp)
+def (self: imp.BinopAexp, op: builtins.str, left: imp.Aexp, right: imp.IntAexp)
+def (self: imp.BinopAexp, op: builtins.str, left: imp.VarAexp, right: imp.Aexp)
+def (self: imp.BinopAexp, op: builtins.str, left: imp.VarAexp, right: imp.IntAexp)
+__repr__
+def (imp.BinopAexp) -> builtins.str
+eval
+def (self: imp.BinopAexp, env: builtins.dict[builtins.bool, builtins.str]) -> builtins.float
+def (self: imp.BinopAexp, env: builtins.dict[builtins.float, builtins.str]) -> builtins.float
+def (self: imp.BinopAexp, env: builtins.dict[builtins.int, builtins.str]) -> builtins.float
+__init__
+def (self: imp.RelopBexp, op: builtins.str, left: imp.Aexp, right: imp.Aexp)
+def (self: imp.RelopBexp, op: builtins.str, left: imp.Aexp, right: imp.Bexp)
+def (self: imp.RelopBexp, op: builtins.str, left: imp.Aexp, right: imp.IntAexp)
+def (self: imp.RelopBexp, op: builtins.str, left: imp.Bexp, right: imp.Aexp)
+def (self: imp.RelopBexp, op: builtins.str, left: imp.Bexp, right: imp.Bexp)
+def (self: imp.RelopBexp, op: builtins.str, left: imp.Bexp, right: imp.IntAexp)
+def (self: imp.RelopBexp, op: builtins.str, left: imp.VarAexp, right: imp.Aexp)
+def (self: imp.RelopBexp, op: builtins.str, left: imp.VarAexp, right: imp.Bexp)
+def (self: imp.RelopBexp, op: builtins.str, left: imp.VarAexp, right: imp.IntAexp)
+__repr__
+def (imp.RelopBexp) -> builtins.str
+eval
+def (self: Any, env: builtins.object) -> builtins.bool
+__init__
+def (self: imp.AndBexp, left: imp.Aexp, right: imp.Aexp)
+def (self: imp.AndBexp, left: imp.Aexp, right: imp.Bexp)
+def (self: imp.AndBexp, left: imp.Bexp, right: imp.Aexp)
+def (self: imp.AndBexp, left: imp.Bexp, right: imp.Bexp)
+__repr__
+def (imp.AndBexp) -> builtins.str
+eval
+def (self: Any, env: builtins.object) -> builtins.int
+__init__
+def (self: imp.OrBexp, left: imp.Aexp, right: imp.Aexp)
+def (self: imp.OrBexp, left: imp.Aexp, right: imp.Bexp)
+def (self: imp.OrBexp, left: imp.Bexp, right: imp.Aexp)
+def (self: imp.OrBexp, left: imp.Bexp, right: imp.Bexp)
+__repr__
+def (imp.OrBexp) -> builtins.str
+eval
+def (self: Any, env: builtins.object) -> builtins.int
+__init__
+def (self: imp.NotBexp, exp: imp.Aexp)
+def (self: imp.NotBexp, exp: imp.Bexp)
+__repr__
+def (imp.NotBexp) -> builtins.str
+eval
+def (self: Any, env: builtins.object) -> builtins.bool
+__init__
+def (self: imp.AssignStatement, name: builtins.str, aexp: imp.Aexp)
+def (self: imp.AssignStatement, name: builtins.str, aexp: imp.BinopAexp)
+def (self: imp.AssignStatement, name: builtins.str, aexp: imp.IntAexp)
+__repr__
+def (imp.AssignStatement) -> builtins.str
+eval
+def (self: imp.AssignStatement, env: builtins.dict[builtins.float, builtins.str])
+def (self: imp.AssignStatement, env: builtins.dict[builtins.int, builtins.str])
+__init__
+def (self: imp.CompoundStatement, first: imp.AssignStatement, second: imp.Statement)
+def (self: imp.CompoundStatement, first: imp.AssignStatement, second: imp.WhileStatement)
+def (self: imp.CompoundStatement, first: imp.Statement, second: imp.Statement)
+def (self: imp.CompoundStatement, first: imp.Statement, second: imp.WhileStatement)
+__repr__
+def (imp.CompoundStatement) -> builtins.str
+eval
+def (self: imp.CompoundStatement, env: builtins.dict[builtins.bool, builtins.str])
+def (self: imp.CompoundStatement, env: builtins.dict[builtins.float, builtins.str])
+def (self: imp.CompoundStatement, env: builtins.dict[builtins.int, builtins.str])
+__init__
+def (self: imp.IfStatement, condition: imp.Bexp, true_stmt: imp.Statement, false_stmt: imp.Statement)
+__repr__
+def (imp.IfStatement) -> builtins.str
+eval
+def (self: Any, env: builtins.bool)
+def (self: Any, env: builtins.bytes)
+def (self: Any, env: builtins.dict[builtins.bool, builtins.str])
+def (self: Any, env: builtins.dict[builtins.bytes, builtins.str])
+def (self: Any, env: builtins.dict[builtins.float, builtins.str])
+def (self: Any, env: builtins.dict[builtins.int, builtins.str])
+def (self: Any, env: builtins.dict[builtins.object, builtins.object])
+def (self: Any, env: builtins.dict[builtins.object, builtins.str])
+def (self: Any, env: builtins.dict[builtins.str, builtins.str])
+def (self: Any, env: builtins.dict[builtins.str, imp.Aexp])
+def (self: Any, env: builtins.dict[builtins.str, imp.Bexp])
+def (self: Any, env: builtins.dict[builtins.str, imp.Statement])
+def (self: Any, env: builtins.float)
+def (self: Any, env: builtins.int)
+def (self: Any, env: builtins.list[builtins.bool])
+def (self: Any, env: builtins.list[builtins.bytes])
+def (self: Any, env: builtins.list[builtins.float])
+def (self: Any, env: builtins.list[builtins.int])
+def (self: Any, env: builtins.list[builtins.object])
+def (self: Any, env: builtins.list[builtins.str])
+def (self: Any, env: builtins.list[imp.Aexp])
+def (self: Any, env: builtins.list[imp.Bexp])
+def (self: Any, env: builtins.list[imp.Statement])
+def (self: Any, env: builtins.object)
+def (self: Any, env: builtins.set[builtins.bool])
+def (self: Any, env: builtins.set[builtins.bytes])
+def (self: Any, env: builtins.set[builtins.float])
+def (self: Any, env: builtins.set[builtins.int])
+def (self: Any, env: builtins.set[builtins.object])
+def (self: Any, env: builtins.set[builtins.str])
+def (self: Any, env: builtins.set[imp.Aexp])
+def (self: Any, env: builtins.set[imp.Bexp])
+def (self: Any, env: builtins.set[imp.Statement])
+def (self: Any, env: builtins.str)
+def (self: Any, env: imp.Aexp)
+def (self: Any, env: imp.Bexp)
+def (self: Any, env: imp.Statement)
+__init__
+def (self: imp.WhileStatement, condition: imp.Bexp, body: Any)
+def (self: imp.WhileStatement, condition: imp.RelopBexp, body: Any)
+__repr__
+def (imp.WhileStatement) -> builtins.str
+eval
+def (self: Any, env: builtins.bool)
+def (self: Any, env: builtins.bytes)
+def (self: Any, env: builtins.dict[builtins.bool, builtins.str])
+def (self: Any, env: builtins.dict[builtins.bytes, builtins.str])
+def (self: Any, env: builtins.dict[builtins.float, builtins.str])
+def (self: Any, env: builtins.dict[builtins.int, builtins.str])
+def (self: Any, env: builtins.dict[builtins.object, builtins.object])
+def (self: Any, env: builtins.dict[builtins.object, builtins.str])
+def (self: Any, env: builtins.dict[builtins.str, builtins.str])
+def (self: Any, env: builtins.dict[builtins.str, imp.Aexp])
+def (self: Any, env: builtins.dict[builtins.str, imp.Bexp])
+def (self: Any, env: builtins.dict[builtins.str, imp.Statement])
+def (self: Any, env: builtins.float)
+def (self: Any, env: builtins.int)
+def (self: Any, env: builtins.list[builtins.bool])
+def (self: Any, env: builtins.list[builtins.bytes])
+def (self: Any, env: builtins.list[builtins.float])
+def (self: Any, env: builtins.list[builtins.int])
+def (self: Any, env: builtins.list[builtins.object])
+def (self: Any, env: builtins.list[builtins.str])
+def (self: Any, env: builtins.list[imp.Aexp])
+def (self: Any, env: builtins.list[imp.Bexp])
+def (self: Any, env: builtins.list[imp.Statement])
+def (self: Any, env: builtins.object)
+def (self: Any, env: builtins.set[builtins.bool])
+def (self: Any, env: builtins.set[builtins.bytes])
+def (self: Any, env: builtins.set[builtins.float])
+def (self: Any, env: builtins.set[builtins.int])
+def (self: Any, env: builtins.set[builtins.object])
+def (self: Any, env: builtins.set[builtins.str])
+def (self: Any, env: builtins.set[imp.Aexp])
+def (self: Any, env: builtins.set[imp.Bexp])
+def (self: Any, env: builtins.set[imp.Statement])
+def (self: Any, env: builtins.str)
+def (self: Any, env: imp.Aexp)
+def (self: Any, env: imp.Bexp)
+def (self: Any, env: imp.Statement)
+__init__
+def (self: imp.VarAexp, name: builtins.str)
+__init__
+def (self: imp.IntAexp, i: builtins.bool)
+def (self: imp.IntAexp, i: builtins.int)
+__init__
+def (self: imp.AssignStatement, name: builtins.str, aexp: imp.Aexp)
+def (self: imp.AssignStatement, name: builtins.str, aexp: imp.BinopAexp)
+def (self: imp.AssignStatement, name: builtins.str, aexp: imp.IntAexp)
+__init__
+def (self: imp.RelopBexp, op: builtins.str, left: imp.Aexp, right: imp.Aexp)
+def (self: imp.RelopBexp, op: builtins.str, left: imp.Aexp, right: imp.Bexp)
+def (self: imp.RelopBexp, op: builtins.str, left: imp.Aexp, right: imp.IntAexp)
+def (self: imp.RelopBexp, op: builtins.str, left: imp.Bexp, right: imp.Aexp)
+def (self: imp.RelopBexp, op: builtins.str, left: imp.Bexp, right: imp.Bexp)
+def (self: imp.RelopBexp, op: builtins.str, left: imp.Bexp, right: imp.IntAexp)
+def (self: imp.RelopBexp, op: builtins.str, left: imp.VarAexp, right: imp.Aexp)
+def (self: imp.RelopBexp, op: builtins.str, left: imp.VarAexp, right: imp.Bexp)
+def (self: imp.RelopBexp, op: builtins.str, left: imp.VarAexp, right: imp.IntAexp)
+__init__
+def (self: imp.BinopAexp, op: builtins.str, left: imp.Aexp, right: imp.Aexp)
+def (self: imp.BinopAexp, op: builtins.str, left: imp.Aexp, right: imp.IntAexp)
+def (self: imp.BinopAexp, op: builtins.str, left: imp.VarAexp, right: imp.Aexp)
+def (self: imp.BinopAexp, op: builtins.str, left: imp.VarAexp, right: imp.IntAexp)
+__init__
+def (self: imp.WhileStatement, condition: imp.Bexp, body: Any)
+def (self: imp.WhileStatement, condition: imp.RelopBexp, body: Any)
+__init__
+def (self: imp.CompoundStatement, first: imp.AssignStatement, second: imp.Statement)
+def (self: imp.CompoundStatement, first: imp.AssignStatement, second: imp.WhileStatement)
+def (self: imp.CompoundStatement, first: imp.Statement, second: imp.Statement)
+def (self: imp.CompoundStatement, first: imp.Statement, second: imp.WhileStatement)

@@ -1,0 +1,13 @@
+__init__
+def (self: data.benchmark.pendulum.tz.zoneinfo.transition_type.TransitionType, offset: builtins.bool, is_dst: builtins.bool, abbr: builtins.str)
+def (self: data.benchmark.pendulum.tz.zoneinfo.transition_type.TransitionType, offset: builtins.int, is_dst: builtins.bool, abbr: builtins.str)
+offset
+def (self: data.benchmark.pendulum.tz.zoneinfo.transition_type.TransitionType) -> builtins.int
+abbreviation
+def (self: data.benchmark.pendulum.tz.zoneinfo.transition_type.TransitionType) -> builtins.str
+is_dst
+def (self: data.benchmark.pendulum.tz.zoneinfo.transition_type.TransitionType) -> builtins.bool
+utcoffset
+def (self: data.benchmark.pendulum.tz.zoneinfo.transition_type.TransitionType) -> datetime.timedelta
+__repr__
+def (data.benchmark.pendulum.tz.zoneinfo.transition_type.TransitionType) -> builtins.str

@@ -1,0 +1,26 @@
+__init__
+['bellman_ford.Edge']
+['builtins.int']
+['builtins.int']
+['None']
+bellman_ford
+['builtins.object', 'builtins.str', 'builtins.int']
+['Any']
+['builtins.list[builtins.int]']
+__init__
+['bellman_ford.Edge']
+['builtins.int']
+['builtins.int']
+['None']
+bellman_ford
+['builtins.object', 'builtins.str', 'builtins.int']
+['Any']
+['builtins.list[builtins.int]']
+bellman_ford
+['builtins.object', 'builtins.str', 'builtins.int']
+['Any']
+['builtins.list[builtins.int]']
+has_negative_cycle
+['builtins.object', 'builtins.str', 'builtins.int']
+['Any']
+['builtins.bool']

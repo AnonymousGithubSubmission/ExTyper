@@ -1,0 +1,24 @@
+__init__
+['comparison_test.A']
+['builtins.object', 'builtins.str', 'builtins.int']
+['None']
+__gt__
+['comparison_test.A']
+['comparison_test.A']
+['builtins.bool']
+__lt__
+['comparison_test.A']
+['comparison_test.A']
+['builtins.bool']
+__ge__
+['comparison_test.A']
+['comparison_test.A']
+['builtins.bool']
+__le__
+['comparison_test.A']
+['comparison_test.A']
+['builtins.bool']
+__init__
+['comparison_test.A']
+['builtins.object', 'builtins.str', 'builtins.int']
+['None']

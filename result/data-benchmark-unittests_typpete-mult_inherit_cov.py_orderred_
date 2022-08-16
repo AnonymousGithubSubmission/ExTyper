@@ -1,0 +1,12 @@
+f
+['mult_inherit_cov.A']
+['builtins.int']
+['None']
+f
+['mult_inherit_cov.B']
+['builtins.str']
+['None']
+f
+['mult_inherit_cov.C']
+['builtins.str', 'builtins.int']
+['None']

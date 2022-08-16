@@ -1,0 +1,17 @@
+_sign
+['builtins.int', 'builtins.float']
+['builtins.int']
+_sign
+['builtins.int', 'builtins.float']
+['builtins.int']
+add_duration
+['datetime.date', 'datetime.datetime']
+['builtins.int']
+['builtins.int']
+['builtins.int', 'builtins.float']
+['builtins.int', 'builtins.float']
+['builtins.int', 'builtins.float']
+['builtins.int', 'builtins.float']
+['builtins.int', 'builtins.float']
+['builtins.int', 'builtins.float']
+['None']

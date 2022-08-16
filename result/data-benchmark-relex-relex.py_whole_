@@ -1,0 +1,109 @@
+__init__
+def (self: relex.RelationInstancesReader, lazy: builtins.bool =, max_bag_size: builtins.int =, negative_exampels_percentage: builtins.int =, with_direct_supervision: builtins.bool =)
+def (self: relex.RelationInstancesReader, lazy: builtins.float =, max_bag_size: builtins.int =, negative_exampels_percentage: builtins.int =, with_direct_supervision: builtins.bool =)
+def (self: relex.RelationInstancesReader, lazy: builtins.int =, max_bag_size: builtins.int =, negative_exampels_percentage: builtins.int =, with_direct_supervision: builtins.bool =)
+def (self: relex.RelationInstancesReader, lazy: builtins.object =, max_bag_size: builtins.int =, negative_exampels_percentage: builtins.int =, with_direct_supervision: builtins.bool =)
+_positions
+def (self: relex.RelationInstancesReader, tokens_count: builtins.bool, e_loc: numpy.ndarray[Any, Any]) -> builtins.list[builtins.int]
+def (self: relex.RelationInstancesReader, tokens_count: builtins.int, e_loc: numpy.ndarray[Any, Any]) -> builtins.list[builtins.int]
+def (self: relex.RelationInstancesReader, tokens_count: numpy.ndarray[Any, Any], e_loc: numpy.ndarray[Any, Any]) -> builtins.list[builtins.int]
+def (self: relex.RelationInstancesReader, tokens_count: torch._tensor.Tensor, e_loc: numpy.ndarray[Any, Any]) -> builtins.list[builtins.int]
+__init__
+def (self: relex.CombDistDirectRelex, vocab: builtins.object, text_field_embedder: Any, cnn_size: builtins.int =, dropout_weight: builtins.float =, with_entity_embeddings: builtins.bool =, sent_loss_weight: builtins.int =, attention_weight_fn: builtins.str =, attention_aggregation_fn: builtins.str =)
+forward
+def (self: relex.CombDistDirectRelex, mentions: Any, positions1: torch._tensor.Tensor, positions2: torch._tensor.Tensor, is_direct_supervision_bag: numpy.ndarray[Any, Any], sent_labels: torch._tensor.Tensor, labels: torch._tensor.Tensor) -> builtins.dict[Any, builtins.str]
+get_metrics
+def (self: relex.CombDistDirectRelex, reset: builtins.bool =) -> builtins.dict[Any, builtins.str]
+__init__
+def (self: relex.MultilabelAveragePrecision, bins: builtins.int =, recall_thr: builtins.float =)
+__call__
+def (self: relex.MultilabelAveragePrecision, predictions: torch._tensor.Tensor, gold_labels: torch._tensor.Tensor)
+_thresholded_average_precision_score
+def (self: relex.MultilabelAveragePrecision, precision: builtins.bytes, recall: numpy.ndarray[Any, Any]) -> Union[Tuple[builtins.int, builtins.int], Tuple[numpy.ndarray[Any, Any], numpy.signedinteger[Any]]]
+def (self: relex.MultilabelAveragePrecision, precision: builtins.bytes, recall: torch._tensor.Tensor) -> Union[Tuple[builtins.int, builtins.int], Tuple[numpy.ndarray[Any, Any], numpy.signedinteger[Any]]]
+def (self: relex.MultilabelAveragePrecision, precision: builtins.list[builtins.bool], recall: numpy.ndarray[Any, Any]) -> Union[Tuple[builtins.int, builtins.int], Tuple[numpy.ndarray[Any, Any], numpy.signedinteger[Any]]]
+def (self: relex.MultilabelAveragePrecision, precision: builtins.list[builtins.bool], recall: torch._tensor.Tensor) -> Union[Tuple[builtins.int, builtins.int], Tuple[numpy.ndarray[Any, Any], numpy.signedinteger[Any]]]
+def (self: relex.MultilabelAveragePrecision, precision: builtins.list[builtins.bytes], recall: numpy.ndarray[Any, Any]) -> Union[Tuple[builtins.int, builtins.int], Tuple[numpy.ndarray[Any, Any], numpy.signedinteger[Any]]]
+def (self: relex.MultilabelAveragePrecision, precision: builtins.list[builtins.bytes], recall: torch._tensor.Tensor) -> Union[Tuple[builtins.int, builtins.int], Tuple[numpy.ndarray[Any, Any], numpy.signedinteger[Any]]]
+def (self: relex.MultilabelAveragePrecision, precision: builtins.list[builtins.float], recall: numpy.ndarray[Any, Any]) -> Union[Tuple[builtins.int, builtins.int], Tuple[numpy.ndarray[Any, Any], numpy.signedinteger[Any]]]
+def (self: relex.MultilabelAveragePrecision, precision: builtins.list[builtins.float], recall: torch._tensor.Tensor) -> Union[Tuple[builtins.int, builtins.int], Tuple[numpy.ndarray[Any, Any], numpy.signedinteger[Any]]]
+def (self: relex.MultilabelAveragePrecision, precision: builtins.list[builtins.int], recall: numpy.ndarray[Any, Any]) -> Union[Tuple[builtins.int, builtins.int], Tuple[numpy.ndarray[Any, Any], numpy.signedinteger[Any]]]
+def (self: relex.MultilabelAveragePrecision, precision: builtins.list[builtins.int], recall: torch._tensor.Tensor) -> Union[Tuple[builtins.int, builtins.int], Tuple[numpy.ndarray[Any, Any], numpy.signedinteger[Any]]]
+def (self: relex.MultilabelAveragePrecision, precision: builtins.list[torch._tensor.Tensor], recall: numpy.ndarray[Any, Any]) -> Union[Tuple[builtins.int, builtins.int], Tuple[numpy.ndarray[Any, Any], numpy.signedinteger[Any]]]
+def (self: relex.MultilabelAveragePrecision, precision: builtins.list[torch._tensor.Tensor], recall: torch._tensor.Tensor) -> Union[Tuple[builtins.int, builtins.int], Tuple[numpy.ndarray[Any, Any], numpy.signedinteger[Any]]]
+def (self: relex.MultilabelAveragePrecision, precision: numpy.ndarray[Any, Any], recall: numpy.ndarray[Any, Any]) -> Union[Tuple[builtins.int, builtins.int], Tuple[numpy.ndarray[Any, Any], numpy.signedinteger[Any]]]
+def (self: relex.MultilabelAveragePrecision, precision: numpy.ndarray[Any, Any], recall: torch._tensor.Tensor) -> Union[Tuple[builtins.int, builtins.int], Tuple[numpy.ndarray[Any, Any], numpy.signedinteger[Any]]]
+def (self: relex.MultilabelAveragePrecision, precision: torch._tensor.Tensor, recall: numpy.ndarray[Any, Any]) -> Union[Tuple[builtins.int, builtins.int], Tuple[numpy.ndarray[Any, Any], numpy.signedinteger[Any]]]
+def (self: relex.MultilabelAveragePrecision, precision: torch._tensor.Tensor, recall: torch._tensor.Tensor) -> Union[Tuple[builtins.int, builtins.int], Tuple[numpy.ndarray[Any, Any], numpy.signedinteger[Any]]]
+reset
+def (self: relex.MultilabelAveragePrecision)
+get_metric
+def (self: relex.MultilabelAveragePrecision, reset: builtins.bool =) -> Union[builtins.int, numpy.ndarray[Any, Any]]
+def (self: relex.MultilabelAveragePrecision, reset: builtins.float =) -> Union[builtins.int, numpy.ndarray[Any, Any]]
+def (self: relex.MultilabelAveragePrecision, reset: builtins.int =) -> Union[builtins.int, numpy.ndarray[Any, Any]]
+def (self: relex.MultilabelAveragePrecision, reset: builtins.object =) -> Union[builtins.int, numpy.ndarray[Any, Any]]
+_positions
+def (self: relex.RelationInstancesReader, tokens_count: builtins.bool, e_loc: builtins.list[Tuple[builtins.int, builtins.str]]) -> builtins.list[builtins.int]
+def (self: relex.RelationInstancesReader, tokens_count: builtins.bool, e_loc: numpy.ndarray[Any, Any]) -> builtins.list[builtins.int]
+def (self: relex.RelationInstancesReader, tokens_count: builtins.int, e_loc: builtins.list[Tuple[builtins.int, builtins.str]]) -> builtins.list[builtins.int]
+def (self: relex.RelationInstancesReader, tokens_count: builtins.int, e_loc: numpy.ndarray[Any, Any]) -> builtins.list[builtins.int]
+def (self: relex.RelationInstancesReader, tokens_count: numpy.ndarray[Any, Any], e_loc: builtins.list[Tuple[builtins.int, builtins.str]]) -> builtins.list[builtins.int]
+def (self: relex.RelationInstancesReader, tokens_count: numpy.ndarray[Any, Any], e_loc: numpy.ndarray[Any, Any]) -> builtins.list[builtins.int]
+def (self: relex.RelationInstancesReader, tokens_count: torch._tensor.Tensor, e_loc: builtins.list[Tuple[builtins.int, builtins.str]]) -> builtins.list[builtins.int]
+def (self: relex.RelationInstancesReader, tokens_count: torch._tensor.Tensor, e_loc: numpy.ndarray[Any, Any]) -> builtins.list[builtins.int]
+_tokens_distances
+def (self: relex.RelationInstancesReader, tokens: builtins.list[allennlp.data.tokenizers.token_class.Token]) -> Tuple[builtins.list[allennlp.data.tokenizers.token_class.Token], builtins.list[builtins.int], builtins.list[builtins.int]]
+_tokens_distances_fields
+def (self: relex.RelationInstancesReader, tokens: builtins.list[allennlp.data.tokenizers.token_class.Token]) -> Tuple[builtins.int, builtins.int, builtins.int]
+text_to_instance
+def (self: relex.RelationInstancesReader, e1: builtins.str, e2: builtins.str, rels: builtins.list[builtins.str], mentions: builtins.dict[allennlp.data.tokenizers.token_class.Token, builtins.str], is_predict: builtins.object, supervision_type: builtins.object) -> allennlp.data.instance.Instance
+def (self: relex.RelationInstancesReader, e1: builtins.str, e2: builtins.str, rels: builtins.list[builtins.str], mentions: builtins.dict[builtins.bool, builtins.str], is_predict: builtins.object, supervision_type: builtins.object) -> allennlp.data.instance.Instance
+def (self: relex.RelationInstancesReader, e1: builtins.str, e2: builtins.str, rels: builtins.list[builtins.str], mentions: builtins.dict[builtins.bytes, builtins.str], is_predict: builtins.object, supervision_type: builtins.object) -> allennlp.data.instance.Instance
+def (self: relex.RelationInstancesReader, e1: builtins.str, e2: builtins.str, rels: builtins.list[builtins.str], mentions: builtins.dict[builtins.float, builtins.str], is_predict: builtins.object, supervision_type: builtins.object) -> allennlp.data.instance.Instance
+def (self: relex.RelationInstancesReader, e1: builtins.str, e2: builtins.str, rels: builtins.list[builtins.str], mentions: builtins.dict[builtins.int, builtins.str], is_predict: builtins.object, supervision_type: builtins.object) -> allennlp.data.instance.Instance
+def (self: relex.RelationInstancesReader, e1: builtins.str, e2: builtins.str, rels: builtins.list[builtins.str], mentions: builtins.dict[builtins.object, builtins.str], is_predict: builtins.object, supervision_type: builtins.object) -> allennlp.data.instance.Instance
+def (self: relex.RelationInstancesReader, e1: builtins.str, e2: builtins.str, rels: builtins.list[builtins.str], mentions: builtins.dict[builtins.str, builtins.str], is_predict: builtins.object, supervision_type: builtins.object) -> allennlp.data.instance.Instance
+def (self: relex.RelationInstancesReader, e1: builtins.str, e2: builtins.str, rels: builtins.list[builtins.str], mentions: builtins.dict[builtins.str, datetime.date], is_predict: builtins.object, supervision_type: builtins.object) -> allennlp.data.instance.Instance
+def (self: relex.RelationInstancesReader, e1: builtins.str, e2: builtins.str, rels: builtins.list[builtins.str], mentions: builtins.dict[builtins.str, torch._tensor.Tensor], is_predict: builtins.object, supervision_type: builtins.object) -> allennlp.data.instance.Instance
+def (self: relex.RelationInstancesReader, e1: builtins.str, e2: builtins.str, rels: builtins.list[builtins.str], mentions: builtins.list[builtins.str], is_predict: builtins.object, supervision_type: builtins.object) -> allennlp.data.instance.Instance
+def (self: relex.RelationInstancesReader, e1: builtins.str, e2: builtins.str, rels: builtins.list[builtins.str], mentions: builtins.set[builtins.str], is_predict: builtins.object, supervision_type: builtins.object) -> allennlp.data.instance.Instance
+def (self: relex.RelationInstancesReader, e1: builtins.str, e2: builtins.str, rels: builtins.list[builtins.str], mentions: builtins.str, is_predict: builtins.object, supervision_type: builtins.object) -> allennlp.data.instance.Instance
+def (self: relex.RelationInstancesReader, e1: builtins.str, e2: builtins.str, rels: builtins.list[builtins.str], mentions: numpy.ndarray[Any, Any], is_predict: builtins.object, supervision_type: builtins.object) -> allennlp.data.instance.Instance
+def (self: relex.RelationInstancesReader, e1: builtins.str, e2: builtins.str, rels: builtins.list[builtins.str], mentions: torch._tensor.Tensor, is_predict: builtins.object, supervision_type: builtins.object) -> allennlp.data.instance.Instance
+text_to_instance
+def (self: relex.RelationInstancesReader, e1: builtins.str, e2: builtins.str, rels: builtins.list[builtins.str], mentions: builtins.dict[allennlp.data.tokenizers.token_class.Token, builtins.str], is_predict: builtins.object, supervision_type: builtins.object) -> allennlp.data.instance.Instance
+def (self: relex.RelationInstancesReader, e1: builtins.str, e2: builtins.str, rels: builtins.list[builtins.str], mentions: builtins.dict[builtins.bool, builtins.str], is_predict: builtins.object, supervision_type: builtins.object) -> allennlp.data.instance.Instance
+def (self: relex.RelationInstancesReader, e1: builtins.str, e2: builtins.str, rels: builtins.list[builtins.str], mentions: builtins.dict[builtins.bytes, builtins.str], is_predict: builtins.object, supervision_type: builtins.object) -> allennlp.data.instance.Instance
+def (self: relex.RelationInstancesReader, e1: builtins.str, e2: builtins.str, rels: builtins.list[builtins.str], mentions: builtins.dict[builtins.float, builtins.str], is_predict: builtins.object, supervision_type: builtins.object) -> allennlp.data.instance.Instance
+def (self: relex.RelationInstancesReader, e1: builtins.str, e2: builtins.str, rels: builtins.list[builtins.str], mentions: builtins.dict[builtins.int, builtins.str], is_predict: builtins.object, supervision_type: builtins.object) -> allennlp.data.instance.Instance
+def (self: relex.RelationInstancesReader, e1: builtins.str, e2: builtins.str, rels: builtins.list[builtins.str], mentions: builtins.dict[builtins.object, builtins.str], is_predict: builtins.object, supervision_type: builtins.object) -> allennlp.data.instance.Instance
+def (self: relex.RelationInstancesReader, e1: builtins.str, e2: builtins.str, rels: builtins.list[builtins.str], mentions: builtins.dict[builtins.str, builtins.str], is_predict: builtins.object, supervision_type: builtins.object) -> allennlp.data.instance.Instance
+def (self: relex.RelationInstancesReader, e1: builtins.str, e2: builtins.str, rels: builtins.list[builtins.str], mentions: builtins.dict[builtins.str, datetime.date], is_predict: builtins.object, supervision_type: builtins.object) -> allennlp.data.instance.Instance
+def (self: relex.RelationInstancesReader, e1: builtins.str, e2: builtins.str, rels: builtins.list[builtins.str], mentions: builtins.dict[builtins.str, torch._tensor.Tensor], is_predict: builtins.object, supervision_type: builtins.object) -> allennlp.data.instance.Instance
+def (self: relex.RelationInstancesReader, e1: builtins.str, e2: builtins.str, rels: builtins.list[builtins.str], mentions: builtins.list[builtins.str], is_predict: builtins.object, supervision_type: builtins.object) -> allennlp.data.instance.Instance
+def (self: relex.RelationInstancesReader, e1: builtins.str, e2: builtins.str, rels: builtins.list[builtins.str], mentions: builtins.set[Any], is_predict: builtins.object, supervision_type: builtins.object) -> allennlp.data.instance.Instance
+def (self: relex.RelationInstancesReader, e1: builtins.str, e2: builtins.str, rels: builtins.list[builtins.str], mentions: builtins.set[builtins.str], is_predict: builtins.object, supervision_type: builtins.object) -> allennlp.data.instance.Instance
+def (self: relex.RelationInstancesReader, e1: builtins.str, e2: builtins.str, rels: builtins.list[builtins.str], mentions: builtins.str, is_predict: builtins.object, supervision_type: builtins.object) -> allennlp.data.instance.Instance
+def (self: relex.RelationInstancesReader, e1: builtins.str, e2: builtins.str, rels: builtins.list[builtins.str], mentions: numpy.ndarray[Any, Any], is_predict: builtins.object, supervision_type: builtins.object) -> allennlp.data.instance.Instance
+def (self: relex.RelationInstancesReader, e1: builtins.str, e2: builtins.str, rels: builtins.list[builtins.str], mentions: torch._tensor.Tensor, is_predict: builtins.object, supervision_type: builtins.object) -> allennlp.data.instance.Instance
+_json_to_instance
+def (self: relex.RelationExtractionPredictor, json_dict: builtins.dict[builtins.str, builtins.str]) -> Tuple[allennlp.data.instance.Instance, builtins.dict[<nothing>, <nothing>]]
+def (self: relex.RelationExtractionPredictor, json_dict: numpy.ndarray[Any, Any]) -> Tuple[allennlp.data.instance.Instance, builtins.dict[<nothing>, <nothing>]]
+text_to_instance
+def (self: relex.RelationInstancesReader, e1: builtins.str, e2: builtins.str, rels: builtins.list[builtins.str], mentions: builtins.dict[allennlp.data.tokenizers.token_class.Token, builtins.str], is_predict: builtins.object, supervision_type: builtins.object) -> allennlp.data.instance.Instance
+def (self: relex.RelationInstancesReader, e1: builtins.str, e2: builtins.str, rels: builtins.list[builtins.str], mentions: builtins.dict[builtins.bool, builtins.str], is_predict: builtins.object, supervision_type: builtins.object) -> allennlp.data.instance.Instance
+def (self: relex.RelationInstancesReader, e1: builtins.str, e2: builtins.str, rels: builtins.list[builtins.str], mentions: builtins.dict[builtins.bytes, builtins.str], is_predict: builtins.object, supervision_type: builtins.object) -> allennlp.data.instance.Instance
+def (self: relex.RelationInstancesReader, e1: builtins.str, e2: builtins.str, rels: builtins.list[builtins.str], mentions: builtins.dict[builtins.float, builtins.str], is_predict: builtins.object, supervision_type: builtins.object) -> allennlp.data.instance.Instance
+def (self: relex.RelationInstancesReader, e1: builtins.str, e2: builtins.str, rels: builtins.list[builtins.str], mentions: builtins.dict[builtins.int, builtins.str], is_predict: builtins.object, supervision_type: builtins.object) -> allennlp.data.instance.Instance
+def (self: relex.RelationInstancesReader, e1: builtins.str, e2: builtins.str, rels: builtins.list[builtins.str], mentions: builtins.dict[builtins.object, builtins.str], is_predict: builtins.object, supervision_type: builtins.object) -> allennlp.data.instance.Instance
+def (self: relex.RelationInstancesReader, e1: builtins.str, e2: builtins.str, rels: builtins.list[builtins.str], mentions: builtins.dict[builtins.str, builtins.str], is_predict: builtins.object, supervision_type: builtins.object) -> allennlp.data.instance.Instance
+def (self: relex.RelationInstancesReader, e1: builtins.str, e2: builtins.str, rels: builtins.list[builtins.str], mentions: builtins.dict[builtins.str, datetime.date], is_predict: builtins.object, supervision_type: builtins.object) -> allennlp.data.instance.Instance
+def (self: relex.RelationInstancesReader, e1: builtins.str, e2: builtins.str, rels: builtins.list[builtins.str], mentions: builtins.dict[builtins.str, torch._tensor.Tensor], is_predict: builtins.object, supervision_type: builtins.object) -> allennlp.data.instance.Instance
+def (self: relex.RelationInstancesReader, e1: builtins.str, e2: builtins.str, rels: builtins.list[builtins.str], mentions: builtins.list[builtins.str], is_predict: builtins.object, supervision_type: builtins.object) -> allennlp.data.instance.Instance
+def (self: relex.RelationInstancesReader, e1: builtins.str, e2: builtins.str, rels: builtins.list[builtins.str], mentions: builtins.set[Any], is_predict: builtins.object, supervision_type: builtins.object) -> allennlp.data.instance.Instance
+def (self: relex.RelationInstancesReader, e1: builtins.str, e2: builtins.str, rels: builtins.list[builtins.str], mentions: builtins.set[builtins.str], is_predict: builtins.object, supervision_type: builtins.object) -> allennlp.data.instance.Instance
+def (self: relex.RelationInstancesReader, e1: builtins.str, e2: builtins.str, rels: builtins.list[builtins.str], mentions: builtins.str, is_predict: builtins.object, supervision_type: builtins.object) -> allennlp.data.instance.Instance
+def (self: relex.RelationInstancesReader, e1: builtins.str, e2: builtins.str, rels: builtins.list[builtins.str], mentions: numpy.ndarray[Any, Any], is_predict: builtins.object, supervision_type: builtins.object) -> allennlp.data.instance.Instance
+def (self: relex.RelationInstancesReader, e1: builtins.str, e2: builtins.str, rels: builtins.list[builtins.str], mentions: torch._tensor.Tensor, is_predict: builtins.object, supervision_type: builtins.object) -> allennlp.data.instance.Instance
+_read
+def (self: relex.RelationInstancesReader, file_path: builtins.str)

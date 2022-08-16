@@ -1,0 +1,25 @@
+__init__
+def (self: linked_list.Node, data: builtins.bool)
+def (self: linked_list.Node, data: builtins.int)
+get_data
+def (self: linked_list.Node) -> builtins.int
+set_data
+def (self: linked_list.Node, data: builtins.bool)
+def (self: linked_list.Node, data: builtins.int)
+get_next_node
+def (self: linked_list.Node) -> linked_list.Node
+set_next_node
+def (self: linked_list.Node, node: linked_list.Node)
+__init__
+def (self: linked_list.LList)
+is_empty
+def (self: linked_list.LList) -> builtins.bool
+insert_at_begin
+def (self: linked_list.LList, value: builtins.bool)
+def (self: linked_list.LList, value: builtins.int)
+__init__
+def (self: linked_list.Node, data: builtins.bool)
+def (self: linked_list.Node, data: builtins.int)
+insert_at_begin
+def (self: linked_list.LList, value: builtins.bool)
+def (self: linked_list.LList, value: builtins.int)

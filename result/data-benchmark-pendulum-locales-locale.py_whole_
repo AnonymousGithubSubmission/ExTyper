@@ -1,0 +1,46 @@
+__init__
+def (self: data.benchmark.pendulum.locales.locale.Locale, locale: builtins.str, data: builtins.dict[builtins.bool, builtins.str])
+def (self: data.benchmark.pendulum.locales.locale.Locale, locale: builtins.str, data: builtins.dict[builtins.bytes, builtins.str])
+def (self: data.benchmark.pendulum.locales.locale.Locale, locale: builtins.str, data: builtins.dict[builtins.float, builtins.str])
+def (self: data.benchmark.pendulum.locales.locale.Locale, locale: builtins.str, data: builtins.dict[builtins.int, builtins.str])
+def (self: data.benchmark.pendulum.locales.locale.Locale, locale: builtins.str, data: builtins.dict[builtins.object, builtins.str])
+def (self: data.benchmark.pendulum.locales.locale.Locale, locale: builtins.str, data: builtins.dict[builtins.str, builtins.str])
+def (self: data.benchmark.pendulum.locales.locale.Locale, locale: builtins.str, data: builtins.dict[builtins.str, data.benchmark.pendulum._extensions.helpers.PreciseDiff])
+def (self: data.benchmark.pendulum.locales.locale.Locale, locale: builtins.str, data: builtins.dict[builtins.str, data.benchmark.pendulum.date.Date])
+def (self: data.benchmark.pendulum.locales.locale.Locale, locale: builtins.str, data: builtins.dict[builtins.str, data.benchmark.pendulum.datetime.DateTime])
+def (self: data.benchmark.pendulum.locales.locale.Locale, locale: builtins.str, data: builtins.dict[builtins.str, data.benchmark.pendulum.formatting.difference_formatter.DifferenceFormatter])
+def (self: data.benchmark.pendulum.locales.locale.Locale, locale: builtins.str, data: builtins.dict[builtins.str, data.benchmark.pendulum.formatting.formatter.Formatter])
+def (self: data.benchmark.pendulum.locales.locale.Locale, locale: builtins.str, data: builtins.dict[builtins.str, data.benchmark.pendulum.locales.locale.Locale])
+def (self: data.benchmark.pendulum.locales.locale.Locale, locale: builtins.str, data: builtins.dict[builtins.str, data.benchmark.pendulum.mixins.default.FormattableMixin])
+def (self: data.benchmark.pendulum.locales.locale.Locale, locale: builtins.str, data: builtins.dict[builtins.str, data.benchmark.pendulum.parsing._Interval])
+def (self: data.benchmark.pendulum.locales.locale.Locale, locale: builtins.str, data: builtins.dict[builtins.str, data.benchmark.pendulum.time.Time])
+def (self: data.benchmark.pendulum.locales.locale.Locale, locale: builtins.str, data: builtins.dict[builtins.str, data.benchmark.pendulum.tz.zoneinfo.posix_timezone.PosixTimezone])
+def (self: data.benchmark.pendulum.locales.locale.Locale, locale: builtins.str, data: builtins.dict[builtins.str, data.benchmark.pendulum.tz.zoneinfo.posix_timezone.PosixTransition])
+def (self: data.benchmark.pendulum.locales.locale.Locale, locale: builtins.str, data: builtins.dict[builtins.str, data.benchmark.pendulum.tz.zoneinfo.reader.Reader])
+def (self: data.benchmark.pendulum.locales.locale.Locale, locale: builtins.str, data: builtins.dict[builtins.str, data.benchmark.pendulum.tz.zoneinfo.reader._offset])
+def (self: data.benchmark.pendulum.locales.locale.Locale, locale: builtins.str, data: builtins.dict[builtins.str, data.benchmark.pendulum.tz.zoneinfo.reader.header])
+def (self: data.benchmark.pendulum.locales.locale.Locale, locale: builtins.str, data: builtins.dict[builtins.str, data.benchmark.pendulum.tz.zoneinfo.timezone.Timezone])
+def (self: data.benchmark.pendulum.locales.locale.Locale, locale: builtins.str, data: builtins.dict[builtins.str, data.benchmark.pendulum.tz.zoneinfo.transition.Transition])
+def (self: data.benchmark.pendulum.locales.locale.Locale, locale: builtins.str, data: builtins.dict[builtins.str, data.benchmark.pendulum.tz.zoneinfo.transition_type.TransitionType])
+def (self: data.benchmark.pendulum.locales.locale.Locale, locale: builtins.str, data: builtins.dict[builtins.str, datetime.date])
+def (self: data.benchmark.pendulum.locales.locale.Locale, locale: builtins.str, data: builtins.dict[builtins.str, datetime.datetime])
+def (self: data.benchmark.pendulum.locales.locale.Locale, locale: builtins.str, data: builtins.dict[builtins.str, datetime.time])
+def (self: data.benchmark.pendulum.locales.locale.Locale, locale: builtins.str, data: builtins.dict[builtins.str, datetime.timedelta])
+def (self: data.benchmark.pendulum.locales.locale.Locale, locale: builtins.str, data: builtins.dict[builtins.str, datetime.timezone])
+def (self: data.benchmark.pendulum.locales.locale.Locale, locale: builtins.str, data: builtins.dict[builtins.str, datetime.tzinfo])
+def (self: data.benchmark.pendulum.locales.locale.Locale, locale: builtins.str, data: builtins.dict[builtins.str, typing.TypeVar])
+normalize_locale
+def (cls: data.benchmark.pendulum.locales.locale.Locale, locale: builtins.bytes) -> builtins.bytes
+def (cls: data.benchmark.pendulum.locales.locale.Locale, locale: builtins.str) -> builtins.str
+get
+def (self: data.benchmark.pendulum.locales.locale.Locale, key: builtins.str, default: builtins.object =) -> builtins.str
+translation
+def (self: data.benchmark.pendulum.locales.locale.Locale, key: builtins.object) -> builtins.str
+plural
+def (self: data.benchmark.pendulum.locales.locale.Locale, number: builtins.object) -> Union[builtins.bytes, builtins.str]
+ordinal
+def (self: data.benchmark.pendulum.locales.locale.Locale, number: builtins.object) -> Union[builtins.bytes, builtins.str]
+ordinalize
+def (self: data.benchmark.pendulum.locales.locale.Locale, number: Any) -> Any
+__repr__
+def (data.benchmark.pendulum.locales.locale.Locale) -> builtins.str

@@ -1,0 +1,28 @@
+__init__
+def (self: vehicle.Vehicle, miles: builtins.bool, make: builtins.str, model: builtins.str, year: builtins.bool, sold_on: builtins.bool)
+def (self: vehicle.Vehicle, miles: builtins.bool, make: builtins.str, model: builtins.str, year: builtins.bool, sold_on: builtins.int)
+def (self: vehicle.Vehicle, miles: builtins.bool, make: builtins.str, model: builtins.str, year: builtins.int, sold_on: builtins.bool)
+def (self: vehicle.Vehicle, miles: builtins.bool, make: builtins.str, model: builtins.str, year: builtins.int, sold_on: builtins.int)
+def (self: vehicle.Vehicle, miles: builtins.int, make: builtins.str, model: builtins.str, year: builtins.bool, sold_on: builtins.bool)
+def (self: vehicle.Vehicle, miles: builtins.int, make: builtins.str, model: builtins.str, year: builtins.bool, sold_on: builtins.int)
+def (self: vehicle.Vehicle, miles: builtins.int, make: builtins.str, model: builtins.str, year: builtins.int, sold_on: builtins.bool)
+def (self: vehicle.Vehicle, miles: builtins.int, make: builtins.str, model: builtins.str, year: builtins.int, sold_on: builtins.int)
+sale_price
+def (self: vehicle.Vehicle) -> builtins.float
+purchase_price
+def (self: vehicle.Vehicle) -> builtins.float
+vehicle_type
+def (self: vehicle.Car) -> builtins.str
+vehicle_type
+def (self: vehicle.Truck) -> builtins.str
+vehicle_type
+def (self: vehicle.Motorcycle) -> builtins.str
+__init__
+def (self: vehicle.Vehicle, miles: builtins.bool, make: builtins.str, model: builtins.str, year: builtins.bool, sold_on: builtins.bool)
+def (self: vehicle.Vehicle, miles: builtins.bool, make: builtins.str, model: builtins.str, year: builtins.bool, sold_on: builtins.int)
+def (self: vehicle.Vehicle, miles: builtins.bool, make: builtins.str, model: builtins.str, year: builtins.int, sold_on: builtins.bool)
+def (self: vehicle.Vehicle, miles: builtins.bool, make: builtins.str, model: builtins.str, year: builtins.int, sold_on: builtins.int)
+def (self: vehicle.Vehicle, miles: builtins.int, make: builtins.str, model: builtins.str, year: builtins.bool, sold_on: builtins.bool)
+def (self: vehicle.Vehicle, miles: builtins.int, make: builtins.str, model: builtins.str, year: builtins.bool, sold_on: builtins.int)
+def (self: vehicle.Vehicle, miles: builtins.int, make: builtins.str, model: builtins.str, year: builtins.int, sold_on: builtins.bool)
+def (self: vehicle.Vehicle, miles: builtins.int, make: builtins.str, model: builtins.str, year: builtins.int, sold_on: builtins.int)

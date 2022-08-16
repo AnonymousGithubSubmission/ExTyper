@@ -1,0 +1,284 @@
+_divide_and_round
+def (a: builtins.bool, b: builtins.bool) -> builtins.float
+def (a: builtins.bool, b: builtins.bool) -> builtins.int
+def (a: builtins.bool, b: builtins.int) -> builtins.float
+def (a: builtins.bool, b: builtins.int) -> builtins.int
+def (a: builtins.float, b: builtins.bool) -> builtins.float
+def (a: builtins.float, b: builtins.bool) -> builtins.int
+def (a: builtins.float, b: builtins.float) -> builtins.float
+def (a: builtins.float, b: builtins.int) -> builtins.float
+def (a: builtins.float, b: builtins.int) -> builtins.int
+def (a: builtins.int, b: builtins.bool) -> builtins.float
+def (a: builtins.int, b: builtins.bool) -> builtins.int
+def (a: builtins.int, b: builtins.int) -> builtins.float
+def (a: builtins.int, b: builtins.int) -> builtins.int
+total_seconds
+def (self: data.benchmark.pendulum.duration.Duration) -> builtins.int
+years
+def (self: data.benchmark.pendulum.duration.Duration) -> builtins.int
+months
+def (self: data.benchmark.pendulum.duration.Duration) -> builtins.int
+weeks
+def (self: data.benchmark.pendulum.duration.Duration) -> builtins.int
+days
+def (self: data.benchmark.pendulum.duration.Duration) -> builtins.int
+remaining_days
+def (self: data.benchmark.pendulum.duration.Duration) -> builtins.int
+seconds
+def (self: data.benchmark.pendulum.duration.Duration) -> builtins.int
+microseconds
+def (self: data.benchmark.pendulum.duration.Duration) -> builtins.int
+invert
+def (self: data.benchmark.pendulum.duration.Duration) -> builtins.int
+in_seconds
+def (self: data.benchmark.pendulum.duration.Duration) -> builtins.int
+_sign
+def (self: data.benchmark.pendulum.duration.Duration, value: builtins.bool) -> builtins.int
+def (self: data.benchmark.pendulum.duration.Duration, value: builtins.float) -> builtins.int
+def (self: data.benchmark.pendulum.duration.Duration, value: builtins.int) -> builtins.int
+as_timedelta
+def (self: data.benchmark.pendulum.duration.Duration) -> datetime.timedelta
+__add__
+def (data.benchmark.pendulum.duration.Duration, builtins.bool) -> builtins._NotImplementedType
+def (data.benchmark.pendulum.duration.Duration, builtins.bytes) -> builtins._NotImplementedType
+def (data.benchmark.pendulum.duration.Duration, builtins.dict[builtins.object, builtins.object]) -> builtins._NotImplementedType
+def (data.benchmark.pendulum.duration.Duration, builtins.float) -> builtins._NotImplementedType
+def (data.benchmark.pendulum.duration.Duration, builtins.int) -> builtins._NotImplementedType
+def (data.benchmark.pendulum.duration.Duration, builtins.list[builtins.int]) -> builtins._NotImplementedType
+def (data.benchmark.pendulum.duration.Duration, builtins.list[builtins.object]) -> builtins._NotImplementedType
+def (data.benchmark.pendulum.duration.Duration, builtins.list[builtins.str]) -> builtins._NotImplementedType
+def (data.benchmark.pendulum.duration.Duration, builtins.set[builtins.object]) -> builtins._NotImplementedType
+def (data.benchmark.pendulum.duration.Duration, builtins.str) -> builtins._NotImplementedType
+def (data.benchmark.pendulum.duration.Duration, data.benchmark.pendulum._extensions.helpers.PreciseDiff) -> builtins._NotImplementedType
+def (data.benchmark.pendulum.duration.Duration, data.benchmark.pendulum.date.Date) -> builtins._NotImplementedType
+def (data.benchmark.pendulum.duration.Duration, data.benchmark.pendulum.datetime.DateTime) -> builtins._NotImplementedType
+def (data.benchmark.pendulum.duration.Duration, data.benchmark.pendulum.formatting.difference_formatter.DifferenceFormatter) -> builtins._NotImplementedType
+def (data.benchmark.pendulum.duration.Duration, data.benchmark.pendulum.formatting.formatter.Formatter) -> builtins._NotImplementedType
+def (data.benchmark.pendulum.duration.Duration, data.benchmark.pendulum.locales.locale.Locale) -> builtins._NotImplementedType
+def (data.benchmark.pendulum.duration.Duration, data.benchmark.pendulum.mixins.default.FormattableMixin) -> builtins._NotImplementedType
+def (data.benchmark.pendulum.duration.Duration, data.benchmark.pendulum.parsing._Interval) -> builtins._NotImplementedType
+def (data.benchmark.pendulum.duration.Duration, data.benchmark.pendulum.time.Time) -> builtins._NotImplementedType
+def (data.benchmark.pendulum.duration.Duration, data.benchmark.pendulum.tz.zoneinfo.posix_timezone.PosixTimezone) -> builtins._NotImplementedType
+def (data.benchmark.pendulum.duration.Duration, data.benchmark.pendulum.tz.zoneinfo.posix_timezone.PosixTransition) -> builtins._NotImplementedType
+def (data.benchmark.pendulum.duration.Duration, data.benchmark.pendulum.tz.zoneinfo.reader.Reader) -> builtins._NotImplementedType
+def (data.benchmark.pendulum.duration.Duration, data.benchmark.pendulum.tz.zoneinfo.reader._offset) -> builtins._NotImplementedType
+def (data.benchmark.pendulum.duration.Duration, data.benchmark.pendulum.tz.zoneinfo.reader.header) -> builtins._NotImplementedType
+def (data.benchmark.pendulum.duration.Duration, data.benchmark.pendulum.tz.zoneinfo.timezone.Timezone) -> builtins._NotImplementedType
+def (data.benchmark.pendulum.duration.Duration, data.benchmark.pendulum.tz.zoneinfo.transition.Transition) -> builtins._NotImplementedType
+def (data.benchmark.pendulum.duration.Duration, data.benchmark.pendulum.tz.zoneinfo.transition_type.TransitionType) -> builtins._NotImplementedType
+def (data.benchmark.pendulum.duration.Duration, datetime.date) -> builtins._NotImplementedType
+def (data.benchmark.pendulum.duration.Duration, datetime.datetime) -> builtins._NotImplementedType
+def (data.benchmark.pendulum.duration.Duration, datetime.time) -> builtins._NotImplementedType
+def (data.benchmark.pendulum.duration.Duration, datetime.timezone) -> builtins._NotImplementedType
+def (data.benchmark.pendulum.duration.Duration, datetime.tzinfo) -> builtins._NotImplementedType
+def (data.benchmark.pendulum.duration.Duration, typing.Match[Any]) -> builtins._NotImplementedType
+def (data.benchmark.pendulum.duration.Duration, typing.Pattern[Any]) -> builtins._NotImplementedType
+def (data.benchmark.pendulum.duration.Duration, typing.TypeVar) -> builtins._NotImplementedType
+__sub__
+def (data.benchmark.pendulum.duration.Duration, builtins.bool) -> builtins._NotImplementedType
+def (data.benchmark.pendulum.duration.Duration, builtins.bytes) -> builtins._NotImplementedType
+def (data.benchmark.pendulum.duration.Duration, builtins.dict[builtins.object, builtins.object]) -> builtins._NotImplementedType
+def (data.benchmark.pendulum.duration.Duration, builtins.float) -> builtins._NotImplementedType
+def (data.benchmark.pendulum.duration.Duration, builtins.int) -> builtins._NotImplementedType
+def (data.benchmark.pendulum.duration.Duration, builtins.list[builtins.int]) -> builtins._NotImplementedType
+def (data.benchmark.pendulum.duration.Duration, builtins.list[builtins.object]) -> builtins._NotImplementedType
+def (data.benchmark.pendulum.duration.Duration, builtins.list[builtins.str]) -> builtins._NotImplementedType
+def (data.benchmark.pendulum.duration.Duration, builtins.set[builtins.object]) -> builtins._NotImplementedType
+def (data.benchmark.pendulum.duration.Duration, builtins.str) -> builtins._NotImplementedType
+def (data.benchmark.pendulum.duration.Duration, data.benchmark.pendulum._extensions.helpers.PreciseDiff) -> builtins._NotImplementedType
+def (data.benchmark.pendulum.duration.Duration, data.benchmark.pendulum.date.Date) -> builtins._NotImplementedType
+def (data.benchmark.pendulum.duration.Duration, data.benchmark.pendulum.datetime.DateTime) -> builtins._NotImplementedType
+def (data.benchmark.pendulum.duration.Duration, data.benchmark.pendulum.formatting.difference_formatter.DifferenceFormatter) -> builtins._NotImplementedType
+def (data.benchmark.pendulum.duration.Duration, data.benchmark.pendulum.formatting.formatter.Formatter) -> builtins._NotImplementedType
+def (data.benchmark.pendulum.duration.Duration, data.benchmark.pendulum.locales.locale.Locale) -> builtins._NotImplementedType
+def (data.benchmark.pendulum.duration.Duration, data.benchmark.pendulum.mixins.default.FormattableMixin) -> builtins._NotImplementedType
+def (data.benchmark.pendulum.duration.Duration, data.benchmark.pendulum.parsing._Interval) -> builtins._NotImplementedType
+def (data.benchmark.pendulum.duration.Duration, data.benchmark.pendulum.time.Time) -> builtins._NotImplementedType
+def (data.benchmark.pendulum.duration.Duration, data.benchmark.pendulum.tz.zoneinfo.posix_timezone.PosixTimezone) -> builtins._NotImplementedType
+def (data.benchmark.pendulum.duration.Duration, data.benchmark.pendulum.tz.zoneinfo.posix_timezone.PosixTransition) -> builtins._NotImplementedType
+def (data.benchmark.pendulum.duration.Duration, data.benchmark.pendulum.tz.zoneinfo.reader.Reader) -> builtins._NotImplementedType
+def (data.benchmark.pendulum.duration.Duration, data.benchmark.pendulum.tz.zoneinfo.reader._offset) -> builtins._NotImplementedType
+def (data.benchmark.pendulum.duration.Duration, data.benchmark.pendulum.tz.zoneinfo.reader.header) -> builtins._NotImplementedType
+def (data.benchmark.pendulum.duration.Duration, data.benchmark.pendulum.tz.zoneinfo.timezone.Timezone) -> builtins._NotImplementedType
+def (data.benchmark.pendulum.duration.Duration, data.benchmark.pendulum.tz.zoneinfo.transition.Transition) -> builtins._NotImplementedType
+def (data.benchmark.pendulum.duration.Duration, data.benchmark.pendulum.tz.zoneinfo.transition_type.TransitionType) -> builtins._NotImplementedType
+def (data.benchmark.pendulum.duration.Duration, datetime.date) -> builtins._NotImplementedType
+def (data.benchmark.pendulum.duration.Duration, datetime.datetime) -> builtins._NotImplementedType
+def (data.benchmark.pendulum.duration.Duration, datetime.time) -> builtins._NotImplementedType
+def (data.benchmark.pendulum.duration.Duration, datetime.timezone) -> builtins._NotImplementedType
+def (data.benchmark.pendulum.duration.Duration, datetime.tzinfo) -> builtins._NotImplementedType
+def (data.benchmark.pendulum.duration.Duration, typing.Match[Any]) -> builtins._NotImplementedType
+def (data.benchmark.pendulum.duration.Duration, typing.Pattern[Any]) -> builtins._NotImplementedType
+def (data.benchmark.pendulum.duration.Duration, typing.TypeVar) -> builtins._NotImplementedType
+__neg__
+def (data.benchmark.pendulum.duration.Duration) -> data.benchmark.pendulum.duration.Duration
+_to_microseconds
+def (self: data.benchmark.pendulum.duration.Duration) -> builtins.int
+__mul__
+def (data.benchmark.pendulum.duration.Duration, builtins.bool) -> Union[builtins._NotImplementedType, data.benchmark.pendulum.duration.Duration]
+def (data.benchmark.pendulum.duration.Duration, builtins.bytes) -> Union[builtins._NotImplementedType, data.benchmark.pendulum.duration.Duration]
+def (data.benchmark.pendulum.duration.Duration, builtins.dict[builtins.object, builtins.object]) -> Union[builtins._NotImplementedType, data.benchmark.pendulum.duration.Duration]
+def (data.benchmark.pendulum.duration.Duration, builtins.int) -> Union[builtins._NotImplementedType, data.benchmark.pendulum.duration.Duration]
+def (data.benchmark.pendulum.duration.Duration, builtins.list[builtins.int]) -> Union[builtins._NotImplementedType, data.benchmark.pendulum.duration.Duration]
+def (data.benchmark.pendulum.duration.Duration, builtins.list[builtins.object]) -> Union[builtins._NotImplementedType, data.benchmark.pendulum.duration.Duration]
+def (data.benchmark.pendulum.duration.Duration, builtins.list[builtins.str]) -> Union[builtins._NotImplementedType, data.benchmark.pendulum.duration.Duration]
+def (data.benchmark.pendulum.duration.Duration, builtins.set[builtins.object]) -> Union[builtins._NotImplementedType, data.benchmark.pendulum.duration.Duration]
+def (data.benchmark.pendulum.duration.Duration, builtins.str) -> Union[builtins._NotImplementedType, data.benchmark.pendulum.duration.Duration]
+def (data.benchmark.pendulum.duration.Duration, data.benchmark.pendulum._extensions.helpers.PreciseDiff) -> Union[builtins._NotImplementedType, data.benchmark.pendulum.duration.Duration]
+def (data.benchmark.pendulum.duration.Duration, data.benchmark.pendulum.date.Date) -> Union[builtins._NotImplementedType, data.benchmark.pendulum.duration.Duration]
+def (data.benchmark.pendulum.duration.Duration, data.benchmark.pendulum.datetime.DateTime) -> Union[builtins._NotImplementedType, data.benchmark.pendulum.duration.Duration]
+def (data.benchmark.pendulum.duration.Duration, data.benchmark.pendulum.formatting.difference_formatter.DifferenceFormatter) -> Union[builtins._NotImplementedType, data.benchmark.pendulum.duration.Duration]
+def (data.benchmark.pendulum.duration.Duration, data.benchmark.pendulum.formatting.formatter.Formatter) -> Union[builtins._NotImplementedType, data.benchmark.pendulum.duration.Duration]
+def (data.benchmark.pendulum.duration.Duration, data.benchmark.pendulum.locales.locale.Locale) -> Union[builtins._NotImplementedType, data.benchmark.pendulum.duration.Duration]
+def (data.benchmark.pendulum.duration.Duration, data.benchmark.pendulum.mixins.default.FormattableMixin) -> Union[builtins._NotImplementedType, data.benchmark.pendulum.duration.Duration]
+def (data.benchmark.pendulum.duration.Duration, data.benchmark.pendulum.parsing._Interval) -> Union[builtins._NotImplementedType, data.benchmark.pendulum.duration.Duration]
+def (data.benchmark.pendulum.duration.Duration, data.benchmark.pendulum.time.Time) -> Union[builtins._NotImplementedType, data.benchmark.pendulum.duration.Duration]
+def (data.benchmark.pendulum.duration.Duration, data.benchmark.pendulum.tz.zoneinfo.posix_timezone.PosixTimezone) -> Union[builtins._NotImplementedType, data.benchmark.pendulum.duration.Duration]
+def (data.benchmark.pendulum.duration.Duration, data.benchmark.pendulum.tz.zoneinfo.posix_timezone.PosixTransition) -> Union[builtins._NotImplementedType, data.benchmark.pendulum.duration.Duration]
+def (data.benchmark.pendulum.duration.Duration, data.benchmark.pendulum.tz.zoneinfo.reader.Reader) -> Union[builtins._NotImplementedType, data.benchmark.pendulum.duration.Duration]
+def (data.benchmark.pendulum.duration.Duration, data.benchmark.pendulum.tz.zoneinfo.reader._offset) -> Union[builtins._NotImplementedType, data.benchmark.pendulum.duration.Duration]
+def (data.benchmark.pendulum.duration.Duration, data.benchmark.pendulum.tz.zoneinfo.reader.header) -> Union[builtins._NotImplementedType, data.benchmark.pendulum.duration.Duration]
+def (data.benchmark.pendulum.duration.Duration, data.benchmark.pendulum.tz.zoneinfo.timezone.Timezone) -> Union[builtins._NotImplementedType, data.benchmark.pendulum.duration.Duration]
+def (data.benchmark.pendulum.duration.Duration, data.benchmark.pendulum.tz.zoneinfo.transition.Transition) -> Union[builtins._NotImplementedType, data.benchmark.pendulum.duration.Duration]
+def (data.benchmark.pendulum.duration.Duration, data.benchmark.pendulum.tz.zoneinfo.transition_type.TransitionType) -> Union[builtins._NotImplementedType, data.benchmark.pendulum.duration.Duration]
+def (data.benchmark.pendulum.duration.Duration, datetime.date) -> Union[builtins._NotImplementedType, data.benchmark.pendulum.duration.Duration]
+def (data.benchmark.pendulum.duration.Duration, datetime.datetime) -> Union[builtins._NotImplementedType, data.benchmark.pendulum.duration.Duration]
+def (data.benchmark.pendulum.duration.Duration, datetime.time) -> Union[builtins._NotImplementedType, data.benchmark.pendulum.duration.Duration]
+def (data.benchmark.pendulum.duration.Duration, datetime.timedelta) -> Union[builtins._NotImplementedType, data.benchmark.pendulum.duration.Duration]
+def (data.benchmark.pendulum.duration.Duration, datetime.timezone) -> Union[builtins._NotImplementedType, data.benchmark.pendulum.duration.Duration]
+def (data.benchmark.pendulum.duration.Duration, datetime.tzinfo) -> Union[builtins._NotImplementedType, data.benchmark.pendulum.duration.Duration]
+def (data.benchmark.pendulum.duration.Duration, typing.Match[Any]) -> Union[builtins._NotImplementedType, data.benchmark.pendulum.duration.Duration]
+def (data.benchmark.pendulum.duration.Duration, typing.Pattern[Any]) -> Union[builtins._NotImplementedType, data.benchmark.pendulum.duration.Duration]
+def (data.benchmark.pendulum.duration.Duration, typing.TypeVar) -> Union[builtins._NotImplementedType, data.benchmark.pendulum.duration.Duration]
+__floordiv__
+def (data.benchmark.pendulum.duration.Duration, builtins.bool) -> Union[builtins._NotImplementedType, builtins.int, data.benchmark.pendulum.duration.Duration]
+def (data.benchmark.pendulum.duration.Duration, builtins.bytes) -> Union[builtins._NotImplementedType, builtins.int]
+def (data.benchmark.pendulum.duration.Duration, builtins.dict[builtins.object, builtins.object]) -> Union[builtins._NotImplementedType, builtins.int]
+def (data.benchmark.pendulum.duration.Duration, builtins.float) -> Union[builtins._NotImplementedType, builtins.int]
+def (data.benchmark.pendulum.duration.Duration, builtins.int) -> Union[builtins._NotImplementedType, builtins.int, data.benchmark.pendulum.duration.Duration]
+def (data.benchmark.pendulum.duration.Duration, builtins.list[builtins.int]) -> Union[builtins._NotImplementedType, builtins.int]
+def (data.benchmark.pendulum.duration.Duration, builtins.list[builtins.object]) -> Union[builtins._NotImplementedType, builtins.int]
+def (data.benchmark.pendulum.duration.Duration, builtins.list[builtins.str]) -> Union[builtins._NotImplementedType, builtins.int]
+def (data.benchmark.pendulum.duration.Duration, builtins.set[builtins.object]) -> Union[builtins._NotImplementedType, builtins.int]
+def (data.benchmark.pendulum.duration.Duration, builtins.str) -> Union[builtins._NotImplementedType, builtins.int]
+def (data.benchmark.pendulum.duration.Duration, data.benchmark.pendulum._extensions.helpers.PreciseDiff) -> Union[builtins._NotImplementedType, builtins.int]
+def (data.benchmark.pendulum.duration.Duration, data.benchmark.pendulum.date.Date) -> Union[builtins._NotImplementedType, builtins.int]
+def (data.benchmark.pendulum.duration.Duration, data.benchmark.pendulum.datetime.DateTime) -> Union[builtins._NotImplementedType, builtins.int]
+def (data.benchmark.pendulum.duration.Duration, data.benchmark.pendulum.formatting.difference_formatter.DifferenceFormatter) -> Union[builtins._NotImplementedType, builtins.int]
+def (data.benchmark.pendulum.duration.Duration, data.benchmark.pendulum.formatting.formatter.Formatter) -> Union[builtins._NotImplementedType, builtins.int]
+def (data.benchmark.pendulum.duration.Duration, data.benchmark.pendulum.locales.locale.Locale) -> Union[builtins._NotImplementedType, builtins.int]
+def (data.benchmark.pendulum.duration.Duration, data.benchmark.pendulum.mixins.default.FormattableMixin) -> Union[builtins._NotImplementedType, builtins.int]
+def (data.benchmark.pendulum.duration.Duration, data.benchmark.pendulum.parsing._Interval) -> Union[builtins._NotImplementedType, builtins.int]
+def (data.benchmark.pendulum.duration.Duration, data.benchmark.pendulum.time.Time) -> Union[builtins._NotImplementedType, builtins.int]
+def (data.benchmark.pendulum.duration.Duration, data.benchmark.pendulum.tz.zoneinfo.posix_timezone.PosixTimezone) -> Union[builtins._NotImplementedType, builtins.int]
+def (data.benchmark.pendulum.duration.Duration, data.benchmark.pendulum.tz.zoneinfo.posix_timezone.PosixTransition) -> Union[builtins._NotImplementedType, builtins.int]
+def (data.benchmark.pendulum.duration.Duration, data.benchmark.pendulum.tz.zoneinfo.reader.Reader) -> Union[builtins._NotImplementedType, builtins.int]
+def (data.benchmark.pendulum.duration.Duration, data.benchmark.pendulum.tz.zoneinfo.reader._offset) -> Union[builtins._NotImplementedType, builtins.int]
+def (data.benchmark.pendulum.duration.Duration, data.benchmark.pendulum.tz.zoneinfo.reader.header) -> Union[builtins._NotImplementedType, builtins.int]
+def (data.benchmark.pendulum.duration.Duration, data.benchmark.pendulum.tz.zoneinfo.timezone.Timezone) -> Union[builtins._NotImplementedType, builtins.int]
+def (data.benchmark.pendulum.duration.Duration, data.benchmark.pendulum.tz.zoneinfo.transition.Transition) -> Union[builtins._NotImplementedType, builtins.int]
+def (data.benchmark.pendulum.duration.Duration, data.benchmark.pendulum.tz.zoneinfo.transition_type.TransitionType) -> Union[builtins._NotImplementedType, builtins.int]
+def (data.benchmark.pendulum.duration.Duration, datetime.date) -> Union[builtins._NotImplementedType, builtins.int]
+def (data.benchmark.pendulum.duration.Duration, datetime.datetime) -> Union[builtins._NotImplementedType, builtins.int]
+def (data.benchmark.pendulum.duration.Duration, datetime.time) -> Union[builtins._NotImplementedType, builtins.int]
+def (data.benchmark.pendulum.duration.Duration, datetime.timezone) -> Union[builtins._NotImplementedType, builtins.int]
+def (data.benchmark.pendulum.duration.Duration, datetime.tzinfo) -> Union[builtins._NotImplementedType, builtins.int]
+def (data.benchmark.pendulum.duration.Duration, typing.Match[Any]) -> Union[builtins._NotImplementedType, builtins.int]
+def (data.benchmark.pendulum.duration.Duration, typing.Pattern[Any]) -> Union[builtins._NotImplementedType, builtins.int]
+def (data.benchmark.pendulum.duration.Duration, typing.TypeVar) -> Union[builtins._NotImplementedType, builtins.int]
+__truediv__
+def (data.benchmark.pendulum.duration.Duration, builtins.bool) -> Union[builtins._NotImplementedType, builtins.float, data.benchmark.pendulum.duration.Duration]
+def (data.benchmark.pendulum.duration.Duration, builtins.bytes) -> Union[builtins._NotImplementedType, builtins.float, data.benchmark.pendulum.duration.Duration]
+def (data.benchmark.pendulum.duration.Duration, builtins.dict[builtins.object, builtins.object]) -> Union[builtins._NotImplementedType, builtins.float, data.benchmark.pendulum.duration.Duration]
+def (data.benchmark.pendulum.duration.Duration, builtins.float) -> Union[builtins._NotImplementedType, builtins.float, data.benchmark.pendulum.duration.Duration]
+def (data.benchmark.pendulum.duration.Duration, builtins.int) -> Union[builtins._NotImplementedType, builtins.float, data.benchmark.pendulum.duration.Duration]
+def (data.benchmark.pendulum.duration.Duration, builtins.list[builtins.int]) -> Union[builtins._NotImplementedType, builtins.float, data.benchmark.pendulum.duration.Duration]
+def (data.benchmark.pendulum.duration.Duration, builtins.list[builtins.object]) -> Union[builtins._NotImplementedType, builtins.float, data.benchmark.pendulum.duration.Duration]
+def (data.benchmark.pendulum.duration.Duration, builtins.list[builtins.str]) -> Union[builtins._NotImplementedType, builtins.float, data.benchmark.pendulum.duration.Duration]
+def (data.benchmark.pendulum.duration.Duration, builtins.set[builtins.object]) -> Union[builtins._NotImplementedType, builtins.float, data.benchmark.pendulum.duration.Duration]
+def (data.benchmark.pendulum.duration.Duration, builtins.str) -> Union[builtins._NotImplementedType, builtins.float, data.benchmark.pendulum.duration.Duration]
+def (data.benchmark.pendulum.duration.Duration, data.benchmark.pendulum._extensions.helpers.PreciseDiff) -> Union[builtins._NotImplementedType, builtins.float, data.benchmark.pendulum.duration.Duration]
+def (data.benchmark.pendulum.duration.Duration, data.benchmark.pendulum.date.Date) -> Union[builtins._NotImplementedType, builtins.float, data.benchmark.pendulum.duration.Duration]
+def (data.benchmark.pendulum.duration.Duration, data.benchmark.pendulum.datetime.DateTime) -> Union[builtins._NotImplementedType, builtins.float, data.benchmark.pendulum.duration.Duration]
+def (data.benchmark.pendulum.duration.Duration, data.benchmark.pendulum.formatting.difference_formatter.DifferenceFormatter) -> Union[builtins._NotImplementedType, builtins.float, data.benchmark.pendulum.duration.Duration]
+def (data.benchmark.pendulum.duration.Duration, data.benchmark.pendulum.formatting.formatter.Formatter) -> Union[builtins._NotImplementedType, builtins.float, data.benchmark.pendulum.duration.Duration]
+def (data.benchmark.pendulum.duration.Duration, data.benchmark.pendulum.locales.locale.Locale) -> Union[builtins._NotImplementedType, builtins.float, data.benchmark.pendulum.duration.Duration]
+def (data.benchmark.pendulum.duration.Duration, data.benchmark.pendulum.mixins.default.FormattableMixin) -> Union[builtins._NotImplementedType, builtins.float, data.benchmark.pendulum.duration.Duration]
+def (data.benchmark.pendulum.duration.Duration, data.benchmark.pendulum.parsing._Interval) -> Union[builtins._NotImplementedType, builtins.float, data.benchmark.pendulum.duration.Duration]
+def (data.benchmark.pendulum.duration.Duration, data.benchmark.pendulum.time.Time) -> Union[builtins._NotImplementedType, builtins.float, data.benchmark.pendulum.duration.Duration]
+def (data.benchmark.pendulum.duration.Duration, data.benchmark.pendulum.tz.zoneinfo.posix_timezone.PosixTimezone) -> Union[builtins._NotImplementedType, builtins.float, data.benchmark.pendulum.duration.Duration]
+def (data.benchmark.pendulum.duration.Duration, data.benchmark.pendulum.tz.zoneinfo.posix_timezone.PosixTransition) -> Union[builtins._NotImplementedType, builtins.float, data.benchmark.pendulum.duration.Duration]
+def (data.benchmark.pendulum.duration.Duration, data.benchmark.pendulum.tz.zoneinfo.reader.Reader) -> Union[builtins._NotImplementedType, builtins.float, data.benchmark.pendulum.duration.Duration]
+def (data.benchmark.pendulum.duration.Duration, data.benchmark.pendulum.tz.zoneinfo.reader._offset) -> Union[builtins._NotImplementedType, builtins.float, data.benchmark.pendulum.duration.Duration]
+def (data.benchmark.pendulum.duration.Duration, data.benchmark.pendulum.tz.zoneinfo.reader.header) -> Union[builtins._NotImplementedType, builtins.float, data.benchmark.pendulum.duration.Duration]
+def (data.benchmark.pendulum.duration.Duration, data.benchmark.pendulum.tz.zoneinfo.timezone.Timezone) -> Union[builtins._NotImplementedType, builtins.float, data.benchmark.pendulum.duration.Duration]
+def (data.benchmark.pendulum.duration.Duration, data.benchmark.pendulum.tz.zoneinfo.transition.Transition) -> Union[builtins._NotImplementedType, builtins.float, data.benchmark.pendulum.duration.Duration]
+def (data.benchmark.pendulum.duration.Duration, data.benchmark.pendulum.tz.zoneinfo.transition_type.TransitionType) -> Union[builtins._NotImplementedType, builtins.float, data.benchmark.pendulum.duration.Duration]
+def (data.benchmark.pendulum.duration.Duration, datetime.date) -> Union[builtins._NotImplementedType, builtins.float, data.benchmark.pendulum.duration.Duration]
+def (data.benchmark.pendulum.duration.Duration, datetime.datetime) -> Union[builtins._NotImplementedType, builtins.float, data.benchmark.pendulum.duration.Duration]
+def (data.benchmark.pendulum.duration.Duration, datetime.time) -> Union[builtins._NotImplementedType, builtins.float, data.benchmark.pendulum.duration.Duration]
+def (data.benchmark.pendulum.duration.Duration, datetime.timezone) -> Union[builtins._NotImplementedType, builtins.float, data.benchmark.pendulum.duration.Duration]
+def (data.benchmark.pendulum.duration.Duration, datetime.tzinfo) -> Union[builtins._NotImplementedType, builtins.float, data.benchmark.pendulum.duration.Duration]
+def (data.benchmark.pendulum.duration.Duration, typing.Match[Any]) -> Union[builtins._NotImplementedType, builtins.float, data.benchmark.pendulum.duration.Duration]
+def (data.benchmark.pendulum.duration.Duration, typing.Pattern[Any]) -> Union[builtins._NotImplementedType, builtins.float, data.benchmark.pendulum.duration.Duration]
+def (data.benchmark.pendulum.duration.Duration, typing.TypeVar) -> Union[builtins._NotImplementedType, builtins.float, data.benchmark.pendulum.duration.Duration]
+__mod__
+def (data.benchmark.pendulum.duration.Duration, builtins.bool) -> Union[builtins._NotImplementedType, data.benchmark.pendulum.duration.Duration]
+def (data.benchmark.pendulum.duration.Duration, builtins.bytes) -> Union[builtins._NotImplementedType, data.benchmark.pendulum.duration.Duration]
+def (data.benchmark.pendulum.duration.Duration, builtins.dict[builtins.object, builtins.object]) -> Union[builtins._NotImplementedType, data.benchmark.pendulum.duration.Duration]
+def (data.benchmark.pendulum.duration.Duration, builtins.float) -> Union[builtins._NotImplementedType, data.benchmark.pendulum.duration.Duration]
+def (data.benchmark.pendulum.duration.Duration, builtins.int) -> Union[builtins._NotImplementedType, data.benchmark.pendulum.duration.Duration]
+def (data.benchmark.pendulum.duration.Duration, builtins.list[builtins.int]) -> Union[builtins._NotImplementedType, data.benchmark.pendulum.duration.Duration]
+def (data.benchmark.pendulum.duration.Duration, builtins.list[builtins.object]) -> Union[builtins._NotImplementedType, data.benchmark.pendulum.duration.Duration]
+def (data.benchmark.pendulum.duration.Duration, builtins.list[builtins.str]) -> Union[builtins._NotImplementedType, data.benchmark.pendulum.duration.Duration]
+def (data.benchmark.pendulum.duration.Duration, builtins.set[builtins.object]) -> Union[builtins._NotImplementedType, data.benchmark.pendulum.duration.Duration]
+def (data.benchmark.pendulum.duration.Duration, builtins.str) -> Union[builtins._NotImplementedType, data.benchmark.pendulum.duration.Duration]
+def (data.benchmark.pendulum.duration.Duration, data.benchmark.pendulum._extensions.helpers.PreciseDiff) -> Union[builtins._NotImplementedType, data.benchmark.pendulum.duration.Duration]
+def (data.benchmark.pendulum.duration.Duration, data.benchmark.pendulum.date.Date) -> Union[builtins._NotImplementedType, data.benchmark.pendulum.duration.Duration]
+def (data.benchmark.pendulum.duration.Duration, data.benchmark.pendulum.datetime.DateTime) -> Union[builtins._NotImplementedType, data.benchmark.pendulum.duration.Duration]
+def (data.benchmark.pendulum.duration.Duration, data.benchmark.pendulum.formatting.difference_formatter.DifferenceFormatter) -> Union[builtins._NotImplementedType, data.benchmark.pendulum.duration.Duration]
+def (data.benchmark.pendulum.duration.Duration, data.benchmark.pendulum.formatting.formatter.Formatter) -> Union[builtins._NotImplementedType, data.benchmark.pendulum.duration.Duration]
+def (data.benchmark.pendulum.duration.Duration, data.benchmark.pendulum.locales.locale.Locale) -> Union[builtins._NotImplementedType, data.benchmark.pendulum.duration.Duration]
+def (data.benchmark.pendulum.duration.Duration, data.benchmark.pendulum.mixins.default.FormattableMixin) -> Union[builtins._NotImplementedType, data.benchmark.pendulum.duration.Duration]
+def (data.benchmark.pendulum.duration.Duration, data.benchmark.pendulum.parsing._Interval) -> Union[builtins._NotImplementedType, data.benchmark.pendulum.duration.Duration]
+def (data.benchmark.pendulum.duration.Duration, data.benchmark.pendulum.time.Time) -> Union[builtins._NotImplementedType, data.benchmark.pendulum.duration.Duration]
+def (data.benchmark.pendulum.duration.Duration, data.benchmark.pendulum.tz.zoneinfo.posix_timezone.PosixTimezone) -> Union[builtins._NotImplementedType, data.benchmark.pendulum.duration.Duration]
+def (data.benchmark.pendulum.duration.Duration, data.benchmark.pendulum.tz.zoneinfo.posix_timezone.PosixTransition) -> Union[builtins._NotImplementedType, data.benchmark.pendulum.duration.Duration]
+def (data.benchmark.pendulum.duration.Duration, data.benchmark.pendulum.tz.zoneinfo.reader.Reader) -> Union[builtins._NotImplementedType, data.benchmark.pendulum.duration.Duration]
+def (data.benchmark.pendulum.duration.Duration, data.benchmark.pendulum.tz.zoneinfo.reader._offset) -> Union[builtins._NotImplementedType, data.benchmark.pendulum.duration.Duration]
+def (data.benchmark.pendulum.duration.Duration, data.benchmark.pendulum.tz.zoneinfo.reader.header) -> Union[builtins._NotImplementedType, data.benchmark.pendulum.duration.Duration]
+def (data.benchmark.pendulum.duration.Duration, data.benchmark.pendulum.tz.zoneinfo.timezone.Timezone) -> Union[builtins._NotImplementedType, data.benchmark.pendulum.duration.Duration]
+def (data.benchmark.pendulum.duration.Duration, data.benchmark.pendulum.tz.zoneinfo.transition.Transition) -> Union[builtins._NotImplementedType, data.benchmark.pendulum.duration.Duration]
+def (data.benchmark.pendulum.duration.Duration, data.benchmark.pendulum.tz.zoneinfo.transition_type.TransitionType) -> Union[builtins._NotImplementedType, data.benchmark.pendulum.duration.Duration]
+def (data.benchmark.pendulum.duration.Duration, datetime.date) -> Union[builtins._NotImplementedType, data.benchmark.pendulum.duration.Duration]
+def (data.benchmark.pendulum.duration.Duration, datetime.datetime) -> Union[builtins._NotImplementedType, data.benchmark.pendulum.duration.Duration]
+def (data.benchmark.pendulum.duration.Duration, datetime.time) -> Union[builtins._NotImplementedType, data.benchmark.pendulum.duration.Duration]
+def (data.benchmark.pendulum.duration.Duration, datetime.timezone) -> Union[builtins._NotImplementedType, data.benchmark.pendulum.duration.Duration]
+def (data.benchmark.pendulum.duration.Duration, datetime.tzinfo) -> Union[builtins._NotImplementedType, data.benchmark.pendulum.duration.Duration]
+def (data.benchmark.pendulum.duration.Duration, typing.Match[Any]) -> Union[builtins._NotImplementedType, data.benchmark.pendulum.duration.Duration]
+def (data.benchmark.pendulum.duration.Duration, typing.Pattern[Any]) -> Union[builtins._NotImplementedType, data.benchmark.pendulum.duration.Duration]
+def (data.benchmark.pendulum.duration.Duration, typing.TypeVar) -> Union[builtins._NotImplementedType, data.benchmark.pendulum.duration.Duration]
+total_minutes
+def (self: data.benchmark.pendulum.duration.Duration) -> builtins.float
+total_hours
+def (self: data.benchmark.pendulum.duration.Duration) -> builtins.float
+total_days
+def (self: data.benchmark.pendulum.duration.Duration) -> builtins.float
+total_weeks
+def (self: data.benchmark.pendulum.duration.Duration) -> builtins.float
+hours
+def (self: data.benchmark.pendulum.duration.Duration) -> builtins.int
+minutes
+def (self: data.benchmark.pendulum.duration.Duration) -> builtins.int
+remaining_seconds
+def (self: data.benchmark.pendulum.duration.Duration) -> builtins.int
+in_weeks
+def (self: data.benchmark.pendulum.duration.Duration) -> builtins.int
+in_days
+def (self: data.benchmark.pendulum.duration.Duration) -> builtins.int
+in_hours
+def (self: data.benchmark.pendulum.duration.Duration) -> builtins.int
+in_minutes
+def (self: data.benchmark.pendulum.duration.Duration) -> builtins.int
+__repr__
+def (data.benchmark.pendulum.duration.Duration) -> builtins.str

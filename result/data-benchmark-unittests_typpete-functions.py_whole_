@@ -1,0 +1,132 @@
+f1
+def (x: builtins.bytes) -> builtins.bytes
+def (x: builtins.list[builtins.bool]) -> builtins.list[builtins.bool]
+def (x: builtins.list[builtins.int]) -> builtins.list[builtins.int]
+f2
+def (x: builtins.object) -> builtins.list[builtins.object]
+f3
+def (x: builtins.object) -> builtins.object
+f4
+def (x: builtins.dict[builtins.bool, builtins.str], y: builtins.bool) -> builtins.int
+def (x: builtins.dict[builtins.bool, builtins.str], y: builtins.int) -> builtins.int
+def (x: builtins.dict[builtins.int, builtins.str], y: builtins.bool) -> builtins.int
+def (x: builtins.dict[builtins.int, builtins.str], y: builtins.int) -> builtins.int
+f5
+def (x: builtins.bytes, y: builtins.dict[Any, builtins.str], i: builtins.bool) -> Union[builtins.bytes, builtins.float, builtins.str]
+def (x: builtins.bytes, y: builtins.dict[Any, builtins.str], i: builtins.int) -> Union[builtins.bytes, builtins.float, builtins.str]
+def (x: builtins.bytes, y: builtins.dict[builtins.bool, builtins.str], i: builtins.bool) -> builtins.int
+def (x: builtins.bytes, y: builtins.dict[builtins.bool, builtins.str], i: builtins.int) -> builtins.int
+def (x: builtins.bytes, y: builtins.dict[builtins.int, builtins.str], i: builtins.bool) -> builtins.int
+def (x: builtins.bytes, y: builtins.dict[builtins.int, builtins.str], i: builtins.int) -> builtins.int
+def (x: builtins.list[builtins.bool], y: builtins.dict[Any, builtins.str], i: builtins.bool) -> Union[builtins.bytes, builtins.float, builtins.str]
+def (x: builtins.list[builtins.bool], y: builtins.dict[Any, builtins.str], i: builtins.int) -> Union[builtins.bytes, builtins.float, builtins.str]
+def (x: builtins.list[builtins.bool], y: builtins.dict[builtins.bool, builtins.str], i: builtins.bool) -> builtins.int
+def (x: builtins.list[builtins.bool], y: builtins.dict[builtins.bool, builtins.str], i: builtins.int) -> builtins.int
+def (x: builtins.list[builtins.bool], y: builtins.dict[builtins.int, builtins.str], i: builtins.bool) -> builtins.int
+def (x: builtins.list[builtins.bool], y: builtins.dict[builtins.int, builtins.str], i: builtins.int) -> builtins.int
+def (x: builtins.list[builtins.bytes], y: builtins.dict[Any, builtins.str], i: builtins.bool) -> Union[builtins.bytes, builtins.float, builtins.str]
+def (x: builtins.list[builtins.bytes], y: builtins.dict[Any, builtins.str], i: builtins.int) -> Union[builtins.bytes, builtins.float, builtins.str]
+def (x: builtins.list[builtins.bytes], y: builtins.dict[builtins.bool, builtins.str], i: builtins.bool) -> builtins.bytes
+def (x: builtins.list[builtins.bytes], y: builtins.dict[builtins.bool, builtins.str], i: builtins.int) -> builtins.bytes
+def (x: builtins.list[builtins.bytes], y: builtins.dict[builtins.int, builtins.str], i: builtins.bool) -> builtins.bytes
+def (x: builtins.list[builtins.bytes], y: builtins.dict[builtins.int, builtins.str], i: builtins.int) -> builtins.bytes
+def (x: builtins.list[builtins.float], y: builtins.dict[Any, builtins.str], i: builtins.bool) -> Union[builtins.bytes, builtins.float, builtins.str]
+def (x: builtins.list[builtins.float], y: builtins.dict[Any, builtins.str], i: builtins.int) -> Union[builtins.bytes, builtins.float, builtins.str]
+def (x: builtins.list[builtins.float], y: builtins.dict[builtins.bool, builtins.str], i: builtins.bool) -> builtins.float
+def (x: builtins.list[builtins.float], y: builtins.dict[builtins.bool, builtins.str], i: builtins.int) -> builtins.float
+def (x: builtins.list[builtins.float], y: builtins.dict[builtins.float, builtins.str], i: builtins.bool) -> builtins.float
+def (x: builtins.list[builtins.float], y: builtins.dict[builtins.float, builtins.str], i: builtins.int) -> builtins.float
+def (x: builtins.list[builtins.float], y: builtins.dict[builtins.int, builtins.str], i: builtins.bool) -> builtins.float
+def (x: builtins.list[builtins.float], y: builtins.dict[builtins.int, builtins.str], i: builtins.int) -> builtins.float
+def (x: builtins.list[builtins.int], y: builtins.dict[Any, builtins.str], i: builtins.bool) -> Union[builtins.bytes, builtins.float, builtins.str]
+def (x: builtins.list[builtins.int], y: builtins.dict[Any, builtins.str], i: builtins.int) -> Union[builtins.bytes, builtins.float, builtins.str]
+def (x: builtins.list[builtins.int], y: builtins.dict[builtins.bool, builtins.str], i: builtins.bool) -> builtins.int
+def (x: builtins.list[builtins.int], y: builtins.dict[builtins.bool, builtins.str], i: builtins.int) -> builtins.int
+def (x: builtins.list[builtins.int], y: builtins.dict[builtins.int, builtins.str], i: builtins.bool) -> builtins.int
+def (x: builtins.list[builtins.int], y: builtins.dict[builtins.int, builtins.str], i: builtins.int) -> builtins.int
+def (x: builtins.list[builtins.str], y: builtins.dict[Any, builtins.str], i: builtins.bool) -> Union[builtins.bytes, builtins.float, builtins.str]
+def (x: builtins.list[builtins.str], y: builtins.dict[Any, builtins.str], i: builtins.int) -> Union[builtins.bytes, builtins.float, builtins.str]
+def (x: builtins.list[builtins.str], y: builtins.dict[builtins.bool, builtins.str], i: builtins.bool) -> builtins.str
+def (x: builtins.list[builtins.str], y: builtins.dict[builtins.bool, builtins.str], i: builtins.int) -> builtins.str
+def (x: builtins.list[builtins.str], y: builtins.dict[builtins.int, builtins.str], i: builtins.bool) -> builtins.str
+def (x: builtins.list[builtins.str], y: builtins.dict[builtins.int, builtins.str], i: builtins.int) -> builtins.str
+def (x: builtins.str, y: builtins.dict[Any, builtins.str], i: builtins.bool) -> Union[builtins.bytes, builtins.float, builtins.str]
+def (x: builtins.str, y: builtins.dict[Any, builtins.str], i: builtins.int) -> Union[builtins.bytes, builtins.float, builtins.str]
+def (x: builtins.str, y: builtins.dict[builtins.bool, builtins.str], i: builtins.bool) -> builtins.str
+def (x: builtins.str, y: builtins.dict[builtins.bool, builtins.str], i: builtins.int) -> builtins.str
+def (x: builtins.str, y: builtins.dict[builtins.int, builtins.str], i: builtins.bool) -> builtins.str
+def (x: builtins.str, y: builtins.dict[builtins.int, builtins.str], i: builtins.int) -> builtins.str
+f6
+def (x: builtins.dict[builtins.bool, builtins.str]) -> builtins.bool
+def (x: builtins.dict[builtins.bytes, builtins.str]) -> builtins.bytes
+def (x: builtins.dict[builtins.float, builtins.str]) -> builtins.float
+def (x: builtins.dict[builtins.int, builtins.str]) -> builtins.int
+def (x: builtins.dict[builtins.object, builtins.object]) -> builtins.object
+def (x: builtins.dict[builtins.object, builtins.str]) -> builtins.object
+def (x: builtins.dict[builtins.str, builtins.str]) -> builtins.str
+f7
+def (x: builtins.bool) -> builtins.int
+def (x: builtins.float) -> builtins.int
+def (x: builtins.int) -> builtins.int
+f1
+def (x: builtins.bytes) -> builtins.bytes
+def (x: builtins.list[builtins.bool]) -> builtins.list[builtins.bool]
+def (x: builtins.list[builtins.int]) -> builtins.list[builtins.int]
+f4
+def (x: builtins.dict[builtins.bool, builtins.str], y: builtins.bool) -> builtins.int
+def (x: builtins.dict[builtins.bool, builtins.str], y: builtins.int) -> builtins.int
+def (x: builtins.dict[builtins.int, builtins.str], y: builtins.bool) -> builtins.int
+def (x: builtins.dict[builtins.int, builtins.str], y: builtins.int) -> builtins.int
+f5
+def (x: builtins.bytes, y: builtins.dict[Any, builtins.str], i: builtins.bool) -> Union[builtins.bytes, builtins.float, builtins.str]
+def (x: builtins.bytes, y: builtins.dict[Any, builtins.str], i: builtins.int) -> Union[builtins.bytes, builtins.float, builtins.str]
+def (x: builtins.bytes, y: builtins.dict[builtins.bool, builtins.str], i: builtins.bool) -> builtins.int
+def (x: builtins.bytes, y: builtins.dict[builtins.bool, builtins.str], i: builtins.int) -> builtins.int
+def (x: builtins.bytes, y: builtins.dict[builtins.int, builtins.str], i: builtins.bool) -> builtins.int
+def (x: builtins.bytes, y: builtins.dict[builtins.int, builtins.str], i: builtins.int) -> builtins.int
+def (x: builtins.list[builtins.bool], y: builtins.dict[Any, builtins.str], i: builtins.bool) -> Union[builtins.bytes, builtins.float, builtins.str]
+def (x: builtins.list[builtins.bool], y: builtins.dict[Any, builtins.str], i: builtins.int) -> Union[builtins.bytes, builtins.float, builtins.str]
+def (x: builtins.list[builtins.bool], y: builtins.dict[builtins.bool, builtins.str], i: builtins.bool) -> builtins.int
+def (x: builtins.list[builtins.bool], y: builtins.dict[builtins.bool, builtins.str], i: builtins.int) -> builtins.int
+def (x: builtins.list[builtins.bool], y: builtins.dict[builtins.int, builtins.str], i: builtins.bool) -> builtins.int
+def (x: builtins.list[builtins.bool], y: builtins.dict[builtins.int, builtins.str], i: builtins.int) -> builtins.int
+def (x: builtins.list[builtins.bytes], y: builtins.dict[Any, builtins.str], i: builtins.bool) -> Union[builtins.bytes, builtins.float, builtins.str]
+def (x: builtins.list[builtins.bytes], y: builtins.dict[Any, builtins.str], i: builtins.int) -> Union[builtins.bytes, builtins.float, builtins.str]
+def (x: builtins.list[builtins.bytes], y: builtins.dict[builtins.bool, builtins.str], i: builtins.bool) -> builtins.bytes
+def (x: builtins.list[builtins.bytes], y: builtins.dict[builtins.bool, builtins.str], i: builtins.int) -> builtins.bytes
+def (x: builtins.list[builtins.bytes], y: builtins.dict[builtins.int, builtins.str], i: builtins.bool) -> builtins.bytes
+def (x: builtins.list[builtins.bytes], y: builtins.dict[builtins.int, builtins.str], i: builtins.int) -> builtins.bytes
+def (x: builtins.list[builtins.float], y: builtins.dict[Any, builtins.str], i: builtins.bool) -> Union[builtins.bytes, builtins.float, builtins.str]
+def (x: builtins.list[builtins.float], y: builtins.dict[Any, builtins.str], i: builtins.int) -> Union[builtins.bytes, builtins.float, builtins.str]
+def (x: builtins.list[builtins.float], y: builtins.dict[builtins.bool, builtins.str], i: builtins.bool) -> builtins.float
+def (x: builtins.list[builtins.float], y: builtins.dict[builtins.bool, builtins.str], i: builtins.int) -> builtins.float
+def (x: builtins.list[builtins.float], y: builtins.dict[builtins.float, builtins.str], i: builtins.bool) -> builtins.float
+def (x: builtins.list[builtins.float], y: builtins.dict[builtins.float, builtins.str], i: builtins.int) -> builtins.float
+def (x: builtins.list[builtins.float], y: builtins.dict[builtins.int, builtins.str], i: builtins.bool) -> builtins.float
+def (x: builtins.list[builtins.float], y: builtins.dict[builtins.int, builtins.str], i: builtins.int) -> builtins.float
+def (x: builtins.list[builtins.int], y: builtins.dict[Any, builtins.str], i: builtins.bool) -> Union[builtins.bytes, builtins.float, builtins.str]
+def (x: builtins.list[builtins.int], y: builtins.dict[Any, builtins.str], i: builtins.int) -> Union[builtins.bytes, builtins.float, builtins.str]
+def (x: builtins.list[builtins.int], y: builtins.dict[builtins.bool, builtins.str], i: builtins.bool) -> builtins.int
+def (x: builtins.list[builtins.int], y: builtins.dict[builtins.bool, builtins.str], i: builtins.int) -> builtins.int
+def (x: builtins.list[builtins.int], y: builtins.dict[builtins.int, builtins.str], i: builtins.bool) -> builtins.int
+def (x: builtins.list[builtins.int], y: builtins.dict[builtins.int, builtins.str], i: builtins.int) -> builtins.int
+def (x: builtins.list[builtins.str], y: builtins.dict[Any, builtins.str], i: builtins.bool) -> Union[builtins.bytes, builtins.float, builtins.str]
+def (x: builtins.list[builtins.str], y: builtins.dict[Any, builtins.str], i: builtins.int) -> Union[builtins.bytes, builtins.float, builtins.str]
+def (x: builtins.list[builtins.str], y: builtins.dict[builtins.bool, builtins.str], i: builtins.bool) -> builtins.str
+def (x: builtins.list[builtins.str], y: builtins.dict[builtins.bool, builtins.str], i: builtins.int) -> builtins.str
+def (x: builtins.list[builtins.str], y: builtins.dict[builtins.int, builtins.str], i: builtins.bool) -> builtins.str
+def (x: builtins.list[builtins.str], y: builtins.dict[builtins.int, builtins.str], i: builtins.int) -> builtins.str
+def (x: builtins.str, y: builtins.dict[Any, builtins.str], i: builtins.bool) -> Union[builtins.bytes, builtins.float, builtins.str]
+def (x: builtins.str, y: builtins.dict[Any, builtins.str], i: builtins.int) -> Union[builtins.bytes, builtins.float, builtins.str]
+def (x: builtins.str, y: builtins.dict[builtins.bool, builtins.str], i: builtins.bool) -> builtins.str
+def (x: builtins.str, y: builtins.dict[builtins.bool, builtins.str], i: builtins.int) -> builtins.str
+def (x: builtins.str, y: builtins.dict[builtins.int, builtins.str], i: builtins.bool) -> builtins.str
+def (x: builtins.str, y: builtins.dict[builtins.int, builtins.str], i: builtins.int) -> builtins.str
+f6
+def (x: builtins.dict[builtins.bool, builtins.str]) -> builtins.bool
+def (x: builtins.dict[builtins.bytes, builtins.str]) -> builtins.bytes
+def (x: builtins.dict[builtins.float, builtins.str]) -> builtins.float
+def (x: builtins.dict[builtins.int, builtins.str]) -> builtins.int
+def (x: builtins.dict[builtins.object, builtins.object]) -> builtins.object
+def (x: builtins.dict[builtins.object, builtins.str]) -> builtins.object
+def (x: builtins.dict[builtins.str, builtins.str]) -> builtins.str

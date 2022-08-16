@@ -1,0 +1,37 @@
+f
+def (self: inheritance_cov_incorrect.A, x: builtins.bool, y: builtins.bool, z: builtins.int =) -> builtins.int
+def (self: inheritance_cov_incorrect.A, x: builtins.bool, y: builtins.int, z: builtins.int =) -> builtins.int
+def (self: inheritance_cov_incorrect.A, x: builtins.float, y: builtins.bool, z: builtins.float =) -> builtins.float
+def (self: inheritance_cov_incorrect.A, x: builtins.float, y: builtins.bool, z: builtins.int =) -> builtins.float
+def (self: inheritance_cov_incorrect.A, x: builtins.float, y: builtins.float, z: builtins.float =) -> builtins.float
+def (self: inheritance_cov_incorrect.A, x: builtins.float, y: builtins.float, z: builtins.int =) -> builtins.float
+def (self: inheritance_cov_incorrect.A, x: builtins.float, y: builtins.int, z: builtins.float =) -> builtins.float
+def (self: inheritance_cov_incorrect.A, x: builtins.float, y: builtins.int, z: builtins.int =) -> builtins.float
+def (self: inheritance_cov_incorrect.A, x: builtins.int, y: builtins.bool, z: builtins.int =) -> builtins.int
+def (self: inheritance_cov_incorrect.A, x: builtins.int, y: builtins.int, z: builtins.int =) -> builtins.int
+g
+def (self: inheritance_cov_incorrect.A) -> builtins.int
+f
+def (self: inheritance_cov_incorrect.B, x: builtins.bool, y: builtins.bool) -> builtins.int
+def (self: inheritance_cov_incorrect.B, x: builtins.bool, y: builtins.int) -> builtins.int
+def (self: inheritance_cov_incorrect.B, x: builtins.bytes, y: builtins.bytes) -> builtins.bytes
+def (self: inheritance_cov_incorrect.B, x: builtins.float, y: builtins.bool) -> builtins.float
+def (self: inheritance_cov_incorrect.B, x: builtins.float, y: builtins.float) -> builtins.float
+def (self: inheritance_cov_incorrect.B, x: builtins.float, y: builtins.int) -> builtins.float
+def (self: inheritance_cov_incorrect.B, x: builtins.int, y: builtins.bool) -> builtins.int
+def (self: inheritance_cov_incorrect.B, x: builtins.int, y: builtins.int) -> builtins.int
+def (self: inheritance_cov_incorrect.B, x: builtins.list[builtins.float], y: builtins.list[builtins.int]) -> builtins.list[builtins.float]
+def (self: inheritance_cov_incorrect.B, x: builtins.list[builtins.int], y: builtins.list[builtins.int]) -> builtins.list[builtins.int]
+def (self: inheritance_cov_incorrect.B, x: builtins.list[builtins.object], y: builtins.list[builtins.int]) -> builtins.list[builtins.object]
+def (self: inheritance_cov_incorrect.B, x: builtins.list[builtins.object], y: builtins.list[builtins.object]) -> builtins.list[builtins.object]
+def (self: inheritance_cov_incorrect.B, x: builtins.list[builtins.object], y: builtins.list[builtins.str]) -> builtins.list[builtins.object]
+def (self: inheritance_cov_incorrect.B, x: builtins.list[builtins.str], y: builtins.list[builtins.str]) -> builtins.list[builtins.str]
+def (self: inheritance_cov_incorrect.B, x: builtins.str, y: builtins.str) -> builtins.str
+g
+def (self: inheritance_cov_incorrect.B, x: builtins.float =) -> builtins.int
+def (self: inheritance_cov_incorrect.B, x: builtins.int =) -> builtins.int
+def (self: inheritance_cov_incorrect.B, x: builtins.object =) -> builtins.int
+f
+def (cls: inheritance_cov_incorrect.A) -> builtins.int
+f
+def (cls: inheritance_cov_incorrect.A) -> builtins.int

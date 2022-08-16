@@ -1,0 +1,58 @@
+__init__
+def (self: adventure.HasN)
+__init__
+def (self: adventure.Room)
+__repr__
+def (adventure.Room) -> builtins.str
+is_forced
+def (self: adventure.Room) -> <nothing>
+is_aboveground
+def (self: adventure.Room) -> builtins.bool
+is_before_hall_of_mists
+def (self: adventure.Room) -> builtins.bool
+is_after_hall_of_mists
+def (self: adventure.Room) -> builtins.bool
+is_dark
+def (self: adventure.Room) -> builtins.bool
+__init__
+def (self: adventure.Message)
+__str__
+def (adventure.Message) -> builtins.str
+__init__
+def (self: adventure.Word)
+__repr__
+def (adventure.Word) -> builtins.str
+__eq__
+def (adventure.Word, builtins.str) -> builtins.bool
+add_synonym
+def (self: adventure.Word, other: adventure.Word)
+__init__
+def (self: adventure.Move)
+__repr__
+def (Any) -> builtins.str
+__repr__
+def (Any) -> builtins.str
+__eq__
+def (Any, builtins.object) -> builtins.bool
+__init__
+def (self: adventure.Hint)
+__init__
+def (self: adventure.Object)
+__repr__
+def (adventure.Object) -> builtins.str
+__hash__
+def (self: adventure.Object) -> builtins.int
+__eq__
+def (adventure.Object, builtins.str) -> builtins.bool
+is_at
+def (self: adventure.Object, room: builtins.object) -> builtins.bool
+carry
+def (self: adventure.Object)
+drop
+def (self: adventure.Object, room: adventure.Room)
+hide
+def (self: adventure.Object)
+destroy
+def (self: adventure.Object)
+__init__
+def (self: adventure.Data)

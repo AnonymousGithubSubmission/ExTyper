@@ -1,0 +1,24 @@
+__init__
+def (self: disjoint_sets.DisjointSets, size: builtins.bool)
+def (self: disjoint_sets.DisjointSets, size: builtins.int)
+find_set
+def (self: disjoint_sets.DisjointSets, i: builtins.bool) -> builtins.int
+def (self: disjoint_sets.DisjointSets, i: builtins.int) -> builtins.int
+is_same_set
+def (self: disjoint_sets.DisjointSets, i: builtins.bool, j: builtins.bool) -> builtins.bool
+def (self: disjoint_sets.DisjointSets, i: builtins.bool, j: builtins.int) -> builtins.bool
+def (self: disjoint_sets.DisjointSets, i: builtins.int, j: builtins.bool) -> builtins.bool
+def (self: disjoint_sets.DisjointSets, i: builtins.int, j: builtins.int) -> builtins.bool
+find_set
+def (self: disjoint_sets.DisjointSets, i: builtins.bool) -> builtins.int
+def (self: disjoint_sets.DisjointSets, i: builtins.int) -> builtins.int
+is_same_set
+def (self: disjoint_sets.DisjointSets, i: builtins.bool, j: builtins.bool) -> builtins.bool
+def (self: disjoint_sets.DisjointSets, i: builtins.bool, j: builtins.int) -> builtins.bool
+def (self: disjoint_sets.DisjointSets, i: builtins.int, j: builtins.bool) -> builtins.bool
+def (self: disjoint_sets.DisjointSets, i: builtins.int, j: builtins.int) -> builtins.bool
+union_sets
+def (self: disjoint_sets.DisjointSets, i: builtins.bool, j: builtins.bool)
+def (self: disjoint_sets.DisjointSets, i: builtins.bool, j: builtins.int)
+def (self: disjoint_sets.DisjointSets, i: builtins.int, j: builtins.bool)
+def (self: disjoint_sets.DisjointSets, i: builtins.int, j: builtins.int)

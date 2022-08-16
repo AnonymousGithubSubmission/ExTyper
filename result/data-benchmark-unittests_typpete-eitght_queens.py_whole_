@@ -1,0 +1,18 @@
+validate
+def (q: builtins.bytes)
+def (q: builtins.list[builtins.bool])
+def (q: builtins.list[builtins.bytes])
+def (q: builtins.list[builtins.float])
+def (q: builtins.list[builtins.int])
+def (q: builtins.list[builtins.object])
+def (q: builtins.list[builtins.str])
+def (q: builtins.list[eitght_queens.BailOut])
+def (q: builtins.str)
+add_queen
+def (q: builtins.list[builtins.float]) -> Union[Any, builtins.list[<nothing>], builtins.list[builtins.float]]
+def (q: builtins.list[builtins.int]) -> Union[Any, builtins.list[<nothing>], builtins.list[builtins.int]]
+def (q: builtins.list[builtins.object]) -> Union[Any, builtins.list[<nothing>], builtins.list[builtins.object]]
+add_queen
+def (q: builtins.list[builtins.float]) -> Union[Any, builtins.list[<nothing>], builtins.list[builtins.float]]
+def (q: builtins.list[builtins.int]) -> Union[Any, builtins.list[<nothing>], builtins.list[builtins.int]]
+def (q: builtins.list[builtins.object]) -> Union[Any, builtins.list[<nothing>], builtins.list[builtins.object]]

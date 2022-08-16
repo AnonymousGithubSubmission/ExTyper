@@ -1,0 +1,44 @@
+__init__
+['coop_concatenate.Concatenator']
+['coop_concatenate.Y', 'coop_concatenate.YP']
+['None']
+concatenate
+['coop_concatenate.Concatenator']
+['coop_concatenate.X', 'coop_concatenate.XP']
+['builtins.str', 'builtins.list[coop_concatenate.WP]', 'builtins.list[coop_concatenate.Z]']
+['builtins.list[builtins.object]', 'builtins.list[coop_concatenate.Z]', 'builtins.list[coop_concatenate.ZP]']
+['None']
+foo
+['coop_concatenate.Z']
+['None']
+bar
+['coop_concatenate.Y']
+['None']
+baz
+['coop_concatenate.X']
+['None']
+omg
+['coop_concatenate.W']
+['None']
+foo
+['coop_concatenate.ZP']
+['None']
+bar
+['coop_concatenate.YP']
+['None']
+baz
+['coop_concatenate.XP']
+['None']
+omg
+['coop_concatenate.WP']
+['None']
+__init__
+['coop_concatenate.Concatenator']
+['coop_concatenate.Y', 'coop_concatenate.YP']
+['None']
+concatenate
+['coop_concatenate.Concatenator']
+['coop_concatenate.X', 'coop_concatenate.XP']
+['builtins.str', 'builtins.list[builtins.bytes]', 'builtins.list[builtins.float]']
+['builtins.list[builtins.object]', 'builtins.list[coop_concatenate.X]', 'builtins.list[coop_concatenate.Z]']
+['None']

@@ -1,0 +1,36 @@
+dirname
+['file_download.Path']
+['builtins.object']
+['builtins.object']
+makedirs
+['file_download.OS']
+['builtins.object']
+['builtins.object']
+['None']
+__init__
+['file_download.File']
+['builtins.str']
+['builtins.str']
+['builtins.str']
+['None']
+__init__
+['file_download.File']
+['builtins.str']
+['builtins.str']
+['builtins.str']
+['None']
+dirname
+['file_download.Path']
+['builtins.object', 'builtins.str', 'builtins.int']
+['builtins.object', 'builtins.str', 'builtins.int']
+makedirs
+['file_download.OS']
+['builtins.object', 'builtins.str', 'builtins.int']
+['builtins.object']
+['None']
+create_folder_if_not_exists
+['file_download.File']
+['None']
+download
+['file_download.File']
+['builtins.bool']

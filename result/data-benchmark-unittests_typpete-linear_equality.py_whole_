@@ -1,0 +1,10 @@
+count_solutions
+def (a: builtins.bytes, b: builtins.bool) -> builtins.int
+def (a: builtins.bytes, b: builtins.int) -> builtins.int
+def (a: builtins.list[builtins.int], b: builtins.bool) -> builtins.int
+def (a: builtins.list[builtins.int], b: builtins.int) -> builtins.int
+count_solutions
+def (a: builtins.bytes, b: builtins.bool) -> builtins.int
+def (a: builtins.bytes, b: builtins.int) -> builtins.int
+def (a: builtins.list[builtins.int], b: builtins.bool) -> builtins.int
+def (a: builtins.list[builtins.int], b: builtins.int) -> builtins.int
