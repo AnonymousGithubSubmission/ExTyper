@@ -6,7 +6,7 @@
 
 This is a prototype package for a paper submission. 
 The material mentioned in the paper (i.e., the extended Algorithm 1 and the proof of Theorem 2.1) are in the **Appendix** folder. 
-The additional statistics mentioned in the response (i.e., MRR, pyre and time costing of different units) are in the **Additional Statistics** folder. 
+The statistics mentioned in the paper (i.e., the statistics about the evaluation dataset and the time costing of different units) are in the **Additional Statistics** folder. 
 
 
 ### Installation
