@@ -1,2 +1,0 @@
-x
-def (self: property_decorator.A) -> builtins.int

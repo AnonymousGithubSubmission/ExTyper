@@ -26,7 +26,7 @@ builtins.int/builtins.bool
 None
 None
 None
-tinychain.TxOut/tinychain.UnspentTxOut
+tinychain.UnspentTxOut/tinychain.TxOut
 tinychain.Transaction
 builtins.int/builtins.bool
 builtins.bool
@@ -53,7 +53,7 @@ builtins.list[tinychain.Transaction]/builtins.list[tinychain.Transaction]/builti
 builtins.object/builtins.int/builtins.float
 builtins.bool
 tinychain.TxIn
-tinychain.TxOut/tinychain.UnspentTxOut
+tinychain.UnspentTxOut/tinychain.TxOut
 tinychain.Transaction
 Any
 Any
@@ -103,5 +103,5 @@ builtins.str
 builtins.str
 builtins.str/builtins.bytes
 typing.Generator[None, None, builtins.list[builtins.bool]]/typing.Generator[None, None, builtins.list[builtins.bytes]]/typing.Generator[None, None, builtins.list[builtins.float]]
-builtins.str/tinychain.Block/tinychain.TxOut
+builtins.str/tinychain.Transaction/tinychain.Block
 builtins.int/builtins.bool

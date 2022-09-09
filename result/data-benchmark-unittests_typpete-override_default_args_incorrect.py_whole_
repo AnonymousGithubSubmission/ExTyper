@@ -1,6 +1,0 @@
-f
-def (self: override_default_args_incorrect.A, x: builtins.float =)
-def (self: override_default_args_incorrect.A, x: builtins.int =)
-def (self: override_default_args_incorrect.A, x: builtins.object =)
-f
-def (self: override_default_args_incorrect.B, x: builtins.object)

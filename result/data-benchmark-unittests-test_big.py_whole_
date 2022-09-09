@@ -1,4 +1,0 @@
-f
-def (a: builtins.bool, b: builtins.object, c: builtins.object, d: builtins.object, e: builtins.object, f: builtins.object, g: builtins.object) -> builtins.int
-def (a: builtins.float, b: builtins.object, c: builtins.object, d: builtins.object, e: builtins.object, f: builtins.object, g: builtins.object) -> builtins.float
-def (a: builtins.int, b: builtins.object, c: builtins.object, d: builtins.object, e: builtins.object, f: builtins.object, g: builtins.object) -> builtins.int

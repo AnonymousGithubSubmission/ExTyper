@@ -1,4 +1,0 @@
-f
-def (dt1: datetime.datetime) -> Tuple[builtins.int, builtins.int, builtins.int, builtins.int]
-def (dt1: datetime.time) -> Tuple[builtins.int, builtins.int, builtins.int, builtins.int]
-def (dt1: dt.A) -> Tuple[builtins.int, builtins.int, builtins.int, builtins.int]

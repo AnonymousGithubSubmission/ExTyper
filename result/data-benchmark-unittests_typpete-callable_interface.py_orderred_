@@ -1,8 +1,0 @@
-f
-['def (x: builtins.int) -> Any', 'def (x: builtins.str) -> Any']
-['builtins.str', 'builtins.int']
-['Any']
-f
-['def (x: builtins.int) -> Any', 'def (x: builtins.str) -> Any']
-['builtins.str', 'builtins.int']
-['Any']

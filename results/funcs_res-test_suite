@@ -97,7 +97,7 @@ builtins.bool
 builtins.int
 builtins.object
 builtins.float
-builtins.dict[builtins.bool, builtins.str]/builtins.dict[builtins.float, builtins.str]/builtins.dict[builtins.int, builtins.str]
+builtins.dict[builtins.int, builtins.str]/builtins.dict[builtins.bool, builtins.str]/builtins.dict[builtins.float, builtins.str]
 None
 builtins.dict[builtins.float, builtins.str]/builtins.dict[builtins.int, builtins.str]
 builtins.int
@@ -139,7 +139,7 @@ builtins.object
 builtins.dict[builtins.object, builtins.object]
 builtins.str
 builtins.float
-builtins.dict[builtins.int, builtins.str]/builtins.dict[builtins.bool, builtins.str]/builtins.dict[builtins.float, builtins.str]
+builtins.dict[builtins.float, builtins.str]/builtins.dict[builtins.int, builtins.str]/builtins.dict[builtins.bool, builtins.str]
 builtins.str
 builtins.bool
 builtins.object
@@ -154,7 +154,7 @@ builtins.bool
 builtins.object
 builtins.str
 None
-builtins.dict[builtins.int, builtins.str]/builtins.dict[builtins.float, builtins.str]
+builtins.dict[builtins.float, builtins.str]/builtins.dict[builtins.int, builtins.str]
 builtins.str
 None
 builtins.dict[builtins.float, builtins.str]/builtins.dict[builtins.bool, builtins.str]/builtins.dict[builtins.int, builtins.str]
@@ -232,7 +232,7 @@ None
 builtins.int/builtins.bool
 builtins.int/builtins.bool
 None
-Overload(def (x: builtins.float =) -> default_args_class.A, def (x: builtins.int =) -> default_args_class.A, def (x: builtins.object =) -> default_args_class.A)/def (x: Any =) -> default_args_class.A
+Overload(def (x: builtins.float =) -> default_args_class.A, def (x: builtins.object =) -> default_args_class.A, def (x: builtins.int =) -> default_args_class.A)/def (x: Any =) -> default_args_class.A
 None
 coop_concatenate_2.X/coop_concatenate_2.XP
 builtins.str/builtins.list[builtins.bytes]/builtins.list[builtins.float]

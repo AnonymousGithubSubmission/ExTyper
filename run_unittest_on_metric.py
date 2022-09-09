@@ -15,22 +15,14 @@ import os
 from extyper.remover import TypeHintRemover
 import ast
 from tqdm import tqdm
+import json
+
+TEST = True
+args = sys.argv[1:]
+MODE = args[0]
+
 builtins = ['int', 'float','bool','str', 'byte', 'callable', 'none', 'object']
 third = ['ndarray', 'tensor', 'namespace', 'vocabulary', 'textfieldembedder', 'jsondict', 'instance', 'socket', 'token']
-# fis = {
-#     # 'seagull_new': 'data/benchmark/unittests/seagull_new.py',
-#     'seagull_new': 'data/benchmark/seagull',
-    
-#     'tinychain': 'data/benchmark/unittests/tinychain.py',
-#     'relex': 'data/benchmark/unittests/relex.py',
-#     'htmlark': 'data/benchmark/unittests/htmlark.py',
-#     'adventure': 'data/benchmark/unittests/adventure.py',
-#     'imp': 'data/benchmark/unittests/imp.py',
-#     'chip': 'data/benchmark/unittests/chip.py',
-#     'scion': 'data/benchmark/scion',
-#     'unittests': 'data/benchmark/unittests_typpete',
-#     'pendulum': 'data/benchmark/pendulum'
-# }
 
 fis = {
     'seagull': 'data/benchmark/seagull',
@@ -45,7 +37,11 @@ fis = {
     'pendulum': 'data/benchmark/pendulum'
 }
 projects = ['seagull','tinychain','relex','htmlark', 'pendulum', 'adventure', 'imp', 'icemu', 'scion', 'test_suite']
+fast_test_projects = ['seagull', 'tinychain', 'adventure', 'imp', 'icemu', 'scion', 'test_suite']
+# fast_test_projects = ['relex']
 
+if TEST:
+    projects = fast_test_projects
 # special types like any, none and callable are sensitive
 
 lower = True
@@ -97,7 +93,7 @@ F1 = defaultdict(list)
 MRR = defaultdict(list)
 
 def run(file, tag):
-    mode = 'predict'
+    mode = MODE
     
     args = [file]
     def build_cache(options):
@@ -204,36 +200,12 @@ def remove_any(p):
 
 
 def same_ds(x, g):
-    # global ds
-    # if not mass_container:
-    #     return False
-    # if x == 'object':
-    #     return True
-    # for d in ds:
-    #     if x.find(d) != -1:
-    #         for g_ in g:
-    #             if g_.find(d) != -1:
-    #                 return True
-
-    # return False
     for y in g:
         if same_ds_(x, y):
             return True
 
     return False
 def same_pk(x, g):
-    # global ds
-    # if not mass_container:
-    #     return False
-    # if x == 'object':
-    #     return True
-    # for d in ds:
-    #     if x.find(d) != -1:
-    #         for g_ in g:
-    #             if g_.find(d) != -1:
-    #                 return True
-
-    # return False
     for y in g:
         if same_pk_(x, y):
             return True
@@ -370,45 +342,6 @@ def same_type(x, g):
     for y in g:
         if compatible(x,y) or coherent(x, y) or alias(x, y):
             return True
-    # if x in g:
-    #     return True
-
-    # if 'bool' in g:
-    #     if x == 'int':
-    #         return True
-    #     if x == 'float':
-    #         return True
-        
-    # if 'int' in g :
-    #     if x == 'float':
-    #         return True
-    #     if x == 'bool':
-    #         return True
-
-    # if x.find('literal') != -1:
-    #     if 'int' in g:
-    #         return True
-    #     if 'str' in g:
-    #         return True
-    # if 'any' in g:
-    #     return True
-
-    # if mass_object and 'object' in g:
-    #     return True
-    # # if 'bool' in g and ('float' == x or 'int' == x or 'object' == x):
-    # #     return True
-    # # if 'int' in g and ('float' == x):
-    # #     return True
-    # # if 'float' in g and ('int' == x):
-    # #     return True
-    
-    # # if x == 'object':
-    # #     return True
-    # # for d in ds:
-    # #     if x.find(d) != -1:
-    # #         for g_ in g:
-    # #             if g_.find(d) != -1:
-    # #                 return True
 
     return False
 if __name__ == '__main__':
@@ -566,22 +499,3 @@ if __name__ == '__main__':
         f.write('$F1_3$ & ' + ' & '.join(F1[3])+ '\\\\ \\hline' +'\n')
         # f.write('$MRR_3$ & ' + ' & '.join(MRR[3])+ '\\\\ \\hline' +'\n')
 
-
-
-        # print(R[1])
-        # print(F1[1])
-
-        # print(P[3])
-        # print(R[3])
-        # print(F1[3])
-
-    # with open('evaluation/examined_arg', 'w+') as f:
-    #     # c = choices(no_match_ground, k = 100)
-    #     for n in no_match_ground:
-    #         f.write(str(n)+'\n')
-    # # print('all')
-    # print('----------------------')
-    # print(all_precisions/all_cnt)
-    # print(all_recalls/all_cnt)
-    # print(all_f1s/all_cnt)
-    # print(all_cnt)

@@ -1,7 +1,0 @@
-read
-def (name: builtins.object, extend: builtins.bool =) -> Any
-__init__
-def (self: data.benchmark.pendulum.tz.zoneinfo.reader.Reader, extend: builtins.bool =)
-read_file
-def (path: builtins.bytes, extend: builtins.bool =) -> Any
-def (path: builtins.str, extend: builtins.bool =) -> Any

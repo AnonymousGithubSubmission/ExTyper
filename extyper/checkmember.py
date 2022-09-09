@@ -170,9 +170,10 @@ def _analyze_member_access(name: str,
         if isinstance(typ.upper_bound, Instance):
             upper_bound_names = typ.upper_bound.type.names
             if name not in upper_bound_names:
-                mx.chk.expr_checker.add_improvement_from_pair(mx.object_node, typ)
-                if hasattr(mx, 'object_node') and mx.object_node is not None:
-                    mx.chk.expr_checker.add_single_incompatible(mx.object_node, typ)
+                if hasattr(mx.chk.expr_checker, "add_improvement_from_pair"):
+                    mx.chk.expr_checker.add_improvement_from_pair(mx.object_node, typ)
+                    if hasattr(mx, 'object_node') and mx.object_node is not None:
+                        mx.chk.expr_checker.add_single_incompatible(mx.object_node, typ)
         return _analyze_member_access(name, typ.upper_bound, mx, override_info)
     elif isinstance(typ, DeletedType):
         mx.msg.deleted_as_rvalue(typ, mx.context)
@@ -181,7 +182,7 @@ def _analyze_member_access(name: str,
         return AnyType(TypeOfAny.from_error)
     if hasattr(mx, 'object_node') and mx.object_node is not None:
         mx.chk.expr_checker.add_single_incompatible(mx.object_node, typ)
-    return mx.msg.has_no_attr(mx.original_type, typ, name, mx.context, mx.module_symbol_table)
+    return AnyType(TypeOfAny.from_error)
 
 
 # The several functions that follow implement analyze_member_access for various
@@ -234,7 +235,8 @@ def analyze_instance_member_access(name: str,
 
     # Look up the member. First look up the method dictionary.
     method = info.get_method(name)
-    if method in mx.chk.func_candidates:
+
+    if hasattr(mx.chk, "func_candidates") and method in mx.chk.func_candidates:
         if hasattr(mx, "member_expr") and hasattr(mx.member_expr, 'node'):
             if mx.member_expr.node is not None:
                 mx.member_expr.node.append(method)
@@ -242,7 +244,7 @@ def analyze_instance_member_access(name: str,
                 mx.member_expr.node = [method]
         # else:
         #     mx.member_expr.node = [method]
-    if method is not None and method.line != -1 and method.type is None:
+    if hasattr(mx.chk, "method_typing") and method is not None and method.line != -1 and method.type is None:
         if method in mx.chk.method_typing:
             member_type = []
             annos = mx.chk.method_typing[method]
@@ -261,12 +263,7 @@ def analyze_instance_member_access(name: str,
         elif method in mx.chk.func_candidates or method in mx.chk.manager.func_candidates:
             # return AnyType(TypeOfAny.from_error)
             mx.not_ready_callback(name, mx.context)
-    # if method is not None and method.fullname in mx.chk.manager.mutable_funcs:
-    #     # this path should updating MaybeTypes
-    #     if method.type is None:
-    #         mx.chk.manager.server.suggest_function(method)
-    #     assert type(method.type) is Overloaded
-    #     items = [x for x in method.type.items]
+
     if method:
         if isinstance(method.type, Overloaded):
             origin_type = method.type
@@ -336,7 +333,6 @@ def analyze_instance_member_access(name: str,
     else:
         # Not a method.
         return analyze_member_var_access(name, typ, info, mx)
-
 
 def analyze_type_callable_member_access(name: str,
                                         typ: FunctionLike,
@@ -683,7 +679,7 @@ def analyze_var(name: str,
     # Found a member variable.
     itype = map_instance_to_supertype(itype, var.info)
     typ = var.type
-    if typ is None and var in mx.chk.var_node:
+    if hasattr(mx.chk, "var_node") and typ is None and var in mx.chk.var_node:
         node = mx.chk.var_node[var]
         # assert len(node) == 1
         node = node[0]
@@ -845,7 +841,7 @@ def analyze_class_attribute_access(itype: Instance,
     node = info.get(name)
     if hasattr(node, "node") and isinstance(node.node, Decorator):
         method = node.node.func
-        if method in mx.chk.func_candidates:
+        if hasattr(mx.chk, "func_candidates") and method in mx.chk.func_candidates:
             if hasattr(mx.member_expr, 'node'):
                 if mx.member_expr.node is not None:
                     mx.member_expr.node.append(method)
@@ -964,7 +960,7 @@ def analyze_class_attribute_access(itype: Instance,
 
     if is_decorated:
         assert isinstance(node.node, Decorator)
-        if node.node.func in mx.chk.func_candidates:
+        if hasattr(mx.chk, "func_candidates") and node.node.func in mx.chk.func_candidates:
             pass
         if node.node.type:
             return node.node.type

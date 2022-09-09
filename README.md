@@ -4,63 +4,106 @@
 
 ## STRAY: a Static Type Recommendation Approach for pYthon
 
-This is a prototype package for a paper submission. 
+This is the prototype package for a ASE '22 paper "Static Type Recommendation for Python". 
 The material mentioned in the paper (i.e., the extended Algorithm 1 and the proof of Theorem 2.1) are in the **Appendix** folder. 
 The statistics mentioned in the paper (i.e., the statistics about the evaluation dataset and the time costing of different units) are in the **Additional Statistics** folder. 
 
 
+
+
 ### Installation
-To run STRAY, those packages are required. 
+First, create and activate a Python environment, e.g.: 
 
-* python3
-* typing_extensions
-* tqdm
-* mypy_extensions
-* eventlet
-* tomli
-* astunparse
-* datasets
-### Recommendation
+```
+conda create -n stray_exp python=3.9
+conda activate stray_exp
+```
 
-#### Install Third-Party Dependency of the Recommending Project
-Please ensure that all third-party dependencies have been installed in the same virtual environment as STARY. 
+Then, install the packages to run stray:
 
-#### Recommendation
-##### Modes
-For those projects without **heavy** third-party dependency, e.g., *htmlark*, STARY can be employed directly to recommend types: 
+```
+pip install -r requirements.txt
+```
 
-python -m predict data/benchmark/htmlark.py predict
+Note that two kinds of packages are installed: (1) the packages necessary to run stray, (2) the packages that are depended by our evaluation projects, i.e., the packages necessary to reproduce our experiments. 
 
-For those projects with **heavy** third-party dependency, e.g., *relex* and all other projects in the benchmark, running STARY directly would analyze and recommend types for all third-party packages and the recommending project.
-Thus, STARY provide a pre-analysis to only **check** the third-party packages/recommending project and generate type stubs for them. 
+### Reproduction
 
-python -m predict data/benchmark/relex.py check
+#### Handling Dependency
+To precisely reproduce the results reported in the paper, you need to substitute several type stub files of numpy and matplotlib in their installation site with our version provided under data/pyi folder. 
 
-Then, running STARY directly would only analyze and recommend types for the recommending project. 
+Specifically, if you follow our instruction to install (using conda), you can 
+```
+cp -a data/pyi/numpy/. PATH_TO_CONDA/envs/stray_exp/lib/python3.9/site-packages/numpy
+cp -a data/pyi/matplotlib-stubs/. PATH_TO_CONDA/envs/stray_exp/lib/python3.9/site-packages/matplotlib-stubs
 
-python -m predict data/benchmark/relex.py predict
-##### Running
-The commend line format is:
+```
 
-python -m predict PROJECT MODE
+The reason is that, by the time of our experiment, numpy had just started their annotation, some stub files are not complete, we provide necessary completion to them.  On the other hand, matplotlib has never introduced their offical annotation. Thus, the stubs are unofficial and thus, incomplete. We also provide necessary completion to them. 
 
-If the recommending project is a single file (e.g., htmlark, relex, seagull, tinychain), please use the file address directly. 
+#### Reproduction Scripts
 
-python -m predict data/benchmark/htmlark.py check/predict
+We provide scripts to convinently reproduce the results reported in the paper, i.e., Table 1 & 2. 
 
-If the recommending project is a folder (e.g., pendulum), please use the folder address. 
+```
+python -m run_unittest_on_metric check
+python -m run_unittest_on_metric predict
+python -m evaluation.evaluate parameter
+python -m evaluation.evaluate return
+```
+Note that we run run_unittests_on_metric twice. The first run is to simply check and generate type cache for third-party dependencies. The second run is to predict (recommend) types for benchmark projects. 
 
-python -m predict data/benchmark/pendulum check/predict
-### Results
-You can reproduce the results following previous instruction. 
+Also note that we run evaluation.evaluate twice. The first run is to evaluate the results on parameters, while the second run is to evaluate the results on returns. 
 
-The results reported in the paper have been collected in the evaluation folder. You can conveniently check it through evaluate.py. 
+After the evaluation, find Table 1 in the table_parameter.txt, Table 2 in table_return.txt  
 
-python -m evaluation.evaluate
+### Usage
 
-### Replication
+To run stray for a single project, make sure that all its dependencies have been installed, for instance, for a project depending on A:
 
-We provide one-command replication script to replicate the results reported in the paper. 
+```
+pip install A
+```
 
-python -m run_unittest_on_metric
+then use the predict.py as the main entry.
+
+For instance: 
+
+```
+python -m predict data/benchmark/tinychain check tinychain
+python -m predict data/benchmark/tinychain predict tinychain
+```
+
+The first parameter is the project root; the second parameter is the executation mode (see the explanation in the last section); the third parameter is the name of the project. 
+
+After the execution, find the results on the *results* folder. results/funcs-name is the index of each function, results/funcs_res-name is the recommended types for the corresponding function. For example: 
+Suppose we have results/funcs-name as 
+```
+3    ...
+4    tinychain.Transaction.validate_basics
+5
+6    tinychain.Block.header
+7    ....
+```
+and results/funcs_res-name as 
+```
+3    builtins.str
+4    None
+5    builtins.object/builtins.int/builtins.float
+6    builtins.str
+7    builtins.int
+```
+Then the types for tinychain.Transaction.validate_basics is in the fourth and fifth line of results/funcs_res-name, i.e., the return type is None and the parameter type is builtins.object/builtins.int/builtins.float. 
+
+
+### Structure
+
+This project is based on the code of mypy 0.92 (https://github.com/python/mypy). On the basis of mypy, we write an abstract interpretation (a bottom-up traversal of the AST) added front-end interfaces to the abstract interpretation. All source codes are in the extyper folder. 
+
+* The entry and the collection of tentative type seeds is the *process_project* function in *build.py*. 
+* The abstract interpretation are *inferencer.py* and *inferexpr.py*
+
+
+Also note that the constraints used in this implementation is reverse of the specification of the paper. That is, instead of collecting constraints that make type checks, we collect constraints that make type not checks. Since the two are dual, it should be easy to alter between them. 
+
 

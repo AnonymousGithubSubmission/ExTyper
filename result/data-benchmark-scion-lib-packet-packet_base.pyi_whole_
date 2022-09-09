@@ -1,2 +1,0 @@
-__init__
-def (self: data.benchmark.scion.lib.packet.packet_base.Serializable, raw: builtins.object =)

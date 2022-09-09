@@ -92,106 +92,129 @@ def infer_constraints_for_callable_pure(
                 constraints.extend(c)
 
     return constraints
-def infer_constraints_for_callable(
-        callee: CallableType, arg_types: Sequence[Optional[Type]], arg_kinds: List[ArgKind],
-        formal_to_actual: List[List[int]], args=None) -> List[Constraint]:
-    """Infer type variable constraints for a callable and actual arguments.
 
+
+def infer_constraints_for_callable(
+        callee: CallableType, arg_types: Sequence[Optional[Type]], arg_kinds: List[int],
+        formal_to_actual: List[List[int]]) -> List[Constraint]:
+    """Infer type variable constraints for a callable and actual arguments.
     Return a list of constraints.
     """
-    constraints: List[Constraint] = []
+    constraints = []  # type: List[Constraint]
     mapper = ArgTypeExpander()
-    # for i, actuals in enumerate(formal_to_actual):
-    #     candidiate_types = []
-    #     type_set = set()
-    #     for actual in actuals:
-    #         actual_arg_type = arg_types[actual]
-    #         if isinstance(actual_arg_type, MaybeTypes):
-    #             typs = actual_arg_type.items
-    #         else:
-    #             typs = [actual_arg_type]
-    #         candidiate_types.append(typs)
-    #         for typ in typs:
-    #             type_set.add(typ)
-    #     for t in typ:
-    type_map = {}
-    tv_at = defaultdict(lambda:defaultdict(list))
-    concrete = set()
-    tv_2_concrete_2_cons = defaultdict(list)
-    for i, actuals in enumerate(formal_to_actual):
 
+    for i, actuals in enumerate(formal_to_actual):
         for actual in actuals:
-            concrete_2_cons = {}
             actual_arg_type = arg_types[actual]
-            actual_arg = args[actual]
             if actual_arg_type is None:
                 continue
-            if isinstance(actual_arg_type, MaybeTypes):
-                typs = actual_arg_type.items
-            else:
-                typs = [actual_arg_type]
-            targets = {}
-            for typ in typs:
-                actual_type = mapper.expand_actual_type(typ, arg_kinds[actual],
-                                                        callee.arg_names[i], callee.arg_kinds[i])
-                c = infer_constraints(callee.arg_types[i], actual_type, SUPERTYPE_OF)
-                # might be empty, need checking to ensure. 
-                for c_ in c:
-                    if c_.type_var not in targets:
-                        targets[c_.type_var] = []
-                    targets[c_.type_var].append(c_)
-                    tv_at[(c_.type_var, c_.target)][actual_arg].append(typ)
-                # targets.extend(c)
-            for tv in targets:
-                if tv not in type_map:
-                    type_map[tv] = []
-                type_map[tv].append(targets[tv])
-    final_constriants = []
-    # do a unification among args with the same type variable
-    for type_id in type_map:
-        type_set = set()
-        constraints = type_map[type_id]
-        for cons in constraints:
-            for c in cons:
-                type_set.add(c.target)
-        final_set = set()
-        for t in type_set:
 
-            corrects = set()
-            for cons in constraints:
-                if any([extyper.subtypes.is_subtype(c.target, t) for c in cons]):
-                    corrects.add(True)
-                else:
-                    corrects.add(False)
-            if all(corrects):
-                final_set.add(t)
+            actual_type = mapper.expand_actual_type(actual_arg_type, arg_kinds[actual],
+                                                    callee.arg_names[i], callee.arg_kinds[i])
+            c = infer_constraints(callee.arg_types[i], actual_type, SUPERTYPE_OF)
+            constraints.extend(c)
+
+    return constraints
+# def infer_constraints_for_callable(
+#         callee: CallableType, arg_types: Sequence[Optional[Type]], arg_kinds: List[ArgKind],
+#         formal_to_actual: List[List[int]], args=None) -> List[Constraint]:
+#     """Infer type variable constraints for a callable and actual arguments.
+
+#     Return a list of constraints.
+#     """
+#     constraints: List[Constraint] = []
+#     mapper = ArgTypeExpander()
+#     # for i, actuals in enumerate(formal_to_actual):
+#     #     candidiate_types = []
+#     #     type_set = set()
+#     #     for actual in actuals:
+#     #         actual_arg_type = arg_types[actual]
+#     #         if isinstance(actual_arg_type, MaybeTypes):
+#     #             typs = actual_arg_type.items
+#     #         else:
+#     #             typs = [actual_arg_type]
+#     #         candidiate_types.append(typs)
+#     #         for typ in typs:
+#     #             type_set.add(typ)
+#     #     for t in typ:
+#     type_map = {}
+#     tv_at = defaultdict(lambda:defaultdict(list))
+#     concrete = set()
+#     tv_2_concrete_2_cons = defaultdict(list)
+#     for i, actuals in enumerate(formal_to_actual):
+
+#         for actual in actuals:
+#             concrete_2_cons = {}
+#             actual_arg_type = arg_types[actual]
+#             actual_arg = args[actual]
+#             if actual_arg_type is None:
+#                 continue
+#             if isinstance(actual_arg_type, MaybeTypes):
+#                 typs = actual_arg_type.items
+#             else:
+#                 typs = [actual_arg_type]
+#             targets = {}
+#             for typ in typs:
+#                 actual_type = mapper.expand_actual_type(typ, arg_kinds[actual],
+#                                                         callee.arg_names[i], callee.arg_kinds[i])
+#                 c = infer_constraints(callee.arg_types[i], actual_type, SUPERTYPE_OF)
+#                 # might be empty, need checking to ensure. 
+#                 for c_ in c:
+#                     if c_.type_var not in targets:
+#                         targets[c_.type_var] = []
+#                     targets[c_.type_var].append(c_)
+#                     tv_at[(c_.type_var, c_.target)][actual_arg].append(typ)
+#                 # targets.extend(c)
+#             for tv in targets:
+#                 if tv not in type_map:
+#                     type_map[tv] = []
+#                 type_map[tv].append(targets[tv])
+#     final_constriants = []
+#     # do a unification among args with the same type variable
+#     for type_id in type_map:
+#         type_set = set()
+#         constraints = type_map[type_id]
+#         for cons in constraints:
+#             for c in cons:
+#                 type_set.add(c.target)
+#         final_set = set()
+#         for t in type_set:
+
+#             corrects = set()
+#             for cons in constraints:
+#                 if any([extyper.subtypes.is_subtype(c.target, t) for c in cons]):
+#                     corrects.add(True)
+#                 else:
+#                     corrects.add(False)
+#             if all(corrects):
+#                 final_set.add(t)
                 
 
-        # a special hack to prevent anytype interrupt one-one generic-overload line
-        if len(final_set) >= 1:
-            temp_set = set()
-            have_any = False
-            have_other = False
-            should_remove = False
-            for t in final_set:
-                if isinstance(t, AnyType):
-                    have_any = True
-                else:
-                    have_other = True
-            if have_any and have_other:
-                should_remove = True
-            if should_remove:
-                for t in final_set:
-                    if not isinstance(t, AnyType):
-                        temp_set.add(t)
-                final_set = temp_set
+#         # a special hack to prevent anytype interrupt one-one generic-overload line
+#         if len(final_set) >= 1:
+#             temp_set = set()
+#             have_any = False
+#             have_other = False
+#             should_remove = False
+#             for t in final_set:
+#                 if isinstance(t, AnyType):
+#                     have_any = True
+#                 else:
+#                     have_other = True
+#             if have_any and have_other:
+#                 should_remove = True
+#             if should_remove:
+#                 for t in final_set:
+#                     if not isinstance(t, AnyType):
+#                         temp_set.add(t)
+#                 final_set = temp_set
 
-        for t in final_set:
-            for cons in constraints:
-                for c in cons:
-                    if isinstance(t, AnyType) or (extyper.subtypes.is_subtype(c.target, t) and not isinstance(c.target, AnyType)):
-                        final_constriants.append(c)
-    return final_constriants, tv_at
+#         for t in final_set:
+#             for cons in constraints:
+#                 for c in cons:
+#                     if isinstance(t, AnyType) or (extyper.subtypes.is_subtype(c.target, t) and not isinstance(c.target, AnyType)):
+#                         final_constriants.append(c)
+#     return final_constriants, tv_at
 
 
 def infer_constraints(template: Type, actual: Type,

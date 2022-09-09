@@ -1,7 +1,0 @@
-exp
-def (a: builtins.int, b: builtins.int) -> builtins.int
-exp
-def (a: builtins.int, b: builtins.int) -> builtins.int
-f
-def (x: builtins.bool) -> builtins.int
-def (x: builtins.int) -> builtins.int

@@ -1,4 +1,0 @@
-__init__
-def (self: lib.path_store.PathPolicy)
-from_file
-def (policy_file: builtins.str) -> Any

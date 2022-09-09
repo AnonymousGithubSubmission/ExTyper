@@ -1,3 +1,0 @@
-f1
-def (x: builtins.bytes) -> builtins.bytes
-def (x: builtins.list[builtins.int]) -> builtins.list[builtins.int]

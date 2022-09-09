@@ -1,6 +1,0 @@
-validate
-['builtins.str', 'builtins.bytes', 'builtins.list[builtins.int]']
-[]
-add_queen
-['builtins.list[builtins.int]', 'builtins.list[builtins.object]']
-['builtins.list[builtins.int]', 'builtins.list[<nothing>]', 'builtins.list[builtins.object]']

@@ -1,8 +1,0 @@
-f
-def (x: def (x: builtins.int) -> Any, y: builtins.bool) -> Any
-def (x: def (x: builtins.int) -> Any, y: builtins.int) -> Any
-def (x: def (x: builtins.str) -> Any, y: builtins.str) -> Any
-f
-def (x: def (x: builtins.int) -> Any, y: builtins.bool) -> Any
-def (x: def (x: builtins.int) -> Any, y: builtins.int) -> Any
-def (x: def (x: builtins.str) -> Any, y: builtins.str) -> Any

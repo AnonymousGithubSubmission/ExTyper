@@ -27,7 +27,6 @@ from extyper.types import (
 from extyper.typeops import make_simplified_union, map_type_from_supertype
 from extyper.typevars import fill_typevars
 from extyper.util import unmangle
-from extyper.server.trigger import make_wildcard_trigger
 
 KW_ONLY_PYTHON_2_UNSUPPORTED = "kw_only is not supported in Python 2"
 
@@ -371,8 +370,6 @@ def _analyze_class(ctx: 'extyper.plugin.ClassDefContext',
     super_attrs = []
     for super_info in ctx.cls.info.mro[1:-1]:
         if 'attrs' in super_info.metadata:
-            # Each class depends on the set of attributes in its attrs ancestors.
-            ctx.api.add_plugin_dependency(make_wildcard_trigger(super_info.fullname))
 
             for data in super_info.metadata['attrs']['attributes']:
                 # Only add an attribute if it hasn't been defined before.  This

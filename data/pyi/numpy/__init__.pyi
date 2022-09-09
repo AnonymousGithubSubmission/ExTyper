@@ -384,12 +384,12 @@ from numpy.lib.function_base import (
     copy as copy,
     iterable as iterable,
     percentile as percentile,
-    diff as diff,
     gradient as gradient,
     angle as angle,
     unwrap as unwrap,
     sort_complex as sort_complex,
     disp as disp,
+    diff as diff,
     flip as flip,
     rot90 as rot90,
     extract as extract,
@@ -420,6 +420,7 @@ from numpy.lib.function_base import (
     add_newdoc_ufunc as add_newdoc_ufunc,
     quantile as quantile,
 )
+
 
 from numpy.lib.index_tricks import (
     ravel_multi_index as ravel_multi_index,
@@ -571,6 +572,16 @@ __git_version__: str
 #
 # Placeholders for classes
 # TODO: Remove `__getattr__` once the classes are stubbed out
+
+# def diff(
+#     a: ndarray[_DType],
+#     n: _IntLike_co = ...,
+#     axis: _ShapeLike = ...,
+#     prepend: ndarray[_DType] = ...,
+#     append: ndarray[_DType] = ...,
+# ) -> ndarray[_DType]: ...
+# def insert(arr: ndarray[_DType], index: int, value: _DType) -> ndarray[_DType]: ...
+
 class MachAr:
     def __init__(
         self,
@@ -1839,7 +1850,7 @@ class ndarray(_ArrayOrScalarCommon, Generic[_ShapeType, _DType_co]):
         dtype: DTypeLike,
         offset: SupportsIndex = ...,
     ) -> None: ...
-
+    # do something
     def sort(
         self,
         axis: SupportsIndex = ...,
@@ -2287,8 +2298,8 @@ class ndarray(_ArrayOrScalarCommon, Generic[_ShapeType, _DType_co]):
         other: _RecursiveSequence,
     ) -> Any: ...
 
-    @overload
-    def __mul__(self: NDArray[Any], other: _NestedSequence[Union[str, bytes]]) -> NoReturn: ...
+    # @overload
+    # def __mul__(self: NDArray[Any], other: _NestedSequence[Union[str, bytes]]) -> NoReturn: ...
     @overload
     def __mul__(self: NDArray[bool_], other: _ArrayLikeBool_co) -> NDArray[bool_]: ...  # type: ignore[misc]
     @overload
@@ -2303,15 +2314,15 @@ class ndarray(_ArrayOrScalarCommon, Generic[_ShapeType, _DType_co]):
     def __mul__(self: _ArrayTD64_co, other: _ArrayLikeFloat_co) -> NDArray[timedelta64]: ...
     @overload
     def __mul__(self: _ArrayFloat_co, other: _ArrayLikeTD64_co) -> NDArray[timedelta64]: ...
-    @overload
-    def __mul__(self: NDArray[object_], other: Any) -> Any: ...
-    @overload
-    def __mul__(self: NDArray[Any], other: _ArrayLikeObject_co) -> Any: ...
-    @overload
-    def __mul__(
-        self: NDArray[Union[bool_, number[Any], timedelta64]],
-        other: _RecursiveSequence,
-    ) -> Any: ...
+    # @overload
+    # def __mul__(self: NDArray[object_], other: Any) -> Any: ...
+    # @overload
+    # def __mul__(self: NDArray[Any], other: _ArrayLikeObject_co) -> Any: ...
+    # @overload
+    # def __mul__(
+    #     self: NDArray[Union[bool_, number[Any], timedelta64]],
+    #     other: _RecursiveSequence,
+    # ) -> Any: ...
 
     @overload
     def __rmul__(self: NDArray[Any], other: _NestedSequence[Union[str, bytes]]) -> NoReturn: ...
@@ -2570,7 +2581,7 @@ class ndarray(_ArrayOrScalarCommon, Generic[_ShapeType, _DType_co]):
     # @overload
     # def __and__(self: NDArray[object_], other: Any) -> Any: ...
     @overload
-    def __and__(self: NDArray[Any], other: _ArrayLikeObject_co) -> ndarray: ...
+    def __and__(self: NDArray[Any], other: ArrayLike) -> ndarray: ...
     # @overload
     # def __and__(
     #     self: NDArray[Union[bool_, integer[Any]]],

@@ -53,11 +53,11 @@ None
 builtins.int/builtins.bool
 None
 builtins.bool
-builtins.list[chip.LED]/builtins.list[chip.Pin]/builtins.set[chip.Pin]
-builtins.bool
-builtins.list[chip.LED]/builtins.list[chip.Pin]/builtins.set[chip.Pin]
-builtins.bool
 builtins.list[chip.LED]/builtins.list[chip.Pin]/builtins.set[chip.LED]
 builtins.bool
-builtins.list[chip.LED]/builtins.list[chip.Pin]/builtins.set[chip.LED]
+builtins.list[chip.LED]/builtins.list[chip.Pin]/builtins.set[chip.Pin]
+builtins.bool
+builtins.list[chip.Pin]/builtins.list[chip.LED]/builtins.set[chip.LED]
+builtins.bool
+builtins.list[chip.Pin]/builtins.list[chip.LED]/builtins.set[chip.LED]
 None

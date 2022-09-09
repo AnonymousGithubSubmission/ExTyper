@@ -1,3 +1,0 @@
-f
-def (x: builtins.bool) -> Union[Any, builtins.int]
-def (x: builtins.int) -> Union[Any, builtins.int]

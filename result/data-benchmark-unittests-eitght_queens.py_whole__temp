@@ -1,9 +1,0 @@
-validate
-def (q: builtins.bytes)
-def (q: builtins.list[builtins.int])
-def (q: builtins.list[builtins.object])
-def (q: builtins.list[builtins.str])
-def (q: builtins.str)
-add_queen
-def (q: builtins.list[builtins.int]) -> Union[Any, builtins.list[<nothing>], builtins.list[builtins.int]]
-def (q: builtins.list[builtins.object]) -> Union[Any, builtins.list[<nothing>], builtins.list[builtins.object]]

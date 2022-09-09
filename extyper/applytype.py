@@ -59,7 +59,7 @@ def apply_generic_arguments(
         callable: CallableType, orig_types: Sequence[Optional[Type]],
         report_incompatible_typevar_value: Callable[[CallableType, Type, str, Context], None],
         context: Context,
-        skip_unsatisfied: bool = False) -> CallableType:
+        skip_unsatisfied: bool = False, fail=False) -> CallableType:
     """Apply generic type arguments to a callable type.
 
     For example, applying [int] to 'def [T] (T) -> T' results in
@@ -91,7 +91,7 @@ def apply_generic_arguments(
         )
         if target_type is not None:
             id_to_type[tvar.id] = target_type
-        else:
+        elif fail:
             return None
 
     # Apply arguments to argument types.

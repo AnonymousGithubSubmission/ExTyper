@@ -43,7 +43,7 @@ data.benchmark.scion.lib.packet.scion_addr.PathSegment
 data.benchmark.scion.lib.packet.scion_addr.ISD_AS
 data.benchmark.scion.lib.packet.scion_addr.PathSegment
 None
-builtins.list[builtins.str]/builtins.list[builtins.object]
+builtins.list[builtins.object]/builtins.list[builtins.str]
 builtins.str
 builtins.str/builtins.int/builtins.float
 <partial list[?]>
@@ -79,7 +79,7 @@ builtins.list[Any]
 builtins.int
 None
 None
-builtins.list[builtins.object]/builtins.list[builtins.int]/builtins.list[builtins.str]
+builtins.list[builtins.int]/builtins.list[builtins.str]/builtins.list[builtins.object]
 data.benchmark.scion.lib.packet.scion_addr.PathSegment
 builtins.int/builtins.bool
 builtins.str

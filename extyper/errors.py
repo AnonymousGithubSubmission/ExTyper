@@ -9,7 +9,6 @@ from typing_extensions import Final
 
 from extyper.scope import Scope
 from extyper.options import Options
-from extyper.version import __version__ as mypy_version
 from extyper.errorcodes import ErrorCode, IMPORT
 from extyper import errorcodes as codes
 from extyper.util import DEFAULT_SOURCE_OFFSET, is_typeshed_file
@@ -804,42 +803,8 @@ def report_internal_error(err: Exception,
 
     # Print "INTERNAL ERROR" message.
     print('{}error: INTERNAL ERROR --'.format(prefix),
-          'Please try using mypy master on Github:\n'
-          'https://mypy.readthedocs.io/en/stable/common_issues.html'
-          '#using-a-development-mypy-build',
-          file=stderr)
-    if options.show_traceback:
-        print('Please report a bug at https://github.com/python/mypy/issues',
-            file=stderr)
-    else:
-        print('If this issue continues with mypy master, '
-              'please report a bug at https://github.com/python/mypy/issues',
-            file=stderr)
-    print('version: {}'.format(mypy_version),
           file=stderr)
 
-    # If requested, drop into pdb. This overrides show_tb.
-    if options.pdb:
-        print('Dropping into pdb', file=stderr)
-        import pdb
-        pdb.post_mortem(sys.exc_info()[2])
-
-    # If requested, print traceback, else print note explaining how to get one.
-    if options.raise_exceptions:
-        raise err
-    if False :#not options.show_traceback:
-        if not options.pdb:
-            print('{}: note: please use --show-traceback to print a traceback '
-                  'when reporting a bug'.format(prefix),
-                  file=stderr)
-    else:
-        tb = traceback.extract_stack()[:-2]
-        tb2 = traceback.extract_tb(sys.exc_info()[2])
-        print('Traceback (most recent call last):')
-        for s in traceback.format_list(tb + tb2):
-            print(s.rstrip('\n'))
-        print('{}: {}'.format(type(err).__name__, err), file=stdout)
-        print('{}: note: use --pdb to drop into pdb'.format(prefix), file=stderr)
 
     # Exit.  The caller has nothing more to say.
     # We use exit code 2 to signal that this is no ordinary error.

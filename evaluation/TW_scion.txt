@@ -1,12 +1,11 @@
-TW
 
 str/List[T]
 
 bytes/str
 
-str/Union[str, bytes]
+str/JSON
 
-str/Union[str, bytes]
+str/bytes
 
 
 
@@ -14,7 +13,7 @@ nan/bytes
 nan/List[str]
 nan/float
 nan/Tuple[str, str]
-str/Optional[str]
+str/Text
 nan/Point2
 object/tp.Any
 nan/List[str]
@@ -27,11 +26,11 @@ nan/List[str]
 nan/bytes
 
 str/Path
-bytes/bytearray
+bytes/str
 
 
 
-nan/bytes
+nan/List[str]
 
 
 
@@ -39,48 +38,48 @@ nan/Point2
 object/tp.Any
 
 nan/p.Parameter
-
-
-
-
-
-str/bytes
-
-nan/bool/bool
-str/tuple
+nan/bool
+str/Set
 nan/List[str]
-bool/str
+str/int
 nan/Iterable[str]
 str/Optional[str]
 str/Text
 Type/str
-nan/Optional[str]
-str/bool
-nan/Optional[bool]
-bool/str
-
-bool/str
-
-
+nan/Optional[int]
 str/int
+nan/Optional[str]
+str/int
+
+
+
+
+
+str/Path
+
+
+bool/int
+
+
+int/str
 nan/bool
 object/tp.Any
 
 nan/Iterator[str]
-str/List[str]
+str/int
 
 
 
 
 
 nan/List[str]
-int/List[int]
-bool/str
-nan/List[str]
-int/Optional[int]/str
-
-
-List[str]/List[int]
-nan/Store
 int/str
+bool/Optional[bool]
+nan/List[str]
+int/str/Optional[int]
+
+
+str/int
+nan/Optional[str]
+str/int
 

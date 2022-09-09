@@ -108,14 +108,14 @@ builtins.str/builtins.int/builtins.float
 data.benchmark.pendulum.duration.Duration
 builtins.int
 data.benchmark.pendulum.duration.Duration/builtins._NotImplementedType
-builtins.str/builtins.int/data.benchmark.pendulum.tz.zoneinfo.posix_timezone.PosixTransition
+builtins.str/builtins.int/data.benchmark.pendulum.datetime.DateTime
 builtins._NotImplementedType/builtins.int/builtins._NotImplementedType/builtins.int/data.benchmark.pendulum.duration.Duration
 builtins.str/builtins.int/builtins.float
 builtins._NotImplementedType/builtins.float/data.benchmark.pendulum.duration.Duration
 builtins.str/builtins.int/builtins.float
 data.benchmark.pendulum.duration.Duration/builtins._NotImplementedType
 builtins.str/builtins.int/builtins.float
-Any/builtins.object
+builtins.object/Any
 data.benchmark.pendulum.duration.Duration/data.benchmark.pendulum.period.Period
 builtins.object/builtins.int/builtins.float
 builtins.object/builtins.int/builtins.float
@@ -150,7 +150,7 @@ builtins.str/builtins.int/builtins.float
 data.benchmark.pendulum.duration.Duration
 data.benchmark.pendulum.time.Time/datetime.time
 builtins.object/builtins.int/builtins.float
-Any/builtins.object
+builtins.object/Any
 data.benchmark.pendulum.time.Time/datetime.time
 builtins.object/builtins.int/builtins.float
 builtins.object
@@ -195,7 +195,7 @@ builtins._NotImplementedType
 builtins.str/builtins.int/builtins.float
 data.benchmark.pendulum.period.Period
 data.benchmark.pendulum.duration.Duration/builtins._NotImplementedType
-builtins.str/builtins.int/data.benchmark.pendulum.tz.zoneinfo.posix_timezone.PosixTransition
+builtins.str/builtins.int/data.benchmark.pendulum.datetime.DateTime
 builtins._NotImplementedType/builtins.int/builtins._NotImplementedType/builtins.int/data.benchmark.pendulum.duration.Duration
 builtins.str/builtins.int/builtins.float
 builtins._NotImplementedType/builtins.float/data.benchmark.pendulum.duration.Duration
@@ -217,7 +217,7 @@ builtins.object/builtins.str/builtins.int
 builtins.int
 builtins.bool/Any
 Any
-Any/builtins.object
+builtins.object/Any
 data.benchmark.pendulum.duration.Duration/data.benchmark.pendulum.period.Period
 builtins.object/builtins.int/builtins.float
 builtins.object/builtins.int/builtins.float
@@ -335,7 +335,7 @@ Any
 data.benchmark.pendulum.period.Period
 data.benchmark.pendulum.datetime.DateTime/data.benchmark.pendulum.date.Date/datetime.date
 builtins.bool
-Any/builtins.object
+builtins.object/Any
 data.benchmark.pendulum.datetime.DateTime/data.benchmark.pendulum.date.Date/datetime.date
 builtins.object/builtins.int/builtins.float
 builtins.object
@@ -385,7 +385,7 @@ data.benchmark.pendulum.datetime.DateTime/builtins.bool
 builtins.int
 builtins.int/builtins.bool
 data.benchmark.pendulum.datetime.DateTime
-builtins.object/data.benchmark.pendulum.mixins.default.FormattableMixin/data.benchmark.pendulum.datetime.DateTime
+builtins.object/data.benchmark.pendulum.datetime.DateTime/data.benchmark.pendulum.mixins.default.FormattableMixin
 builtins._NotImplementedType/builtins._NotImplementedType/data.benchmark.pendulum.period.Period/data.benchmark.pendulum.datetime.DateTime/builtins._NotImplementedType
 builtins.str/builtins.int/builtins.float
 builtins._NotImplementedType/builtins._NotImplementedType/data.benchmark.pendulum.period.Period
@@ -502,10 +502,10 @@ builtins.int
 builtins.int
 builtins.int
 builtins.str
-datetime.datetime
+sqlite3.dbapi2.Connection/datetime.datetime
 data.benchmark.pendulum.datetime.DateTime/data.benchmark.pendulum.time.Time/datetime.time
 builtins.object/builtins.str/builtins.int
-datetime.datetime
+datetime.datetime/sqlite3.dbapi2.Connection
 builtins.int/builtins.bool
 builtins.int/builtins.bool
 builtins.int/builtins.bool
@@ -513,10 +513,10 @@ builtins.int
 builtins.int
 builtins.int
 builtins.int
-data.benchmark.pendulum.datetime.DateTime/datetime.datetime
+data.benchmark.pendulum.datetime.DateTime/datetime.datetime/sqlite3.dbapi2.Connection/datetime.datetime
 data.benchmark.pendulum.datetime.DateTime/data.benchmark.pendulum.time.Time/datetime.time
 builtins.object/builtins.str
-datetime.datetime
+sqlite3.dbapi2.Connection/datetime.datetime
 Any
 data.benchmark.pendulum.tz.zoneinfo.transition.Transition
 Any
@@ -527,7 +527,7 @@ datetime.timedelta
 Any
 builtins.str
 data.benchmark.pendulum.datetime.DateTime/datetime.datetime
-data.benchmark.pendulum.datetime.DateTime/datetime.datetime
+data.benchmark.pendulum.datetime.DateTime/datetime.datetime/sqlite3.dbapi2.Connection/datetime.datetime
 data.benchmark.pendulum.datetime.DateTime/data.benchmark.pendulum.time.Time/datetime.time
 builtins.str
 Tuple[builtins.str]
@@ -585,7 +585,7 @@ builtins.int/builtins.bool
 Any
 typing.IO[Any]
 builtins.int/builtins.bool
-builtins.dict[Any, builtins.str]/builtins.dict[Any, Any]/builtins.dict[Any, builtins.int]
+builtins.dict[Any, builtins.int]/builtins.dict[Any, Any]/builtins.dict[Any, builtins.str]
 typing.IO[Any]
 builtins.int/builtins.bool
 data.benchmark.pendulum.tz.zoneinfo.reader.header/data.benchmark.pendulum.tz.zoneinfo.reader._offset/builtins.list[builtins.bytes]

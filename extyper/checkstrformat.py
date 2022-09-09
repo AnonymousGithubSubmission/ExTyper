@@ -603,33 +603,6 @@ class StringFormatterChecker:
             return self.named_type('builtins.str')
         else:
             assert False
-        self.exprchk.accept(expr)
-        return {AnyType(0)} # not Implemented
-        specifiers = parse_conversion_specifiers(expr.value)
-        has_mapping_keys = self.analyze_conversion_specifiers(specifiers, expr)
-        if isinstance(expr, BytesExpr) and (3, 0) <= self.chk.options.python_version < (3, 5):
-            self.msg.fail('Bytes formatting is only supported in Python 3.5 and later',
-                          replacements, code=codes.STRING_FORMATTING)
-            return AnyType(TypeOfAny.from_error)
-
-        self.unicode_upcast = False
-        if has_mapping_keys is None:
-            pass  # Error was reported
-        elif has_mapping_keys:
-            self.check_mapping_str_interpolation(specifiers, replacements, expr)
-        else:
-            self.check_simple_str_interpolation(specifiers, replacements, expr)
-
-        if isinstance(expr, BytesExpr):
-            return self.named_type('builtins.bytes')
-        elif isinstance(expr, UnicodeExpr):
-            return self.named_type('builtins.unicode')
-        elif isinstance(expr, StrExpr):
-            if self.unicode_upcast:
-                return self.named_type('builtins.unicode')
-            return self.named_type('builtins.str')
-        else:
-            assert False
 
     def analyze_conversion_specifiers(self, specifiers: List[ConversionSpecifier],
                                       context: Context) -> Optional[bool]:

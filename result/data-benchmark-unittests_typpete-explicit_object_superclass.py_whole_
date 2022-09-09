@@ -1,2 +1,0 @@
-something
-def (self: explicit_object_superclass.A) -> builtins.int

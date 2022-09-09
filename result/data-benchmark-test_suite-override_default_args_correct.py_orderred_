@@ -1,8 +1,0 @@
-f
-['override_default_args_correct.A']
-['builtins.object']
-['None']
-f
-['override_default_args_correct.B']
-['builtins.object', 'builtins.int', 'builtins.float']
-['None']

@@ -1,7 +1,0 @@
-__init__
-['callable_class.A']
-[]
-__call__
-['callable_class.A']
-['builtins.list[builtins.object]']
-['builtins.list[builtins.object]']

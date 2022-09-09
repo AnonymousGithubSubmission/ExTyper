@@ -8,7 +8,6 @@ from typing_extensions import ClassVar, Final
 
 from extyper.nodes import TypeInfo
 from extyper.types import Instance, TypeAliasType, get_proper_type, Type
-from extyper.server.trigger import make_trigger
 from extyper import state
 
 # Represents that the 'left' instance is a subtype of the 'right' instance
@@ -157,92 +156,6 @@ class TypeState:
             left_type.fullname,
             set()).update(right_type.protocol_members)
 
-    @staticmethod
-    def _snapshot_protocol_deps() -> Dict[str, Set[str]]:
-        """Collect protocol attribute dependencies found so far from registered subtype checks.
-
-        There are three kinds of protocol dependencies. For example, after a subtype check:
-
-            x: Proto = C()
-
-        the following dependencies will be generated:
-            1. ..., <SuperProto[wildcard]>, <Proto[wildcard]> -> <Proto>
-            2. ..., <B.attr>, <C.attr> -> <C> [for every attr in Proto members]
-            3. <C> -> Proto  # this one to invalidate the subtype cache
-
-        The first kind is generated immediately per-module in deps.py (see also an example there
-        for motivation why it is needed). While two other kinds are generated here after all
-        modules are type checked and we have recorded all the subtype checks. To understand these
-        two kinds, consider a simple example:
-
-            class A:
-                def __iter__(self) -> Iterator[int]:
-                    ...
-
-            it: Iterable[int] = A()
-
-        We add <a.A.__iter__> -> <a.A> to invalidate the assignment (module target in this case),
-        whenever the signature of a.A.__iter__ changes. We also add <a.A> -> typing.Iterable,
-        to invalidate the subtype caches of the latter. (Note that the same logic applies to
-        proper subtype checks, and calculating meets and joins, if this involves calling
-        'subtypes.is_protocol_implementation').
-        """
-        deps: Dict[str, Set[str]] = {}
-        for info in TypeState._rechecked_types:
-            for attr in TypeState._checked_against_members[info.fullname]:
-                # The need for full MRO here is subtle, during an update, base classes of
-                # a concrete class may not be reprocessed, so not all <B.x> -> <C.x> deps
-                # are added.
-                for base_info in info.mro[:-1]:
-                    trigger = make_trigger('%s.%s' % (base_info.fullname, attr))
-                    if 'typing' in trigger or 'builtins' in trigger:
-                        # TODO: avoid everything from typeshed
-                        continue
-                    deps.setdefault(trigger, set()).add(make_trigger(info.fullname))
-            for proto in TypeState._attempted_protocols[info.fullname]:
-                trigger = make_trigger(info.fullname)
-                if 'typing' in trigger or 'builtins' in trigger:
-                    continue
-                # If any class that was checked against a protocol changes,
-                # we need to reset the subtype cache for the protocol.
-                #
-                # Note: strictly speaking, the protocol doesn't need to be
-                # re-checked, we only need to reset the cache, and its uses
-                # elsewhere are still valid (unless invalidated by other deps).
-                deps.setdefault(trigger, set()).add(proto)
-        return deps
-
-    @staticmethod
-    def update_protocol_deps(second_map: Optional[Dict[str, Set[str]]] = None) -> None:
-        """Update global protocol dependency map.
-
-        We update the global map incrementally, using a snapshot only from recently
-        type checked types. If second_map is given, update it as well. This is currently used
-        by FineGrainedBuildManager that maintains normal (non-protocol) dependencies.
-        """
-        assert TypeState.proto_deps is not None, (
-            "This should not be called after failed cache load")
-        new_deps = TypeState._snapshot_protocol_deps()
-        for trigger, targets in new_deps.items():
-            TypeState.proto_deps.setdefault(trigger, set()).update(targets)
-        if second_map is not None:
-            for trigger, targets in new_deps.items():
-                second_map.setdefault(trigger, set()).update(targets)
-        TypeState._rechecked_types.clear()
-        TypeState._attempted_protocols.clear()
-        TypeState._checked_against_members.clear()
-
-    @staticmethod
-    def add_all_protocol_deps(deps: Dict[str, Set[str]]) -> None:
-        """Add all known protocol dependencies to deps.
-
-        This is used by tests and debug output, and also when collecting
-        all collected or loaded dependencies as part of build.
-        """
-        TypeState.update_protocol_deps()  # just in case
-        if TypeState.proto_deps is not None:
-            for trigger, targets in TypeState.proto_deps.items():
-                deps.setdefault(trigger, set()).update(targets)
 
 
 def reset_global_state() -> None:

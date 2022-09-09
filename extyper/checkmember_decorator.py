@@ -261,12 +261,7 @@ def analyze_instance_member_access(name: str,
         else:
             # return AnyType(TypeOfAny.from_error)
             mx.not_ready_callback(name, mx.context)
-    # if method is not None and method.fullname in mx.chk.manager.mutable_funcs:
-    #     # this path should updating MaybeTypes
-    #     if method.type is None:
-    #         mx.chk.manager.server.suggest_function(method)
-    #     assert type(method.type) is Overloaded
-    #     items = [x for x in method.type.items]
+
     if method:
         if isinstance(method.type, Overloaded):
             origin_type = method.type

@@ -17,8 +17,6 @@ from extyper.types import (
     Type, Instance, NoneType, TypeVarType, CallableType, get_proper_type,
     AnyType, TypeOfAny,
 )
-from extyper.server.trigger import make_wildcard_trigger
-
 # The set of decorators that generate dataclasses.
 dataclass_makers: Final = {
     'dataclass',
@@ -323,9 +321,6 @@ class DataclassTransformer:
                 continue
 
             super_attrs = []
-            # Each class depends on the set of attributes in its dataclass ancestors.
-            ctx.api.add_plugin_dependency(make_wildcard_trigger(info.fullname))
-
             for data in info.metadata["dataclass"]["attributes"]:
                 name: str = data["name"]
                 if name not in known_attrs:

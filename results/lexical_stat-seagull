@@ -4,8 +4,8 @@
 <class 'extyper.nodes.ImportFrom'>:15
 <class 'extyper.nodes.ClassDef'>:24
 <class 'extyper.nodes.TupleExpr'>:68
-<class 'extyper.nodes.IntExpr'>:294
-<class 'extyper.nodes.NameExpr'>:309
+<class 'extyper.nodes.IntExpr'>:293
+<class 'extyper.nodes.NameExpr'>:308
 <class 'extyper.nodes.FuncDef'>:66
 <class 'extyper.nodes.Block'>:94
 <class 'extyper.nodes.ReturnStmt'>:39

@@ -1,9 +1,0 @@
-validate
-['builtins.str', 'builtins.list[builtins.bytes]', 'builtins.list[builtins.float]']
-['None']
-add_queen
-['builtins.list[builtins.float]', 'builtins.list[builtins.int]', 'builtins.list[builtins.object]']
-['builtins.list[builtins.float]', 'builtins.list[<nothing>]', 'builtins.list[builtins.int]']
-add_queen
-['builtins.list[builtins.float]', 'builtins.list[builtins.int]', 'builtins.list[builtins.object]']
-['builtins.list[builtins.float]', 'builtins.list[<nothing>]', 'builtins.list[builtins.int]']

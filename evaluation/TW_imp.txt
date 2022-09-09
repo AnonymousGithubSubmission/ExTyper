@@ -1,4 +1,3 @@
-TW
 nan/List[Token]
 str/Character
 Token/str
@@ -13,9 +12,6 @@ nan/Point2
 tp.Any/Units
 nan/List[str]
 Callable/Callable[..., Any]
-
-Token/str
-int/torch.LongTensor
 nan/Optional[int]
 Token/str
 int/torch.LongTensor
@@ -35,6 +31,9 @@ nan/Dict[str, Any]
 Token/str
 torch.LongTensor/int/torch.Tensor
 nan/List[str]
+Token/str
+torch.LongTensor/int/torch.Tensor
+nan/List[Dict[str, Any]]
 Token/str
 torch.LongTensor/int/torch.Tensor
 nan/List[str]
@@ -82,44 +81,3 @@ nan/List[bool]
 dict/Mapping[str, Any]
 nan/List[str]
 str/Namespace
-nan/Dict[str, int]
-List[Token]/Token
-nan/List[str]
-nan/GrammarType
-Dict[str, Any]/IfStmt
-nan/pd.DataFrame
-ast.Module/str
-nan/List[str]
-nan/Dict[str, Any]
-ast.Module/Parser
-nan/Optional[str]
-nan/bytes
-ast.Module/Callable[[Dict[str, Any]], None]
-nan/GrammarType
-nan/float
-nan/List[str]
-nan/Set[str]
-nan/list[str]
-nan/Set[str]
-nan/float
-nan/Dict[str, Any]
-nan/Set[str]
-nan/List[int]
-nan/bool_t
-int/str
-str/int
-nan/argparse.ArgumentParser
-Parser/argparse.ArgumentParser
-int/str
-int/str
-nan/ops.OP_TREE
-ops.Operation/str
-nan/Select
-Parser/ast.Module
-nan/ops.OP_TREE
-ops.Operation/cirq.Operation
-nan/argparse.ArgumentParser
-Callable[[Dict[str, Any]], None]/str
-nan/argparse.ArgumentParser
-7.76
-

@@ -1,5 +1,0 @@
-f
-def (self: test_tuple_set.A, a: builtins.bool, b: builtins.bool)
-def (self: test_tuple_set.A, a: builtins.bool, b: builtins.int)
-def (self: test_tuple_set.A, a: builtins.int, b: builtins.bool)
-def (self: test_tuple_set.A, a: builtins.int, b: builtins.int)

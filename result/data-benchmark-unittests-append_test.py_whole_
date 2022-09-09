@@ -1,2 +1,0 @@
-f
-def () -> builtins.list[builtins.int]

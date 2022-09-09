@@ -4,7 +4,7 @@
 <class 'extyper.nodes.StrExpr'>:226
 <class 'extyper.nodes.IntExpr'>:469
 <class 'extyper.nodes.CallExpr'>:507
-<class 'extyper.nodes.NameExpr'>:1410
+<class 'extyper.nodes.NameExpr'>:1409
 <class 'extyper.nodes.MemberExpr'>:332
 <class 'extyper.nodes.FuncDef'>:197
 <class 'extyper.nodes.Block'>:374
@@ -13,7 +13,7 @@
 <class 'extyper.nodes.ComparisonExpr'>:91
 <class 'extyper.nodes.ReturnStmt'>:147
 <class 'extyper.nodes.FloatExpr'>:52
-<class 'extyper.nodes.OpExpr'>:223
+<class 'extyper.nodes.OpExpr'>:217
 <class 'extyper.nodes.IndexExpr'>:129
 <class 'extyper.nodes.ListExpr'>:122
 <class 'extyper.nodes.OperatorAssignmentStmt'>:20
@@ -27,7 +27,7 @@
 <class 'extyper.nodes.DictExpr'>:39
 <class 'extyper.nodes.RaiseStmt'>:4
 <class 'extyper.nodes.BreakStmt'>:5
-<class 'extyper.nodes.TupleExpr'>:156
+<class 'extyper.nodes.TupleExpr'>:139
 <class 'extyper.nodes.ConditionalExpr'>:3
 <class 'extyper.nodes.SetComprehension'>:1
 <class 'extyper.nodes.SetExpr'>:3

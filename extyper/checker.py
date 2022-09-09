@@ -1,5 +1,3 @@
-"""Mypy type checker."""
-
 from collections import defaultdict
 from copy import copy
 from gc import collect
@@ -14,7 +12,6 @@ from typing import (
     Iterable, Sequence, Mapping, Generic, AbstractSet, Callable
 )
 from typing_extensions import Final
-# from mypy.suggestions import make_suggestion_anys
 from extyper.errors import Errors, report_internal_error
 from extyper.nodes import (
     UNBOUND_IMPORTED, Argument, FlowNode, SymbolTable, Statement, MypyFile, Var, Expression, Lvalue, Node,
@@ -48,7 +45,6 @@ from extyper.messages import (
     format_type, format_type_bare, format_type_distinctly, SUGGESTED_TEST_FIXTURES
 )
 import extyper.checkexpr
-from extyper.checkexpr import LeadingFinder, get_ground_pairs
 from extyper.checkmember import (
     analyze_member_access, analyze_descriptor_access, type_object_type, lookup_member_var_or_accessor
 )
@@ -147,23 +143,6 @@ PartialTypeScope = NamedTuple('PartialTypeScope', [('map', Dict[Var, Context]),
                                                    ('is_function', bool),
                                                    ('is_local', bool),
                                                    ])
-class InferMapManager:
-    def __init__(self):
-        self.sons = {}
-        self.fathers = {}
-        self.is_ground = {}
-    def update(self, father, son):
-        if father not in self.sons:
-            self.sons[fahter] = []
-        if son not in self.fathers:
-            self.fathers[son] = []
-        self.sons[father].append(son)
-        self.fathers[son].append(father)
-class InferNode:
-    def __init__(self, identity, typ, father):
-        self.identity = identity
-        self.typ = typ
-        self.father = father # used for backward inference
 
 
 class TypeChecker(NodeVisitor[None], CheckerPluginInterface):
@@ -182,8 +161,7 @@ class TypeChecker(NodeVisitor[None], CheckerPluginInterface):
     msg: MessageBuilder
     # Types of type checked nodes
     type_map: Dict[Expression, Type]
-    wide_type_map: Dict[Expression, Type]
-    
+
     # Helper for managing conditional types
     binder: ConditionalTypeBinder
     # Helper for type checking expressions
@@ -239,12 +217,8 @@ class TypeChecker(NodeVisitor[None], CheckerPluginInterface):
     # functions such as open(), etc.
     plugin: Plugin
 
-
-    
-
     def __init__(self, errors: Errors, modules: Dict[str, MypyFile], options: Options,
-                 tree: MypyFile, path: str, plugin: Plugin, union_errors=None, incompatible=None, single_incompatible=None, mutable_funcs=None, infer_dependency_map=None, manager=None, added_attr=None, func_name_recorder = None, func_name_order=None, 
-                 func_s1=None, func_s2=None, func_s3=None, func_finished=None, func_candidates=None, func_must=None, func_class=None) -> None:
+                 tree: MypyFile, path: str, plugin: Plugin) -> None:
         """Construct a type checker.
 
         Use errors to report type check errors.
@@ -256,54 +230,11 @@ class TypeChecker(NodeVisitor[None], CheckerPluginInterface):
         self.path = path
         self.msg = MessageBuilder(errors, modules)
         self.plugin = plugin
-        self.union_errors = union_errors
-        self.incompatible = incompatible
-        self.single_incompatible = single_incompatible
-        self.added_attr = added_attr
-        self.mutable_funcs = mutable_funcs
-        self.check_dependency_map = {}
-        self.infer_dependency_map = infer_dependency_map
-        self.func_s1 = func_s1
-        self.func_s2 = func_s2
-        self.func_s3 = func_s3 
-        self.func_must = func_must
-        self.mode = 'PTI'
-        self.combination_limits = 4096
-        self.func_seeds = {}
-        
-        # self.infer_map_manager = InferMapManager()
-        self.manager = manager
-        self.scope = CheckerScope(tree)
-        self.msg.errors.cscope = self.scope
-        self.message = set()
-        self.improvement = set()
-        self.tv_level = defaultdict(list)
-        self.arg_level = {}
-        
-        self.record = {}
-        self.added_attr = set()
-        self.func_candidates = func_candidates
-        self.must_analyze = {}
-        self.func_finished = func_finished
-        self.func_orderred_type = defaultdict(dict)
-        self.func_class = func_class
-        self.global_vars = set()
-        self.expr_checker = extyper.checkexpr.ExpressionChecker(self, self.msg, self.plugin, union_errors, incompatible, single_incompatible, self.infer_dependency_map, self.mutable_funcs, self.added_attr, self.message)
+        self.expr_checker = extyper.checkexpr.ExpressionChecker(self, self.msg, self.plugin)
         self.tscope = Scope()
+        self.scope = CheckerScope(tree)
         self.binder = ConditionalTypeBinder(self)
-        self.var_type = {}
-        self.var_node = {}
-        self.type_hook = {}
-        self.method_typing = {}
         self.globals = tree.names
-        tree.path.replace('/', '-')
-        self.result_file = open('result/' + tree.path.replace('/', '-') +'_whole_', 'w+')
-        self.result_file.close()
-        self.result_file2 = open('result/' + tree.path.replace('/', '-') +'_orderred_', 'w+')
-        self.result_file2.close()
-        self.result_file = open('result/' + tree.path.replace('/', '-') +'_whole_', 'a+')
-        self.result_file2 = open('result/' + tree.path.replace('/', '-') +'_orderred_', 'a+')
-        self.union_context = None
         self.return_types = []
         self.dynamic_funcs = []
         self.partial_types = []
@@ -311,9 +242,6 @@ class TypeChecker(NodeVisitor[None], CheckerPluginInterface):
         self.var_decl_frames = {}
         self.deferred_nodes = []
         self.type_map = {}
-        self.wide_type_map = {}
-        self.dp_dag = {}
-        self.cache_type_map = {}
         self.module_refs = set()
         self.pass_num = 0
         self.current_node_deferred = False
@@ -329,42 +257,13 @@ class TypeChecker(NodeVisitor[None], CheckerPluginInterface):
         # If True, process function definitions. If False, don't. This is used
         # for processing module top levels in fine-grained incremental mode.
         self.recurse_into_functions = True
-
-        
         # This internal flag is used to track whether we a currently type-checking
         # a final declaration (assignment), so that some errors should be suppressed.
         # Should not be set manually, use get_final_context/enter_final_context instead.
         # NOTE: we use the context manager to avoid "threading" an additional `is_final_def`
         # argument through various `checker` and `checkmember` functions.
         self._is_final_def = False
-        self.node = None
-        self.err_cnts = 0
-        self.is_checking = False
-        self.func_name_recorder = func_name_recorder
-        self.func_name_order = func_name_order
-    def update_infer_dependency_map(self, a, b):
-        # if self.infer_dependency_map.get(a, None) is not None:
-        #     print('error')
-        #     return
-        if a not in self.infer_dependency_map:
-            self.infer_dependency_map[a] = []
-        if len(b) > 0 and b not in self.infer_dependency_map[a]:
-            self.infer_dependency_map[a].append(b)
-    def update_infer_dependency_map_multiple_values(self, pair1, r_identity, typs):
-        # if self.infer_dependency_map.get(a, None) is not None:
-        #     print('error')
-        #     return
-        typs = list(set(typs))
-        if pair1 not in self.infer_dependency_map:
-            self.infer_dependency_map[pair1] = []
-        
-        for typ in typs:
-            self.infer_dependency_map[pair1].append([(r_identity, typ)])
-    
-    def update_check_dependency_map(self, a, b):
-        if self.check_dependency_map.get(a, None) is None:
-            self.check_dependency_map[a] = []
-        self.check_dependency_map[a].append(b)
+
     @property
     def type_context(self) -> List[Optional[Type]]:
         return self.expr_checker.type_context
@@ -379,2663 +278,14 @@ class TypeChecker(NodeVisitor[None], CheckerPluginInterface):
         self.partial_reported.clear()
         self.module_refs.clear()
         self.binder = ConditionalTypeBinder(self)
-        # self.type_map.clear()
-        self.expr_checker.local_infer_map.clear()
-        self.infer_dependency_map.clear()
+        self.type_map.clear()
+
         assert self.inferred_attribute_types is None
         assert self.partial_types == []
         assert self.deferred_nodes == []
         assert len(self.scope.stack) == 1
         assert self.partial_types == []
 
-
-    def analyze_func_and_context(self, node) -> None:
-        self.node = node
-        self.recurse_into_functions = True
-        if node.info is not None:
-            with state.strict_optional_set(self.options.strict_optional):
-                self.errors.set_file(self.path, self.tree.fullname, scope=self.tscope)
-                with self.tscope.module_scope(self.tree.fullname):
-                    with self.enter_partial_types(), self.binder.top_frame_context():
-                        for d in self.tree.defs:
-                            if d == node or (isinstance(d, ClassDef) and d.info == node.info):
-                            # if (isinstance(d, Statement) and not isinstance(d, ClassDef) or (isinstance(d, ClassDef) and d.info == node.info):
-                                self.accept(d)
-        else:
-            with state.strict_optional_set(self.options.strict_optional):
-                self.errors.set_file(self.path, self.tree.fullname, scope=self.tscope)
-                with self.tscope.module_scope(self.tree.fullname):
-                    with self.enter_partial_types(), self.binder.top_frame_context():
-                        for d in self.tree.defs:
-                            if isinstance(d, Statement) or d == node:
-                                self.accept(d)
-
-    def get_trivial_type(self, fdef: FuncDef) -> CallableType:
-        """Generate a trivial callable type from a func def, with all Anys"""
-        # The Anys are marked as being from the suggestion engine
-        # since they need some special treatment (specifically,
-        # constraint generation ignores them.)
-        return CallableType(
-            [AnyType(TypeOfAny.suggestion_engine) for a in fdef.arg_kinds],
-            fdef.arg_kinds,
-            fdef.arg_names,
-            AnyType(TypeOfAny.suggestion_engine),
-            self.manager.semantic_analyzer.builtin_type('builtins.function'))
-    def contains_all(self, items, state):
-
-        return all(item in state for item in items if items[0] is not None)
-    def get_starting_type(self, fdef: FuncDef) -> CallableType:
-        
-        # if isinstance(fdef.type, CallableType):
-        #     return make_suggestion_anys(fdef.type)
-        # else:
-        return self.get_trivial_type(fdef)
-    def all_type(self):
-        return self.candidates
-    def suggest_class(self, cld: ClassDef, init=False):
-        self.manager.lexical_stat[type(cld)].add(cld)
-        with self.tscope.class_scope(cld.info), self.enter_partial_types(is_class=True):
-            old_binder = self.binder
-            self.binder = ConditionalTypeBinder(self)
-            with self.binder.top_frame_context():
-                with self.scope.push_class(cld.info):
-                    b = cld.defs
-                    self.none_global = set()
-                    self.class_vars = set()
-                    self.global_single_incompatible = {}
-                    self.global_incompatible = {}
-                    self.func_solutions = {}
-                    all_success = True
-                    for s in b.body:
-                        if self.binder.is_unreachable():
-                            if self.should_report_unreachable_issues() and not self.is_raising_or_empty(s):
-                                self.msg.unreachable_statement(s)
-                            break
-                        if isinstance(s, FuncDef):
-                            print(s.name)
-                            if self.mode == 'CPA':
-                                self.suggest_function_CPA(s,True, init=init)
-                            else:
-                                self.suggest_function(s,True, init=init)
-                        elif isinstance(s, Decorator):
-                            if self.mode == 'CPA':
-                                self.suggest_function_CPA(s.func,True)
-                            else:
-                                self.suggest_function(s.func,True, init=init)
-                        elif isinstance(s, AssignmentStmt):
-                            self.visit_assignment_stmt(s)
-
-                        else:
-                            self.accept(s)
-                    if all_success:
-                        pass
-                        # for s in b.body:
-                        #     if isinstance(s, FuncDef):
-                        #         self.suggest_function(s, True,force=True)
-                        # self.merge_by_concat()
-                        # for s in b.body:
-                        #     if isinstance(s, FuncDef):
-                        #         self.merge_function(s)
-                        #         print(s.name)
-                        #         print(s.type)
-                    else:
-                        self.defer_node(cld, cld.info)
-        self.binder = old_binder
-    def merge_function(self, func):
-        if func.type is not None:
-            return
-        worklist = self.func_solutions[func]
-        base = self.get_starting_type(func)
-        args = [x for x in func.arguments]
-        solutions = []
-        args2ann = {}
-        for w in worklist:
-            if self.fine(w, self.final_global):
-                r_args = self.project(w, to=args)
-                ann = self.to_annotation(base, w, args)
-                if r_args not in args2ann:
-                    args2ann[r_args] = ann
-                    if ann not in solutions:
-                        solutions.append(ann)
-        if len(solutions) == 0:
-            solutions.append(base)
-        mu_def = Overloaded(solutions)
-        func.type = mu_def
-    def fine(self, w, solution):
-        if isinstance(solution, list) and isinstance(solution[0], tuple):
-            solutions = solution
-            for solution in solutions:
-                corrects = set()
-                w = w[1:]
-                s = solution[1:]
-                s_nodes_type = {x[0]:x[1] for x in s}
-                for pair in w:
-                    node, typ = pair
-                    if node in s_nodes_type:
-                        node_t = s_nodes_type[node]
-                        if is_subtype(node_t, typ) or is_subtype(typ, node_t):  # pair in 
-                            corrects.add(True)
-                        else:
-                            corrects.add(False)
-                            break
-                    else:
-                        corrects.add(True)
-                if all(corrects):
-                    return True
-            return False
-        corrects = set()
-        w = w[1:]
-        s = solution[1:]
-        s_nodes_type = {x[0]:x[1] for x in s}
-        for pair in w:
-            node, typ = pair
-            if node in s_nodes_type:
-                node_t = s_nodes_type[node]
-                if is_subtype(node_t, typ) or is_subtype(typ, node_t):  # pair in 
-                    corrects.add(True)
-                else:
-                    corrects.add(False)
-                    break
-            else:
-                corrects.add(True)
-        if all(corrects):
-            return True
-        return all(corrects)
-
-
-    def fine_single(self, w, final_candidates):
-        for node, typ in w[1:]:
-            if node in self.class_vars:
-                if typ not in final_candidates[node]:
-                    return False
-        return True
-    def merge_by_concat(self):
-        
-        def exists(T, t):
-            for x in T:
-                if is_subtype(t, x) or is_subtype(x, t):
-                    return True
-            return False
-        def merge(w, solution):
-            w = tuple(w)
-            solution = tuple(solution)
-            new_solution = {}
-            for pair in w[1:] + solution[1:]:
-                node, typ = pair
-                if node in new_solution:
-                    previous_typ = new_solution[node]
-                    if is_subtype(typ, previous_typ): # typ is int, prev is object
-                        new_solution[node] = typ
-                else:
-                    new_solution[node] = typ
-
-            
-            new_solution = set(new_solution.items())
-            new_solution = [x for x in new_solution if x[0] in self.class_vars]
-            
-            ret = ['start'] + new_solution
-            return tuple(ret)
-        worklist = [['start']]
-
-        # func_solutions = list(self.func_solutions.values())[0]
-        func_candidates = defaultdict(list)
-        type_candidates = defaultdict(set)
-        for solutions in self.func_solutions.values():
-            
-            single_candidates = defaultdict(set)
-            for solution in solutions:
-                for node, typ in solution[1:]:
-                    if node in self.class_vars:
-                        single_candidates[node].add(typ)
-                        type_candidates[node].add(typ)
-        
-            for node in single_candidates:
-                func_candidates[node].append(single_candidates[node])
-        final_candidates = defaultdict(set)
-        for node in func_candidates:
-            for t in type_candidates[node]:
-                ok = all([exists(TT, t) for TT in func_candidates[node]])
-                if ok:
-                    final_candidates[node].add(t)
-            # final_candidates[node] = set.intersection(*func_candidates[node])
-
-        solutions_list = self.func_solutions.values()
-        solutions_list = sorted(solutions_list, key = lambda x: len(x))
-        for solutions in solutions_list:
-            new_worklist = set()
-            for w in worklist:
-                if self.fine_single(w, final_candidates):
-                    for solution in solutions:
-                        if self.fine_single(solution, final_candidates):
-                            if self.fine(w, solution):
-                                nw = merge(w, solution)
-                                new_worklist.add(nw)
-            worklist = new_worklist
-        if len(worklist) >= 1:
-            self.final_global = list(worklist)
-            for global_pairs in self.final_global[0][1:]:
-                node, typ = global_pairs
-                if isinstance(node, NameExpr):
-                    node.node.type = typ
-                    node.node.is_ready = True
-            # self.final_global = next(iter(worklist))
-            # for global_pairs in self.final_global[1:]:
-            #     node, typ = global_pairs
-            #     if isinstance(node, NameExpr):
-            #         node.node.type = typ
-            #         node.node.is_ready = True
-        else:
-            self.final_global = [['start']]
-    def suggest_assignment(self, s, from_class=False):
-        node = None
-        lvalues = s.lvalues
-        if len(lvalues) == 1 and isinstance(lvalues[0], NameExpr):
-            node = lvalues[0]
-            if from_class:
-
-                self.class_vars.add(node)
-            else:
-                self.global_vars.add(node)
-            if hasattr(s.rvalue, "name") and s.rvalue.name == 'None':
-                #self.none_global.add(node)
-                pass
-            var = node.node
-            # outer usage and inner usage need unified, why infer failed?
-            if s.type:
-                self.store_type(node, [s.type], overwrite=True)
-                self.update_var_node(node)
-            else:
-                if node not in self.type_map:
-                    self.store_type(node, self.S1(), overwrite=True)
-                    self.update_var_node(node)
-
-                    self.accept(s)
-                else:
-                    pass ## assigned in past iterations
-        if node is None:
-            return True
-        worklist = [['start']]
-        typs = self.type_map[node]
-        new_worklist = []
-        for typ in typs:
-            for state in worklist:
-                new_state = [x for x in state]
-                new_state.append((node, typ))
-                new_worklist.append(new_state)
-
-        worklist = new_worklist
-        if from_class:
-            self.func_solutions[s]=(worklist)
-
-    def to_annotations(self, base, wlist, args):
-        solutions = set()
-        for w in wlist:
-            solution = self.to_annotation(base, w, args)
-            solutions.add(solution)
-        ann = Overloaded(solution)
-        return ann
-
-
-    def to_annotation(self, base, w, args):
-
-        def maybe_degenerate(t, r):
-            if isinstance(t, TypeVarType):
-                if isinstance(r, TypeVarType):
-                    if t == r:
-                        return t
-                else:
-                    if isinstance(r, Instance):
-                        if t in r.args:
-                            return t
-                    if isinstance(r, TupleType):
-                        if t in r.items:
-                            return t
-                    
-                return object_or_any_from_type(t)
-            else:
-                return t
-        arg_list = []
-        for arg in args:
-            ok = False
-            for node, typ in w[1:-1]:
-                if node == arg:
-                    arg_list.append(maybe_degenerate(typ, w[-1][1]))
-
-                    ok = True
-                    break
-            if not ok:
-                arg_list.append(AnyType(100))
-        variables = []
-        for at in arg_list:
-            if isinstance(at, TypeVarType):
-                variables.append(at)
-            else:
-                if isinstance(at, Instance):
-                    for a in at.args:
-                        if isinstance(a, TypeVarType):
-                            variables.append(a)            
-        now = base.copy_modified(arg_types=arg_list, ret_type=w[-1][1], variables=variables)
-        return now
-    def project(self, solution, to=None, global_=False):
-        if to:
-            new_solution = [x for x in solution if x[0] in to]
-        else:
-            if global_:
-                new_solution = [x for x in solution if x[0] in self.class_vars]
-            else:    
-                new_solution = [x for x in solution if x[0] not in self.class_vars]
-        return tuple(new_solution)
-
-    def same_solutions(self, s1, s2):
-        if len(s1) != len(s2):
-            return False
-        for s in s1:
-            if s not in s2:
-                return False
-        return True
-
-
-    def try_expand(self, base, worklist, args):
-        worklist = set([tuple(x) for x in worklist])
-        arg2ann = {}
-        for w in worklist:
-            r_args = self.project(w, to=args)
-            ann = self.to_annotation(base, w, args)
-            if r_args not in arg2ann:
-                arg2ann[r_args] = ann
-        return arg2ann
-        
-    def try_reduce(self, base, worklist, args):
-        worklist = set([tuple(x) for x in worklist])
-        arg2ann = {}
-        for w in worklist:
-            args_global = self.project(w, global_=True)
-            ann = self.to_annotation(base, w, args)
-            if args_global in arg2ann:
-                arg2ann[args_global].add(ann)
-            else:
-                arg2ann[args_global] = set([ann])
-        annos = [x for x in arg2ann.values()]
-        if all([self.same_solutions(x, annos[0]) for x in annos]):
-            return True, arg2ann
-        else:
-            return False, arg2ann
-        # reduced_worklist = [tuple(self.project(w, global_=False)) for w in worklist]
-        # original_len = len(reduced_worklist)
-        # deduplicated_len = len(set(reduced_worklist)) # can be optimized by stopping when finding dedeplicate
-        # return original_len == deduplicated_len
-    def global_solving(self):
-        def get_candidates(x):
-            if isinstance(x, (set, list)):
-                return len(x)
-            else:
-                return 1
-        grounds = []
-        for var in self.wide_type_map:
-            flag = 0
-            for var2, typ in self.expr_checker.local_infer_map:
-                if var2 == var:
-                    source_pairss = self.expr_checker.local_infer_map[(var2, typ)]
-                    source_nodes = []
-                    for source_pairs in source_pairss:
-                        source_nodes.extend([x[0] for x in source_pairs])
-                    if not all(isinstance(x, FlowNode) for x in source_nodes):
-                        flag = 1
-                        break
-            if flag == 0 and var not in grounds:
-                grounds.append(var)
-        grounds = sorted(grounds, key=lambda x:get_candidates(self.wide_type_map[x]))
-
-        single_incompatible1 = self.single_incompatible
-        double_incompatible = self.incompatible
-        worklist = [['start']]
-        updates = []
-        for g in grounds:
-            new_worklist = []
-            types = self.wide_type_map[g]
-            for typ in types:
-                id_pair = (g, typ)
-                if not (g in single_incompatible1 and typ in single_incompatible1[g]):
-                    for state in worklist:
-                        if (id_pair not in double_incompatible) or (not any([self.contains_all(x, state) for x in double_incompatible[id_pair]])):
-                            new_state = [x for x in state]
-                            new_state.append(id_pair)
-                            new_worklist.append(new_state)  
-            if len(new_worklist) == 0:
-                updates.append(g)
-                for typ in types:
-                    id_pair = (g, typ)
-                    if id_pair in double_incompatible:
-                        for p in double_incompatible[id_pair]:
-                            for x in p:
-                                updates.append(x[0])
-                worklist = new_worklist
-                break
-            worklist = new_worklist
-        return worklist, set(updates)
-    
-    def init_candidates(self, node):
-        nows = {}
-        now = self.S3(node)
-        # now = self.S2()
-        for arg in node.arguments:
-            nows[arg] = copy(now)
-        return nows
-
-    def suggest_function_CPA_(self, node, from_class = False, force=False):
-        def improve(a, t):
-            if isinstance(t, TypeVarType):
-                if 'T' in self.tv_level[a]:
-                    return None
-                else:
-                    self.tv_level[a].append('T')
-                    return set(self.S2(self.func_candidates[node], ground=a))
-            else:
-                if t.type.fullname in self.tv_level[a]:
-                    return None
-                else:  
-                    self.tv_level[a].append(t.type.fullname)
-                    return self.S3_for(t)
-                # self.arg_level[ground] = 3
-                # now = self.S3(self.func_candidates[node], ground)
-                # nows[ground] = now
-                # success = True
-        def improvement():
-            success = False
-            for (a, t) in self.improvement:
-                if a in nows:
-                    now = set(nows[a])
-                    ret = improve(a, t)
-                    if ret is not None:
-                        now.update(ret)
-                        nows[a] = list(now)
-                        success = True
-                    # if isinstance(nows[ground][0], TypeVarType):
-                    #     self.arg_level[ground] = 2
-                    #     now = self.S2(self.func_candidates[node], ground)
-                    #     nows[ground] = now
-                    #     success = True
-                    # else:
-                    #     self.arg_level[ground] = 3
-                    #     now = self.S3(self.func_candidates[node], ground)
-                    #     nows[ground] = now
-                    #     success = True
-            return success
-        def try_to_update(updates):
-            unsolvable = False
-            hit = False
-            for ground in updates:
-                if ground in nows:
-
-                    hit = True
-                    now = nows[ground]
-                    if now == self.S1(self.func_candidates[node], ground):
-                        now = self.S2(self.func_candidates[node], ground)
-                    elif now == self.S2(self.func_candidates[node], ground):
-                        now = self.S3(self.func_candidates[node], ground)
-                    # elif now == self.S3(self.func_candidates[node], ground):
-                    #     now = self.S4(self.func_candidates[node], ground)
-                    else:
-                        unsolvable = True
-                    nows[ground] = now
-                elif hasattr(self, "class_vars") and ground in self.class_vars:
-
-                    hit = True
-                    if ground not in self.none_global:
-                        self.type_map[ground] = self.makeS4Type(self.type_map[ground])
-                        
-                    else:
-                        if self.type_map[ground].items == self.S1():
-                            self.type_map[ground] = self.makeS2Type()
-                        elif self.type_map[ground].items == self.S2():
-                            self.type_map[ground] = self.makeS3Type()
-                        elif self.type_map[ground].items == self.S3():
-                            self.type_map[ground] = self.makeS4Type()
-                        else:
-                            unsolvable = True
-            return not(not hit or unsolvable)
-        def add_attr(x, attrs):
-            candidates = self.s2 + self.s3
-            for candidate in candidates:
-                candidate_info = candidate.type
-                retrieve_attr_res = [candidate_info.get(x) for x in attrs]
-                if all([x is not None for x in retrieve_attr_res]):
-                    if candidate not in x:
-                        list_user_type = self.type_checker().named_type_with_type_var('builtins.list', candidate)
-                        set_user_type = self.type_checker().named_type_with_type_var('builtins.set', candidate)
-                        x.append(candidate)
-                        x.append(list_user_type)
-                        x.append(set_user_type)
-            return x
-        def add_type(x, types):
-            for typ in types:
-                if typ not in x:
-                    x.append(x)
-            return x
-        if node.unanalyzed_type is not None:
-            return
-        node.type = None
-        func_name = node.fullname
-        line_no = node.line
-        is_method = bool(node.info) and not node.is_static
-        base = self.get_starting_type(node)
-        # if node not in self.func_candidates:
-        #     self.func_candidates[node] = self.init_candidates(node)
-        if node not in self.func_class:
-            if bool(node.info):
-                self.func_class[node] = node.info
-            else:
-                self.func_class[node] = None
-        nows = {}
-        self.record = {}
-        # now = self.S2()
-        for arg in node.arguments:
-            nows[arg] = self.S2(ground = arg)
-            self.arg_level[arg] = 1
-
-        original_var_node = {k:v for k,v in self.var_node.items()}
-
-        original_type_map = {k:v for k, v in self.type_map.items()}
-        original_wide_type_map = {k:v for k, v in self.wide_type_map.items()}
-        
-        original_infer_map = {k:v for k,v in self.expr_checker.local_infer_map.items()}
-        original_dp_dag = {k:v for k,v in self.dp_dag.items()}
-            
-
-        list_now = []
-        for i in range(len(base.arg_kinds)):
-            argument = node.arguments[i]
-            list_now.append(nows[argument])
-        
-        combinations = itertools.product(*list_now)
-        solutions = []
-        start = time.time()
-        flag = 0
-        for combination in combinations:
-            
-            annots = []
-            for i in range(len(base.arg_kinds)):
-                argument = node.arguments[i]
-                typ = combination[i]
-                if i == 0 and is_method:
-                    # annots.append([AnyType(TypeOfAny.from_omitted_generics)])
-                    annots.append(Instance(node.info, [AnyType(TypeOfAny.from_omitted_generics)] * len(node.info.defn.type_vars)))
-                else:
-                    annots.append(typ)
-            node.type = base.copy_modified(arg_types=annots)
-            func = node
-            # type_checker.reset()
-            self.type_map = {k:v for k,v in original_type_map.items()}
-            self.wide_type_map = {k:v for k,v in original_wide_type_map.items()}
-            
-            self.dp_dag = {k:v for k,v in original_dp_dag.items()}
-            self.cache_type_map.clear()
-            self.defer_this_node = False        
-            self.infer_dependency_map = {}
-            self.single_incompatible.clear()
-            self.incompatible.clear()
-            self.var_node = {k:v for k,v in original_var_node.items()}
-            self.added_attr.clear()
-            self.message.clear()
-
-            self.improvement.clear()
-        
-            self.expr_checker.local_infer_map = {k:v for k,v in original_infer_map.items()}
-            grounds = []
-            self.expr_checker.timeout = False
-            
-            self.visit_func_def(node)
-            # if self.expr_checker.timeout:
-            #     break
-            
-            # if time.time()-start >= 10:
-            #     break
-            if self.defer_this_node:
-                break
-        
-            else:
-                worklist, updates = self.global_solving()
-                if len(worklist) > 0:
-                    new_worklist = []
-                    none_type = NoneType()
-                    ret_node = TempNode(none_type)
-                    for w in worklist:
-                        phi_ret = []
-                        if len(self.infer_dependency_map) == 0:
-                            pass
-                        elif len(self.infer_dependency_map) == 1 and all([len(x) == 0 for x in self.infer_dependency_map.values()]):
-                            for node_, typ in self.infer_dependency_map:
-                                phi_ret.append(typ)
-                        else:
-                            for node_, typ in self.infer_dependency_map:
-                                if len(self.infer_dependency_map[(node_, typ)]) == 0:
-                                    phi_ret.append(typ)
-                                else:
-                                    for possiblity in self.infer_dependency_map[(node_, typ)]:
-                                        if self.contains_all(possiblity, w):
-                                            phi_ret.append(typ)
-                                            break
-                                        else:
-                                            # print('not contains all')
-                                            pass
-                
-                            
-                        if len(phi_ret) > 1:
-                            phi_ret = UnionType.make_union(phi_ret)
-                        elif len(phi_ret) == 1:
-                            phi_ret = phi_ret[0]
-                        else:
-                            if len(self.infer_dependency_map) == 0:
-                                phi_ret = NoneType(0)
-                            else:
-                                # soft return type
-                                phi_ret = UnionType.make_union([x[1] for x in self.infer_dependency_map.keys()])
-                        if not isinstance(phi_ret, NoneType):
-                            try:
-
-                                w.append((node_, phi_ret))
-                                new_worklist.append(w)
-                            except Exception:
-                                pass
-                        else:
-                            w.append((ret_node, none_type))
-                            new_worklist.append(w)
-
-                        self.infer_dependency_map.clear()
-                        worklist = new_worklist
-                        args = [x for x in func.arguments]
-                        if not from_class:
-                            for w in worklist:
-                                ann = self.to_annotation(base, w, args)
-                                if ann not in solutions:
-                                    solutions.append(ann)
-
-                        else:
-                            self.func_solutions[func] = worklist
-
-
-                            # args2ann = self.try_expand(base, worklist, args)
-                            # ftype = Overloaded(list(args2ann.values()))
-                            # func.type = ftype
-
-
-                            reduce, args2ann = self.try_reduce(base, worklist, args)
-                            reduce = True
-                            if reduce:
-                                if len(args2ann) == 0:
-                                    func.type = base
-                                else:
-                                    ftype = Overloaded(list(list(args2ann.values())[0]))
-                                    solutions.extend(list(list(args2ann.values())[0]))
-                                    func.type = ftype
-                            else:
-                                self.method_typing[func] = {k:Overloaded(list(v)) for k,v in args2ann.items()}
-                                func.type = None    
-            end = time.time()
-            if end-start > 60*5:
-                flag = 1
-                break
-        if flag == 1:
-            mu_def = None
-        elif len(solutions) == 0:
-            mu_def = AnyType(0)
-        else:
-            mu_def = Overloaded(solutions)
-        func.type = mu_def
-        func.candidates = self.S3()
-        
-        print(func.name)
-        print(func.type)        
-
-        if self.defer_this_node:
-            self.var_node = {k:v for k,v in original_var_node.items()}
-            self.type_map = {k:v for k,v in original_type_map.items()}
-            self.wide_type_map = {k:v for k,v in original_wide_type_map.items()}
-            
-            self.dp_dag = {k:v for k,v in original_dp_dag.items()}
-            self.expr_checker.local_infer_map = {k:v for k,v in original_infer_map.items()}
-            for arg in func.arguments:
-                self.tv_level[arg].clear()
-            func.type = None
-            return False
-
-
-            
-
-
-        def not_parametric(t):
-            parametric = ['builtins.list', 'builtins.set', 'builtins.dict', 'builtins.tuple', 'Tuple']
-            t = str(t)
-            for p in parametric:
-                if t.find(p) != -1:
-                    return False
-            return True
-        def order_type(items):
-            
-            names = items[0].arg_names + ['']
-            types = []
-            for i, name in enumerate(names):
-                
-                types.append([])
-                if i == len(names) -1:
-                    for item in items:
-                        if isinstance(item.ret_type, UnionType):
-                            for t in item.ret_type.items:
-                                if hasattr(t, 'type') and not_parametric(t):
-                                    types[-1].append(t.type.fullname)
-                                else:
-                                    types[-1].append(str(t))
-                        else:
-
-                            if hasattr(item.ret_type, 'type') and not_parametric(item.ret_type):
-                                types[-1].append(item.ret_type.type.fullname)
-                            else:
-                                types[-1].append(str(item.ret_type))
-                else:
-                    for item in items:
-                        if hasattr(item.arg_types[i], 'type') and not_parametric(item.arg_types[i]):
-                            types[-1].append(item.arg_types[i].type.fullname)
-                        else:
-                            types[-1].append(str(item.arg_types[i]))
-
-
-            
-            from difflib import SequenceMatcher
-            new_types_all = []
-            for i, name in enumerate(names):
-                name = ''.join(name.split('_'))
-                new_types = []
-                long_length = 0
-                long_lcs = '<no>'
-                for typ in types[i]:
-                    match = SequenceMatcher(None, name, typ).find_longest_match(0, len(name), 0, len(typ))
-                    lcs = name[match.a: match.a + match.size] # -> apple pie
-                    if len(lcs) > long_length:
-                        long_length = len(lcs)
-                        long_lcs = typ
-                if long_length >= 4:
-                    print(long_lcs)
-                    new_types.append(long_lcs)
-                    types[i].remove(long_lcs)
-
-                primary = ['builtins.str', 'builtins.int', 'builtins.float', 'builtins.bytes', 'builtins.bool', 'builtins.object']
-                third_party = ['numpy.ndarray', 'torch._tensor.Tensor', 'socket.socket']
-                user_defined = self.user_defined
-                parametric = ['builtins.list', 'builtins.set', 'builtins.dict', 'builtins.tuple', 'Tuple']
-                for p in primary:
-                    for typ in types[i]:
-                        if typ == p and typ not in new_types:
-                            new_types.append(typ)
-                print(new_types)
-                for p in third_party:
-                    for typ in types[i]:
-                        if typ == p and typ not in new_types:
-                            new_types.append(typ)
-                print(new_types)
-                for p in user_defined:
-                    for typ in types[i]:
-                        if typ == p and typ not in new_types:
-                            new_types.append(typ)
-                print(new_types)
-                
-                for p in parametric:
-                    for typ in types[i]:
-                        if typ.find(p) != -1 and typ not in new_types:
-                            new_types.append(typ)
-                print(new_types)
-                self.result_file2.write(str(new_types[:3])+'\n')
-                new_types_all.append(new_types[:3])
-            item_score = {}
-            for item in items:
-                score = 0
-                for i, t in enumerate(item.arg_types):
-                    if hasattr(t, 'type') and not_parametric(t):
-                        identity = item.arg_types[i].type.fullname
-                    else:
-                        identity = str(t)
-                    if identity in new_types_all[i]:
-                        score += 1
-                item_score[item] = score
-            ordered_items = sorted(item_score.items(), key = lambda x:x[1], reverse=True)
-            ordered_items = ordered_items[:3]
-            annotation = '\n'.join(str(x[0]) for x in ordered_items)
-            self.result_file.write(annotation+'\n\n')
-            # string1 = "apple pie available"
-            # string2 = "come have some apple pies"
-
-            
-            # print(match)  # -> Match(a=0, b=15, size=9)
-            
-            # print(string2[match.b: match.b + match.size])  # -> apple pie
-
-
-        self.var_node = {k:v for k,v in original_var_node.items()}
-        self.dp_dag = {k:v for k,v in original_dp_dag.items()}
-        self.type_map = {k:v for k,v in original_type_map.items()}
-        self.wide_type_map = {k:v for k,v in original_wide_type_map.items()}
-        
-        self.expr_checker.local_infer_map = {k:v for k,v in original_infer_map.items()}
-        for arg in func.arguments:
-            self.tv_level[arg].clear()
-        self.record = {}
-        self.result_file.write(func.name+' <func>\n')
-        self.result_file2.write(func.name+'\n')
-        if flag == 1:
-            self.result_file.write('timeout\n')
-        elif isinstance(func.type, AnyType):
-            self.result_file.write('any\n')
-        else:
-            i = 0
-            for t in (func.type.items):
-                self.result_file.write(str(t)+'\n')
-                i+=1
-                if i>2:
-                    break
-        # ordered_items = order_type(func.type.items)
-        self.result_file.flush()
-        self.result_file2.flush()
-        
-        
-        return True
-
-    def suggest_function_CPA2(self, node, from_class = False, force=False):
-        def improve(a, t):
-            if isinstance(t, TypeVarType):
-                if 'T' in self.tv_level[a]:
-                    return None
-                else:
-                    self.tv_level[a].append('T')
-                    return set(self.S2(self.func_candidates[node], ground=a))
-            else:
-                if t.type.fullname in self.tv_level[a]:
-                    return None
-                else:  
-                    self.tv_level[a].append(t.type.fullname)
-                    return self.S3_for(t)
-                # self.arg_level[ground] = 3
-                # now = self.S3(self.func_candidates[node], ground)
-                # nows[ground] = now
-                # success = True
-        def improvement():
-            success = False
-            for (a, t) in self.improvement:
-                if a in nows:
-                    now = set(nows[a])
-                    ret = improve(a, t)
-                    if ret is not None:
-                        now.update(ret)
-                        nows[a] = list(now)
-                        success = True
-                    # if isinstance(nows[ground][0], TypeVarType):
-                    #     self.arg_level[ground] = 2
-                    #     now = self.S2(self.func_candidates[node], ground)
-                    #     nows[ground] = now
-                    #     success = True
-                    # else:
-                    #     self.arg_level[ground] = 3
-                    #     now = self.S3(self.func_candidates[node], ground)
-                    #     nows[ground] = now
-                    #     success = True
-            return success
-        def try_to_update(updates):
-            unsolvable = False
-            hit = False
-            for ground in updates:
-                if ground in nows:
-
-                    hit = True
-                    now = nows[ground]
-                    if now == self.S1(self.func_candidates[node], ground):
-                        now = self.S2(self.func_candidates[node], ground)
-                    elif now == self.S2(self.func_candidates[node], ground):
-                        now = self.S3(self.func_candidates[node], ground)
-                    # elif now == self.S3(self.func_candidates[node], ground):
-                    #     now = self.S4(self.func_candidates[node], ground)
-                    else:
-                        unsolvable = True
-                    nows[ground] = now
-                elif hasattr(self, "class_vars") and ground in self.class_vars:
-
-                    hit = True
-                    if ground not in self.none_global:
-                        self.type_map[ground] = self.makeS4Type(self.type_map[ground])
-                        
-                    else:
-                        if self.type_map[ground].items == self.S1():
-                            self.type_map[ground] = self.makeS2Type()
-                        elif self.type_map[ground].items == self.S2():
-                            self.type_map[ground] = self.makeS3Type()
-                        elif self.type_map[ground].items == self.S3():
-                            self.type_map[ground] = self.makeS4Type()
-                        else:
-                            unsolvable = True
-            return not(not hit or unsolvable)
-        def add_attr(x, attrs):
-            candidates = self.s2 + self.s3
-            for candidate in candidates:
-                candidate_info = candidate.type
-                retrieve_attr_res = [candidate_info.get(x) for x in attrs]
-                if all([x is not None for x in retrieve_attr_res]):
-                    if candidate not in x:
-                        list_user_type = self.type_checker().named_type_with_type_var('builtins.list', candidate)
-                        set_user_type = self.type_checker().named_type_with_type_var('builtins.set', candidate)
-                        x.append(candidate)
-                        x.append(list_user_type)
-                        x.append(set_user_type)
-            return x
-        def add_type(x, types):
-            for typ in types:
-                if typ not in x:
-                    x.append(x)
-            return x
-        if node.unanalyzed_type is not None:
-            return
-        node.type = None
-        func_name = node.fullname
-        line_no = node.line
-        is_method = bool(node.info) and not node.is_static
-        base = self.get_starting_type(node)
-        # if node not in self.func_candidates:
-        #     self.func_candidates[node] = self.init_candidates(node)
-        if node not in self.func_class:
-            if bool(node.info):
-                self.func_class[node] = node.info
-            else:
-                self.func_class[node] = None
-        nows = {}
-        self.record = {}
-        # now = self.S2()
-        for arg in node.arguments:
-            nows[arg] = self.S3(node, arg)
-            self.arg_level[arg] = 1
-
-        original_var_node = {k:v for k,v in self.var_node.items()}
-
-        original_type_map = {k:v for k, v in self.type_map.items()}
-        original_wide_type_map = {k:v for k, v in self.wide_type_map.items()}
-        
-        original_infer_map = {k:v for k,v in self.expr_checker.local_infer_map.items()}
-        original_dp_dag = {k:v for k,v in self.dp_dag.items()}
-            
-
-        list_now = []
-        for i in range(len(base.arg_kinds)):
-            argument = node.arguments[i]
-            list_now.append(nows[argument])
-        
-        combinations = itertools.product(*list_now)
-        solutions = []
-        start = time.time()
-        flag = 0
-        for combination in combinations:
-            
-            annots = []
-            for i in range(len(base.arg_kinds)):
-                argument = node.arguments[i]
-                typ = combination[i]
-                if i == 0 and is_method:
-                    # annots.append([AnyType(TypeOfAny.from_omitted_generics)])
-                    annots.append(Instance(node.info, [AnyType(TypeOfAny.from_omitted_generics)] * len(node.info.defn.type_vars)))
-                else:
-                    annots.append(typ)
-            node.type = base.copy_modified(arg_types=annots)
-            func = node
-            # type_checker.reset()
-            self.type_map = {k:v for k,v in original_type_map.items()}
-            self.wide_type_map = {k:v for k,v in original_wide_type_map.items()}
-            
-            self.dp_dag = {k:v for k,v in original_dp_dag.items()}
-            self.cache_type_map.clear()
-            self.defer_this_node = False        
-            self.infer_dependency_map = {}
-            self.single_incompatible.clear()
-            self.incompatible.clear()
-            self.var_node = {k:v for k,v in original_var_node.items()}
-            self.added_attr.clear()
-            self.message.clear()
-
-            self.improvement.clear()
-        
-            self.expr_checker.local_infer_map = {k:v for k,v in original_infer_map.items()}
-            grounds = []
-            self.expr_checker.timeout = False
-            
-            self.visit_func_def(node)
-            # if self.expr_checker.timeout:
-            #     break
-            
-            # if time.time()-start >= 10:
-            #     break
-            if self.defer_this_node:
-                break
-        
-            else:
-                worklist, updates = self.global_solving()
-                if len(worklist) > 0:
-                    new_worklist = []
-                    none_type = NoneType()
-                    ret_node = TempNode(none_type)
-                    for w in worklist:
-                        phi_ret = []
-                        if len(self.infer_dependency_map) == 0:
-                            pass
-                        elif len(self.infer_dependency_map) == 1 and all([len(x) == 0 for x in self.infer_dependency_map.values()]):
-                            for node_, typ in self.infer_dependency_map:
-                                phi_ret.append(typ)
-                        else:
-                            for node_, typ in self.infer_dependency_map:
-                                if len(self.infer_dependency_map[(node_, typ)]) == 0:
-                                    phi_ret.append(typ)
-                                else:
-                                    for possiblity in self.infer_dependency_map[(node_, typ)]:
-                                        if self.contains_all(possiblity, w):
-                                            phi_ret.append(typ)
-                                            break
-                                        else:
-                                            # print('not contains all')
-                                            pass
-                
-                            
-                        if len(phi_ret) > 1:
-                            phi_ret = UnionType.make_union(phi_ret)
-                        elif len(phi_ret) == 1:
-                            phi_ret = phi_ret[0]
-                        else:
-                            if len(self.infer_dependency_map) == 0:
-                                phi_ret = NoneType(0)
-                            else:
-                                # soft return type
-                                phi_ret = UnionType.make_union([x[1] for x in self.infer_dependency_map.keys()])
-                        if not isinstance(phi_ret, NoneType):
-                            try:
-
-                                w.append((node_, phi_ret))
-                                new_worklist.append(w)
-                            except Exception:
-                                pass
-                        else:
-                            w.append((ret_node, none_type))
-                            new_worklist.append(w)
-
-                        self.infer_dependency_map.clear()
-                        worklist = new_worklist
-                        args = [x for x in func.arguments]
-                        if not from_class:
-                            for w in worklist:
-                                ann = self.to_annotation(base, w, args)
-                                if ann not in solutions:
-                                    solutions.append(ann)
-
-                        else:
-                            self.func_solutions[func] = worklist
-
-
-                            # args2ann = self.try_expand(base, worklist, args)
-                            # ftype = Overloaded(list(args2ann.values()))
-                            # func.type = ftype
-
-
-                            reduce, args2ann = self.try_reduce(base, worklist, args)
-                            reduce = True
-                            if reduce:
-                                if len(args2ann) == 0:
-                                    func.type = base
-                                else:
-                                    ftype = Overloaded(list(list(args2ann.values())[0]))
-                                    solutions.extend(list(list(args2ann.values())[0]))
-                                    func.type = ftype
-                            else:
-                                self.method_typing[func] = {k:Overloaded(list(v)) for k,v in args2ann.items()}
-                                func.type = None    
-            end = time.time()
-            if end-start > 60*5:
-                flag = 1
-                break
-        if flag == 1:
-            mu_def = None
-        elif len(solutions) == 0:
-            mu_def = AnyType(0)
-        else:
-            mu_def = Overloaded(solutions)
-        func.type = mu_def
-        func.candidates = self.S3()
-        
-        print(func.name)
-        print(func.type)        
-
-        if self.defer_this_node:
-            self.var_node = {k:v for k,v in original_var_node.items()}
-            self.type_map = {k:v for k,v in original_type_map.items()}
-            self.wide_type_map = {k:v for k,v in original_wide_type_map.items()}
-            
-            self.dp_dag = {k:v for k,v in original_dp_dag.items()}
-            self.expr_checker.local_infer_map = {k:v for k,v in original_infer_map.items()}
-            for arg in func.arguments:
-                self.tv_level[arg].clear()
-            func.type = None
-            return False
-
-
-            
-
-
-        def not_parametric(t):
-            parametric = ['builtins.list', 'builtins.set', 'builtins.dict', 'builtins.tuple', 'Tuple']
-            t = str(t)
-            for p in parametric:
-                if t.find(p) != -1:
-                    return False
-            return True
-        def order_type(items):
-            
-            names = items[0].arg_names + ['']
-            types = []
-            for i, name in enumerate(names):
-                
-                types.append([])
-                if i == len(names) -1:
-                    for item in items:
-                        if isinstance(item.ret_type, UnionType):
-                            for t in item.ret_type.items:
-                                if hasattr(t, 'type') and not_parametric(t):
-                                    types[-1].append(t.type.fullname)
-                                else:
-                                    types[-1].append(str(t))
-                        else:
-
-                            if hasattr(item.ret_type, 'type') and not_parametric(item.ret_type):
-                                types[-1].append(item.ret_type.type.fullname)
-                            else:
-                                types[-1].append(str(item.ret_type))
-                else:
-                    for item in items:
-                        if hasattr(item.arg_types[i], 'type') and not_parametric(item.arg_types[i]):
-                            types[-1].append(item.arg_types[i].type.fullname)
-                        else:
-                            types[-1].append(str(item.arg_types[i]))
-
-
-            
-            from difflib import SequenceMatcher
-            new_types_all = []
-            for i, name in enumerate(names):
-                name = ''.join(name.split('_'))
-                new_types = []
-                long_length = 0
-                long_lcs = '<no>'
-                for typ in types[i]:
-                    match = SequenceMatcher(None, name, typ).find_longest_match(0, len(name), 0, len(typ))
-                    lcs = name[match.a: match.a + match.size] # -> apple pie
-                    if len(lcs) > long_length:
-                        long_length = len(lcs)
-                        long_lcs = typ
-                if long_length >= 4:
-                    print(long_lcs)
-                    new_types.append(long_lcs)
-                    types[i].remove(long_lcs)
-
-                primary = ['builtins.str', 'builtins.int', 'builtins.float', 'builtins.bytes', 'builtins.bool', 'builtins.object']
-                third_party = ['numpy.ndarray', 'torch._tensor.Tensor', 'socket.socket']
-                user_defined = self.user_defined
-                parametric = ['builtins.list', 'builtins.set', 'builtins.dict', 'builtins.tuple', 'Tuple']
-                for p in primary:
-                    for typ in types[i]:
-                        if typ == p and typ not in new_types:
-                            new_types.append(typ)
-                print(new_types)
-                for p in third_party:
-                    for typ in types[i]:
-                        if typ == p and typ not in new_types:
-                            new_types.append(typ)
-                print(new_types)
-                for p in user_defined:
-                    for typ in types[i]:
-                        if typ == p and typ not in new_types:
-                            new_types.append(typ)
-                print(new_types)
-                
-                for p in parametric:
-                    for typ in types[i]:
-                        if typ.find(p) != -1 and typ not in new_types:
-                            new_types.append(typ)
-                print(new_types)
-                self.result_file2.write(str(new_types[:3])+'\n')
-                new_types_all.append(new_types[:3])
-            item_score = {}
-            for item in items:
-                score = 0
-                for i, t in enumerate(item.arg_types):
-                    if hasattr(t, 'type') and not_parametric(t):
-                        identity = item.arg_types[i].type.fullname
-                    else:
-                        identity = str(t)
-                    if identity in new_types_all[i]:
-                        score += 1
-                item_score[item] = score
-            ordered_items = sorted(item_score.items(), key = lambda x:x[1], reverse=True)
-            ordered_items = ordered_items[:3]
-            annotation = '\n'.join(str(x[0]) for x in ordered_items)
-            self.result_file.write(annotation+'\n\n')
-            # string1 = "apple pie available"
-            # string2 = "come have some apple pies"
-
-            
-            # print(match)  # -> Match(a=0, b=15, size=9)
-            
-            # print(string2[match.b: match.b + match.size])  # -> apple pie
-
-
-        self.var_node = {k:v for k,v in original_var_node.items()}
-        self.dp_dag = {k:v for k,v in original_dp_dag.items()}
-        self.type_map = {k:v for k,v in original_type_map.items()}
-        self.wide_type_map = {k:v for k,v in original_wide_type_map.items()}
-        
-        self.expr_checker.local_infer_map = {k:v for k,v in original_infer_map.items()}
-        for arg in func.arguments:
-            self.tv_level[arg].clear()
-        self.record = {}
-        self.result_file.write(func.name+' <func>\n')
-        self.result_file2.write(func.name+'\n')
-        if flag == 1:
-            self.result_file.write('timeout\n')
-        elif isinstance(func.type, AnyType):
-            self.result_file.write('any\n')
-        else:
-            i = 0
-            for t in (func.type.items):
-                self.result_file.write(str(t)+'\n')
-                i+=1
-                if i>2:
-                    break
-        # ordered_items = order_type(func.type.items)
-        self.result_file.flush()
-        self.result_file2.flush()
-        
-        
-        return True
-    def put_into_correct_level(self, func, argument, at):
-        if self.mode == 'CPA':
-            self.func_finished[func][argument].add(at)
-        if isinstance(at, Instance):
-
-            self.func_candidates[func][argument].add(at)
-            self.func_must[func][argument].add(at)
-            t = (at.type, at.args)
-            if at.type.fullname == 'builtins.list' or at.type.fullname == 'builtins.set' or at.type.fullname == 'builtins.dict':
-                self.func_s3[func][argument].add(at)
-            else:
-                self.func_s2[func][argument].add(at)
-
-        elif isinstance(at, CallableType):
-
-            self.func_candidates[func][argument].add(at)
-            self.func_must[func][argument].add(at)
-            self.func_s3[func][argument].add(at)
-        elif not isinstance(at, AnyType) and not isinstance(at, NoneType) and not isinstance(at, PartialType) and not isinstance(at, UnionType) and not isinstance(at, TypeVarType) and not isinstance(at, CallableType) and not isinstance(at, UninhabitedType):
-            
-            self.func_candidates[func][argument].add(at)
-            self.func_must[func][argument].add(at)
-            self.func_s3[func][argument].add(at)
-
-    def init_type_seeds(self, node):
-        self.func_candidates[node] = {}
-        for arg in node.arguments:
-            self.func_s1[node][arg] = set(copy(self.s1))
-            self.func_s2[node][arg] = set(copy(self.s2))
-            self.func_s3[node][arg] = set(copy(self.s3))
-            self.func_candidates[node][arg] = set(self.S3(node, arg))
-            self.func_must[node][arg] = set()
-            self.func_finished[node][arg] = set()
-            if arg.initializer is not None:
-                default_types = self.expr_checker.accept(arg.initializer)
-                for dt in default_types:
-                    self.put_into_correct_level(node, arg, dt)
-    def suggest_function(self, node, from_class = False, force=False, init=False):
-        def get_candidates(x):
-            if isinstance(x, (set, list)):
-                return len(x)
-            else:
-                return 1
-        def improve(a):
-            # if isinstance(t, Instance) and t.type.fullname == 'builtins.object':
-            if len(nows[a]) == len(self.S1(node, a)): 
-                return self.S2(node, a)
-            elif len(nows[a]) == len(self.S2(node, a)): 
-                return self.S3(node, a)
-            else:
-                return None
-        def improvement():
-            success = False
-            args = set()
-            for (a, t) in self.improvement:
-                args.add(a)
-            for a in args:
-                if a in nows and a is not self.self_arg:
-                    now = set(nows[a])
-                    ret = improve(a)
-                    if ret is not None:
-                        now.update(ret)
-                        nows[a] = now
-                        success = True
-                    # if isinstance(nows[ground][0], TypeVarType):
-                    #     self.arg_level[ground] = 2
-                    #     now = self.S2(self.func_candidates[node], ground)
-                    #     nows[ground] = now
-                    #     success = True
-                    # else:
-                    #     self.arg_level[ground] = 3
-                    #     now = self.S3(self.func_candidates[node], ground)
-                    #     nows[ground] = now
-                    #     success = True
-            return success
-        def check_must():
-            for arg in nows:
-                if not self.func_must[node][arg].issubset(nows[arg]):
-                    self.expr_checker.add_improvement(arg)
-                    return False
-
-            return True
-        def try_to_update(updates):
-            unsolvable = False
-            hit = False
-            for ground in updates:
-                if ground in nows:
-
-                    hit = True
-                    now = nows[ground]
-                    if now == self.S1(self.func_candidates[node], ground):
-                        now = self.S2(self.func_candidates[node], ground)
-                    elif now == self.S2(self.func_candidates[node], ground):
-                        now = self.S3(self.func_candidates[node], ground)
-                    # elif now == self.S3(self.func_candidates[node], ground):
-                    #     now = self.S4(self.func_candidates[node], ground)
-                    else:
-                        unsolvable = True
-                    nows[ground] = now
-                elif hasattr(self, "class_vars") and ground in self.class_vars:
-
-                    hit = True
-                    if ground not in self.none_global:
-                        self.type_map[ground] = self.makeS4Type(self.type_map[ground])
-                        
-                    else:
-                        if self.type_map[ground].items == self.S1():
-                            self.type_map[ground] = self.makeS2Type()
-                        elif self.type_map[ground].items == self.S2():
-                            self.type_map[ground] = self.makeS3Type()
-                        elif self.type_map[ground].items == self.S3():
-                            self.type_map[ground] = self.makeS4Type()
-                        else:
-                            unsolvable = True
-            return not(not hit or unsolvable)
-        def isS1(x):
-            if isinstance(x, Instance):
-                if x.type.name == 'object':
-                    return True
-            elif isinstance(x, MaybeTypes):
-                if len(x.items) == 1:
-                    t = x.items[0].type
-                    if t.name == 'object':
-                        return True
-            return False
-        def add_attr(x, attrs):
-            candidates = self.s2 + self.s3
-            for candidate in candidates:
-                candidate_info = candidate.type
-                retrieve_attr_res = [candidate_info.get(x) for x in attrs]
-                if all([x is not None for x in retrieve_attr_res]):
-                    if candidate not in x:
-                        list_user_type = self.type_checker().named_type_with_type_var('builtins.list', candidate)
-                        set_user_type = self.type_checker().named_type_with_type_var('builtins.set', candidate)
-                        x.append(candidate)
-                        x.append(list_user_type)
-                        x.append(set_user_type)
-            return x
-        def add_type(x, types):
-            for typ in types:
-                if typ not in x:
-                    x.append(x)
-            return x
-        
-        if node.unanalyzed_type is not None:
-            return
-
-        
-        if node not in self.func_candidates:
-            self.init_type_seeds(node)
-        if node not in self.func_class:
-            if bool(node.info):
-                self.func_class[node] = node.info
-            else:
-                self.func_class[node] = None
-        
-        is_method = bool(node.info) and not node.is_static
-        if node.fullname not in self.func_name_order:
-            # We only record types for non init
-            if node.fullname.find('__init__') == -1:
-                # for return indexing
-                with open(f'results/funcs_ret-{self.manager.options.tag}', 'a+') as f:
-                    f.write(str(len(self.func_name_order))+',')
-                self.func_name_order.append(node.fullname)
-
-                for i, a in enumerate(node.arguments):
-                    if is_method and i == 0:
-                        continue
-                    self.func_name_order.append('\n')
-                # return
-                # for func placing
-
-                # self.func_name_order.append(node.fullname)
-                with open(f'results/funcs-{self.manager.options.tag}', 'a+') as f:
-                    f.write(node.fullname+'\n')
-                    for i, a in enumerate(node.arguments):
-                        if is_method and i == 0:
-                            continue
-                        f.write('\n')
-            # return
-            # for predicting
-        if init:
-            return
-        node.type = None
-        func_name = node.fullname
-        print(func_name)
-        line_no = node.line
-        
-        base = self.get_starting_type(node)
-        # if node not in self.func_candidates:
-        #     self.func_candidates[node] = self.init_candidates(node)
-        
-        nows = {}
-        self.record = {}
-        # now = self.S2()
-
-        self.self_arg = None
-        for arg in node.arguments:
-            if self.mode == 'PTI':
-                nows[arg] = self.S1(node, arg) # [self.new_type_var(arg, directly_object=True)]
-            else:
-                nows[arg] = self.S2(node, arg)# [self.new_type_var(arg)]
-            self.arg_level[arg] = 1
-
-        original_var_node = {k:v for k,v in self.var_node.items()}
-
-        original_type_map = {k:v for k, v in self.type_map.items()}
-        original_wide_type_map = {k:v for k, v in self.wide_type_map.items()}
-        
-        original_infer_map = {k:v for k,v in self.expr_checker.local_infer_map.items()}
-        original_dp_dag = {k:v for k,v in self.dp_dag.items()}
-        while True:
-            all_annots = []
-            for arg in nows:
-                all_annots.append(nows[arg])
-            annots = []
-
-
-            for i in range(len(base.arg_kinds)):
-                argument = node.arguments[i]
-                all_annots[i] = nows[argument]
-                if argument.initializer is not None:
-                    all_annots[i] = nows[argument]
-                if i == 0 and is_method:
-                    # annots.append([AnyType(TypeOfAny.from_omitted_generics)])
-                    self.self_arg = argument
-                    annots.append(Instance(node.info, [AnyType(TypeOfAny.from_omitted_generics)] * len(node.info.defn.type_vars)))
-                else:
-                    annots.append(all_annots[i])
-                # self.func_candidates[node][argument] = nows[argument]
-            node.type = base.copy_modified(arg_types=annots)
-            func = node
-            # type_checker.reset()
-            self.type_map = {k:v for k,v in original_type_map.items()}
-            self.wide_type_map = {k:v for k,v in original_wide_type_map.items()}
-            
-            self.dp_dag = {k:v for k,v in original_dp_dag.items()}
-            self.cache_type_map.clear()
-            self.defer_this_node = False        
-            self.infer_dependency_map = {}
-            self.single_incompatible.clear()
-            self.incompatible.clear()
-            self.var_node = {k:v for k,v in original_var_node.items()}
-            self.added_attr.clear()
-            self.message.clear()
-
-            self.improvement.clear()
-            
-            self.expr_checker.local_infer_map = {k:v for k,v in original_infer_map.items()}
-            grounds = []
-            start = time.time()
-            self.expr_checker.timeout = False
-            self.current_node = node
-            self.visit_func_def(node)
-            # if self.expr_checker.timeout:
-            #     break
-            
-            # if time.time()-start >= 10:
-            #     break
-            if self.defer_this_node:
-                break
-            
-            else:
-                worklist, updates = self.global_solving()
-                musted = check_must()
-                if len(worklist) > 0 and musted:
-                    break
-                else:
-                    if self.mode == 'PTI':
-                        success = improvement()
-                        if not success:
-                            break
-                    else:
-                        break
-        if self.defer_this_node:
-            self.var_node = {k:v for k,v in original_var_node.items()}
-            self.type_map = {k:v for k,v in original_type_map.items()}
-            self.wide_type_map = {k:v for k,v in original_wide_type_map.items()}
-            
-            self.dp_dag = {k:v for k,v in original_dp_dag.items()}
-            self.expr_checker.local_infer_map = {k:v for k,v in original_infer_map.items()}
-            for arg in func.arguments:
-                self.tv_level[arg].clear()
-            func.type = None
-            return False
-
-        self.func_finished[node] = nows
-        if self.expr_checker.timeout:
-            self.expr_checker.timeout = False
-            self.var_node = {k:v for k,v in original_var_node.items()}
-            self.type_map = {k:v for k,v in original_type_map.items()}
-            self.wide_type_map = {k:v for k,v in original_wide_type_map.items()}
-            
-            self.expr_checker.local_infer_map = {k:v for k,v in original_infer_map.items()}
-            self.record = {}
-            func.type = base
-            return True
-        for var in self.wide_type_map:
-            flag = 0
-            for var2, typ in self.expr_checker.local_infer_map:
-                if var2 == var:
-                    source_pairss = self.expr_checker.local_infer_map[(var2, typ)]
-                    source_nodes = []
-                    for source_pairs in source_pairss:
-                        source_nodes.extend([x[0] for x in source_pairs])
-                    
-                    if not all(isinstance(x, FlowNode) for x in source_nodes):
-                        flag = 1
-                        break
-                    # exception is self mutation
-
-            if flag == 0 and var not in grounds:
-                grounds.append(var)
-        grounds = sorted(grounds, key=lambda x:get_candidates(self.wide_type_map[x]))
-
-        single_incompatible1 = self.single_incompatible
-        double_incompatible = self.incompatible
-        worklist = [['start']]
-        
-        for g in grounds:
-            new_worklist = []
-            types = self.wide_type_map[g]
-            for typ in types:
-                id_pair = (g, typ)
-                if not (g in single_incompatible1 and typ in single_incompatible1[g]):
-                    for state in worklist:
-                        if (id_pair not in double_incompatible) or (not any([self.contains_all(x, state) for x in double_incompatible[id_pair]])):
-                            new_state = [x for x in state]
-                            new_state.append(id_pair)
-                            new_worklist.append(new_state)  
-                        else:
-                            pass
-                            # print('ok')
-                else:
-                    pass
-            if len(new_worklist) > 0:
-                worklist = new_worklist
-        if len(worklist) > self.combination_limits:
-            worklist = []
-        new_worklist = []
-        none_type = NoneType()
-        ret_node = TempNode(none_type)
-        for w in worklist:
-            phi_ret = []
-            if len(self.infer_dependency_map) == 0:
-                pass
-            elif len(self.infer_dependency_map) == 1 and all([len(x) == 0 for x in self.infer_dependency_map.values()]):
-                for node, typ in self.infer_dependency_map:
-                    phi_ret.append(typ)
-            else:
-                for node, typ in self.infer_dependency_map:
-                    if len(self.infer_dependency_map[(node, typ)]) == 0:
-                        phi_ret.append(typ)
-                    else:
-                        for possiblity in self.infer_dependency_map[(node, typ)]:
-                            if self.contains_all(possiblity, w):
-                                phi_ret.append(typ)
-                                break
-                            else:
-                                # print('not contains all')
-                                pass
-        
-                    
-            if len(phi_ret) > 1:
-                phi_ret = [x for x in phi_ret if not isinstance(x, NoneType)]
-                phi_ret = make_simplified_union(phi_ret)
-            elif len(phi_ret) == 1:
-                phi_ret = phi_ret[0]
-            else:
-                if len(self.infer_dependency_map) == 0:
-                    phi_ret = NoneType(0)
-                else:
-                    # soft return type
-                    # phi_ret = NoneType(0)
-                    phi_ret = make_simplified_union([x[1] for x in self.infer_dependency_map.keys()])
-            if phi_ret is not None:
-                w.append((node, phi_ret))
-                new_worklist.append(w)
-            else:
-                w.append((ret_node, none_type))
-                new_worklist.append(w)
-
-        self.infer_dependency_map.clear()
-        worklist = new_worklist
-        solutions = []  
-        args = [x for x in func.arguments]
-        # if len(worklist) > 1000:
-        #     worklist = worklist[:1000]
-        if not from_class:
-            for w in worklist:
-                ann = self.to_annotation(base, w, args)
-                if ann not in solutions:
-                    solutions.append(ann)
-            if len(solutions) == 0:
-                solutions.append(base)
-
-            solutions = sorted(solutions, key=lambda x: str(x))
-            mu_def = Overloaded(solutions)
-            func.type = mu_def
-            # func.candidates = self.S3(node)
-            
-            print(func.name)
-            print(func.type)
-        else:
-            self.func_solutions[func] = worklist
-
-
-            # args2ann = self.try_expand(base, worklist, args)
-            # ftype = Overloaded(list(args2ann.values()))
-            # func.type = ftype
-
-
-            reduce, args2ann = self.try_reduce(base, worklist, args)
-            reduce = True
-            if reduce:
-                if len(args2ann) == 0:
-                    func.type = base
-                else:
-                    ftype = Overloaded(list(list(args2ann.values())[0]))
-                    func.type = ftype
-            else:
-                self.method_typing[func] = {k:Overloaded(list(v)) for k,v in args2ann.items()}
-                func.type = None
-            
-            print(func.name)
-            print(func.type)
-        def not_parametric(t):
-            parametric = ['builtins.list', 'builtins.set', 'builtins.dict', 'builtins.tuple', 'Tuple']
-            t = str(t)
-            for p in parametric:
-                if t.find(p) != -1:
-                    return False
-            return True
-        
-        def identity(t):
-            if hasattr(t, 'type') and not_parametric(t):
-                if t.type == None:
-                    idt = 'None'
-                else:
-                    idt = t.type.fullname
-            else:
-                idt = str(t)
-            return idt
-        def order_type(items):
-            
-            names = items[0].arg_names + ['']
-            types = []
-            for i, name in enumerate(names):
-                
-                types.append([])
-                if i == len(names) -1:
-                    for item in items:
-                        if isinstance(item.ret_type, UnionType):
-                            for t in item.ret_type.items:
-                                if hasattr(t, 'type') and not_parametric(t):
-                                    if t.type == None:
-                                        types[-1].append('None')
-                                    else:
-                                        types[-1].append(t.type.fullname)
-                                else:
-                                    types[-1].append(str(t))
-                        else:
-
-                            if hasattr(item.ret_type, 'type') and not_parametric(item.ret_type):
-                                if item.ret_type.type == None:
-                                    types[-1].append('None')
-                                else:
-                                    types[-1].append(item.ret_type.type.fullname)
-                            else:
-                                types[-1].append(str(item.ret_type))
-                else:
-                    for item in items:
-                        if hasattr(item.arg_types[i], 'type') and not_parametric(item.arg_types[i]):
-                            types[-1].append(item.arg_types[i].type.fullname)
-                        else:
-                            types[-1].append(str(item.arg_types[i]))
-
-
-            
-            from difflib import SequenceMatcher
-            new_types_all = []
-            for i, name in enumerate(names):
-                name = str(name)
-                name = ''.join(name.split('_'))
-                new_types = []
-                long_length = 0
-                long_lcs = '<no>'
-                for typ in types[i]:
-                    match = SequenceMatcher(None, name, typ).find_longest_match(0, len(name), 0, len(typ))
-                    lcs = name[match.a: match.a + match.size] # -> apple pie
-                    if len(lcs) > long_length:
-                        long_length = len(lcs)
-                        long_lcs = typ
-                if long_length >= 4:
-                    print(long_lcs)
-                    new_types.append(long_lcs)
-                    types[i].remove(long_lcs)
-
-                primary = ['builtins.object', 'builtins.str', 'builtins.int', 'builtins.float', 'builtins.bytes', 'builtins.bool']
-                third_party = ['numpy.ndarray', 'torch._tensor.Tensor', 'socket.socket']
-                user_defined = self.user_defined
-                parametric = ['builtins.list', 'builtins.set', 'builtins.dict', 'builtins.tuple', 'Tuple']
-                for p in primary:
-                    for typ in types[i]:
-                        if typ == p and typ not in new_types:
-                            new_types.append(typ)
-                # print(new_types)
-                for p in third_party:
-                    for typ in types[i]:
-                        if typ == p and typ not in new_types:
-                            new_types.append(typ)
-                # print(new_types)
-                for p in user_defined:
-                    for typ in types[i]:
-                        if typ == p and typ not in new_types:
-                            new_types.append(typ)
-                # print(new_types)
-                
-                for p in parametric:
-                    for typ in types[i]:
-                        if typ.find(p) != -1 and typ not in new_types:
-                            new_types.append(typ)
-                for typ in types[i]:
-                    if typ not in new_types:
-                        new_types.append(typ)
-                # print(new_types)
-
-                to_print = new_types[:3]
-
-                # subsumes
-
-                if 'builtins.int' in new_types and 'builtins.bool' in new_types:
-                    new_types.remove('builtins.bool')
-                if 'builtins.list[builtins.int]' in new_types and 'builtins.list[builtins.bool]' in new_types:
-                    new_types.remove('builtins.list[builtins.bool]')
-                if 'builtins.list[builtins.int]' in new_types and 'builtins.bytes' in new_types:
-                    new_types.remove('builtins.bytes')
-                
-                self.result_file2.write(str(new_types[:3])+'\n')
-                new_types_all.append(new_types)
-            # item_score = {}
-            # for item in items:
-            #     score = 0
-            #     for i, t in enumerate(item.arg_types):
-            #         if hasattr(t, 'type') and not_parametric(t):
-            #             identity = item.arg_types[i].type.fullname
-            #         else:
-            #             identity = str(t)
-            #         if identity in new_types_all[i]:
-            #             score += 1
-            #     item_score[item] = score
-            # ordered_items = sorted(item_score.items(), key = lambda x:x[1], reverse=True)
-            # ordered_items = ordered_items[:3]
-            def strize(x):
-                if isinstance(x, UnionType):
-                    return '/'.join([str(y) for y in x.items])
-                return str(x)
-            def rank(l, x):
-                if x in l:
-                    return l.index(x)
-                else:
-                    return 1000000
-            def topize(l):
-                ret = []
-                for x in l:
-                    if x not in ret:
-                        ret.append(x)
-                    if len(ret) == 3:
-                        return ret
-                return ret
-            # annotation = '\n'.join(str(x[0]) for x in ordered_items)
-            strs = []
-            rets = []
-            origin_rets = [x.ret_type for x in items]
-            topn = sorted(origin_rets, key = lambda x:rank(new_types_all[-1], identity(x)))
-            top3 = topize(topn)
-            rets = [strize(x) for x in top3]
-            ret_str = '/'.join(rets)
-            strs.append(ret_str)
-            for i, a in enumerate(func.arguments):
-                if is_method and i == 0 :
-                    continue
-                origin_args = [x.arg_types[i] for x in items]
-                topn = sorted(origin_args, key = lambda x:rank(new_types_all[i], identity(x)))
-                top3 = topize(topn)
-                args = [strize(x) for x in top3]
-                arg_str = '/'.join(args)
-                # arg_str = '/'.join(set(strize(x[0].arg_types[i]) for x in ordered_items))
-                strs.append(arg_str)
-            self.func_name_recorder[func.fullname] = strs
-            return
-            self.result_file.write(annotation+'\n\n')
-
-
-        self.var_node = {k:v for k,v in original_var_node.items()}
-        self.dp_dag = {k:v for k,v in original_dp_dag.items()}
-        self.type_map = {k:v for k,v in original_type_map.items()}
-        self.wide_type_map = {k:v for k,v in original_wide_type_map.items()}
-        
-        self.expr_checker.local_infer_map = {k:v for k,v in original_infer_map.items()}
-        for arg in func.arguments:
-            self.tv_level[arg].clear()
-        self.record = {}
-        self.result_file.write(func.name+'\n')
-        self.result_file2.write(func.name+'\n')
-        sorted_items = sorted(func.type.items, key=lambda x:str(x))
-        for t in (sorted_items):
-            self.result_file.write(str(t)+'\n')
-        order_type(func.type.items)
-        # ordered_items = order_type(func.type.items)
-        self.result_file.flush()
-        self.result_file2.flush()
-        
-        
-        return True
-    
-    def suggest_function_CPA(self, node, from_class = False, force=False, init=False):
-        def get_candidates(x):
-            if isinstance(x, (set, list)):
-                return len(x)
-            else:
-                return 1
-        def improve(a):
-            # if isinstance(t, Instance) and t.type.fullname == 'builtins.object':
-            if len(nows[a]) == len(self.S1(node, a)): 
-                return self.S2(node, a)
-            elif len(nows[a]) == len(self.S2(node, a)): 
-                return self.S3(node, a)
-            else:
-                return None
-        def improvement():
-            success = False
-            args = set()
-            for (a, t) in self.improvement:
-                args.add(a)
-            for a in args:
-                if a in nows and a is not self.self_arg:
-                    now = set(nows[a])
-                    ret = improve(a)
-                    if ret is not None:
-                        now.update(ret)
-                        nows[a] = now
-                        success = True
-                    # if isinstance(nows[ground][0], TypeVarType):
-                    #     self.arg_level[ground] = 2
-                    #     now = self.S2(self.func_candidates[node], ground)
-                    #     nows[ground] = now
-                    #     success = True
-                    # else:
-                    #     self.arg_level[ground] = 3
-                    #     now = self.S3(self.func_candidates[node], ground)
-                    #     nows[ground] = now
-                    #     success = True
-            return success
-        def check_must():
-            for arg in nows:
-                if not self.func_must[node][arg].issubset(nows[arg]):
-                    self.expr_checker.add_improvement(arg)
-                    return False
-
-            return True
-        def try_to_update(updates):
-            unsolvable = False
-            hit = False
-            for ground in updates:
-                if ground in nows:
-
-                    hit = True
-                    now = nows[ground]
-                    if now == self.S1(self.func_candidates[node], ground):
-                        now = self.S2(self.func_candidates[node], ground)
-                    elif now == self.S2(self.func_candidates[node], ground):
-                        now = self.S3(self.func_candidates[node], ground)
-                    # elif now == self.S3(self.func_candidates[node], ground):
-                    #     now = self.S4(self.func_candidates[node], ground)
-                    else:
-                        unsolvable = True
-                    nows[ground] = now
-                elif hasattr(self, "class_vars") and ground in self.class_vars:
-
-                    hit = True
-                    if ground not in self.none_global:
-                        self.type_map[ground] = self.makeS4Type(self.type_map[ground])
-                        
-                    else:
-                        if self.type_map[ground].items == self.S1():
-                            self.type_map[ground] = self.makeS2Type()
-                        elif self.type_map[ground].items == self.S2():
-                            self.type_map[ground] = self.makeS3Type()
-                        elif self.type_map[ground].items == self.S3():
-                            self.type_map[ground] = self.makeS4Type()
-                        else:
-                            unsolvable = True
-            return not(not hit or unsolvable)
-        def isS1(x):
-            if isinstance(x, Instance):
-                if x.type.name == 'object':
-                    return True
-            elif isinstance(x, MaybeTypes):
-                if len(x.items) == 1:
-                    t = x.items[0].type
-                    if t.name == 'object':
-                        return True
-            return False
-        def add_attr(x, attrs):
-            candidates = self.s2 + self.s3
-            for candidate in candidates:
-                candidate_info = candidate.type
-                retrieve_attr_res = [candidate_info.get(x) for x in attrs]
-                if all([x is not None for x in retrieve_attr_res]):
-                    if candidate not in x:
-                        list_user_type = self.type_checker().named_type_with_type_var('builtins.list', candidate)
-                        set_user_type = self.type_checker().named_type_with_type_var('builtins.set', candidate)
-                        x.append(candidate)
-                        x.append(list_user_type)
-                        x.append(set_user_type)
-            return x
-        def add_type(x, types):
-            for typ in types:
-                if typ not in x:
-                    x.append(x)
-            return x
-        
-        if node.unanalyzed_type is not None:
-            return
-        if node.fullname.find('__init__') != -1:
-            return
-        if node not in self.func_candidates:
-            self.init_type_seeds(node)
-        if node not in self.func_class:
-            if bool(node.info):
-                self.func_class[node] = node.info
-            else:
-                self.func_class[node] = None
-        if init:
-            return
-        is_method = bool(node.info) and not node.is_static
-        if node.fullname in self.func_name_order and node.type == None:
-            # for predicting
-            self.result_file.write(node.fullname + ' ; ' + 'None' +'\n')
-            # self.result_file2.write(func.name+'\n')
-            # sorted_items = sorted(func.type.items, key=lambda x:str(x))
-            # self.result_file.write(str(node.type)+'\n')
-            # order_type(func.type.items)
-            # # ordered_items = order_type(func.type.items)
-            self.result_file.flush()
-            return
-            # for return indexing and func placing
-            # return
-        else:
-            pass
-            if node.fullname.find('__init__') != -1:
-                return
-
-
-            # # for return indexing
-            # with open('funcs_ret', 'a+') as f:
-            #      f.write(str(len(self.func_name_order)+2)+',')
-            # self.func_name_order.append(node.fullname)
-
-            # for i, a in enumerate(node.arguments):
-            #     if is_method and i == 0:
-            #         continue
-            #     self.func_name_order.append('\n')
-            # return
-            # for func placing
-
-            # self.func_name_order.append(node.fullname)
-            # with open('funcs', 'a+') as f:
-            #     f.write(node.fullname+'\n')
-            #     for i, a in enumerate(node.arguments):
-            #         if is_method and i == 0:
-            #             continue
-            #         f.write('\n')
-            # return
-            # for predicting
-
-            # self.func_name_order.append(node.fullname)
-
-            # for i, a in enumerate(node.arguments):
-            #     if is_method and i == 0:
-            #         continue
-            #     self.func_name_order.append('\n')
-        node.type = None
-        func_name = node.fullname
-        print(func_name)
-        line_no = node.line
-        
-        base = self.get_starting_type(node)
-        # if node not in self.func_candidates:
-        #     self.func_candidates[node] = self.init_candidates(node)
-        
-        nows = {}
-        self.record = {}
-        # now = self.S2()
-
-        self.self_arg = None
-        for arg in node.arguments:
-            if self.mode == 'PTI':
-                nows[arg] = self.S1(node, arg) # [self.new_type_var(arg, directly_object=True)]
-            else:
-                nows[arg] = self.S3(node, arg)# [self.new_type_var(arg)]
-            self.arg_level[arg] = 1
-
-        original_var_node = {k:v for k,v in self.var_node.items()}
-
-        original_type_map = {k:v for k, v in self.type_map.items()}
-        original_wide_type_map = {k:v for k, v in self.wide_type_map.items()}
-        
-        original_infer_map = {k:v for k,v in self.expr_checker.local_infer_map.items()}
-        original_dp_dag = {k:v for k,v in self.dp_dag.items()}
-
-        list_now = []
-        for i in range(len(base.arg_kinds)):
-            argument = node.arguments[i]
-            list_now.append(nows[argument])
-        
-        combinations = itertools.product(*list_now)
-
-        solutions = []
-        start = time.time()
-        flag = 0
-        for combination in combinations:
-            
-            annots = []
-            for i in range(len(base.arg_kinds)):
-                argument = node.arguments[i]
-                typ = combination[i]
-                typ = {typ}
-                if i == 0 and is_method:
-                    # annots.append([AnyType(TypeOfAny.from_omitted_generics)])
-                    annots.append(Instance(node.info, [AnyType(TypeOfAny.from_omitted_generics)] * len(node.info.defn.type_vars)))
-                else:
-                    annots.append(typ)
-                # self.func_candidates[node][argument] = nows[argument]
-            node.type = base.copy_modified(arg_types=annots)
-            func = node
-            # type_checker.reset()
-            self.type_map = {k:v for k,v in original_type_map.items()}
-            self.wide_type_map = {k:v for k,v in original_wide_type_map.items()}
-            
-            self.dp_dag = {k:v for k,v in original_dp_dag.items()}
-            self.cache_type_map.clear()
-            self.defer_this_node = False        
-            self.infer_dependency_map = {}
-            self.single_incompatible.clear()
-            self.incompatible.clear()
-            self.var_node = {k:v for k,v in original_var_node.items()}
-            self.added_attr.clear()
-            self.message.clear()
-
-            self.improvement.clear()
-            
-            self.expr_checker.local_infer_map = {k:v for k,v in original_infer_map.items()}
-            grounds = []
-            self.expr_checker.timeout = False
-            
-            self.visit_func_def(node)
-            # if self.expr_checker.timeout:
-            #     break
-            
-            # if time.time()-start >= 10:
-            #     break
-            if self.defer_this_node:
-                break
-            
-            else:
-                worklist, updates = self.global_solving()
-                musted = check_must()
-                if len(worklist) > 0:
-                    new_worklist = []
-                    none_type = NoneType()
-                    ret_node = TempNode(none_type)
-                    for w in worklist:
-                        phi_ret = []
-                        if len(self.infer_dependency_map) == 0:
-                            pass
-                        elif len(self.infer_dependency_map) == 1 and all([len(x) == 0 for x in self.infer_dependency_map.values()]):
-                            for node_, typ in self.infer_dependency_map:
-                                phi_ret.append(typ)
-                        else:
-                            for node_, typ in self.infer_dependency_map:
-                                if len(self.infer_dependency_map[(node_, typ)]) == 0:
-                                    phi_ret.append(typ)
-                                else:
-                                    for possiblity in self.infer_dependency_map[(node_, typ)]:
-                                        if self.contains_all(possiblity, w):
-                                            phi_ret.append(typ)
-                                            break
-                                        else:
-                                            # print('not contains all')
-                                            pass
-                
-                            
-                        if len(phi_ret) > 1:
-                            phi_ret = UnionType.make_union(phi_ret)
-                        elif len(phi_ret) == 1:
-                            phi_ret = phi_ret[0]
-                        else:
-                            if len(self.infer_dependency_map) == 0:
-                                phi_ret = NoneType(0)
-                            else:
-                                # soft return type
-                                phi_ret = UnionType.make_union([x[1] for x in self.infer_dependency_map.keys()])
-                        if not isinstance(phi_ret, NoneType):
-                            try:
-
-                                w.append((node_, phi_ret))
-                                new_worklist.append(w)
-                            except Exception:
-                                pass
-                        else:
-                            w.append((ret_node, none_type))
-                            new_worklist.append(w)
-
-                        self.infer_dependency_map.clear()
-                        worklist = new_worklist
-                        args = [x for x in func.arguments]
-                        if not from_class:
-                            for w in worklist:
-                                ann = self.to_annotation(base, w, args)
-                                if ann not in solutions:
-                                    solutions.append(ann)
-
-                        else:
-                            self.func_solutions[func] = worklist
-
-
-                            # args2ann = self.try_expand(base, worklist, args)
-                            # ftype = Overloaded(list(args2ann.values()))
-                            # func.type = ftype
-
-
-                            reduce, args2ann = self.try_reduce(base, worklist, args)
-                            reduce = True
-                            if reduce:
-                                if len(args2ann) == 0:
-                                    func.type = base
-                                else:
-                                    ftype = Overloaded(list(list(args2ann.values())[0]))
-                                    solutions.extend(list(list(args2ann.values())[0]))
-                                    func.type = ftype
-                            else:
-                                self.method_typing[func] = {k:Overloaded(list(v)) for k,v in args2ann.items()}
-                                func.type = None    
-            end = time.time()
-            if end-start > 5*60:
-                flag = 1
-                break
-
-        
-        if self.defer_this_node:
-            self.var_node = {k:v for k,v in original_var_node.items()}
-            self.type_map = {k:v for k,v in original_type_map.items()}
-            self.wide_type_map = {k:v for k,v in original_wide_type_map.items()}
-            
-            self.dp_dag = {k:v for k,v in original_dp_dag.items()}
-            self.expr_checker.local_infer_map = {k:v for k,v in original_infer_map.items()}
-            for arg in func.arguments:
-                self.tv_level[arg].clear()
-            func.type = None
-            return False
-
-        if flag == 1:
-            mu_def = None
-            self.result_file.write(node.fullname + ' ; ' + 'None' +'\n')
-            # self.result_file2.write(func.name+'\n')
-            # sorted_items = sorted(func.type.items, key=lambda x:str(x))
-            # self.result_file.write(str(node.type)+'\n')
-            # order_type(func.type.items)
-            # # ordered_items = order_type(func.type.items)
-            self.result_file.flush()
-        elif len(solutions) == 0:
-            mu_def = base
-        else:
-            mu_def = Overloaded(solutions)
-        func.type = mu_def
-        # func.candidates = self.S3()
-        self.func_name_order.append(node.fullname)
-        print(func.name)
-        print(func.type)    
-
-        self.func_name_order.append(node.fullname)
-
-        
-        def not_parametric(t):
-            parametric = ['builtins.list', 'builtins.set', 'builtins.dict', 'builtins.tuple', 'Tuple']
-            t = str(t)
-            for p in parametric:
-                if t.find(p) != -1:
-                    return False
-            return True
-        
-        def identity(t):
-            if hasattr(t, 'type') and not_parametric(t):
-                if t.type == None:
-                    idt = 'None'
-                else:
-                    idt = t.type.fullname
-            else:
-                idt = str(t)
-            return idt
-        def order_type(items):
-            
-            names = items[0].arg_names + ['']
-            types = []
-            for i, name in enumerate(names):
-                
-                types.append([])
-                if i == len(names) -1:
-                    for item in items:
-                        if isinstance(item.ret_type, UnionType):
-                            for t in item.ret_type.items:
-                                if hasattr(t, 'type') and not_parametric(t):
-                                    if t.type == None:
-                                        types[-1].append('None')
-                                    else:
-                                        types[-1].append(t.type.fullname)
-                                else:
-                                    types[-1].append(str(t))
-                        else:
-
-                            if hasattr(item.ret_type, 'type') and not_parametric(item.ret_type):
-                                if item.ret_type.type == None:
-                                    types[-1].append('None')
-                                else:
-                                    types[-1].append(item.ret_type.type.fullname)
-                            else:
-                                types[-1].append(str(item.ret_type))
-                else:
-                    for item in items:
-                        if hasattr(item.arg_types[i], 'type') and not_parametric(item.arg_types[i]):
-                            types[-1].append(item.arg_types[i].type.fullname)
-                        else:
-                            types[-1].append(str(item.arg_types[i]))
-
-
-            
-            from difflib import SequenceMatcher
-            new_types_all = []
-            for i, name in enumerate(names):
-                name = str(name)
-                name = ''.join(name.split('_'))
-                new_types = []
-                long_length = 0
-                long_lcs = '<no>'
-                for typ in types[i]:
-                    match = SequenceMatcher(None, name, typ).find_longest_match(0, len(name), 0, len(typ))
-                    lcs = name[match.a: match.a + match.size] # -> apple pie
-                    if len(lcs) > long_length:
-                        long_length = len(lcs)
-                        long_lcs = typ
-                if long_length >= 4:
-                    print(long_lcs)
-                    new_types.append(long_lcs)
-                    types[i].remove(long_lcs)
-
-                primary = ['builtins.object', 'builtins.str', 'builtins.int', 'builtins.float', 'builtins.bytes', 'builtins.bool']
-                third_party = ['numpy.ndarray', 'torch._tensor.Tensor', 'socket.socket']
-                user_defined = self.user_defined
-                parametric = ['builtins.list', 'builtins.set', 'builtins.dict', 'builtins.tuple', 'Tuple']
-                for p in primary:
-                    for typ in types[i]:
-                        if typ == p and typ not in new_types:
-                            new_types.append(typ)
-                # print(new_types)
-                for p in third_party:
-                    for typ in types[i]:
-                        if typ == p and typ not in new_types:
-                            new_types.append(typ)
-                # print(new_types)
-                for p in user_defined:
-                    for typ in types[i]:
-                        if typ == p and typ not in new_types:
-                            new_types.append(typ)
-                # print(new_types)
-                
-                for p in parametric:
-                    for typ in types[i]:
-                        if typ.find(p) != -1 and typ not in new_types:
-                            new_types.append(typ)
-                for typ in types[i]:
-                    if typ not in new_types:
-                        new_types.append(typ)
-                # print(new_types)
-
-                to_print = new_types[:3]
-
-                # subsumes
-
-                if 'builtins.int' in new_types and 'builtins.bool' in new_types:
-                    new_types.remove('builtins.bool')
-                if 'builtins.list[builtins.int]' in new_types and 'builtins.list[builtins.bool]' in new_types:
-                    new_types.remove('builtins.list[builtins.bool]')
-                if 'builtins.list[builtins.int]' in new_types and 'builtins.bytes' in new_types:
-                    new_types.remove('builtins.bytes')
-                
-                self.result_file2.write(str(new_types[:3])+'\n')
-                new_types_all.append(new_types)
-            # item_score = {}
-            # for item in items:
-            #     score = 0
-            #     for i, t in enumerate(item.arg_types):
-            #         if hasattr(t, 'type') and not_parametric(t):
-            #             identity = item.arg_types[i].type.fullname
-            #         else:
-            #             identity = str(t)
-            #         if identity in new_types_all[i]:
-            #             score += 1
-            #     item_score[item] = score
-            # ordered_items = sorted(item_score.items(), key = lambda x:x[1], reverse=True)
-            # ordered_items = ordered_items[:3]
-            def strize(x):
-                if isinstance(x, UnionType):
-                    return '/'.join([str(y) for y in x.items])
-                return str(x)
-            def rank(l, x):
-                if x in l:
-                    return l.index(x)
-                else:
-                    return 1000000
-            def topize(l):
-                ret = []
-                for x in l:
-                    if x not in ret:
-                        ret.append(x)
-                    if len(ret) == 3:
-                        return ret
-                return ret
-            # annotation = '\n'.join(str(x[0]) for x in ordered_items)
-            strs = []
-            rets = []
-            origin_rets = [x.ret_type for x in items]
-            topn = sorted(origin_rets, key = lambda x:rank(new_types_all[-1], identity(x)))
-            top3 = topize(topn)
-            rets = [strize(x) for x in top3]
-            ret_str = '/'.join(rets)
-            strs.append(ret_str)
-            for i, a in enumerate(func.arguments):
-                if is_method and i == 0 :
-                    continue
-                origin_args = [x.arg_types[i] for x in items]
-                topn = sorted(origin_args, key = lambda x:rank(new_types_all[i], identity(x)))
-                top3 = topize(topn)
-                args = [strize(x) for x in top3]
-                arg_str = '/'.join(args)
-                # arg_str = '/'.join(set(strize(x[0].arg_types[i]) for x in ordered_items))
-                strs.append(arg_str)
-            self.func_name_recorder[func.fullname] = strs
-            return
-            self.result_file.write(annotation+'\n\n')
-
-
-        self.var_node = {k:v for k,v in original_var_node.items()}
-        self.dp_dag = {k:v for k,v in original_dp_dag.items()}
-        self.type_map = {k:v for k,v in original_type_map.items()}
-        self.wide_type_map = {k:v for k,v in original_wide_type_map.items()}
-        
-        self.expr_checker.local_infer_map = {k:v for k,v in original_infer_map.items()}
-        for arg in func.arguments:
-            self.tv_level[arg].clear()
-        self.record = {}
-        # self.result_file.write(func.name+'\n')
-        # # self.result_file2.write(func.name+'\n')
-        # # sorted_items = sorted(func.type.items, key=lambda x:str(x))
-        # self.result_file.write(str(func.type)+'\n')
-        # # order_type(func.type.items)
-        # # # ordered_items = order_type(func.type.items)
-        # self.result_file.flush()
-        # self.result_file2.flush()
-        
-        
-        return True
-    def in_var_node(self, node, var_node=None):
-        if not (isinstance(node, str) or isinstance(node,tuple)):
-            var = literal_hash(node)
-        else:
-            var = node
-        if  var_node is not None:
-            return var in var_node    
-        return var in self.var_node
-    def get_var_node(self, node, var_node=None):
-        if not (isinstance(node, str) or isinstance(node,tuple)):
-            var = literal_hash(node)
-        else:
-            var = node
-        if  var_node is not None:
-            return var_node[var]
-        return self.var_node[var]
-
-
-    def update_var_node(self, node, var_node=None):
-        if not (isinstance(node, str) or isinstance(node,tuple)):
-            var = literal_hash(node)
-        else:
-            var = node
-        if var_node is not None:
-            var_node[var] = node
-        self.var_node[var] = node
-        # if overwrite:
-        #     self.var_node[var] = [node]
-        # else:
-        #     if var in self.var_node:
-        #         self.var_node[var].append(node)
-        #     else:
-        #         self.var_node[var] = [node]
-    
-
-
-
-    def setS1(self, s1):
-        self.s1 = s1
-    
-    def setS2(self, s2):
-        self.s2 = list(set(s2))
-    
-    def setS3(self, s3):
-        self.s3 = list(set(s3))
-
-    def set_hierarchy(self, hierarchy_children):
-        self.hierarchy_children = hierarchy_children
-    def set_user_defined(self, user_defined):
-        self.user_defined = list(set(user_defined))
-    
-
-    def setS4(self, s4):
-        self.s4 = list(set(s4))
-    
-
-
-
-    def makeS1Type(self):
-        return self.S1()
-    def makeS2Type(self):
-        return self.S2()
-    def makeS3Type(self, t=None):
-        if t:
-            t = t.items[0]
-            s3 = [x for x in self.S3() if is_subtype(x, t)]
-            return s3
-        return self.S3()
-    def makeS4Type(self, t=None):
-        if t and len(t.items) == 1: # update basic case
-            t = t.items[0]
-            s4 = [x for x in self.S4() if is_subtype(x, t)]
-            return s4
-        return self.S4()
-    def new_type_var(self, arg, directly_object=False):
-        object_type = self.named_type('builtins.object')
-        if directly_object:
-            return object_type
-        bounded_name = [x.name for x in self.record]
-        for i in range(100):
-            new_name = f'T{i}'
-            if new_name not in bounded_name:
-                tv = TypeVarType(f'T{i}', f'T{i}', i, [], object_type)
-                self.record[tv] = arg
-                # self.tv_level[tv] = 1
-                return tv
-    def S1(self, node, arg, candidates=None):
-        # if candidates:
-        #     added = [x for x in candidates[ground] if not isinstance(x, tuple) and not isinstance(x, AnyType)]
-        # else:
-        #     added = []
-        return self.func_s1[node][arg]
-
-    def S2(self, node, arg, candidates=None):
-
-        # generic_containers = []
-        # arg = ground
-        # if arg:
-        #     t = self.new_type_var(arg, directly_object=True)
-        #     generic_containers.append(t)
-        #     t = self.new_type_var(arg, directly_object=True)
-        #     # self.tv_level[t] = 2
-        #     str_type = self.named_type('builtins.str')
-        #     generic_containers.append(self.named_type_with_type_var('builtins.set', t))
-        #     t = self.new_type_var(arg, directly_object=True)
-        #     # self.tv_level[t] = 2
-        #     generic_containers.append(self.named_type_with_type_var('builtins.list', t))
-        #     t = self.new_type_var(arg, directly_object=True)
-        #     # self.tv_level[t] = 2
-        #     generic_containers.append(self.named_dict_with_type_var('builtins.dict', t, t))
-        # if candidates:
-        #     added = [x for x in candidates[ground] if not isinstance(x, tuple)]
-        #     radded = []
-        #     for add in added:
-        #         # if hasattr(add, "type"):
-        #         #     if (len(add.type.mro) <= 2 and len(add.args) == 0):
-        #         radded.append(add)
-        #     added = radded
-        #     # added = []
-        # else:
-        #     added = []
-        # # return self.S1(candidates, ground) + self.s2 + added
-        return self.func_s2[node][arg].union(self.S1(node, arg))
-    
-    def S3_for(self, node, arg, t1):
-        if not isinstance(t1, Instance):
-            return set()
-        s3_for = set()
-        for t2 in self.S3(node, arg):
-            if isinstance(t2, Instance) and t2.type == t1.type:
-                s3_for.add(t2)
-        if t1 in self.hierarchy_children:
-            s3_for.update(self.hierarchy_children[t1])
-        return s3_for
-    def S3(self, node, arg, candidates=None, ground=None):
-        # if candidates:
-        #     added = [x for x in candidates[ground] if not isinstance(x, tuple)]
-        #     radded = []
-        #     for add in added:
-        #         if hasattr(add, "type"):
-        #             if not (len(add.type.mro) <= 2 and len(add.args) == 0):
-        #                 radded.append(add)
-        #     added = radded
-        #     added = []
-        # else:
-        #     added = []
-        return self.S2(node, arg).union(self.func_s3[node][arg])
-
-    def S4(self, candidates=None, ground=None):
-        return self.s4
-
-    
-    
-    # def get_candidates(self):
-    #     return self.candidates
-
-    
-    def set_candidates(self, candidates):
-        self.candidates = candidates
-    def suggest_first_pass(self, init=False) -> None:
-        """Type check the entire file, but defer functions with unresolved references.
-
-        Unresolved references are forward references to variables
-        whose types haven't been inferred yet.  They may occur later
-        in the same file or in a different file that's being processed
-        later (usually due to an import cycle).
-
-        Deferred functions will be processed by check_second_pass().
-        """
-        # print('???')
-        self.recurse_into_functions = True
-
-        with state.strict_optional_set(self.options.strict_optional):
-            self.errors.set_file(self.path, self.tree.fullname, scope=self.tscope)
-            with self.tscope.module_scope(self.tree.fullname):
-                with self.enter_partial_types(), self.binder.top_frame_context():
-                    for i, d in enumerate(self.tree.defs):
-                        if isinstance(d, FuncDef):
-                            if self.mode == 'CPA':
-                                self.suggest_function_CPA(d, init=init)
-                            else:
-                                self.suggest_function(d, init=init)
-                        elif isinstance(d, Decorator):
-                            if self.mode == 'CPA':
-                                self.suggest_function_CPA(d.func)
-                            else:
-                                self.suggest_function(d.func, init=init)
-                        elif isinstance(d, ClassDef):
-                            self.suggest_class(d, init=init)
-                        elif isinstance(d, AssignmentStmt):
-                            self.visit_assignment_stmt(d)
-                        else:
-                            self.accept(d)
-                        
-
-                assert not self.current_node_deferred
-
-                all_ = self.globals.get('__all__')
-                if all_ is not None and all_.type is not None:
-                    all_node = all_.node
-                    assert all_node is not None
-                    seq_str = self.named_generic_type('typing.Sequence',
-                                                      [self.named_type('builtins.str')])
-                    if self.options.python_version[0] < 3:
-                        seq_str = self.named_generic_type('typing.Sequence',
-                                                          [self.named_type('builtins.unicode')])
-                    if not is_subtype(all_.type, seq_str):
-                        str_seq_s, all_s = format_type_distinctly(seq_str, all_.type)
-                        self.fail(message_registry.ALL_MUST_BE_SEQ_STR.format(str_seq_s, all_s),
-                                  all_node)
     def check_first_pass(self) -> None:
         """Type check the entire file, but defer functions with unresolved references.
 
@@ -3046,10 +296,7 @@ class TypeChecker(NodeVisitor[None], CheckerPluginInterface):
 
         Deferred functions will be processed by check_second_pass().
         """
-        # print('???')
-        import datasets.filesystems.compression
         self.recurse_into_functions = True
-        self.is_checking = True
         with state.strict_optional_set(self.options.strict_optional):
             self.errors.set_file(self.path, self.tree.fullname, scope=self.tscope)
             with self.tscope.module_scope(self.tree.fullname):
@@ -3108,69 +355,14 @@ class TypeChecker(NodeVisitor[None], CheckerPluginInterface):
                             self.check_partial(node)
             return True
 
-
-    def suggest_second_pass(self,
-                          todo: Optional[Sequence[Union[DeferredNode,
-                                                        FineGrainedDeferredNode]]] = None
-                          ) -> bool:
-        """Run second or following pass of type checking.
-
-        This goes through deferred nodes, returning True if there were any.
-        """
-        self.recurse_into_functions = True
-        with state.strict_optional_set(self.options.strict_optional):
-            if not todo and not self.deferred_nodes:
-                return False
-            self.errors.set_file(self.path, self.tree.fullname, scope=self.tscope)
-            with self.tscope.module_scope(self.tree.fullname):
-                with self.enter_partial_types(), self.binder.top_frame_context():
-                    self.pass_num += 1
-                    if not todo:
-                        todo = self.deferred_nodes
-                    else:
-                        assert not self.deferred_nodes
-                    self.deferred_nodes = []
-                    done: Set[Union[DeferredNodeType, FineGrainedDeferredNodeType]] = set()
-                    for i, (node, active_typeinfo) in enumerate(todo):
-                        if node in done:
-                            continue
-                        # This is useful for debugging:
-                        # print("XXX in pass %d, class %s, function %s" %
-                        #       (self.pass_num, type_name, node.fullname or node.name))
-                        done.add(node)
-                        # with self.tscope.class_scope(active_typeinfo) if active_typeinfo \
-                        #         else nothing():
-                        #     with self.scope.push_class(active_typeinfo) if active_typeinfo \
-                        #             else nothing():
-                        # self.suggest_partial(node)
-                        if isinstance(node, FuncDef):
-                            with self.tscope.class_scope(active_typeinfo) if active_typeinfo \
-                                    else nothing():
-                                with self.scope.push_class(active_typeinfo) if active_typeinfo \
-                                        else nothing():
-                                            if self.mode == 'CPA':
-                                                self.suggest_function_CPA(node)
-                                            else:
-                                                self.suggest_function(node)
-                        # elif isinstance(node, ClassDef):
-                        #     self.suggest_class(node)
-            return True
-
-    def suggest_partial(self, node: Union[DeferredNodeType, FineGrainedDeferredNodeType]) -> None:
-        if isinstance(node, MypyFile):
-            self.check_top_level(node)
-        else:
-            self.recurse_into_functions = True
-            if isinstance(node, FuncDef):
-                self.suggest_function(node)
-            elif isinstance(node, ClassDef):
-                self.suggest_class(node)
     def check_partial(self, node: Union[DeferredNodeType, FineGrainedDeferredNodeType]) -> None:
         if isinstance(node, MypyFile):
             self.check_top_level(node)
         else:
             self.recurse_into_functions = True
-            if isinstance(node, FuncDef):
+            if isinstance(node, LambdaExpr):
+                self.expr_checker.accept(node)
+            else:
                 self.accept(node)
 
     def check_top_level(self, node: MypyFile) -> None:
@@ -3196,39 +388,27 @@ class TypeChecker(NodeVisitor[None], CheckerPluginInterface):
         # can be deferred. Only module/class level scope information is needed.
         # Module-level scope information is preserved in the TypeChecker instance.
         self.deferred_nodes.append(DeferredNode(node, enclosing_class))
-    
+
     def handle_cannot_determine_type(self, name: str, context: Context) -> None:
-        if self.is_checking:
-            return
         node = self.scope.top_non_lambda_function()
-        if node not in self.func_candidates:
-            return 
-        if isinstance(node, FuncDef):
+        if self.pass_num < self.last_pass and isinstance(node, FuncDef):
             # Don't report an error yet. Just defer. Note that we don't defer
             # lambdas because they are coupled to the surrounding function
             # through the binder and the inferred type of the lambda, so it
             # would get messy.
             enclosing_class = self.scope.enclosing_class()
-            # if enclosing_class is None:
             self.defer_node(node, enclosing_class)
             # Set a marker so that we won't infer additional types in this
             # function. Any inferred types could be bogus, because there's at
             # least one type that we don't know.
             self.current_node_deferred = True
-            self.defer_this_node = True
         else:
-            pass
-            # self.msg.cannot_determine_type(name, context)
+            self.msg.cannot_determine_type(name, context)
 
     def accept(self, stmt: Statement) -> None:
         """Type check a node in the given type context."""
-        # try:
-            # print(type(stmt))
-        self.manager.lexical_stat[type(stmt)].add(stmt)
+        
         stmt.accept(self)
-        # except Exception as err:
-        #     report_internal_error(err, self.errors.file, stmt.line, self.errors, self.options)
-
     def accept_loop(self, body: Statement, else_body: Optional[Statement] = None, *,
                     exit_condition: Optional[Expression] = None) -> None:
         """Repeatedly type check a loop body until the frame doesn't change.
@@ -3242,7 +422,7 @@ class TypeChecker(NodeVisitor[None], CheckerPluginInterface):
                 with self.binder.frame_context(can_skip=True,
                                                break_frame=2, continue_frame=1):
                     self.accept(body)
-                if not self.binder.last_pop_changed or True:
+                if not self.binder.last_pop_changed:
                     break
             if exit_condition:
                 _, else_map = self.find_isinstance_check(exit_condition)
@@ -3308,14 +488,21 @@ class TypeChecker(NodeVisitor[None], CheckerPluginInterface):
                 inner_type = defn.impl.var.type
             else:
                 assert False, "Impl isn't the right type"
-            if isinstance(inner_type, MaybeTypes):
-                inner_type = inner_type.items[0]
+
             # This can happen if we've got an overload with a different
             # decorator or if the implementation is untyped -- we gave up on the types.
             inner_type = get_proper_type(inner_type)
             if inner_type is not None and not isinstance(inner_type, AnyType):
-                assert isinstance(inner_type, CallableType)
-                impl_type = inner_type
+                if isinstance(inner_type, CallableType):
+                    impl_type = inner_type
+                elif isinstance(inner_type, Instance):
+                    inner_call = get_proper_type(
+                        find_member('__call__', inner_type, inner_type, is_operator=True)
+                    )
+                    if isinstance(inner_call, CallableType):
+                        impl_type = inner_call
+                if impl_type is None:
+                    self.msg.not_callable(inner_type, defn.impl)
 
         is_descriptor_get = defn.info and defn.name == "__get__"
         for i, item in enumerate(defn.items):
@@ -3555,11 +742,6 @@ class TypeChecker(NodeVisitor[None], CheckerPluginInterface):
             return AnyType(TypeOfAny.special_form)
 
     def visit_func_def(self, defn: FuncDef) -> None:
-        # if self.analyzing and defn.type is None:
-        #     self.suggest_function(defn)
-        self.manager.lexical_stat[type(defn)].add(defn)
-        if self.node is not None and self.node.info and (defn.name != '__init__' and defn != self.node):
-            return
         if not self.recurse_into_functions:
             return
         with self.tscope.function_scope(defn):
@@ -3567,15 +749,15 @@ class TypeChecker(NodeVisitor[None], CheckerPluginInterface):
 
     def _visit_func_def(self, defn: FuncDef) -> None:
         """Type check a function definition."""
-        self.check_func_item(defn, name=defn.name) # main entry
-        # if defn.info:
-        #     if not defn.is_dynamic() and not defn.is_overload and not defn.is_decorated:
-        #         # If the definition is the implementation for an
-        #         # overload, the legality of the override has already
-        #         # been typechecked, and decorated methods will be
-        #         # checked when the decorator is.
-        #         self.check_method_override(defn)
-        #     self.check_inplace_operator_method(defn)
+        self.check_func_item(defn, name=defn.name)
+        if defn.info:
+            if not defn.is_dynamic() and not defn.is_overload and not defn.is_decorated:
+                # If the definition is the implementation for an
+                # overload, the legality of the override has already
+                # been typechecked, and decorated methods will be
+                # checked when the decorator is.
+                self.check_method_override(defn)
+            self.check_inplace_operator_method(defn)
         if defn.original_def:
             # Override previous definition.
             new_type = self.function_type(defn)
@@ -3795,14 +977,7 @@ class TypeChecker(NodeVisitor[None], CheckerPluginInterface):
                         arg_type = self.named_generic_type('builtins.dict',
                                                            [self.str_type(),
                                                             arg_type])
-
-                    # self.var_type[item.arguments[i].variable] = arg_type
-                    # item.arguments[i].variable.type = arg_type
-                    self.update_var_node(item.arguments[i])
-                    # item.arguments[i].variable.node = item.arguments[i]
-                    self.store_type(item.arguments[i], arg_type)
-                    
-                    
+                    item.arguments[i].variable.type = arg_type
 
                 # Type check initialization expressions.
                 body_is_trivial = self.is_trivial_body(defn.body)
@@ -3860,17 +1035,7 @@ class TypeChecker(NodeVisitor[None], CheckerPluginInterface):
                 msg += "tuple argument {}".format(name[12:])
             else:
                 msg += 'argument "{}"'.format(name)
-            if arg in self.type_map:
-                self.check_completed_assignment(
-                    self.type_map[arg],
-                    arg.initializer,
-                    context=arg.initializer,
-                    msg=msg,
-                    lvalue_name='argument',
-                    rvalue_name='default',
-                    code=codes.ASSIGNMENT, lvalue=arg)
-            else:
-                self.check_simple_assignment(
+            self.check_simple_assignment(
                 arg.variable.type,
                 arg.initializer,
                 context=arg.initializer,
@@ -4571,7 +1736,6 @@ class TypeChecker(NodeVisitor[None], CheckerPluginInterface):
 
     def visit_class_def(self, defn: ClassDef) -> None:
         """Type check a class definition."""
-        self.manager.lexical_stat[type(defn)].add(defn)
         typ = defn.info
         for base in typ.mro[1:]:
             if base.is_final:
@@ -4608,7 +1772,6 @@ class TypeChecker(NodeVisitor[None], CheckerPluginInterface):
 
                     # TODO: Figure out how to have clearer error messages.
                     # (e.g. "class decorator must be a function that accepts a type."
-                    dec = list(dec)[0]
                     sig, _ = self.expr_checker.check_call(dec, [temp],
                                                           [nodes.ARG_POS], defn,
                                                           callable_name=fullname)
@@ -4818,7 +1981,7 @@ class TypeChecker(NodeVisitor[None], CheckerPluginInterface):
     def check_import(self, node: ImportBase) -> None:
         for assign in node.assignments:
             lvalue = assign.lvalues[0]
-            lvalue_type, _, __, _2, _3 = self.check_lvalue(lvalue)
+            lvalue_type, _, __ = self.check_lvalue(lvalue)
             if lvalue_type is None:
                 # TODO: This is broken.
                 lvalue_type = AnyType(TypeOfAny.special_form)
@@ -4833,8 +1996,6 @@ class TypeChecker(NodeVisitor[None], CheckerPluginInterface):
     #
 
     def visit_block(self, b: Block) -> None:
-
-        original_var_node = {k:v for k,v in self.var_node.items()}
         if b.is_unreachable:
             # This block was marked as being unreachable during semantic analysis.
             # It turns out any blocks marked in this way are *intentionally* marked
@@ -4846,11 +2007,8 @@ class TypeChecker(NodeVisitor[None], CheckerPluginInterface):
                 if self.should_report_unreachable_issues() and not self.is_raising_or_empty(s):
                     self.msg.unreachable_statement(s)
                 break
-            
-            # forbid into func analyze here to quit nested function
-
             self.accept(s)
-        # self.var_node = {k:v for k,v in original_var_node.items()}
+
     def should_report_unreachable_issues(self) -> bool:
         return (self.in_checked_function()
                 and self.options.warn_unreachable
@@ -4946,25 +2104,6 @@ class TypeChecker(NodeVisitor[None], CheckerPluginInterface):
             accept_items(s.rvalue)
         self.store_type(s.lvalues[-1], alias_type)
 
-    def check_definition(self, lvalue: Lvalue, rvalue: Expression, infer_lvalue_type: bool = True,
-                         new_syntax: bool = False) -> None:
-        lvalue_type, index_lvalue, inferred, lvar, temp_lnode = self.check_lvalue(lvalue)
-        self.expr_checker.infer_type.clear()
-                
-        rvalue_type = self.expr_checker.accept(rvalue)
-        rtype = self.type_map[rvalue]
-        if isinstance(rtype, MaybeTypes):
-            for typ in rtype.items:
-                self.expr_checker.add_infer_type((lvalue, typ),[(rvalue, typ)])
-                # if isinstance(lvalue, NameExpr):
-                #     self.expr_checker.update_local_infer_map(lvalue.node, typ,[[(rvalue, typ)]])
-        else:
-            self.expr_checker.add_infer_type((lvalue, rtype),[(rvalue, rtype)])
-            # if isinstance(lvalue, NameExpr):
-            #     self.expr_checker.update_local_infer_map(lvalue.node, rtype,[[(rvalue, rtype)]])
-        
-        self.store_type(lvalue, rtype)
-        # self.infer_variable_type(inferred, lvalue, rvalue_type, rvalue)
     def check_assignment(self, lvalue: Lvalue, rvalue: Expression, infer_lvalue_type: bool = True,
                          new_syntax: bool = False) -> None:
         """Type check a single assignment: lvalue = rvalue."""
@@ -4973,7 +2112,30 @@ class TypeChecker(NodeVisitor[None], CheckerPluginInterface):
                                                       infer_lvalue_type)
         else:
             self.try_infer_partial_generic_type_from_assignment(lvalue, rvalue, '=')
-            lvalue_type, index_lvalue, inferred, lvar, temp_lnode = self.check_lvalue(lvalue)
+            lvalue_type, index_lvalue, inferred = self.check_lvalue(lvalue)
+            # If we're assigning to __getattr__ or similar methods, check that the signature is
+            # valid.
+            if isinstance(lvalue, NameExpr) and lvalue.node:
+                name = lvalue.node.name
+                if name in ('__setattr__', '__getattribute__', '__getattr__'):
+                    # If an explicit type is given, use that.
+                    if lvalue_type:
+                        signature = lvalue_type
+                    else:
+                        signature = self.expr_checker.accept(rvalue)
+                    if signature:
+                        if name == '__setattr__':
+                            self.check_setattr_method(signature, lvalue)
+                        else:
+                            self.check_getattr_method(signature, lvalue, name)
+
+            # Defer PartialType's super type checking.
+            if (isinstance(lvalue, RefExpr) and
+                    not (isinstance(lvalue_type, PartialType) and lvalue_type.type is None)):
+                if self.check_compatibility_all_supers(lvalue, lvalue_type, rvalue):
+                    # We hit an error on this line; don't check for any others
+                    return
+
             if lvalue_type:
                 if isinstance(lvalue_type, PartialType) and lvalue_type.type is None:
                     # Try to infer a proper type for a variable with a partial None type.
@@ -5006,11 +2168,18 @@ class TypeChecker(NodeVisitor[None], CheckerPluginInterface):
                             self.check_compatibility_all_supers(lvalue, lvalue_type, rvalue)):
                         # We hit an error on this line; don't check for any others
                         return
+                elif (is_literal_none(rvalue) and
+                        isinstance(lvalue, NameExpr) and
+                        isinstance(lvalue.node, Var) and
+                        lvalue.node.is_initialized_in_class and
+                        not new_syntax):
+                    # Allow None's to be assigned to class variables with non-Optional types.
+                    rvalue_type = lvalue_type
                 elif (isinstance(lvalue, MemberExpr) and
                         lvalue.kind is None):  # Ignore member access to modules
                     instance_type = self.expr_checker.accept(lvalue.expr)
                     rvalue_type, lvalue_type, infer_lvalue_type = self.check_member_assignment(
-                        instance_type, lvalue_type, rvalue, context=rvalue, lvalue=lvalue, lnode = temp_lnode, lvar=lvar)
+                        instance_type, lvalue_type, rvalue, context=rvalue)
                 else:
                     # Hacky special case for assigning a literal None
                     # to a variable defined in a previous if
@@ -5037,32 +2206,36 @@ class TypeChecker(NodeVisitor[None], CheckerPluginInterface):
                             lvalue_type = make_optional_type(lvalue_type)
                             self.set_inferred_type(lvalue.node, lvalue, lvalue_type)
 
-                    rvalue_type = self.check_completed_assignment(lvalue_type, rvalue, context=rvalue,
-                                                               code=codes.ASSIGNMENT, lvalue=lvalue)
+                    rvalue_type = self.check_simple_assignment(lvalue_type, rvalue, context=rvalue,
+                                                               code=codes.ASSIGNMENT)
 
+                # Special case: only non-abstract non-protocol classes can be assigned to
+                # variables with explicit type Type[A], where A is protocol or abstract.
+                rvalue_type = get_proper_type(rvalue_type)
+                lvalue_type = get_proper_type(lvalue_type)
+                if (isinstance(rvalue_type, CallableType) and rvalue_type.is_type_obj() and
+                        (rvalue_type.type_object().is_abstract or
+                         rvalue_type.type_object().is_protocol) and
+                        isinstance(lvalue_type, TypeType) and
+                        isinstance(lvalue_type.item, Instance) and
+                        (lvalue_type.item.type.is_abstract or
+                         lvalue_type.item.type.is_protocol)):
+                    self.msg.concrete_only_assign(lvalue_type, rvalue)
+                    return
                 if rvalue_type and infer_lvalue_type and not isinstance(lvalue_type, PartialType):
                     # Don't use type binder for definitions of special forms, like named tuples.
                     if not (isinstance(lvalue, NameExpr) and lvalue.is_special_form):
                         self.binder.assign_type(lvalue, rvalue_type, lvalue_type, False)
+
             elif index_lvalue:
                 self.check_indexed_assignment(index_lvalue, rvalue, lvalue)
 
             if inferred:
-                if inferred.type is not None:
-                    return
-                # do not infer/mutate static typed node
                 rvalue_type = self.expr_checker.accept(rvalue)
-                
-                rtypes = self.type_map[rvalue]
-                ltypes = []
-                for rtype in rtypes:
-                    maybe_partial = self.infer_partial_type_for_rtype(lvalue, rtype)
-                    ltypes.append(maybe_partial)
-                    self.expr_checker.add_infer_type((lvalue, maybe_partial),[(rvalue, rtype)])
-            
-                self.store_type(lvalue, ltypes)
-                self.update_var_node(lvalue)
-            
+                if not inferred.is_final:
+                    rvalue_type = remove_instance_last_known_values(rvalue_type)
+                self.infer_variable_type(inferred, lvalue, rvalue_type, rvalue)
+
     # (type, operator) tuples for augmented assignments supported with partial types
     partial_type_augmented_ops: Final = {
         ('builtins.list', '+'),
@@ -5391,6 +2564,59 @@ class TypeChecker(NodeVisitor[None], CheckerPluginInterface):
                 if lv.node.is_final and not is_final_decl:
                     self.msg.cant_assign_to_final(name, lv.node.info is None, s)
 
+    def check_assignment_to_slots(self, lvalue: Lvalue) -> None:
+        if not isinstance(lvalue, MemberExpr):
+            return
+
+        inst = get_proper_type(self.expr_checker.accept(lvalue.expr))
+        if not isinstance(inst, Instance):
+            return
+        if inst.type.slots is None:
+            return  # Slots do not exist, we can allow any assignment
+        if lvalue.name in inst.type.slots:
+            return  # We are assigning to an existing slot
+        for base_info in inst.type.mro[:-1]:
+            if base_info.names.get('__setattr__') is not None:
+                # When type has `__setattr__` defined,
+                # we can assign any dynamic value.
+                # We exclude object, because it always has `__setattr__`.
+                return
+
+        definition = inst.type.get(lvalue.name)
+        if definition is None:
+            # We don't want to duplicate
+            # `"SomeType" has no attribute "some_attr"`
+            # error twice.
+            return
+        if self.is_assignable_slot(lvalue, definition.type):
+            return
+
+        self.fail(
+            'Trying to assign name "{}" that is not in "__slots__" of type "{}"'.format(
+                lvalue.name, inst.type.fullname,
+            ),
+            lvalue,
+        )
+
+    def is_assignable_slot(self, lvalue: Lvalue, typ: Optional[Type]) -> bool:
+        if getattr(lvalue, 'node', None):
+            return False  # This is a definition
+
+        typ = get_proper_type(typ)
+        if typ is None or isinstance(typ, AnyType):
+            return True  # Any can be literally anything, like `@propery`
+        if isinstance(typ, Instance):
+            # When working with instances, we need to know if they contain
+            # `__set__` special method. Like `@property` does.
+            # This makes assigning to properties possible,
+            # even without extra slot spec.
+            return typ.type.get('__set__') is not None
+        if isinstance(typ, FunctionLike):
+            return True  # Can be a property, or some other magic
+        if isinstance(typ, UnionType):
+            return all(self.is_assignable_slot(lvalue, u) for u in typ.items)
+        return False
+
     def check_assignment_to_multiple_lvalues(self, lvalues: List[Lvalue], rvalue: Expression,
                                              context: Context,
                                              infer_lvalue_type: bool = True) -> None:
@@ -5483,78 +2709,37 @@ class TypeChecker(NodeVisitor[None], CheckerPluginInterface):
                                infer_lvalue_type: bool = True,
                                rv_type: Optional[Type] = None,
                                undefined_rvalue: bool = False) -> None:
-        """Check the assignment of one rvalue to a number of lvalues.
-        
-        a,*b,c,d... = t1
-
-        case T[t1]:
-        
-        | Tuple
-        | Iterable
-        | Union
-        | Any
-        
-        """
+        """Check the assignment of one rvalue to a number of lvalues."""
 
         # Infer the type of an ordinary rvalue expression.
         # TODO: maybe elsewhere; redundant.
-        rvalue_types = rv_type or self.expr_checker.accept(rvalue)
-        ltypes_store = defaultdict(list)
-        for rvalue_type in rvalue_types:
-            ltypes = self.check_multiple_from_multiple_types(lvalues, rvalue, context, infer_lvalue_type, rvalue_type)
-            for lvalue, ltype in zip(lvalues, ltypes):
-                if isinstance(lvalue, StarExpr):
-                    lvalue = lvalue.expr
-                self.expr_checker.add_infer_type((lvalue, ltype), [(rvalue, rvalue_type)])
-                ltypes_store[lvalue].append(ltype)
+        rvalue_type = get_proper_type(rv_type or self.expr_checker.accept(rvalue))
 
-        
-        for lvalue in ltypes_store:
-            if isinstance(lvalue, StarExpr):
-                lvalue = lvalue.expr
-            self.update_var_node(lvalue)
-            self.store_type(lvalue, ltypes_store[lvalue])
-
-    def check_multiple_from_multiple_types(self, lvalues: List[Lvalue],
-                                rvalue: Expression,
-                                context: Context,
-                                infer_lvalue_type: bool = True,
-                                rv_type: Optional[Type] = None,) -> None:
-        """
-            types(lv, rt)
-            match rt with
-            | Tuple
-            | Iterable
-            | Union -> Union[types(lv,r)]
-            | Any
-        """
-        rvalue_type = rv_type
         if isinstance(rvalue_type, UnionType):
-                # If this is an Optional type in non-strict Optional code, unwrap it.
+            # If this is an Optional type in non-strict Optional code, unwrap it.
             relevant_items = rvalue_type.relevant_items()
             if len(relevant_items) == 1:
                 rvalue_type = get_proper_type(relevant_items[0])
 
         if isinstance(rvalue_type, AnyType):
-            return [AnyType(0)] * len(lvalues)
+            for lv in lvalues:
+                if isinstance(lv, StarExpr):
+                    lv = lv.expr
+                temp_node = self.temp_node(AnyType(TypeOfAny.from_another_any,
+                                                   source_any=rvalue_type), context)
+                self.check_assignment(lv, temp_node, infer_lvalue_type)
         elif isinstance(rvalue_type, TupleType):
-            return self.check_multi_assignment_from_tuple(lvalues, rvalue, rvalue_type,
-                                                context, True, infer_lvalue_type)
+            self.check_multi_assignment_from_tuple(lvalues, rvalue, rvalue_type,
+                                                   context, undefined_rvalue, infer_lvalue_type)
         elif isinstance(rvalue_type, UnionType):
-            stores = defaultdict(list)
-            for item in rvalue_type.items:
-                ltypes_item =  self.check_multiple_from_multiple_types(lvalues, rvalue, context,
-                                                infer_lvalue_type, item)
-                for i, _ in enumerate(ltypes_item):
-                    stores[i].append(_)
-            return [UnionType.make_union(x) for x in stores.values()]
+            self.check_multi_assignment_from_union(lvalues, rvalue, rvalue_type, context,
+                                                   infer_lvalue_type)
+        elif isinstance(rvalue_type, Instance) and rvalue_type.type.fullname == 'builtins.str':
+            self.msg.unpacking_strings_disallowed(context)
         else:
-            if self.type_is_iterable(rvalue_type) and isinstance(rvalue_type, Instance):
-                return self.check_multi_assignment_from_iterable(lvalues, rvalue_type, rvalue, 
-                                                        context, infer_lvalue_type)
-            else:
-                self.expr_checker.add_single_incompatible(rvalue, rvalue_type)
-                return [AnyType(0)] * len(lvalues)
+            self.check_multi_assignment_from_iterable(lvalues, rvalue_type,
+                                                      context, infer_lvalue_type)
+
     def check_multi_assignment_from_union(self, lvalues: List[Expression], rvalue: Expression,
                                           rvalue_type: UnionType, context: Context,
                                           infer_lvalue_type: bool) -> None:
@@ -5570,8 +2755,6 @@ class TypeChecker(NodeVisitor[None], CheckerPluginInterface):
         inferred types for first assignments, 'assignments' contains the narrowed types
         for binder.
         """
-
-        assert False, "union is not finished"
         self.no_partial_types = True
         transposed: Tuple[List[Type], ...] = tuple([] for _ in self.flatten_lvalues(lvalues))
         # Notify binder that we want to defer bindings and instead collect types.
@@ -5605,12 +2788,13 @@ class TypeChecker(NodeVisitor[None], CheckerPluginInterface):
                                     False)
         for union, lv in zip(union_types, self.flatten_lvalues(lvalues)):
             # Properly store the inferred types.
-            _1, _2, inferred, _3, _4 = self.check_lvalue(lv)
+            _1, _2, inferred = self.check_lvalue(lv)
             if inferred:
                 self.set_inferred_type(inferred, lv, union)
             else:
                 self.store_type(lv, union)
         self.no_partial_types = False
+
     def flatten_lvalues(self, lvalues: List[Expression]) -> List[Expression]:
         res: List[Expression] = []
         for lv in lvalues:
@@ -5621,14 +2805,11 @@ class TypeChecker(NodeVisitor[None], CheckerPluginInterface):
                 lv = lv.expr
             res.append(lv)
         return res
+
     def check_multi_assignment_from_tuple(self, lvalues: List[Lvalue], rvalue: Expression,
                                           rvalue_type: TupleType, context: Context,
                                           undefined_rvalue: bool,
                                           infer_lvalue_type: bool = True) -> None:
-        """
-        a,*b,c,d,.. = e
-        len(e) >= len([a,c,d..])
-        """
         if self.check_rvalue_count_in_assignment(lvalues, len(rvalue_type.items), context):
             star_index = next((i for i, lv in enumerate(lvalues)
                                if isinstance(lv, StarExpr)), len(lvalues))
@@ -5636,19 +2817,47 @@ class TypeChecker(NodeVisitor[None], CheckerPluginInterface):
             left_lvs = lvalues[:star_index]
             star_lv = cast(StarExpr, lvalues[star_index]) if star_index != len(lvalues) else None
             right_lvs = lvalues[star_index + 1:]
+
+            if not undefined_rvalue:
+                # Infer rvalue again, now in the correct type context.
+                lvalue_type = self.lvalue_type_for_inference(lvalues, rvalue_type)
+                reinferred_rvalue_type = get_proper_type(self.expr_checker.accept(rvalue,
+                                                                                  lvalue_type))
+
+                if isinstance(reinferred_rvalue_type, UnionType):
+                    # If this is an Optional type in non-strict Optional code, unwrap it.
+                    relevant_items = reinferred_rvalue_type.relevant_items()
+                    if len(relevant_items) == 1:
+                        reinferred_rvalue_type = get_proper_type(relevant_items[0])
+                if isinstance(reinferred_rvalue_type, UnionType):
+                    self.check_multi_assignment_from_union(lvalues, rvalue,
+                                                           reinferred_rvalue_type, context,
+                                                           infer_lvalue_type)
+                    return
+                if isinstance(reinferred_rvalue_type, AnyType):
+                    # We can get Any if the current node is
+                    # deferred. Doing more inference in deferred nodes
+                    # is hard, so give up for now.  We can also get
+                    # here if reinferring types above changes the
+                    # inferred return type for an overloaded function
+                    # to be ambiguous.
+                    return
+                assert isinstance(reinferred_rvalue_type, TupleType)
+                rvalue_type = reinferred_rvalue_type
+
             left_rv_types, star_rv_types, right_rv_types = self.split_around_star(
                 rvalue_type.items, star_index, len(lvalues))
 
+            for lv, rv_type in zip(left_lvs, left_rv_types):
+                self.check_assignment(lv, self.temp_node(rv_type, context), infer_lvalue_type)
             if star_lv:
                 list_expr = ListExpr([self.temp_node(rv_type, context)
                                       for rv_type in star_rv_types])
                 list_expr.set_line(context.get_line())
-                list_type = self.expr_checker.accept(list_expr)[0]
-                return list(left_rv_types) + [list_type] + list(right_rv_types)
-            else:
-                return list(left_rv_types) + list(right_rv_types)
-        else:
-            assert False, "todo"
+                self.check_assignment(star_lv.expr, list_expr, infer_lvalue_type)
+            for lv, rv_type in zip(right_lvs, right_rv_types):
+                self.check_assignment(lv, self.temp_node(rv_type, context), infer_lvalue_type)
+
     def lvalue_type_for_inference(self, lvalues: List[Lvalue], rvalue_type: TupleType) -> Type:
         star_index = next((i for i, lv in enumerate(lvalues)
                            if isinstance(lv, StarExpr)), len(lvalues))
@@ -5662,7 +2871,7 @@ class TypeChecker(NodeVisitor[None], CheckerPluginInterface):
 
         def append_types_for_inference(lvs: List[Expression], rv_types: List[Type]) -> None:
             for lv, rv_type in zip(lvs, rv_types):
-                sub_lvalue_type, index_expr, inferred, _, _2 = self.check_lvalue(lv)
+                sub_lvalue_type, index_expr, inferred = self.check_lvalue(lv)
                 if sub_lvalue_type and not isinstance(sub_lvalue_type, PartialType):
                     type_parameters.append(sub_lvalue_type)
                 else:  # index lvalue
@@ -5673,7 +2882,7 @@ class TypeChecker(NodeVisitor[None], CheckerPluginInterface):
         append_types_for_inference(left_lvs, left_rv_types)
 
         if star_lv:
-            sub_lvalue_type, index_expr, inferred, _ , _2= self.check_lvalue(star_lv.expr)
+            sub_lvalue_type, index_expr, inferred = self.check_lvalue(star_lv.expr)
             if sub_lvalue_type and not isinstance(sub_lvalue_type, PartialType):
                 type_parameters.extend([sub_lvalue_type] * len(star_rv_types))
             else:  # index lvalue
@@ -5707,21 +2916,22 @@ class TypeChecker(NodeVisitor[None], CheckerPluginInterface):
         return is_subtype(type, self.named_generic_type('typing.Iterable',
                                                         [AnyType(TypeOfAny.special_form)]))
 
-    def check_multi_assignment_from_iterable(self, lvalues: List[Lvalue], rvalue_type: Type, rvalue, 
+    def check_multi_assignment_from_iterable(self, lvalues: List[Lvalue], rvalue_type: Type,
                                              context: Context,
                                              infer_lvalue_type: bool = True) -> None:
         rvalue_type = get_proper_type(rvalue_type)
-        ret = []
         if self.type_is_iterable(rvalue_type) and isinstance(rvalue_type, Instance):
+            item_type = self.iterable_item_type(rvalue_type)
             for lv in lvalues:
-
-                item_type = self.iterable_item_type(rvalue_type)
                 if isinstance(lv, StarExpr):
-                    item_type = self.named_generic_type('builtins.list', [item_type])
-                ret.append(item_type)
+                    items_type = self.named_generic_type('builtins.list', [item_type])
+                    self.check_assignment(lv.expr, self.temp_node(items_type, context),
+                                          infer_lvalue_type)
+                else:
+                    self.check_assignment(lv, self.temp_node(item_type, context),
+                                          infer_lvalue_type)
         else:
             self.msg.type_not_iterable(rvalue_type, context)
-        return ret
 
     def check_lvalue(self, lvalue: Lvalue) -> Tuple[Optional[Type],
                                                     Optional[IndexExpr],
@@ -5729,9 +2939,7 @@ class TypeChecker(NodeVisitor[None], CheckerPluginInterface):
         lvalue_type = None
         index_lvalue = None
         inferred = None
-        var = None
-        temp_lnode = None
-        # lvalue is (definition (not infered before) and node is a var)
+
         if self.is_definition(lvalue) and (
             not isinstance(lvalue, NameExpr) or isinstance(lvalue.node, Var)
         ):
@@ -5744,23 +2952,12 @@ class TypeChecker(NodeVisitor[None], CheckerPluginInterface):
                 inferred = lvalue.def_var
         elif isinstance(lvalue, IndexExpr):
             index_lvalue = lvalue
-            # lvalue_type = self.expr_checker.visit_index_expr(lvalue)
-
-        
         elif isinstance(lvalue, MemberExpr):
             lvalue_type = self.expr_checker.analyze_ordinary_member_access(lvalue, True)
-            if hasattr(lvalue.expr, "name") and lvalue.expr.name == 'self':
-                node_type = self.expr_checker.accept(lvalue.expr)
-                node_type = node_type.items[0] if isinstance(node_type, MaybeTypes) else node_type
-                if hasattr(node_type,"type"):
-                    info = node_type.type
-                    var = lookup_member_var_or_accessor(info, lvalue.name, True)
-                
-            # self.store_type(lvalue, lvalue_type)
+            self.store_type(lvalue, lvalue_type)
         elif isinstance(lvalue, NameExpr):
             lvalue_type = self.expr_checker.analyze_ref_expr(lvalue, lvalue=True)
-            # self.store_type(lvalue, lvalue_type)
-            var = lvalue.node
+            self.store_type(lvalue, lvalue_type)
         elif isinstance(lvalue, TupleExpr) or isinstance(lvalue, ListExpr):
             types = [self.check_lvalue(sub_expr)[0] or
                      # This type will be used as a context for further inference of rvalue,
@@ -5768,17 +2965,17 @@ class TypeChecker(NodeVisitor[None], CheckerPluginInterface):
                      UninhabitedType() for sub_expr in lvalue.items]
             lvalue_type = TupleType(types, self.named_type('builtins.tuple'))
         elif isinstance(lvalue, StarExpr):
-            typ, _1, _2, _3, _4 = self.check_lvalue(lvalue.expr)
+            typ, _, _ = self.check_lvalue(lvalue.expr)
             lvalue_type = StarType(typ) if typ else None
         else:
             lvalue_type = self.expr_checker.accept(lvalue)
 
-        return lvalue_type, index_lvalue, inferred, var, temp_lnode
+        return lvalue_type, index_lvalue, inferred
 
     def is_definition(self, s: Lvalue) -> bool:
         if isinstance(s, NameExpr):
-            # if s.is_inferred_def:
-            #     return True
+            if s.is_inferred_def:
+                return True
             # If the node type is not defined, this must the first assignment
             # that we process => this is a definition, even though the semantic
             # analyzer did not recognize this as such. This can arise in code
@@ -5786,8 +2983,7 @@ class TypeChecker(NodeVisitor[None], CheckerPluginInterface):
             # definition is skipped due to an always False type check.
             node = s.node
             if isinstance(node, Var):
-                # return node not in self.var_node
-                return not self.in_var_node(s)
+                return node.type is None
         elif isinstance(s, MemberExpr):
             return s.is_inferred_def
         return False
@@ -5795,82 +2991,33 @@ class TypeChecker(NodeVisitor[None], CheckerPluginInterface):
     def infer_variable_type(self, name: Var, lvalue: Lvalue,
                             init_type: Type, context: Context) -> None:
         """Infer the type of initialized variables from initializer type."""
-        # init_type = get_proper_type(init_type)
-        # if isinstance(init_type, DeletedType):
-        #     self.msg.deleted_as_rvalue(init_type, context)
-        # elif not is_valid_inferred_type(init_type) and not self.no_partial_types:
-        #     # We cannot use the type of the initialization expression for full type
-        #     # inference (it's not specific enough), but we might be able to give
-        #     # partial type which will be made more specific later. A partial type
-        #     # gets generated in assignment like 'x = []' where item type is not known.
-        #     if not self.infer_partial_type(name, lvalue, init_type):
-        #         self.msg.need_annotation_for_var(name, context, self.options.python_version)
-        #         self.set_inference_error_fallback_type(name, lvalue, init_type)
-        # elif (isinstance(lvalue, MemberExpr) and self.inferred_attribute_types is not None
-        #       and lvalue.def_var and lvalue.def_var in self.inferred_attribute_types
-        #       and not is_same_type(self.inferred_attribute_types[lvalue.def_var], init_type)):
-        #     # Multiple, inconsistent types inferred for an attribute.
-        #     self.msg.need_annotation_for_var(name, context, self.options.python_version)
-        #     name.type = AnyType(TypeOfAny.from_error)
-        # else:
-        #     if isinstance(init_type, MaybeTypes) and len(init_type.items) == 1:
-        #         t_type = init_type.items[0]
-        #         if not is_valid_inferred_type(t_type) and not self.no_partial_types:
-        #             result, partial_type = self.infer_partial_type(name, lvalue, t_type)
-        #             if not result:
-        #                 self.msg.need_annotation_for_var(name, context, self.options.python_version)
-        #                 self.set_inference_error_fallback_type(name, lvalue, init_type)
-        #             else:
-        #                 self.expr_checker.add_infer_type((lvalue, partial_type), [(lvalue, t_type)], not_node=True)
-        #                 init_type = partial_type
-        #             # return
-        #     # Infer type of the target.
-
-        #     # Make the type more general (strip away function names etc.).
-        #     init_type = strip_type(init_type)
-
-        #     self.set_inferred_type(name, lvalue, init_type)
-    def infer_partial_type_for_rtype(self, lvalue, init_type):
-        if not is_valid_inferred_type(init_type):
-            return  self.infer_partial_type_for_rtype_inner(lvalue, init_type)
-        else:
-            return init_type
-    def infer_partial_type_for_rtype_inner(self, lvalue: Lvalue, init_type: Type) -> bool:
         init_type = get_proper_type(init_type)
-        partial_type = init_type
-        if isinstance(init_type, NoneType):
-            partial_type = PartialType(None, None)
-        elif isinstance(init_type, Instance):
-            fullname = init_type.type.fullname
-            is_ref = isinstance(lvalue, RefExpr)
-            if (is_ref and
-                    (fullname == 'builtins.list' or
-                     fullname == 'builtins.set' or
-                     fullname == 'builtins.dict' or
-                     fullname == 'collections.OrderedDict') and
-                    all(isinstance(t, (NoneType, UninhabitedType))
-                        for t in get_proper_types(init_type.args))):
-                partial_type = PartialType(init_type.type, None)
-            elif is_ref and fullname == 'collections.defaultdict':
-                arg0 = get_proper_type(init_type.args[0])
-                arg1 = get_proper_type(init_type.args[1])
-                if (isinstance(arg0, (NoneType, UninhabitedType)) and
-                        self.is_valid_defaultdict_partial_value_type(arg1)):
-                    arg1 = erase_type(arg1)
-                    assert isinstance(arg1, Instance)
-                    partial_type = PartialType(init_type.type, None, arg1)
-                else:
-                    return partial_type
-            else:
-                return partial_type
+        if isinstance(init_type, DeletedType):
+            self.msg.deleted_as_rvalue(init_type, context)
+        elif not is_valid_inferred_type(init_type) and not self.no_partial_types:
+            # We cannot use the type of the initialization expression for full type
+            # inference (it's not specific enough), but we might be able to give
+            # partial type which will be made more specific later. A partial type
+            # gets generated in assignment like 'x = []' where item type is not known.
+            if not self.infer_partial_type(name, lvalue, init_type):
+                self.msg.need_annotation_for_var(name, context, self.options.python_version)
+                self.set_inference_error_fallback_type(name, lvalue, init_type)
+        elif (isinstance(lvalue, MemberExpr) and self.inferred_attribute_types is not None
+              and lvalue.def_var and lvalue.def_var in self.inferred_attribute_types
+              and not is_same_type(self.inferred_attribute_types[lvalue.def_var], init_type)):
+            # Multiple, inconsistent types inferred for an attribute.
+            self.msg.need_annotation_for_var(name, context, self.options.python_version)
+            name.type = AnyType(TypeOfAny.from_error)
         else:
-            return partial_type
-        # self.set_inferred_type(name, lvalue, partial_type)
-        # self.partial_types[-1].map[name] = lvalue
-        return partial_type
+            # Infer type of the target.
+
+            # Make the type more general (strip away function names etc.).
+            init_type = strip_type(init_type)
+
+            self.set_inferred_type(name, lvalue, init_type)
+
     def infer_partial_type(self, name: Var, lvalue: Lvalue, init_type: Type) -> bool:
         init_type = get_proper_type(init_type)
-        partial_type = init_type
         if isinstance(init_type, NoneType):
             partial_type = PartialType(None, name)
         elif isinstance(init_type, Instance):
@@ -5893,14 +3040,14 @@ class TypeChecker(NodeVisitor[None], CheckerPluginInterface):
                     assert isinstance(arg1, Instance)
                     partial_type = PartialType(init_type.type, name, arg1)
                 else:
-                    return False, partial_type
+                    return False
             else:
-                return False, partial_type
+                return False
         else:
-            return False, partial_type
+            return False
         self.set_inferred_type(name, lvalue, partial_type)
         self.partial_types[-1].map[name] = lvalue
-        return True, partial_type
+        return True
 
     def is_valid_defaultdict_partial_value_type(self, t: ProperType) -> bool:
         """Check if t can be used as the basis for a partial defaultdict value type.
@@ -5932,16 +3079,8 @@ class TypeChecker(NodeVisitor[None], CheckerPluginInterface):
         Store the type to both the variable node and the expression node that
         refers to the variable (lvalue). If var is None, do nothing.
         """
-        if var: # and not self.current_node_deferred:
-            # var.node = lvalue
-            # var.type = type
-            self.update_var_node(var, lvalue)
-            # if var in self.var_node:
-
-            #     self.var_node[var].append(lvalue)
-            # else:
-            #     self.var_node[var] = [lvalue]
-            # self.var_type[var] = type
+        if var and not self.current_node_deferred:
+            var.type = type
             var.is_inferred = True
             if var not in self.var_decl_frames:
                 # Used for the hack to improve optional type inference in conditionals
@@ -5971,23 +3110,6 @@ class TypeChecker(NodeVisitor[None], CheckerPluginInterface):
         # Type variables may leak from inference, see https://github.com/python/mypy/issues/5738,
         # we therefore need to erase them.
         return erase_typevars(fallback)
-    def check_completed_assignment(self, lvalue_types: Optional[Type], rvalue: Expression,
-                                context: Context,
-                                msg: str = message_registry.INCOMPATIBLE_TYPES_IN_ASSIGNMENT,
-                                lvalue_name: str = 'variable',
-                                rvalue_name: str = 'expression', *,
-                                code: Optional[ErrorCode] = None, lvalue = None) -> Type:
-        
-        if self.is_checking:
-            return
-        rvalue_types = self.expr_checker.accept(rvalue)
-        for lvalue_type in lvalue_types:
-            for rvalue_type in rvalue_types:
-                if self.check_subtype(rvalue_type, lvalue_type,context, msg):
-                    pass
-                else:
-                    self.expr_checker.add_improvement_from_pair(lvalue, lvalue_type)
-                    self.expr_checker.add_incompatible(lvalue, lvalue_type, rvalue, rvalue_type)
 
     def check_simple_assignment(self, lvalue_type: Optional[Type], rvalue: Expression,
                                 context: Context,
@@ -6015,7 +3137,7 @@ class TypeChecker(NodeVisitor[None], CheckerPluginInterface):
             return rvalue_type
 
     def check_member_assignment(self, instance_type: Type, attribute_type: Type,
-                                rvalue: Expression, context: Context, lvalue=None, lnode=None, lvar=None) -> Tuple[Type, Type, bool]:
+                                rvalue: Expression, context: Context) -> Tuple[Type, Type, bool]:
         """Type member assignment.
 
         This defers to check_simple_assignment, unless the member expression
@@ -6038,8 +3160,8 @@ class TypeChecker(NodeVisitor[None], CheckerPluginInterface):
 
         if not isinstance(attribute_type, Instance):
             # TODO: support __set__() for union types.
-            rvalue_type = self.check_completed_assignment(attribute_type, rvalue, context,
-                                                       code=codes.ASSIGNMENT, lvalue=lvalue)
+            rvalue_type = self.check_simple_assignment(attribute_type, rvalue, context,
+                                                       code=codes.ASSIGNMENT)
             return rvalue_type, attribute_type, True
 
         get_type = analyze_descriptor_access(
@@ -6135,125 +3257,53 @@ class TypeChecker(NodeVisitor[None], CheckerPluginInterface):
                 ret_type=NoneType(),
                 fallback=self.named_type('builtins.function')
             )
-            lvalue.method_type = method_type
-            method_node = TempNode(AnyType(0), context)
-            self.expr_checker.check_method_call(
-                '__setitem__', basetype, method_type, [lvalue.index, rvalue],
-                [nodes.ARG_POS, nodes.ARG_POS], context, object_node = context.base, method_node = method_node, return_node = context)
         else:
-            method_node = TempNode(AnyType(0), context)
-            self.expr_checker.check_method_call_by_name('__setitem__', basetype, [lvalue.index, rvalue],
-            [nodes.ARG_POS, nodes.ARG_POS], context, object_node = context.base, method_node = method_node, return_node = context)
-            
-        #     method_type = self.expr_checker.analyze_external_member_access(
-        #         '__setitem__', basetype, context)
-        # lvalue.method_type = method_type
-        # self.expr_checker.check_method_call(
-        #     '__setitem__', basetype, method_type, [lvalue.index, rvalue],
-        #     [nodes.ARG_POS, nodes.ARG_POS], context)
+            method_type = self.expr_checker.analyze_external_member_access(
+                '__setitem__', basetype, context)
+        lvalue.method_type = method_type
+        self.expr_checker.check_method_call(
+            '__setitem__', basetype, method_type, [lvalue.index, rvalue],
+            [nodes.ARG_POS, nodes.ARG_POS], context)
 
     def try_infer_partial_type_from_indexed_assignment(
             self, lvalue: IndexExpr, rvalue: Expression) -> None:
-        """
-            |>i:kt    |> b:vt     x:PDict i:kt b:vt 
-           -------    --------    -------------------  
-            i:kt       b:vt      x:Dict[kt,vt]     
-        -----------------------------------------------------
-            x[i] = b:unit 
-
-        """
         # TODO: Should we share some of this with try_infer_partial_type?
         var = None
         if isinstance(lvalue.base, RefExpr) and isinstance(lvalue.base.node, Var):
-            node = lvalue.base
-            inferred_types = []
-            if self.in_var_node(node):
-                def_node = self.get_var_node(node)
-                types = self.type_map[def_node]
-                for typ in types:
-                    if isinstance(typ, PartialType) and typ.type is not None:
-                        type_type = typ.type
-                        typename = type_type.fullname
-                        if (typename == 'builtins.dict'
-                                or typename == 'collections.OrderedDict'
-                                or typename == 'collections.defaultdict'):
-                            # TODO: Don't infer things twice.
-                            key_types = self.expr_checker.accept(lvalue.index)
-                            value_types = self.expr_checker.accept(rvalue)
-                            for key_type in key_types:
-                                for value_type in value_types:
-                                    inferred_type = self.named_generic_type(typename, [key_type, value_type])
-                                    inferred_types.append(inferred_type)
-                                    self.expr_checker.add_infer_type((node, inferred_type), [(def_node, typ), (lvalue.index, key_type), (rvalue, value_type)])
-                            # if (is_valid_inferred_type(key_type) and
-                            #         is_valid_inferred_type(value_type) and
-                            #         not self.current_node_deferred and
-                            #         not (typename == 'collections.defaultdict' and
-                            #             var.type.value_type is not None and
-                            #             not is_equivalent(value_type, var.type.value_type))):
-
-                    else:
-                        inferred_type = typ
-                        inferred_types.append(inferred_type)
-                        self.expr_checker.add_infer_type((node, typ), [(def_node, typ)])
-                self.update_var_node(node)
-                self.store_type(node, inferred_types)
+            var = lvalue.base.node
+        elif isinstance(lvalue.base, MemberExpr):
+            var = self.expr_checker.get_partial_self_var(lvalue.base)
+        if isinstance(var, Var):
+            if isinstance(var.type, PartialType):
+                type_type = var.type.type
+                if type_type is None:
+                    return  # The partial type is None.
+                partial_types = self.find_partial_types(var)
+                if partial_types is None:
+                    return
+                typename = type_type.fullname
+                if (typename == 'builtins.dict'
+                        or typename == 'collections.OrderedDict'
+                        or typename == 'collections.defaultdict'):
+                    # TODO: Don't infer things twice.
+                    key_type = self.expr_checker.accept(lvalue.index)
+                    value_type = self.expr_checker.accept(rvalue)
+                    if (is_valid_inferred_type(key_type) and
+                            is_valid_inferred_type(value_type) and
+                            not self.current_node_deferred and
+                            not (typename == 'collections.defaultdict' and
+                                 var.type.value_type is not None and
+                                 not is_equivalent(value_type, var.type.value_type))):
+                        var.type = self.named_generic_type(typename,
+                                                           [key_type, value_type])
+                        del partial_types[var]
 
     def visit_expression_stmt(self, s: ExpressionStmt) -> None:
-        # self.expr_checker.type_map.clear()
-         self.expr_checker.accept(s.expr, allow_none_return=True, always_allow_any=True)
-    
+        self.expr_checker.accept(s.expr, allow_none_return=True, always_allow_any=True)
 
-    def get_identity_from_node(self, node):
-        try:
-            if isinstance(node, str):
-                func = self.scope.top_function()
-                return func.fullname + '.' + str
-            elif isinstance(node, Var):
-                func = self.scope.top_function()
-                return func.fullname + '.' + node.name
-        except Exception:
-            print('name_failed!')
-
-        return 'get_name_failed'
-    def update_infer_dependency_map_with_constraint_pairs(self, identity, typ, constraint_pairs):
-        try:
-            ground_pairs = get_ground_pairs(self.dp_dag, self.expr_checker.local_infer_map, constraint_pairs, self.combination_limits)
-        except RecursionError:
-            pass
-        # if len(ground_pairs) == 0:
-        #     self.update_infer_dependency_map((identity, typ), [])
-        get_ground_pairs(self.dp_dag, self.expr_checker.local_infer_map, constraint_pairs, self.combination_limits)
-        for possible_ground in ground_pairs:
-            
-            # identity_pairs = [(self.get_identity_from_node(x[0]), x[1]) for x in possible_ground]
-            self.update_infer_dependency_map((identity, typ), possible_ground)
-    def update_infer_dependency_map_with_pairs(self, identity, typ, possible_pairs):
-        identity_pairs = []
-        for pair in possible_pairs:
-            self.update_infer_dependency_map_with_constraint_pairs(identity, typ, [pair])
-    
-    def update_infer_dependency_map_from_local(self, expr):
-        if self.current_node_deferred:
-            return
-        flag = 0
-        for key in self.expr_checker.local_infer_map:
-            node, typ = key
-            if node == expr:
-                flag = 1
-                for possible_pairs in list(self.expr_checker.local_infer_map[key])[:self.combination_limits]:
-                    self.update_infer_dependency_map_with_constraint_pairs(node, typ, possible_pairs)
-        
-        if flag == 0 and expr in self.type_map:
-            rets = self.type_map[expr]
-            for r in rets:
-                self.update_infer_dependency_map((expr, r), [])
     def visit_return_stmt(self, s: ReturnStmt) -> None:
         """Type check a return statement."""
         self.check_return_stmt(s)
-        
-        if s.expr is not None and not self.is_checking and not isinstance(self.scope.top_function(), LambdaExpr) and self.scope.top_function() == self.current_node:
-            self.update_infer_dependency_map_from_local(s.expr)
         self.binder.unreachable()
 
     def check_return_stmt(self, s: ReturnStmt) -> None:
@@ -6307,23 +3357,23 @@ class TypeChecker(NodeVisitor[None], CheckerPluginInterface):
 
                 # Disallow return expressions in functions declared to return
                 # None, subject to two exceptions below.
-                # if declared_none_return:
-                #     # Lambdas are allowed to have None returns.
-                #     # Functions returning a value of type None are allowed to have a None return.
-                #     if is_lambda or isinstance(typ, NoneType):
-                #         return
-                #     self.fail(message_registry.NO_RETURN_VALUE_EXPECTED, s,
-                #               code=codes.RETURN_VALUE)
-                # else:
-                #     self.check_subtype(
-                #         subtype_label='got',
-                #         subtype=typ,
-                #         supertype_label='expected',
-                #         supertype=return_type,
-                #         context=s.expr,
-                #         outer_context=s,
-                #         msg=message_registry.INCOMPATIBLE_RETURN_VALUE_TYPE,
-                #         code=codes.RETURN_VALUE)
+                if declared_none_return:
+                    # Lambdas are allowed to have None returns.
+                    # Functions returning a value of type None are allowed to have a None return.
+                    if is_lambda or isinstance(typ, NoneType):
+                        return
+                    self.fail(message_registry.NO_RETURN_VALUE_EXPECTED, s,
+                              code=codes.RETURN_VALUE)
+                else:
+                    self.check_subtype(
+                        subtype_label='got',
+                        subtype=typ,
+                        supertype_label='expected',
+                        supertype=return_type,
+                        context=s.expr,
+                        outer_context=s,
+                        msg=message_registry.INCOMPATIBLE_RETURN_VALUE_TYPE,
+                        code=codes.RETURN_VALUE)
             else:
                 # Empty returns are valid in Generators with Any typed returns, but not in
                 # coroutines.
@@ -6336,65 +3386,32 @@ class TypeChecker(NodeVisitor[None], CheckerPluginInterface):
 
                 if self.in_checked_function():
                     self.fail(message_registry.RETURN_VALUE_EXPECTED, s, code=codes.RETURN_VALUE)
-    def update_type_map(self, type_map):
-        for k in type_map:
-            self.update_var_node(k)
-            self.store_type(k, type_map[k])
 
     def visit_if_stmt(self, s: IfStmt) -> None:
         """Type check an if statement."""
         # This frame records the knowledge from previous if/elif clauses not being taken.
         # Fall-through to the original frame is handled explicitly in each block.
-        total_else_map = {}
-        condition_num = len(s.expr)
-        all_var_node = {k:v for k,v in self.var_node.items()}
         with self.binder.frame_context(can_skip=False, conditional_frame=True, fall_through=0):
-            for i, (e, b) in enumerate(zip(s.expr, s.body)):
+            for e, b in zip(s.expr, s.body):
                 t = get_proper_type(self.expr_checker.accept(e))
 
                 if isinstance(t, DeletedType):
                     self.msg.deleted_as_rvalue(t, s)
-                original_type_hook = {k:v for k,v in self.type_hook.items()}
-                if_map, else_map = self.find_isinstance_check(e)
-                bool_instance = self.expr_checker.bool_type()
-                true_literal = LiteralType(value=True, fallback=bool_instance)
-                false_literal = LiteralType(value=False, fallback=bool_instance)
-                if_node = FlowNode(true_literal, e)
-                else_node = FlowNode(false_literal, e)
 
-                self.add_type_map(if_map, if_node, true_literal)
-                self.add_type_map(else_map, else_node, false_literal)
-                
-                # self.expr_checker.add_infer_type()
-                # origin_type = self.type_map[e.]
+                if_map, else_map = self.find_isinstance_check(e)
+
                 # XXX Issue a warning if condition is always False?
-                original_var_node = {k:v for k,v in self.var_node.items()}
                 with self.binder.frame_context(can_skip=True, fall_through=2):
-                    self.push_type_map(if_map, if_node, true_literal)
+                    self.push_type_map(if_map)
                     self.accept(b)
-                
-                for var in self.var_node:
-                    if var not in all_var_node:
-                        all_var_node[var] = self.var_node[var]
-                    else:
-                        if all_var_node[var].line < self.var_node[var].line:
-                            all_var_node[var] = self.var_node[var]
-                self.var_node = {k:v for k,v in original_var_node.items()}
 
                 # XXX Issue a warning if condition is always True?
-                self.push_type_map(else_map, else_node, false_literal)
+                self.push_type_map(else_map)
 
             with self.binder.frame_context(can_skip=False, fall_through=2):
                 if s.else_body:
                     self.accept(s.else_body)
-            for var in self.var_node:
-                if var not in all_var_node:
-                    all_var_node[var] = self.var_node[var]
-                else:
-                    if all_var_node[var].line < self.var_node[var].line:
-                        all_var_node[var] = self.var_node[var]
 
-            self.var_node = {k:v for k,v in all_var_node.items()}
     def visit_while_stmt(self, s: WhileStmt) -> None:
         """Type check a while statement."""
         if_stmt = IfStmt([s.expr], [s.body], None)
@@ -6413,22 +3430,15 @@ class TypeChecker(NodeVisitor[None], CheckerPluginInterface):
         else:
             lvalue_type = self.expr_checker.accept(s.lvalue)
         inplace, method = infer_operator_assignment_method(lvalue_type, s.op)
-        method_node = TempNode(method, s)
-        return_node = TempNode(AnyType(0), s)
         if inplace:
             # There is __ifoo__, treat as x = x.__ifoo__(y)
             rvalue_type, method_type = self.expr_checker.check_op(
-                method, lvalue_type, s.rvalue, s, object_node = s.lvalue, method_node=method_node, return_node=return_node)
-            
+                method, lvalue_type, s.rvalue, s)
             if not is_subtype(rvalue_type, lvalue_type):
                 self.msg.incompatible_operator_assignment(s.op, s)
         else:
             # There is no __ifoo__, treat as x = x <foo> y
-            temp_left = TempNode(lvalue_type, context = s.lvalue)
-            # temp_left = NameExpr(lvalue_type, s.lvalue)
-            
             expr = OpExpr(s.op, s.lvalue, s.rvalue)
-            # op -> left
             expr.set_line(s)
             self.check_assignment(lvalue=s.lvalue, rvalue=expr,
                                   infer_lvalue_type=True, new_syntax=False)
@@ -6448,10 +3458,10 @@ class TypeChecker(NodeVisitor[None], CheckerPluginInterface):
 
     def visit_raise_stmt(self, s: RaiseStmt) -> None:
         """Type check a raise statement."""
-        # if s.expr:
-        #     self.type_check_raise(s.expr, s)
-        # if s.from_expr:
-        #     self.type_check_raise(s.from_expr, s, True)
+        if s.expr:
+            self.type_check_raise(s.expr, s)
+        if s.from_expr:
+            self.type_check_raise(s.from_expr, s, True)
         self.binder.unreachable()
 
     def type_check_raise(self, e: Expression, s: RaiseStmt,
@@ -6473,6 +3483,10 @@ class TypeChecker(NodeVisitor[None], CheckerPluginInterface):
             expected_type.items.append(TupleType([any_type, any_type], tuple_type))
             expected_type.items.append(TupleType([any_type, any_type, any_type], tuple_type))
         self.check_subtype(typ, expected_type, s, message_registry.INVALID_EXCEPTION)
+
+        if isinstance(typ, FunctionLike):
+            # https://github.com/python/mypy/issues/11089
+            self.expr_checker.check_call(typ, [], [], e)
 
     def visit_try_stmt(self, s: TryStmt) -> None:
         """Type check a try statement."""
@@ -6540,8 +3554,7 @@ class TypeChecker(NodeVisitor[None], CheckerPluginInterface):
                                 # separate Var for each except block.
                                 am_deferring = self.current_node_deferred
                                 self.current_node_deferred = False
-                                # Stary: not implemented assignment
-                                # self.check_assignment(var, self.temp_node(t, var))
+                                self.check_assignment(var, self.temp_node(t, var))
                                 self.current_node_deferred = am_deferring
                         self.accept(s.handlers[i])
                         var = s.vars[i]
@@ -6617,12 +3630,11 @@ class TypeChecker(NodeVisitor[None], CheckerPluginInterface):
         """Type check a for statement."""
         if s.is_async:
             iterator_type, item_type = self.analyze_async_iterable_item_type(s.expr)
-            ret_node = None
         else:
-            iterator_type, item_type, ret_node = self.analyze_iterable_item_type(s.expr)
+            iterator_type, item_type = self.analyze_iterable_item_type(s.expr)
         s.inferred_item_type = item_type
         s.inferred_iterator_type = iterator_type
-        self.analyze_index_variables(s.index, item_type, s.index_type is None, s, ret_node)
+        self.analyze_index_variables(s.index, item_type, s.index_type is None, s)
         self.accept_loop(s.body, s.else_body)
 
     def analyze_async_iterable_item_type(self, expr: Expression) -> Tuple[Type, Type]:
@@ -6639,29 +3651,20 @@ class TypeChecker(NodeVisitor[None], CheckerPluginInterface):
         """Analyse iterable expression and return iterator and iterator item types."""
         echk = self.expr_checker
         iterable = get_proper_type(echk.accept(expr))
-        expr.set_depth(1)
-        method_node = TempNode(AnyType(0), context=expr)
-        return_node = TempNode(AnyType(0), context=expr)
-        # expr.set_method(method_node)
-        # expr.set_return(return_node)
-        iterator = echk.check_method_call_by_name('__iter__', iterable, [], [], expr, object_node=expr, method_node=method_node, return_node=return_node)[0]
-        
+        iterator = echk.check_method_call_by_name('__iter__', iterable, [], [], expr)[0]
+
         if isinstance(iterable, TupleType):
             joined: Type = UninhabitedType()
             for item in iterable.items:
                 joined = join_types(joined, item)
-            return iterator, joined, return_node
+            return iterator, joined
         else:
             # Non-tuple iterable.
             if self.options.python_version[0] >= 3:
                 nextmethod = '__next__'
             else:
                 nextmethod = 'next'
-            method_node2 = TempNode(AnyType(0), context=return_node)
-            return_node2 = TempNode(AnyType(0), context=return_node)
-            # return_node.set_method(method_node2)
-            # return_node.set_return(return_node2)
-            return iterator, echk.check_method_call_by_name(nextmethod, iterator, [], [], expr, object_node=return_node, method_node=method_node2, return_node=return_node2)[0], return_node2
+            return iterator, echk.check_method_call_by_name(nextmethod, iterator, [], [], expr)[0]
 
     def analyze_container_item_type(self, typ: Type) -> Optional[Type]:
         """Check if a type is a nominal container of a union of such.
@@ -6686,12 +3689,9 @@ class TypeChecker(NodeVisitor[None], CheckerPluginInterface):
         return None
 
     def analyze_index_variables(self, index: Expression, item_type: Type,
-                                infer_lvalue_type: bool, context: Context, ret_node=None) -> None:
+                                infer_lvalue_type: bool, context: Context) -> None:
         """Type check or infer for loop or list comprehension index vars."""
-        if ret_node is None:
-            self.check_assignment(index, self.temp_node(item_type, context), infer_lvalue_type)
-        else:
-            self.check_assignment(index, ret_node, infer_lvalue_type)
+        self.check_assignment(index, self.temp_node(item_type, context), infer_lvalue_type)
 
     def visit_del_stmt(self, s: DelStmt) -> None:
         if isinstance(s.expr, IndexExpr):
@@ -6711,8 +3711,6 @@ class TypeChecker(NodeVisitor[None], CheckerPluginInterface):
                                             get_declaration(elt), False)
 
     def visit_decorator(self, e: Decorator) -> None:
-        # if self.is_checking:
-        #     return
         for d in e.decorators:
             if isinstance(d, RefExpr):
                 if d.fullname == 'typing.no_type_check':
@@ -6743,12 +3741,10 @@ class TypeChecker(NodeVisitor[None], CheckerPluginInterface):
                 object_type = self.type_map[d.expr]
                 fullname = self.expr_checker.method_fullname(object_type, d.name)
             self.check_for_untyped_decorator(e.func, dec, d)
-
-            dec = dec
             sig, t2 = self.expr_checker.check_call(dec, [temp],
-                                                [nodes.ARG_POS], e,
-                                                callable_name=fullname,
-                                                object_type=object_type)
+                                                   [nodes.ARG_POS], e,
+                                                   callable_name=fullname,
+                                                   object_type=object_type)
         self.check_untyped_after_decorator(sig, e.func)
         sig = set_callable_name(sig, e.func)
         e.var.type = sig
@@ -6790,7 +3786,7 @@ class TypeChecker(NodeVisitor[None], CheckerPluginInterface):
             if s.is_async:
                 exit_ret_type = self.check_async_with_item(expr, target, s.unanalyzed_type is None)
             else:
-                exit_ret_type = self.check_with_item(expr, target, s.unanalyzed_type is None)   
+                exit_ret_type = self.check_with_item(expr, target, s.unanalyzed_type is None)
 
             # Based on the return type, determine if this context manager 'swallows'
             # exceptions or not. We determine this using a heuristic based on the
@@ -6846,20 +3842,12 @@ class TypeChecker(NodeVisitor[None], CheckerPluginInterface):
                         infer_lvalue_type: bool) -> Type:
         echk = self.expr_checker
         ctx = echk.accept(expr)
-        method_node = TempNode(AnyType(101), context=expr)
-        return_node = TempNode(AnyType(101), context=expr)
-        obj = echk.check_method_call_by_name('__enter__', ctx, [], [], expr, object_node=expr, method_node=method_node, return_node=return_node)[0]
-        
-        
+        obj = echk.check_method_call_by_name('__enter__', ctx, [], [], expr)[0]
         if target:
-            self.check_assignment(target, return_node, infer_lvalue_type)
+            self.check_assignment(target, self.temp_node(obj, expr), infer_lvalue_type)
         arg = self.temp_node(AnyType(TypeOfAny.special_form), expr)
-        self.store_type(arg, [AnyType(TypeOfAny.special_form)]) 
-        
-        method_node = TempNode(AnyType(102), context=expr)
-        return_node = TempNode(AnyType(102), context=expr)
         res, _ = echk.check_method_call_by_name(
-            '__exit__', ctx, [arg] * 3, [nodes.ARG_POS] * 3, expr, object_node=expr, method_node=method_node, return_node=return_node)
+            '__exit__', ctx, [arg] * 3, [nodes.ARG_POS] * 3, expr)
         return res
 
     def visit_print_stmt(self, s: PrintStmt) -> None:
@@ -6931,9 +3919,10 @@ class TypeChecker(NodeVisitor[None], CheckerPluginInterface):
         def _get_base_classes(instances_: Tuple[Instance, Instance]) -> List[Instance]:
             base_classes_ = []
             for inst in instances_:
-                expanded = [inst]
                 if inst.type.is_intersection:
                     expanded = inst.type.bases
+                else:
+                    expanded = [inst]
 
                 for expanded_inst in expanded:
                     base_classes_.append(expanded_inst)
@@ -7492,23 +4481,16 @@ class TypeChecker(NodeVisitor[None], CheckerPluginInterface):
         elif isinstance(node, RefExpr):
             # Restrict the type of the variable to True-ish/False-ish in the if and else branches
             # respectively
-            var_types = type_map[node] 
-            if_hook = defaultdict(list)
-            else_hook = defaultdict(list)
-            if_types = []
-            else_types = []
-            for vartype in var_types:
-                self._check_for_truthy_type(vartype, node)
-                if_type: Type = true_only(vartype)
-                else_type: Type = false_only(vartype)
-                ref: Expression = node
-                # if_hook[(node.var, if_type)].append(vartype)
-                # else_hook[(node.var, else_type)].append(vartype)
-                if_types.append(if_type)
-                else_types.append(else_type)
-            
-            if_map = {ref: if_types}
-            else_map = {ref: else_types}
+            vartype = type_map[node]
+            self._check_for_truthy_type(vartype, node)
+            if_type: Type = true_only(vartype)
+            else_type: Type = false_only(vartype)
+            ref: Expression = node
+            if_map = ({ref: if_type} if not isinstance(get_proper_type(if_type), UninhabitedType)
+                      else None)
+            else_map = ({ref: else_type} if not isinstance(get_proper_type(else_type),
+                                                           UninhabitedType)
+                        else None)
             return if_map, else_map
         elif isinstance(node, OpExpr) and node.op == 'and':
             left_if_vars, left_else_vars = self.find_isinstance_check_helper(node.left)
@@ -7874,12 +4856,9 @@ class TypeChecker(NodeVisitor[None], CheckerPluginInterface):
                       code: Optional[ErrorCode] = None,
                       outer_context: Optional[Context] = None) -> bool:
         """Generate an error if the subtype is not compatible with supertype."""
-        if isinstance(subtype, (set, list)) or isinstance(supertype, (set, list)):
-            # TODO: this call should not happen
-            return True
         if is_subtype(subtype, supertype):
             return True
-        self.err_cnts += 1
+
         subtype = get_proper_type(subtype)
         supertype = get_proper_type(supertype)
         if self.msg.try_report_long_tuple_assignment_error(subtype, supertype, context, msg,
@@ -7934,24 +4913,6 @@ class TypeChecker(NodeVisitor[None], CheckerPluginInterface):
     def should_suppress_optional_error(self, related_types: List[Type]) -> bool:
         return self.suppress_none_errors and any(self.contains_none(t) for t in related_types)
 
-    def named_dict_with_type_var(self, name: str, tk, tv):
-        sym = self.lookup_qualified(name)
-        node = sym.node
-        if isinstance(node, TypeAlias):
-            assert isinstance(node.target, Instance)  # type: ignore
-            node = node.target.type
-        assert isinstance(node, TypeInfo)
-        return Instance(node, [tk, tv])
-
-    def named_type_with_type_var(self, name: str, tv):
-        sym = self.lookup_qualified(name)
-        node = sym.node
-        if isinstance(node, TypeAlias):
-            assert isinstance(node.target, Instance)  # type: ignore
-            node = node.target.type
-        assert isinstance(node, TypeInfo)
-        return Instance(node, [tv] * len(node.defn.type_vars))
-
     def named_type(self, name: str) -> Instance:
         """Return an instance type with given name and implicit Any type args.
 
@@ -7966,20 +4927,6 @@ class TypeChecker(NodeVisitor[None], CheckerPluginInterface):
         assert isinstance(node, TypeInfo)
         any_type = AnyType(TypeOfAny.from_omitted_generics)
         return Instance(node, [any_type] * len(node.defn.type_vars))
-    def named_type_optional(self, name: str) -> Instance:
-        """Return an instance type with given name and implicit Any type args.
-
-        For example, named_type('builtins.object') produces the 'object' type.
-        """
-        # Assume that the name refers to a type.
-        sym = self.lookup_qualified(name)
-        node = sym.node
-        if isinstance(node, TypeAlias):
-            assert isinstance(node.target, Instance)  # type: ignore
-            node = node.target.type
-        assert isinstance(node, TypeInfo)
-        any_type = AnyType(TypeOfAny.from_omitted_generics)
-        return make_optional_type(Instance(node, [any_type] * len(node.defn.type_vars)))
 
     def named_generic_type(self, name: str, args: List[Type]) -> Instance:
         """Return an instance with the given name and type arguments.
@@ -7987,7 +4934,6 @@ class TypeChecker(NodeVisitor[None], CheckerPluginInterface):
         Assume that the number of arguments is correct.  Assume that
         the name refers to a compatible generic type.
         """
-        args = [next(iter(arg)) if isinstance(arg, (list,set)) else arg for arg in args]
         info = self.lookup_typeinfo(name)
         args = [remove_instance_last_known_values(arg) for arg in args]
         # TODO: assert len(args) == len(info.defn.type_vars)
@@ -8007,25 +4953,10 @@ class TypeChecker(NodeVisitor[None], CheckerPluginInterface):
     def str_type(self) -> Instance:
         """Return instance type 'str'."""
         return self.named_type('builtins.str')
-    
-    def store_type(self, node: Expression,  typ: Set[Type], overwrite=True, state=None) -> None:
-        if not (isinstance(typ, list) or isinstance(typ, set)):
-            typ = [typ]
-        typ = set(typ)
-        if state:
-            state.type_map[node] = typ
-            return
-        # if node in self.wide_type_map:
-        #     self.wide_type_map[node].update(typ)
-        #     self.type_map[node] = typ
-        # else:
-        if not overwrite and node in self.wide_type_map:
-            self.wide_type_map[node].update(typ)
-            self.type_map[node].update(typ)
-        self.wide_type_map[node] = typ
+
+    def store_type(self, node: Expression, typ: Type) -> None:
+        """Store the type of a node in the type map."""
         self.type_map[node] = typ
-
-
 
     def in_checked_function(self) -> bool:
         """Should we type-check the current function?
@@ -8257,28 +5188,13 @@ class TypeChecker(NodeVisitor[None], CheckerPluginInterface):
     def function_type(self, func: FuncBase) -> FunctionLike:
         return function_type(func, self.named_type('builtins.function'))
 
-
-    def add_type_map(self, type_map: 'TypeMap', node, t) -> None:
-        self.store_type(node, t)
-        if type_map is None or any(isinstance(x, UninhabitedType) for x in type_map.values()):
-            return
-        # self.store_type(node, t)
-
-        return
-        # wait further
-        nodes = list(type_map.keys())
-        types = itertools.product(*[x.items for x in type_map.values()])
-        for typ in types:
-            self.expr_checker.add_infer_type((node,t), list(zip(nodes, typ)))
-
-    
-    def push_type_map(self, type_map: 'TypeMap', node=None, typ=None) -> None:
-        if type_map is None or any(len(x) == 0 for x in type_map.values()) :
+    def push_type_map(self, type_map: 'TypeMap') -> None:
+        if type_map is None:
             self.binder.unreachable()
         else:
-            self.binder.put_node(node, typ)
             for expr, type in type_map.items():
                 self.binder.put(expr, type)
+
     def infer_issubclass_maps(self, node: CallExpr,
                               expr: Expression,
                               type_map: Dict[Expression, Type]
@@ -8369,7 +5285,7 @@ class TypeChecker(NodeVisitor[None], CheckerPluginInterface):
 
 
 def conditional_type_map(expr: Expression,
-                         current_types : Optional[Type],
+                         current_type: Optional[Type],
                          proposed_type_ranges: Optional[List[TypeRange]],
                          ) -> Tuple[TypeMap, TypeMap]:
     """Takes in an expression, the current type of the expression, and a
@@ -8380,41 +5296,31 @@ def conditional_type_map(expr: Expression,
     second element is a map from the expression to the type it would hold
     if it was not the proposed type, if any. None means bot, {} means top"""
     if proposed_type_ranges:
-        no_map = {expr:[]}
-        yes_map = {expr:[]}
-        
         proposed_items = [type_range.item for type_range in proposed_type_ranges]
         proposed_type = make_simplified_union(proposed_items)
-        if isinstance(proposed_type, AnyType) or isinstance(proposed_type, NoneType):
-            return {expr:[]}, {expr:[]}
-        
-        for current_type in current_types:
-            if current_type:
-                if (not any(type_range.is_upper_bound for type_range in proposed_type_ranges)
-                and is_proper_subtype(current_type, proposed_type)):
-                    # Expression is always of one of the types in proposed_type_ranges
-                    # return {}, None
-                    yes_map[expr].append(current_type)
-                elif not is_overlapping_types(current_type, proposed_type,
-                                            prohibit_none_typevar_overlap=True):
-                    # Expression is never of any type in proposed_type_ranges
-                    # return None, {}
-                    # pass
-                    no_map[expr].append(current_type)
-                else:
-                    yes_map[expr].append(current_type)
-                    no_map[expr].append(current_type)
-                    # we can only restrict when the type is precise, not bounded
-                    # proposed_precise_type = UnionType([type_range.item
-                    #                         for type_range in proposed_type_ranges
-                    #                         if not type_range.is_upper_bound])
-                    # remaining_type = restrict_subtype_away(current_type, proposed_precise_type)
-                    # yes_map[expr].append(proposed_type)
-                    # no_map[expr].append(remaining_type)
-                    # return {expr: proposed_type}, {expr: remaining_type}
+        if current_type:
+            if isinstance(proposed_type, AnyType):
+                # We don't really know much about the proposed type, so we shouldn't
+                # attempt to narrow anything. Instead, we broaden the expr to Any to
+                # avoid false positives
+                return {expr: proposed_type}, {}
+            elif (not any(type_range.is_upper_bound for type_range in proposed_type_ranges)
+               and is_proper_subtype(current_type, proposed_type)):
+                # Expression is always of one of the types in proposed_type_ranges
+                return {}, None
+            elif not is_overlapping_types(current_type, proposed_type,
+                                          prohibit_none_typevar_overlap=True):
+                # Expression is never of any type in proposed_type_ranges
+                return None, {}
             else:
-                    yes_map[expr].append(proposed_type)
-        return yes_map, no_map
+                # we can only restrict when the type is precise, not bounded
+                proposed_precise_type = UnionType([type_range.item
+                                          for type_range in proposed_type_ranges
+                                          if not type_range.is_upper_bound])
+                remaining_type = restrict_subtype_away(current_type, proposed_precise_type)
+                return {expr: proposed_type}, {expr: remaining_type}
+        else:
+            return {expr: proposed_type}, {}
     else:
         # An isinstance check, but we don't understand the type
         return {}, {}
@@ -8566,12 +5472,7 @@ def or_conditional_maps(m1: TypeMap, m2: TypeMap) -> TypeMap:
     for n1 in m1:
         for n2 in m2:
             if literal_hash(n1) == literal_hash(n2):
-                if isinstance(m1[n1], list) and isinstance(m2[n2], list):
-                    result[n1] = m1[n1]+m2[n2]
-                elif isinstance(m1[n1], set) and isinstance(m2[n2], set):
-                    result[n1] = m1[n1]|m2[n2]
-                else:
-                    result[n1] = {make_simplified_union([m1[n1], m2[n2]])}
+                result[n1] = make_simplified_union([m1[n1], m2[n2]])
     return result
 
 
@@ -8639,16 +5540,6 @@ def flatten(t: Expression) -> List[Expression]:
         return [t]
 
 
-
-def flatten_type_set(ts:Set[Type]) -> List[Type]:
-    """Flatten a nested sequence of tuples into one list of nodes."""
-    ret = set()
-    for t in ts:
-        ret.update(flatten_types(t))
-
-    return ret
-
-
 def flatten_types(t: Type) -> List[Type]:
     """Flatten a nested sequence of tuples into one list of nodes."""
     t = get_proper_type(t)
@@ -8666,7 +5557,7 @@ def get_isinstance_type(expr: Expression,
         if left is None or right is None:
             return None
         return left + right
-    all_types = flatten_type_set(type_map[expr])
+    all_types = get_proper_types(flatten_types(type_map[expr]))
     types: List[TypeRange] = []
     for typ in all_types:
         if isinstance(typ, FunctionLike) and typ.is_type_obj():
@@ -8812,7 +5703,7 @@ def detach_callable(typ: CallableType) -> CallableType:
 
 def overload_can_never_match(signature: CallableType, other: CallableType) -> bool:
     """Check if the 'other' method can never be matched due to 'signature'.
-    
+
     This can happen if signature's parameters are all strictly broader then
     other's parameters.
 

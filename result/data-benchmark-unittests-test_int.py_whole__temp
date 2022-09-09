@@ -1,2 +1,0 @@
-int
-def (self: test_int.ISD_AS) -> builtins.int

@@ -148,7 +148,10 @@ class ConditionalTypeBinder:
         key = literal_hash(expr)
         assert key is not None, 'Internal error: binder tried to put non-literal'
         if key not in self.declarations:
-            self.declarations[key] = get_declaration(expr, self.checker.var_node, self.checker.type_map)
+            if hasattr(self.checker, "var_node"):
+                self.declarations[key] = get_declaration(expr, self.checker.var_node, self.checker.type_map)
+            else:
+                self.declarations[key] = get_declaration(expr)
             self._add_dependencies(key)
         self._put(key, typ)
 
@@ -199,7 +202,8 @@ class ConditionalTypeBinder:
         merge_type = AnyType(0)
         for frame in frames:
             if frame.record is not None:
-                self.checker.expr_checker.add_infer_type((merge_node,merge_type), [frame.record])
+                if hasattr(self.checker.expr_checker, "add_infer_type"):
+                    self.checker.expr_checker.add_infer_type((merge_node,merge_type), [frame.record])
         self._put2(merge_node, merge_type)
         self.checker.store_type(merge_node, merge_type)
         for key in keys:
@@ -351,15 +355,28 @@ class ConditionalTypeBinder:
             self._cleanse_key(dep)
 
     def most_recent_enclosing_type(self, expr: BindableExpression, type: Type) -> Optional[Type]:
-        type = get_proper_type(type)
-        if isinstance(type, AnyType):
-            return get_declaration(expr, self.checker.var_node, self.checker.type_map)
-        key = literal_hash(expr)
-        assert key is not None
-        enclosers = ([get_declaration(expr, self.checker.var_node, self.checker.type_map)] +
-                     [f.types[key] for f in self.frames
-                      if key in f.types and is_subtype(type, f.types[key])])
-        return enclosers[-1]
+
+        if not hasattr(self.checker, "var_node"):
+            type = get_proper_type(type)
+            if isinstance(type, AnyType):
+                return get_declaration(expr)
+            key = literal_hash(expr)
+            assert key is not None
+            enclosers = ([get_declaration(expr)] +
+                        [f.types[key] for f in self.frames
+                        if key in f.types and is_subtype(type, f.types[key])])
+            return enclosers[-1]
+        else:
+
+            type = get_proper_type(type)
+            if isinstance(type, AnyType):
+                return get_declaration(expr, self.checker.var_node, self.checker.type_map)
+            key = literal_hash(expr)
+            assert key is not None
+            enclosers = ([get_declaration(expr, self.checker.var_node, self.checker.type_map)] +
+                        [f.types[key] for f in self.frames
+                        if key in f.types and is_subtype(type, f.types[key])])
+            return enclosers[-1]
 
     def allow_jump(self, index: int) -> None:
         # self.frames and self.options_on_return have different lengths
@@ -379,8 +396,9 @@ class ConditionalTypeBinder:
                 frame.unreachable = True
         
         if not frame.unreachable:
-            self.checker.expr_checker.add_infer_type((fall_node, fall_type), fall_pairs)
-            self.checker.store_type(fall_node, fall_type)
+            if hasattr(self.checker.expr_checker, "add_infer_type"):
+                self.checker.expr_checker.add_infer_type((fall_node, fall_type), fall_pairs)
+                self.checker.store_type(fall_node, fall_type)
             frame.record = (fall_node, fall_type)
         self.options_on_return[index].append(frame)
 

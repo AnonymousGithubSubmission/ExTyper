@@ -1,2 +1,0 @@
-_get_unix_timezone
-def (_root: builtins.str =) -> builtins.str

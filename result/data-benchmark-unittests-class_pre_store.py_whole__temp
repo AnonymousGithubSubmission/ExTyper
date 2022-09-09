@@ -1,6 +1,0 @@
-f
-def (self: class_pre_store.A) -> class_pre_store.B
-g
-def (self: class_pre_store.B) -> Literal['string']?
-g
-def (self: class_pre_store.A) -> Literal['string']?

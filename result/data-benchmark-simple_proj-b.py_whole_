@@ -1,4 +1,0 @@
-f
-def () -> builtins.int
-g
-def () -> data.benchmark.simple_proj.a.A

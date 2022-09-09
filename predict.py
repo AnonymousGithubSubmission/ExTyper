@@ -5,7 +5,6 @@ from extyper.fscache import FileSystemCache
 import os
 from extyper.remover import TypeHintRemover
 import ast
-mutable_funcs = []
 args = sys.argv[1:]
 mode = args[1]
 tag = args[2]

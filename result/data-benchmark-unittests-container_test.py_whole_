@@ -1,2 +1,0 @@
-f
-def (self: container_test.A, e1: builtins.str, e2: builtins.str)

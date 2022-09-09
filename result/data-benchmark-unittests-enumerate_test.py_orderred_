@@ -1,4 +1,0 @@
-add_to_utxo
-['builtins.int']
-['builtins.str']
-['None']

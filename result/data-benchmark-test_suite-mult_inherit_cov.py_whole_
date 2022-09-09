@@ -1,9 +1,0 @@
-f
-def (self: mult_inherit_cov.A, x: builtins.bool)
-def (self: mult_inherit_cov.A, x: builtins.int)
-f
-def (self: mult_inherit_cov.B, x: builtins.str)
-f
-def (self: mult_inherit_cov.C, x: builtins.bool)
-def (self: mult_inherit_cov.C, x: builtins.int)
-def (self: mult_inherit_cov.C, x: builtins.str)

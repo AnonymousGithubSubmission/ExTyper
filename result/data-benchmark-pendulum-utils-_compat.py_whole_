@@ -1,4 +1,0 @@
-decode
-def (string: builtins.bytes, encodings: builtins.list[builtins.str] =) -> Union[builtins.bytes, builtins.str]
-encode
-def (string: builtins.str, encodings: builtins.list[builtins.str] =) -> Union[builtins.bytes, builtins.str]

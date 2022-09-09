@@ -36,6 +36,7 @@ from extyper.semanal_pass1 import SemanticAnalyzerPreAnalysis
 from extyper.semanal import SemanticAnalyzer
 import extyper.semanal_main
 from extyper.checker import TypeChecker
+from extyper.inferencer import TypeInferencer
 from extyper.indirection import TypeIndirectionVisitor
 from extyper.errors import Errors, CompileError, ErrorInfo, report_internal_error
 from extyper.util import (
@@ -615,7 +616,6 @@ class BuildManager:
         self.modules: Dict[str, MypyFile] = {}
         self.missing_modules: Set[str] = set()
         self.fg_deps_meta: Dict[str, FgDepMeta] = {}
-        self.mutable_funcs = []
         self.user_modules = user_modules
         self.func_s1 = defaultdict(dict)
         self.func_s2 = defaultdict(dict)
@@ -1862,6 +1862,8 @@ class State:
         self.options = manager.options.clone_for_module(self.id)
         self.early_errors = []
         self._type_checker = None
+        self._type_inferencer = None
+        
         if not path and source is None:
             assert id is not None
             try:
@@ -2211,8 +2213,7 @@ class State:
     def type_suggest_second_pass(self) -> bool:
         if self.options.semantic_analysis_only:
             return False
-        with self.wrap_context():
-            return self.type_checker().suggest_second_pass()
+        return self.type_inferencer().suggest_second_pass()
 
 
 
@@ -2220,38 +2221,44 @@ class State:
         if self.options.semantic_analysis_only:
             return
         with self.wrap_context():
-            self.type_checker().setS1(s1)
-            self.type_checker().setS2(s2)
-            self.type_checker().setS3(s3)
-            self.type_checker().set_user_defined(user_defined)
-            self.type_checker().set_hierarchy(hierarchy_children)
-            self.type_checker().mode = mode
-            self.type_checker().suggest_first_pass(init=True)
+            self.type_inferencer().setS1(s1)
+            self.type_inferencer().setS2(s2)
+            self.type_inferencer().setS3(s3)
+            self.type_inferencer().set_user_defined(user_defined)
+            self.type_inferencer().set_hierarchy(hierarchy_children)
+            self.type_inferencer().mode = mode
+            self.type_inferencer().suggest_first_pass(init=True)
     def type_suggest_first_pass(self, s1, s2, s3, user_defined, hierarchy_children, mode, func_name_reocrder=None) -> None:
         if self.options.semantic_analysis_only:
             return
-        with self.wrap_context():
-            self.type_checker().setS1(s1)
-            self.type_checker().setS2(s2)
-            self.type_checker().setS3(s3)
-            self.type_checker().set_user_defined(user_defined)
-            self.type_checker().set_hierarchy(hierarchy_children)
-            self.type_checker().mode = mode
-            self.type_checker().suggest_first_pass()
+        self.type_inferencer().setS1(s1)
+        self.type_inferencer().setS2(s2)
+        self.type_inferencer().setS3(s3)
+        self.type_inferencer().set_user_defined(user_defined)
+        self.type_inferencer().set_hierarchy(hierarchy_children)
+        self.type_inferencer().mode = mode
+        self.type_inferencer().suggest_first_pass()
 
     def type_check_first_pass(self) -> None:
         if self.options.semantic_analysis_only:
             return
-        with self.wrap_context():
-            self.type_checker().check_first_pass()
-    
+        self.type_checker().check_first_pass()
+
+    def type_inferencer(self) -> TypeChecker:
+        if not self._type_inferencer:
+            assert self.tree is not None, "Internal error: must be called on parsed file only"
+            manager = self.manager
+            self._type_inferencer = TypeInferencer(manager.errors, manager.modules, self.options,
+                                             self.tree, self.xpath, manager.plugin, manager.union_errors, manager.incompatible, manager.single_incompatible, manager.infer_dependency_map, manager, manager.added_attr, manager.func_name_recorder,  manager.func_name_order,
+                                             manager.func_s1, manager.func_s2, manager.func_s3, manager.func_finished, manager.func_candidates, manager.func_must, manager.func_class)
+        return self._type_inferencer
+
     def type_checker(self) -> TypeChecker:
         if not self._type_checker:
             assert self.tree is not None, "Internal error: must be called on parsed file only"
             manager = self.manager
             self._type_checker = TypeChecker(manager.errors, manager.modules, self.options,
-                                             self.tree, self.xpath, manager.plugin, manager.union_errors, manager.incompatible, manager.single_incompatible, manager.mutable_funcs, manager.infer_dependency_map, manager, manager.added_attr, manager.func_name_recorder,  manager.func_name_order,
-                                             manager.func_s1, manager.func_s2, manager.func_s3, manager.func_finished, manager.func_candidates, manager.func_must, manager.func_class)
+                                             self.tree, self.xpath, manager.plugin)
         return self._type_checker
 
     def type_map(self) -> Dict[Expression, Type]:
@@ -2260,8 +2267,7 @@ class State:
     def type_check_second_pass(self) -> bool:
         if self.options.semantic_analysis_only:
             return False
-        with self.wrap_context():
-            return self.type_checker().check_second_pass()
+        return self.type_checker().check_second_pass()
 
     def finish_passes(self) -> None:
         return
@@ -2784,22 +2790,6 @@ def dispatch(sources: List[BuildSource],
         process_graph(graph, manager)
         # Update plugins snapshot.
         write_plugins_snapshot(manager)
-        manager.old_plugins_snapshot = manager.plugins_snapshot
-        if manager.options.cache_fine_grained or manager.options.fine_grained_incremental:
-            # If we are running a daemon or are going to write cache for further fine grained use,
-            # then we need to collect fine grained protocol dependencies.
-            # Since these are a global property of the program, they are calculated after we
-            # processed the whole graph.
-            TypeState.add_all_protocol_deps(manager.fg_deps)
-            if not manager.options.fine_grained_incremental:
-                rdeps = generate_deps_for_cache(manager, graph)
-                write_deps_cache(rdeps, manager, graph)
-
-    if manager.options.dump_deps:
-        # This speeds up startup a little when not using the daemon mode.
-        from extyper.server.deps import dump_all_dependencies
-        dump_all_dependencies(manager.modules, manager.all_types,
-                              manager.options.python_version, manager.options)
     return graph
 
 
@@ -3240,37 +3230,40 @@ def process_project(graph: Graph, scc: List[str], manager: BuildManager) -> None
     for p in packages:
         if p in third_party_types:
             for t in third_party_types[p]:
-                user_type_s2.append(graph[file_].type_checker().named_type(f'{p}.{t}'))
+                try:
+                    user_type_s2.append(graph[file_].type_checker().named_type(f'{p}.{t}'))
+                except KeyError:
+                    pass
     hierarchy_children = {}
-    object_type = graph[file_].type_checker().named_type('builtins.object')
+    object_type = graph[file_].type_inferencer().named_type('builtins.object')
     user_type_s1.append(object_type)
     # tv = TypeVarType('T', 'T', -1, [], object_type)
-    # # user_type_s1.append(graph[file_].type_checker().named_type('builtins.object'))
+    # # user_type_s1.append(graph[file_].type_inferencer().named_type('builtins.object'))
     # user_type_s1.append(tv)
     
-    user_type_s2.append(graph[file_].type_checker().named_type('builtins.str'))
-    user_type_s2.append(graph[file_].type_checker().named_type('builtins.bytes'))
-    # user_type_s2.append(graph[file_].type_checker().named_type('typing.IO'))
+    user_type_s2.append(graph[file_].type_inferencer().named_type('builtins.str'))
+    user_type_s2.append(graph[file_].type_inferencer().named_type('builtins.bytes'))
+    # user_type_s2.append(graph[file_].type_inferencer().named_type('typing.IO'))
     
     t = object_type
-    user_type_s2.append(graph[file_].type_checker().named_type_with_type_var('builtins.set', t))
-    user_type_s2.append(graph[file_].type_checker().named_type_with_type_var('builtins.list', t))
-    user_type_s2.append(graph[file_].type_checker().named_dict_with_type_var('builtins.dict', t, t))
-    # user_type_s2.append(graph[file_].type_checker().named_type('numpy.ndarray'))
+    user_type_s2.append(graph[file_].type_inferencer().named_type_with_type_var('builtins.set', t))
+    user_type_s2.append(graph[file_].type_inferencer().named_type_with_type_var('builtins.list', t))
+    user_type_s2.append(graph[file_].type_inferencer().named_dict_with_type_var('builtins.dict', t, t))
+    # user_type_s2.append(graph[file_].type_inferencer().named_type('numpy.ndarray'))
 
 
-    str_instance = graph[file_].type_checker().named_type('builtins.str')
+    str_instance = graph[file_].type_inferencer().named_type('builtins.str')
     
-    float_instance = graph[file_].type_checker().named_type('builtins.float')
-    int_instance = graph[file_].type_checker().named_type('builtins.int')
-    bool_instance = graph[file_].type_checker().named_type('builtins.bool')
+    float_instance = graph[file_].type_inferencer().named_type('builtins.float')
+    int_instance = graph[file_].type_inferencer().named_type('builtins.int')
+    bool_instance = graph[file_].type_inferencer().named_type('builtins.bool')
     
-    user_type_s2.append(graph[file_].type_checker().named_type_with_type_var('builtins.list', int_instance))
-    user_type_s2.append(graph[file_].type_checker().named_type_with_type_var('builtins.list', str_instance))
+    user_type_s2.append(graph[file_].type_inferencer().named_type_with_type_var('builtins.list', int_instance))
+    user_type_s2.append(graph[file_].type_inferencer().named_type_with_type_var('builtins.list', str_instance))
     
     try:
-        date_instance = graph[file_].type_checker().named_type('datetime.date')
-        datetime_instance = graph[file_].type_checker().named_type('datetime.datetime')
+        date_instance = graph[file_].type_inferencer().named_type('datetime.date')
+        datetime_instance = graph[file_].type_inferencer().named_type('datetime.datetime')
 
         user_type_s2.append(date_instance)
         hierarchy_children[date_instance] = [datetime_instance]
@@ -3291,7 +3284,7 @@ def process_project(graph: Graph, scc: List[str], manager: BuildManager) -> None
                                     [nodes.ARG_STAR, nodes.ARG_STAR2],
                                     [None, None],
                                     ret_type=AnyType(TypeOfAny.explicit),
-                                    fallback=graph[file_]._type_checker.named_type('builtins.function'),
+                                    fallback=graph[file_].type_inferencer().named_type('builtins.function'),
                                     is_ellipsis_args=True)
     # user_type_s2.append(callable_type)
         # user_type_instances.append(graph[file_]._type_checker.named_type('torch.Tensor'))
@@ -3304,7 +3297,7 @@ def process_project(graph: Graph, scc: List[str], manager: BuildManager) -> None
     for module in scc:
         if module in manager.user_modules:
             state = graph[module]
-            state.type_checker().reset()
+            state.type_inferencer().reset()
             for name in state.tree.names:
                 if name not in builtins:
                     symbol = state.tree.names[name]
@@ -3314,7 +3307,7 @@ def process_project(graph: Graph, scc: List[str], manager: BuildManager) -> None
     for module in scc:
         if module in manager.user_modules:
             state = graph[module]
-            state.type_checker().reset()
+            state.type_inferencer().reset()
             for name in state.tree.names:
                 if name not in builtins:
                     symbol = state.tree.names[name]
@@ -3354,23 +3347,23 @@ def process_project(graph: Graph, scc: List[str], manager: BuildManager) -> None
     user_type_s2 = list(set(user_type_s2))
     for t in user_type_s2 + user_type_s1:
         if isinstance(t, TypeType) or (isinstance(t, Instance) and len(t.args) == 0):
-            str_type = graph[file_].type_checker().named_type('builtins.str')
-            user_type_s3.append(graph[file_].type_checker().named_type_with_type_var('builtins.set', t))
-            user_type_s3.append(graph[file_].type_checker().named_type_with_type_var('builtins.list', t))
-            user_type_s3.append(graph[file_].type_checker().named_dict_with_type_var('builtins.dict', str_type, t))
-        # user_type_s3.append(graph[file_].type_checker().named_type_with_type_var('typing.Iterable', t))
+            str_type = graph[file_].type_inferencer().named_type('builtins.str')
+            user_type_s3.append(graph[file_].type_inferencer().named_type_with_type_var('builtins.set', t))
+            user_type_s3.append(graph[file_].type_inferencer().named_type_with_type_var('builtins.list', t))
+            user_type_s3.append(graph[file_].type_inferencer().named_dict_with_type_var('builtins.dict', str_type, t))
+        # user_type_s3.append(graph[file_].type_inferencer().named_type_with_type_var('typing.Iterable', t))
     # for file_ in stale:
-    #     object_type = graph[file_].type_checker().named_type('builtins.object')
-    #     str_type = graph[file_].type_checker().named_type('builtins.str')
+    #     object_type = graph[file_].type_inferencer().named_type('builtins.object')
+    #     str_type = graph[file_].type_inferencer().named_type('builtins.str')
 
-    #     # user_type_s2.append(graph[file_].type_checker().named_type_with_type_var('builtins.tuple', object_type))
-    #     # user_type_s2.append(graph[file_].type_checker().named_type_with_type_var('builtins.dict', object_type))
-    #     # user_type_s2.append(graph[file_].type_checker().named_type_with_type_var('builtins.set', object_type))
-    #     # user_type_s2.insert(0, graph[file_].type_checker().named_type_with_type_var('builtins.list', object_type))
-    #     user_type_s3.insert(0, graph[file_].type_checker().named_dict_with_type_var('builtins.dict', str_type, str_type))
-    #     user_type_s3.insert(0, graph[file_].type_checker().named_dict_with_type_var('builtins.dict', str_type, object_type))
-    #     user_type_s3.insert(0, graph[file_].type_checker().named_type_with_type_var('builtins.list', str_type))
-    #     user_type_s3.insert(0, graph[file_].type_checker().named_type_with_type_var('builtins.set', str_type))
+    #     # user_type_s2.append(graph[file_].type_inferencer().named_type_with_type_var('builtins.tuple', object_type))
+    #     # user_type_s2.append(graph[file_].type_inferencer().named_type_with_type_var('builtins.dict', object_type))
+    #     # user_type_s2.append(graph[file_].type_inferencer().named_type_with_type_var('builtins.set', object_type))
+    #     # user_type_s2.insert(0, graph[file_].type_inferencer().named_type_with_type_var('builtins.list', object_type))
+    #     user_type_s3.insert(0, graph[file_].type_inferencer().named_dict_with_type_var('builtins.dict', str_type, str_type))
+    #     user_type_s3.insert(0, graph[file_].type_inferencer().named_dict_with_type_var('builtins.dict', str_type, object_type))
+    #     user_type_s3.insert(0, graph[file_].type_inferencer().named_type_with_type_var('builtins.list', str_type))
+    #     user_type_s3.insert(0, graph[file_].type_inferencer().named_type_with_type_var('builtins.set', str_type))
     ## PTI will distinguise S2 and S3
     if mode != 'PTI':
         user_type_s2.extend(user_type_s3)
@@ -3385,16 +3378,16 @@ def process_project(graph: Graph, scc: List[str], manager: BuildManager) -> None
     for id in stale:
         graph[id].type_suggest_init_pass(user_type_s1, user_type_s2, user_type_s3, user_defined, hierarchy_children, mode)
         
-        # manager.func_candidates.update(graph[id].type_checker().func_candidates)
+        # manager.func_candidates.update(graph[id].type_inferencer().func_candidates)
     for id in stale:
         graph[id].type_suggest_first_pass(user_type_s1, user_type_s2, user_type_s3, user_defined, hierarchy_children, mode)
         
         # graph[id].type_check_first_pass()
         
-        if not graph[id].type_checker().deferred_nodes:
+        if not graph[id].type_inferencer().deferred_nodes:
             unfinished_modules.discard(id)
             graph[id].finish_passes()
-    previous = [graph[id].type_checker().deferred_nodes for id in unfinished_modules]
+    previous = [graph[id].type_inferencer().deferred_nodes for id in unfinished_modules]
     previous_file = [sum(len(set(x)) for x in previous)]
     while unfinished_modules:
         
@@ -3404,7 +3397,7 @@ def process_project(graph: Graph, scc: List[str], manager: BuildManager) -> None
             if not graph[id].type_suggest_second_pass():
                 unfinished_modules.discard(id)
                 graph[id].finish_passes()
-        now = [graph[id].type_checker().deferred_nodes for id in unfinished_modules]
+        now = [graph[id].type_inferencer().deferred_nodes for id in unfinished_modules]
         # print()
         # print(sum(len(set(x)) for x in now))
         previous_file.append(sum(len(set(x)) for x in now))
@@ -3412,9 +3405,9 @@ def process_project(graph: Graph, scc: List[str], manager: BuildManager) -> None
         if len(previous_file) >= 15 and len(set(previous_file)) == 1:
             for x in now:
                 for n in x:
-                    graph[id].type_checker().result_file.write(n[0].fullname + ' ; Dealyed' +'\n')
-                    # graph[id].type_checker().result_file.write('delayed\n')
-                    graph[id].type_checker().result_file.flush()
+                    graph[id].type_inferencer().result_file.write(n[0].fullname + ' ; Dealyed' +'\n')
+                    # graph[id].type_inferencer().result_file.write('delayed\n')
+                    graph[id].type_inferencer().result_file.flush()
             break
         previous = now
     t3 = time.time()

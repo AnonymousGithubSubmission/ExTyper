@@ -2,8 +2,7 @@ from email.policy import default
 from random import choice, choices
 import os
 import ast
-from klara.core.cfg import Cfg
-from klara.core.tree_rewriter import AstBuilder
+import sys
 from textwrap import dedent
 from collections import defaultdict, deque
 import re
@@ -12,10 +11,19 @@ from run_unittest_on_metric import fis, packages, ds, pk, remove_any, remove_nan
 builtins = ['int', 'float','bool','str', 'byte', 'callable', 'none', 'object']
 third = ['ndarray', 'tensor', 'namespace', 'vocabulary', 'textfieldembedder', 'jsondict', 'instance', 'socket', 'token']
 
-projects = ['seagull','tinychain','relex','htmlark', 'pendulum', 'adventure', 'imp', 'icemu', 'scion', 'test_suite'][:5]
+projects = ['seagull','tinychain','relex','htmlark', 'pendulum', 'adventure', 'imp', 'icemu', 'scion', 'test_suite']
 
 # special types like any, none and callable are sensitive
-check_ret = False
+
+args = sys.argv[1:]
+MODE = args[0]
+if MODE == 'return':
+
+    check_ret = True
+else:
+    check_ret = False
+
+
 ignore_no_res = False
 ignore_ground_no_return = False
 
@@ -54,7 +62,7 @@ for k in [1,3]:
                     ground_truth.append(line.strip().split('/'))
             PIG = []
             if model == 'TW':
-                f = f'/home/sunke/dl-type-python/results/{model}_{project}.txt'
+                f = f'evaluation/{model}_{project}.txt'
             elif model == 'PIG':
                 f = f'results/funcs_res-{project}'
             else:
@@ -186,8 +194,11 @@ for k in [1,3]:
             all_cnt += cnt
             
 
-
-with open('table.txt', 'w+') as f:
+if check_ret:
+    fn = 'table_return.txt'
+else:
+    fn = 'table_parameter.txt'
+with open(fn, 'w+') as f:
 
     f.write('$P_1$ & ' + ' & '.join(P[1]) + '\\\\ \\hline' +'\n')
     f.write('$R_1$ & ' + ' & '.join(R[1]) + '\\\\ \\hline' +'\n')

@@ -1,7 +1,7 @@
-builtins.list[Tuple[Any, builtins.str]]/builtins.list[Tuple[Any, Any]]/builtins.list[Tuple[Any, builtins.int]]/builtins.list[Tuple[Any, builtins.str]]
+builtins.list[Tuple[Any, builtins.str]]/builtins.list[Tuple[Any, builtins.str]]/builtins.list[Tuple[Any, builtins.int]]/builtins.list[Tuple[Any, Any]]
 builtins.str
 builtins.str/builtins.list[Tuple[Union[None, builtins.str], builtins.str]]/builtins.list[builtins.str]
-builtins.list[Tuple[Any, Any]]/builtins.list[Tuple[Any, builtins.int]]/builtins.list[Tuple[Any, builtins.str]]
+builtins.list[Tuple[Any, builtins.str]]/builtins.list[Tuple[Any, builtins.int]]/builtins.list[Tuple[Any, Any]]
 builtins.str
 builtins.str
 imp.Concat
@@ -54,7 +54,7 @@ None
 builtins.dict[builtins.int, builtins.str]/builtins.dict[builtins.bool, builtins.str]
 builtins.str
 None
-builtins.dict[builtins.bool, builtins.str]/builtins.dict[builtins.int, builtins.str]
+builtins.dict[builtins.int, builtins.str]/builtins.dict[builtins.bool, builtins.str]
 builtins.str
 None
 builtins.dict[builtins.bool, builtins.str]/builtins.dict[builtins.int, builtins.str]
@@ -72,12 +72,12 @@ builtins.str
 builtins.dict[builtins.int, builtins.str]/builtins.dict[builtins.bool, builtins.str]
 builtins.str
 builtins.int
-builtins.dict[builtins.int, builtins.str]/builtins.dict[builtins.bool, builtins.str]
+builtins.dict[builtins.bool, builtins.str]/builtins.dict[builtins.int, builtins.str]
 builtins.str
 builtins.int
-builtins.dict[builtins.bool, builtins.str]/builtins.dict[builtins.int, builtins.str]
+builtins.dict[builtins.int, builtins.str]/builtins.dict[builtins.bool, builtins.str]
 builtins.str
 builtins.bool
-builtins.dict[builtins.bool, builtins.str]/builtins.dict[builtins.int, builtins.str]
+builtins.dict[builtins.int, builtins.str]/builtins.dict[builtins.bool, builtins.str]
 imp.Reserved
 builtins.str

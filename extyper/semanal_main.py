@@ -43,7 +43,6 @@ from extyper.semanal_classprop import (
 from extyper.errors import Errors
 from extyper.semanal_infer import infer_decorator_signature_if_simple
 from extyper.checker import FineGrainedDeferredNode
-from extyper.server.aststrip import SavedAttributes
 from extyper.util import is_typeshed_file
 import extyper.build
 
@@ -101,40 +100,9 @@ def cleanup_builtin_scc(state: 'State') -> None:
     remove_imported_names_from_symtable(state.tree.names, 'builtins')
 
 
-def semantic_analysis_for_targets(
-        state: 'State',
-        nodes: List[FineGrainedDeferredNode],
-        graph: 'Graph',
-        saved_attrs: SavedAttributes) -> None:
-    """Semantically analyze only selected nodes in a given module.
-
-    This essentially mirrors the logic of semantic_analysis_for_scc()
-    except that we process only some targets. This is used in fine grained
-    incremental mode, when propagating an update.
-
-    The saved_attrs are implicitly declared instance attributes (attributes
-    defined on self) removed by AST stripper that may need to be reintroduced
-    here.  They must be added before any methods are analyzed.
-    """
-    patches: Patches = []
-    if any(isinstance(n.node, MypyFile) for n in nodes):
-        # Process module top level first (if needed).
-        process_top_levels(graph, [state.id], patches)
-    restore_saved_attrs(saved_attrs)
-    analyzer = state.manager.semantic_analyzer
-    for n in nodes:
-        if isinstance(n.node, MypyFile):
-            # Already done above.
-            continue
-        process_top_level_function(analyzer, state, state.id,
-                                   n.node.fullname, n.node, n.active_typeinfo, patches)
-    apply_semantic_analyzer_patches(patches)
-
-    check_type_arguments_in_targets(nodes, state, state.manager.errors)
-    calculate_class_properties(graph, [state.id], state.manager.errors)
 
 
-def restore_saved_attrs(saved_attrs: SavedAttributes) -> None:
+def restore_saved_attrs(saved_attrs) -> None:
     """Restore instance variables removed during AST strip that haven't been added yet."""
     for (cdef, name), sym in saved_attrs.items():
         info = cdef.info
