@@ -3231,7 +3231,7 @@ def process_project(graph: Graph, scc: List[str], manager: BuildManager) -> None
         if p in third_party_types:
             for t in third_party_types[p]:
                 try:
-                    user_type_s2.append(graph[file_].type_checker().named_type(f'{p}.{t}'))
+                    user_type_s2.append(graph[file_].type_inferencer().named_type(f'{p}.{t}'))
                 except KeyError:
                     pass
     hierarchy_children = {}

@@ -14,7 +14,9 @@
             
             //"args": ["data/benchmark/seagull.py", "predict"],
             //"args": ["data/benchmark/relex.py", "predict"],
-            "args": ["data/benchmark/htmlark.py", "predict"],
+            // "args": ["data/benchmark/htmlark.py", "predict"],
+            "args": ["/home/user/rich/rich-master", "predict", "rich"],
+            
             //"args": ["data/benchmark/tinychain.py", "predict"],
             //"args": ["data/benchmark/test_generic.py", "predict"],
             //"args": ["data/benchmark/duration.py", "predict"],

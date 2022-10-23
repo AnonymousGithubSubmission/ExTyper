@@ -3897,9 +3897,9 @@ class TypeInferencer(NodeVisitor[None], CheckerPluginInterface):
         if isinstance(node, TypeAlias):
             assert isinstance(node.target, Instance)  
             node = node.target.type
-        assert isinstance(node, TypeInfo)
-        any_type = AnyType(TypeOfAny.from_omitted_generics)
-        return Instance(node, [any_type] * len(node.defn.type_vars))
+        if isinstance(node, TypeInfo):
+            any_type = AnyType(TypeOfAny.from_omitted_generics)
+            return Instance(node, [any_type] * len(node.defn.type_vars))
     def named_type_optional(self, name: str) -> Instance:
         """Return an instance type with given name and implicit Any type args.
         For example, named_type('builtins.object') produces the 'object' type.
