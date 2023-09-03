@@ -1,7 +1,3 @@
-
-
-
-
 ## STRAY: a Static Type Recommendation Approach for pYthon
 
 This is the prototype package for a ASE '22 paper "Static Type Recommendation for Python". 
@@ -18,7 +14,19 @@ First, create and activate a Python environment, e.g.:
 conda create -n stray_exp python=3.9
 conda activate stray_exp
 ```
+#### Normal Setup
+Then, install the packages to run stray:
 
+```
+pip install -r minimal_requirements.txt
+```
+
+This will install the packages necessary to run stray. We recommend using this approach if you do not insist on reproducing the original experiment. 
+After installation, see the instruction on the "usage" section for how to use stray. 
+
+
+
+#### Reproduction Setup
 Then, install the packages to run stray:
 
 ```
@@ -26,6 +34,9 @@ pip install -r requirements.txt
 ```
 
 Note that two kinds of packages are installed: (1) the packages necessary to run stray, (2) the packages that are depended by our evaluation projects, i.e., the packages necessary to reproduce our experiments. 
+
+
+
 
 ### Reproduction
 
@@ -70,8 +81,8 @@ then use the predict.py as the main entry.
 For instance: 
 
 ```
-python -m predict data/benchmark/tinychain check tinychain
-python -m predict data/benchmark/tinychain predict tinychain
+python -m predict test_proj check test
+python -m predict test_proj predict test
 ```
 
 The first parameter is the project root; the second parameter is the executation mode (see the explanation in the last section); the third parameter is the name of the project. 
