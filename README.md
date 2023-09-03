@@ -36,8 +36,6 @@ pip install -r requirements.txt
 Note that two kinds of packages are installed: (1) the packages necessary to run stray, (2) the packages that are depended by our evaluation projects, i.e., the packages necessary to reproduce our experiments. 
 
 
-
-
 ### Reproduction
 
 #### Handling Dependency
